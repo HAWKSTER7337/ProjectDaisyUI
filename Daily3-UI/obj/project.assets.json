@@ -24019,11 +24019,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\AHAWK\\OneDrive\\Documents\\Code\\cSharp\\ProjectDaisy\\Daisy-UI\\Daily3-UI\\Daily3-UI.csproj",
+      "projectUniqueName": "C:\\Users\\AHAWK\\Documents\\code\\ProjectDaisyUI\\Daily3-UI\\Daily3-UI.csproj",
       "projectName": "Daily3-UI",
-      "projectPath": "C:\\Users\\AHAWK\\OneDrive\\Documents\\Code\\cSharp\\ProjectDaisy\\Daisy-UI\\Daily3-UI\\Daily3-UI.csproj",
+      "projectPath": "C:\\Users\\AHAWK\\Documents\\code\\ProjectDaisyUI\\Daily3-UI\\Daily3-UI.csproj",
       "packagesPath": "C:\\Users\\AHAWK\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\AHAWK\\OneDrive\\Documents\\Code\\cSharp\\ProjectDaisy\\Daisy-UI\\Daily3-UI\\obj\\",
+      "outputPath": "C:\\Users\\AHAWK\\Documents\\code\\ProjectDaisyUI\\Daily3-UI\\obj\\",
       "projectStyle": "PackageReference",
       "crossTargeting": true,
       "fallbackFolders": [

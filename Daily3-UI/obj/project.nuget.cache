@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "11KZiWX6yZNQ73Rx+DEVTvqQ1RTRfzmmvQQS0l+Qw45aAwpb1gyliw6ow6a0lMN2eHVLBZzgZQ1XQuZcl7pl/g==",
+  "dgSpecHash": "LatzARmd8CzWxtBRf77ceQKi10RavFX63rekLytUSxO3SnlHN5i0jiyfYPezE4c7xITUF5ytstFW3ocskDAAJw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\AHAWK\\OneDrive\\Documents\\Code\\cSharp\\ProjectDaisy\\Daisy-UI\\Daily3-UI\\Daily3-UI.csproj",
+  "projectFilePath": "C:\\Users\\AHAWK\\Documents\\code\\ProjectDaisyUI\\Daily3-UI\\Daily3-UI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\AHAWK\\.nuget\\packages\\googlegson\\2.9.1.1\\googlegson.2.9.1.1.nupkg.sha512",
     "C:\\Users\\AHAWK\\.nuget\\packages\\microsoft.extensions.configuration\\7.0.0\\microsoft.extensions.configuration.7.0.0.nupkg.sha512",
