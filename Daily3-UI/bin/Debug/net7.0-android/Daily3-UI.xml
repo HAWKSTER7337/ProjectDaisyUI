@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Daily3-UI</name>
+    </assembly>
+    <members>
+        <member name="M:Daily3_UI.MainPage.UpdatePage">
+            <summary>
+            Updates all of the values to what they are stored as
+            </summary>
+        </member>
+    </members>
+</doc>
