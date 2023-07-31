@@ -18,8 +18,6 @@ namespace Daily3_UI
         /// </summary>
         private static HtmlWeb web = new HtmlWeb();
         private readonly static string daily3HyperLink = "https://www.lotterypost.com/results/mi/daily3/past";
-        private readonly static string middayId = "daily-3-wn-";
-        private readonly static string eveningId = "daily-3-eve-";
 
         /// <summary>
         /// The 2 times that you can get a ticket
@@ -62,18 +60,16 @@ namespace Daily3_UI
             List<WinningNumber> winningNumbers = new();
 
             HtmlNode targetElement = doc.DocumentNode.SelectSingleNode($"//time[starts-with(@datetime, '{gettingDate}')]");
-            HtmlNode parentElement = targetElement.ParentNode.ParentNode;
-            HtmlNodeCollection nodeNumbers = parentElement.SelectNodes(".//li");
-            List<string> stringsOfNumbers = new();
-            foreach (var nodeNumber in nodeNumbers)
-            {
-                stringsOfNumbers.Add(nodeNumber.InnerText);
-            }
-            
-            for(int i = 0; i < stringsOfNumbers.Count / 3; i++)
-            {
-                winningNumbers.Add(new WinningNumber(stringsOfNumbers.GetRange(i * 3, 3)));
-            }
+            if (targetElement is null)
+                return winningNumbers;
+
+            HtmlNodeCollection nodeNumbers = targetElement.ParentNode.ParentNode.SelectNodes(".//li");
+            winningNumbers = nodeNumbers
+                .Select((nodeNumber, index) => new { nodeNumber, index })
+                .GroupBy(pair => pair.index / 3, pair => pair.nodeNumber.InnerText)
+                .Select(group => new WinningNumber(group.ToList()))
+                .ToList();
+
             return winningNumbers;
         }
 

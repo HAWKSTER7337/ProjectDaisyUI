@@ -42,16 +42,19 @@
                     <Border Grid.Column="0"
                             Style="{StaticResource Ball}">
                         <Label x:Name="yesterdayMidday1"
+                               Text="-"
                                Style="{StaticResource Number}"/>
                     </Border>
                     <Border Grid.Column="1"
                             Style="{StaticResource Ball}">
                         <Label x:Name="yesterdayMidday2"
+                               Text="-"
                                Style="{StaticResource Number}"/>
                     </Border>
                     <Border Grid.Column="2"
                             Style="{StaticResource Ball}">
                         <Label x:Name="yesterdayMidday3"
+                               Text="-"
                                Style="{StaticResource Number}"/>
                     </Border>
                 </Grid>
@@ -79,16 +82,19 @@
                     <Border Grid.Column="0"
                             Style="{StaticResource Ball}">
                         <Label x:Name="yesterdayEvening1"
+                               Text="-"
                                Style="{StaticResource Number}"/>
                     </Border>
                     <Border Grid.Column="1"
                             Style="{StaticResource Ball}">
                         <Label x:Name="yesterdayEvening2"
+                               Text="-"
                                Style="{StaticResource Number}"/>
                     </Border>
                     <Border Grid.Column="2"
                             Style="{StaticResource Ball}">
                         <Label x:Name="yesterdayEvening3"
+                               Text="-"
                                Style="{StaticResource Number}"/>
                     </Border>
                 </Grid>
@@ -120,16 +126,19 @@
                     <Border Grid.Column="0"
                             Style="{StaticResource Ball}">
                         <Label x:Name="todayMidday1"
+                               Text="-"
                                Style="{StaticResource Number}"/>
                     </Border>
                     <Border Grid.Column="1"
                             Style="{StaticResource Ball}">
                         <Label x:Name="todayMidday2"
+                               Text="-"
                                Style="{StaticResource Number}"/>
                     </Border>
                     <Border Grid.Column="2"
                             Style="{StaticResource Ball}">
                         <Label x:Name="todayMidday3"
+                               Text="-"
                                Style="{StaticResource Number}"/>
                     </Border>
                 </Grid>
@@ -157,16 +166,19 @@
                     <Border Grid.Column="0"
                             Style="{StaticResource Ball}">
                         <Label x:Name="todayEvening1"
+                               Text="-"
                                Style="{StaticResource Number}"/>
                     </Border>
                     <Border Grid.Column="1"
                             Style="{StaticResource Ball}">
                         <Label x:Name="todayEvening2"
+                               Text="-"
                                Style="{StaticResource Number}"/>
                     </Border>
                     <Border Grid.Column="2"
                             Style="{StaticResource Ball}">
                         <Label x:Name="todayEvening3"
+                               Text="-"
                                Style="{StaticResource Number}"/>
                     </Border>
                 </Grid>
