@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "LatzARmd8CzWxtBRf77ceQKi10RavFX63rekLytUSxO3SnlHN5i0jiyfYPezE4c7xITUF5ytstFW3ocskDAAJw==",
+  "dgSpecHash": "CoIGjNz12PNUZJq+7u7bDBdYR+q/EVWu6N/t7Y26hWJ2BvI9NOOz3SPtiXpcrgs45BqWCN1aj9Ezq2mVV7nQHw==",
   "success": true,
   "projectFilePath": "C:\\Users\\AHAWK\\Documents\\code\\ProjectDaisyUI\\Daily3-UI\\Daily3-UI.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\AHAWK\\.nuget\\packages\\csvhelper\\30.0.1\\csvhelper.30.0.1.nupkg.sha512",
     "C:\\Users\\AHAWK\\.nuget\\packages\\googlegson\\2.9.1.1\\googlegson.2.9.1.1.nupkg.sha512",
+    "C:\\Users\\AHAWK\\.nuget\\packages\\htmlagilitypack\\1.11.50\\htmlagilitypack.1.11.50.nupkg.sha512",
     "C:\\Users\\AHAWK\\.nuget\\packages\\microsoft.extensions.configuration\\7.0.0\\microsoft.extensions.configuration.7.0.0.nupkg.sha512",
     "C:\\Users\\AHAWK\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\7.0.0\\microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\AHAWK\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\7.0.0\\microsoft.extensions.dependencyinjection.7.0.0.nupkg.sha512",
@@ -100,6 +102,7 @@
     "C:\\Users\\AHAWK\\.nuget\\packages\\xamarin.kotlin.stdlib.jdk8\\1.7.20.1\\xamarin.kotlin.stdlib.jdk8.1.7.20.1.nupkg.sha512",
     "C:\\Users\\AHAWK\\.nuget\\packages\\xamarin.kotlinx.coroutines.android\\1.6.4.1\\xamarin.kotlinx.coroutines.android.1.6.4.1.nupkg.sha512",
     "C:\\Users\\AHAWK\\.nuget\\packages\\xamarin.kotlinx.coroutines.core.jvm\\1.6.4.1\\xamarin.kotlinx.coroutines.core.jvm.1.6.4.1.nupkg.sha512",
+    "C:\\Users\\AHAWK\\.nuget\\packages\\microsoft.netcore.app.crossgen2.win-x64\\7.0.9\\microsoft.netcore.app.crossgen2.win-x64.7.0.9.nupkg.sha512",
     "C:\\Users\\AHAWK\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.19041.29\\microsoft.windows.sdk.net.ref.10.0.19041.29.nupkg.sha512",
     "C:\\Users\\AHAWK\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\7.0.9\\microsoft.aspnetcore.app.runtime.win-x64.7.0.9.nupkg.sha512",
     "C:\\Users\\AHAWK\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\7.0.9\\microsoft.windowsdesktop.app.runtime.win-x64.7.0.9.nupkg.sha512",

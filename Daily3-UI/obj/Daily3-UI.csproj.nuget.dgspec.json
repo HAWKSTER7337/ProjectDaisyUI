@@ -144,6 +144,14 @@
               "target": "Package",
               "version": "[1.7.0.1, )",
               "autoReferenced": true
+            },
+            "csvhelper": {
+              "target": "Package",
+              "version": "[30.0.1, )"
+            },
+            "htmlagilitypack": {
+              "target": "Package",
+              "version": "[1.11.50, )"
             }
           },
           "imports": [
@@ -207,6 +215,14 @@
               "target": "Package",
               "version": "[7.0.86, )",
               "autoReferenced": true
+            },
+            "csvhelper": {
+              "target": "Package",
+              "version": "[30.0.1, )"
+            },
+            "htmlagilitypack": {
+              "target": "Package",
+              "version": "[1.11.50, )"
             }
           },
           "imports": [
@@ -270,6 +286,14 @@
               "target": "Package",
               "version": "[7.0.86, )",
               "autoReferenced": true
+            },
+            "csvhelper": {
+              "target": "Package",
+              "version": "[30.0.1, )"
+            },
+            "htmlagilitypack": {
+              "target": "Package",
+              "version": "[1.11.50, )"
             }
           },
           "imports": [
@@ -350,6 +374,14 @@
               "target": "Package",
               "version": "[1.2.221209.1, )",
               "autoReferenced": true
+            },
+            "csvhelper": {
+              "target": "Package",
+              "version": "[30.0.1, )"
+            },
+            "htmlagilitypack": {
+              "target": "Package",
+              "version": "[1.11.50, )"
             }
           },
           "imports": [
@@ -366,6 +398,10 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
+              "version": "[7.0.9, 7.0.9]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Crossgen2.win-x64",
               "version": "[7.0.9, 7.0.9]"
             },
             {
@@ -415,6 +451,9 @@
           "#import": []
         },
         "iossimulator-x64": {
+          "#import": []
+        },
+        "maccatalyst-arm64": {
           "#import": []
         },
         "maccatalyst-x64": {

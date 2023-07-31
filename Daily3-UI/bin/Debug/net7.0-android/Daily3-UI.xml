@@ -9,5 +9,48 @@
             Updates all of the values to what they are stored as
             </summary>
         </member>
+        <member name="T:Daily3_UI.WebScraper">
+            <summary>
+            Class for Getting the Daily numbers 
+            off of the website
+            </summary>
+        </member>
+        <member name="F:Daily3_UI.WebScraper.web">
+            <summary>
+            Web reader for collecting information from the site
+            </summary>
+        </member>
+        <member name="T:Daily3_UI.WebScraper.TOD">
+            <summary>
+            The 2 times that you can get a ticket
+            for a day
+            </summary>
+        </member>
+        <member name="M:Daily3_UI.WebScraper.GetWinningNumbers">
+            <summary>
+            Pulling all winning numbers from today and 
+            yesterday
+            </summary>
+        </member>
+        <member name="M:Daily3_UI.WebScraper.Scraping(HtmlAgilityPack.HtmlDocument)">
+            <summary>
+            Actually scraping the data
+            </summary>
+        </member>
+        <member name="M:Daily3_UI.WebScraper.ScarpingGivenADate(HtmlAgilityPack.HtmlDocument,System.String)">
+            <summary>
+            Scraping the numbers based on the time of day
+            </summary>
+        </member>
+        <member name="M:Daily3_UI.WebScraper.GetCurrentDate">
+            <summary>
+            Gets current date in the format of how the daily 3 uses it
+            </summary>
+        </member>
+        <member name="M:Daily3_UI.WebScraper.GetYesterday">
+            <summary>
+            Get the date of yesterday
+            </summary>
+        </member>
     </members>
 </doc>

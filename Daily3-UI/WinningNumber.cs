@@ -28,5 +28,13 @@ namespace Daily3_UI
             Number2 = (number / 10) % 10;
             Number3 = number % 10;
         }
+
+        public WinningNumber(List<string> number)
+        {
+            if(number.Count < 3) throw new ArgumentOutOfRangeException();
+            Number1 = int.Parse(number[0]);
+            Number2 = int.Parse(number[1]);
+            Number3 = int.Parse(number[2]);
+        }
     }
 }
