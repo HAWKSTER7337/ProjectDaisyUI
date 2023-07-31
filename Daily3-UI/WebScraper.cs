@@ -57,20 +57,16 @@ namespace Daily3_UI
         /// </summary>
         private static List<WinningNumber> ScarpingGivenADate(HtmlDocument doc, string gettingDate)
         {
-            List<WinningNumber> winningNumbers = new();
-
             HtmlNode targetElement = doc.DocumentNode.SelectSingleNode($"//time[starts-with(@datetime, '{gettingDate}')]");
             if (targetElement is null)
-                return winningNumbers;
+                return new List<WinningNumber>();
 
             HtmlNodeCollection nodeNumbers = targetElement.ParentNode.ParentNode.SelectNodes(".//li");
-            winningNumbers = nodeNumbers
+            return nodeNumbers
                 .Select((nodeNumber, index) => new { nodeNumber, index })
                 .GroupBy(pair => pair.index / 3, pair => pair.nodeNumber.InnerText)
                 .Select(group => new WinningNumber(group.ToList()))
                 .ToList();
-
-            return winningNumbers;
         }
 
         /// <summary>
