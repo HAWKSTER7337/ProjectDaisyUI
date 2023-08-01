@@ -12,7 +12,8 @@
     <VerticalStackLayout
         Spacing="5"
         Padding="30,0"
-        VerticalOptions="Start">
+        VerticalOptions="Fill"
+        HorizontalOptions="Fill">
 
         <!--Title Image-->
         <Image Source="daily.png"/>
