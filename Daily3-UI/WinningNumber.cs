@@ -29,7 +29,7 @@ namespace Daily3_UI
             Number3 = number % 10;
         }
 
-        public WinningNumber(List<string> number)
+        public WinningNumber(IReadOnlyList<string> number)
         {
             if(number.Count < 3) throw new ArgumentOutOfRangeException();
             Number1 = int.Parse(number[0]);

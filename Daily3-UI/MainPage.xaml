@@ -21,7 +21,7 @@
         <Label Text="Yesterday"
                 Style="{StaticResource Day}"/>
         <Border
-            Style="{StaticResource TOD-border}"
+            Style="{StaticResource Tod-Border}"
             Stroke="{StaticResource neutral1}"
             StrokeShape="RoundRectangle 10,10,0,0"
             Padding="16,8">
@@ -32,7 +32,7 @@
                 </Grid.RowDefinitions>
                 <Label Text="Midday"
                     Grid.Row="0"
-                    Style="{StaticResource TOD}"/>
+                    Style="{StaticResource Tod}"/>
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -41,19 +41,19 @@
                     </Grid.ColumnDefinitions>
                     <Border Grid.Column="0"
                             Style="{StaticResource Ball}">
-                        <Label x:Name="yesterdayMidday1"
+                        <Label x:Name="YesterdayMidday1"
                                Text="-"
                                Style="{StaticResource Number}"/>
                     </Border>
                     <Border Grid.Column="1"
                             Style="{StaticResource Ball}">
-                        <Label x:Name="yesterdayMidday2"
+                        <Label x:Name="YesterdayMidday2"
                                Text="-"
                                Style="{StaticResource Number}"/>
                     </Border>
                     <Border Grid.Column="2"
                             Style="{StaticResource Ball}">
-                        <Label x:Name="yesterdayMidday3"
+                        <Label x:Name="YesterdayMidday3"
                                Text="-"
                                Style="{StaticResource Number}"/>
                     </Border>
@@ -61,7 +61,7 @@
             </Grid>
         </Border>
         <Border
-            Style="{StaticResource TOD-border}"
+            Style="{StaticResource Tod-Border}"
             Stroke="{StaticResource neutral1}"
             StrokeShape="RoundRectangle 0,0,10,10"
             Padding="16,8">
@@ -72,7 +72,7 @@
                 </Grid.RowDefinitions>
                 <Label Text="Evening"
                     Grid.Row="0"
-                    Style="{StaticResource TOD}"/>
+                    Style="{StaticResource Tod}"/>
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -81,19 +81,19 @@
                     </Grid.ColumnDefinitions>
                     <Border Grid.Column="0"
                             Style="{StaticResource Ball}">
-                        <Label x:Name="yesterdayEvening1"
+                        <Label x:Name="YesterdayEvening1"
                                Text="-"
                                Style="{StaticResource Number}"/>
                     </Border>
                     <Border Grid.Column="1"
                             Style="{StaticResource Ball}">
-                        <Label x:Name="yesterdayEvening2"
+                        <Label x:Name="YesterdayEvening2"
                                Text="-"
                                Style="{StaticResource Number}"/>
                     </Border>
                     <Border Grid.Column="2"
                             Style="{StaticResource Ball}">
-                        <Label x:Name="yesterdayEvening3"
+                        <Label x:Name="YesterdayEvening3"
                                Text="-"
                                Style="{StaticResource Number}"/>
                     </Border>
@@ -101,11 +101,11 @@
             </Grid>
         </Border>
 
-        <!--todays Daily Numbers-->
+        <!--today's Daily Numbers-->
         <Label Text="Today"
                 Style="{StaticResource Day}"/>
         <Border
-            Style="{StaticResource TOD-border}"
+            Style="{StaticResource Tod-Border}"
             Stroke="{StaticResource neutral1}"
             StrokeShape="RoundRectangle 10,10,0,0"
             Padding="16,8">
@@ -116,7 +116,7 @@
                 </Grid.RowDefinitions>
                 <Label Text="Midday"
                     Grid.Row="0"
-                    Style="{StaticResource TOD}"/>
+                    Style="{StaticResource Tod}"/>
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -125,19 +125,19 @@
                     </Grid.ColumnDefinitions>
                     <Border Grid.Column="0"
                             Style="{StaticResource Ball}">
-                        <Label x:Name="todayMidday1"
+                        <Label x:Name="TodayMidday1"
                                Text="-"
                                Style="{StaticResource Number}"/>
                     </Border>
                     <Border Grid.Column="1"
                             Style="{StaticResource Ball}">
-                        <Label x:Name="todayMidday2"
+                        <Label x:Name="TodayMidday2"
                                Text="-"
                                Style="{StaticResource Number}"/>
                     </Border>
                     <Border Grid.Column="2"
                             Style="{StaticResource Ball}">
-                        <Label x:Name="todayMidday3"
+                        <Label x:Name="TodayMidday3"
                                Text="-"
                                Style="{StaticResource Number}"/>
                     </Border>
@@ -145,7 +145,7 @@
             </Grid>
         </Border>
         <Border
-            Style="{StaticResource TOD-border}"
+            Style="{StaticResource Tod-Border}"
             Stroke="{StaticResource neutral1}"
             StrokeShape="RoundRectangle 0,0,10,10"
             Padding="16,8">
@@ -156,7 +156,7 @@
                 </Grid.RowDefinitions>
                 <Label Text="Evening"
                     Grid.Row="0"
-                    Style="{StaticResource TOD}"/>
+                    Style="{StaticResource Tod}"/>
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -165,19 +165,19 @@
                     </Grid.ColumnDefinitions>
                     <Border Grid.Column="0"
                             Style="{StaticResource Ball}">
-                        <Label x:Name="todayEvening1"
+                        <Label x:Name="TodayEvening1"
                                Text="-"
                                Style="{StaticResource Number}"/>
                     </Border>
                     <Border Grid.Column="1"
                             Style="{StaticResource Ball}">
-                        <Label x:Name="todayEvening2"
+                        <Label x:Name="TodayEvening2"
                                Text="-"
                                Style="{StaticResource Number}"/>
                     </Border>
                     <Border Grid.Column="2"
                             Style="{StaticResource Ball}">
-                        <Label x:Name="todayEvening3"
+                        <Label x:Name="TodayEvening3"
                                Text="-"
                                Style="{StaticResource Number}"/>
                     </Border>

@@ -16,8 +16,8 @@ namespace Daily3_UI
         /// <summary>
         /// Web reader for collecting information from the site
         /// </summary>
-        private static HtmlWeb web = new HtmlWeb();
-        private readonly static string daily3HyperLink = "https://www.lotterypost.com/results/mi/daily3/past";
+        private static readonly HtmlWeb Web = new HtmlWeb();
+        private static readonly string Daily3HyperLink = "https://www.lotterypost.com/results/mi/daily3/past";
 
         /// <summary>
         /// The 2 times that you can get a ticket
@@ -36,7 +36,7 @@ namespace Daily3_UI
         /// </summary>
         public static async Task<List<WinningNumber>> GetWinningNumbers()
         {
-            HtmlDocument doc = await web.LoadFromWebAsync(daily3HyperLink);
+            HtmlDocument doc = await Web.LoadFromWebAsync(Daily3HyperLink);
             List<WinningNumber> winningNumbers = Scraping(doc);
             return winningNumbers;
         }
@@ -57,11 +57,11 @@ namespace Daily3_UI
         /// </summary>
         private static List<WinningNumber> ScarpingGivenADate(HtmlDocument doc, string gettingDate)
         {
-            HtmlNode targetElement = doc.DocumentNode.SelectSingleNode($"//time[starts-with(@datetime, '{gettingDate}')]");
+            var targetElement = doc.DocumentNode.SelectSingleNode($"//time[starts-with(@datetime, '{gettingDate}')]");
             if (targetElement is null)
                 return new List<WinningNumber>();
 
-            HtmlNodeCollection nodeNumbers = targetElement.ParentNode.ParentNode.SelectNodes(".//li");
+            var nodeNumbers = targetElement.ParentNode.ParentNode.SelectNodes(".//li");
             return nodeNumbers
                 .Select((nodeNumber, index) => new { nodeNumber, index })
                 .GroupBy(pair => pair.index / 3, pair => pair.nodeNumber.InnerText)
@@ -74,7 +74,7 @@ namespace Daily3_UI
         /// </summary>
         private static string GetCurrentDate()
         {
-            string dateTime = DateTime.Today.ToString("yyyy-MM-dd");
+            var dateTime = DateTime.Today.ToString("yyyy-MM-dd");
             return dateTime;
         }
 
@@ -83,7 +83,7 @@ namespace Daily3_UI
         /// </summary>
         private static string GetYesterday()
         {
-            string dateTime = DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd");
+            var dateTime = DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd");
             return dateTime;
         }
     }
