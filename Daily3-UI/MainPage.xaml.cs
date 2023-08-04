@@ -4,10 +4,10 @@ namespace Daily3_UI;
 
 public partial class MainPage : ContentPage
 {
-	public WinningNumber YesterdayMidday { get; private set; }
-    public WinningNumber YesterdayEvening { get; private set; }
-    public WinningNumber TodayMidday { get; private set; }
-    public WinningNumber TodayEvening { get; private set; }
+	private WinningNumber YesterdayMidday { get; set; }
+    private WinningNumber YesterdayEvening { get; set; }
+    private WinningNumber TodayMidday { get; set; }
+    private WinningNumber TodayEvening { get; set; }
 
     public MainPage()
 	{
@@ -20,7 +20,7 @@ public partial class MainPage : ContentPage
     /// </summary>
     private async void UpdatePage()
     {
-        List<WinningNumber> winningNumbers = await WebScraper.GetWinningNumbers();
+        var winningNumbers = await WebScraper.GetWinningNumbers();
 
         YesterdayMidday = winningNumbers[0];
         YesterdayMidday1.Text = YesterdayMidday.Number1.ToString();
@@ -39,13 +39,13 @@ public partial class MainPage : ContentPage
             TodayMidday2.Text = TodayMidday.Number2.ToString();
             TodayMidday3.Text = TodayMidday.Number3.ToString();
         }
-        if (winningNumbers.Count > 3)
-        {
-            TodayEvening = winningNumbers[3];
-            TodayEvening1.Text = TodayEvening.Number1.ToString();
-            TodayEvening2.Text = TodayEvening.Number2.ToString();
-            TodayEvening3.Text = TodayEvening.Number3.ToString();
-        }
+
+        if (winningNumbers.Count <= 3) return;
+        TodayEvening = winningNumbers[3];
+        TodayEvening1.Text = TodayEvening.Number1.ToString();
+        TodayEvening2.Text = TodayEvening.Number2.ToString();
+        TodayEvening3.Text = TodayEvening.Number3.ToString();
+        
     }
 }
 
