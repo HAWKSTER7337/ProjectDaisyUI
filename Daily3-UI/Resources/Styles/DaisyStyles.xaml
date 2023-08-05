@@ -17,6 +17,13 @@
         <Setter Property="BackgroundColor" Value="{StaticResource White}"/>
     </Style>
     
+    <Style x:Key = "Picker-Ball" TargetType="Border">
+        <Setter Property="WidthRequest" Value="75"/>
+        <Setter Property="HeightRequest" Value="75"/>
+        <Setter Property="StrokeShape" Value="RoundRectangle 100,100,100,100"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource White}"/>
+    </Style>
+    
     <Style x:Key = "Tod" TargetType="Label">
         <Setter Property="HorizontalTextAlignment" Value="Center"/>
         <Setter Property="TextColor" Value="{StaticResource neutral1}"/>
@@ -56,4 +63,12 @@
         <Setter Property="FontSize" Value="24"/>
         <Setter Property="FontAttributes" Value="Bold"/>
     </Style>
+    
+    <Style x:Key="Daily-Button" TargetType="Button">
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="TextColor" Value="{StaticResource Black}"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+    </Style>
+    
 </ResourceDictionary>
