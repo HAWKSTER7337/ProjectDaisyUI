@@ -51,6 +51,8 @@
     <Style x:Key="Number-Setter" TargetType="Picker">
         <Setter Property="HorizontalOptions" Value="Center"/>
         <Setter Property="VerticalOptions" Value="Center"/>
+        <Setter Property="HorizontalTextAlignment" Value="Center"/>
+        <Setter Property="VerticalTextAlignment" Value="Center"/>
         <Setter Property="FontSize" Value="24"/>
     </Style>
 </ResourceDictionary>
