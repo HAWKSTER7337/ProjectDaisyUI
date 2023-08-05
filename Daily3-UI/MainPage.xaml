@@ -5,10 +5,6 @@
              BackgroundColor="{StaticResource Secondary}"
              Shell.NavBarIsVisible="False">
 
-    <ContentPage.Resources>
-        <ResourceDictionary Source="DaisyStyles.xaml"/>
-    </ContentPage.Resources>
-
     <VerticalStackLayout
         Spacing="5"
         Padding="30,0"

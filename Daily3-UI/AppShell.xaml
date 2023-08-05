@@ -29,7 +29,7 @@
        <ShellContent
            Title="Buy Tickets"
            ContentTemplate="{DataTemplate local:BuyTickets}"
-           Route="ButTickets"/>
+           Route="BuyTickets"/>
         <ShellContent 
             Title="View History"/>
     </TabBar>
