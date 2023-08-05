@@ -55,15 +55,28 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="DaisyStyles.xaml.cs">
-	    <DependentUpon>DaisyStyles.xaml</DependentUpon>
-	  </Compile>
+	  <MauiXaml Update="Resources\Styles\DaisyStyles.xaml">
+	    <SubType>Designer</SubType>
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\BuyTickets.xaml">
+	    <SubType>Designer</SubType>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\MainPage.xaml">
+	    <SubType>Designer</SubType>
+	  </MauiXaml>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="DaisyStyles.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
+	  <Compile Update="Pages\BuyTickets.xaml.cs">
+	    <DependentUpon>BuyTickets.xaml</DependentUpon>
+	    <SubType>Code</SubType>
+	  </Compile>
+	  <Compile Update="Pages\MainPage.xaml.cs">
+	    <DependentUpon>MainPage.xaml</DependentUpon>
+	    <SubType>Code</SubType>
+	  </Compile>
 	</ItemGroup>
+
 
 </Project>
