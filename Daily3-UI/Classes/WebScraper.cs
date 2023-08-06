@@ -1,12 +1,7 @@
-﻿using CsvHelper;
-using HtmlAgilityPack;
-using System.IO;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using HtmlAgilityPack;
 
 namespace Daily3_UI
 {
-
     /// <summary>
     /// Class for Getting the Daily numbers 
     /// off of the website
@@ -17,6 +12,7 @@ namespace Daily3_UI
         /// Web reader for collecting information from the site
         /// </summary>
         private static readonly HtmlWeb Web = new HtmlWeb();
+
         private static readonly string Daily3HyperLink = "https://www.lotterypost.com/results/mi/daily3/past";
 
         /// <summary>
@@ -36,8 +32,8 @@ namespace Daily3_UI
         /// </summary>
         public static async Task<List<WinningNumber>> GetWinningNumbers()
         {
-            HtmlDocument doc = await Web.LoadFromWebAsync(Daily3HyperLink);
-            List<WinningNumber> winningNumbers = Scraping(doc);
+            var doc = await Web.LoadFromWebAsync(Daily3HyperLink);
+            var winningNumbers = Scraping(doc);
             return winningNumbers;
         }
 
@@ -55,7 +51,7 @@ namespace Daily3_UI
         /// <summary>
         /// Scraping the numbers based on the time of day
         /// </summary>
-        private static List<WinningNumber> ScarpingGivenADate(HtmlDocument doc, string gettingDate)
+        private static IEnumerable<WinningNumber> ScarpingGivenADate(HtmlDocument doc, string gettingDate)
         {
             var targetElement = doc.DocumentNode.SelectSingleNode($"//time[starts-with(@datetime, '{gettingDate}')]");
             if (targetElement is null)
@@ -87,6 +83,4 @@ namespace Daily3_UI
             return dateTime;
         }
     }
-
-    
 }
