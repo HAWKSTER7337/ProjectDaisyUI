@@ -13,18 +13,10 @@ namespace Daily3_UI
         /// </summary>
         private static readonly HtmlWeb Web = new HtmlWeb();
 
-        private static readonly string Daily3HyperLink = "https://www.lotterypost.com/results/mi/daily3/past";
-
         /// <summary>
-        /// The 2 times that you can get a ticket
-        /// for a day 
+        /// Location the web scraper pulls from
         /// </summary>
-        enum TOD
-        {
-            Midday,
-            Evening
-        }
-
+        private static readonly string Daily3HyperLink = "https://www.lotterypost.com/results/mi/daily3/past";
 
         /// <summary>
         /// Pulling all winning numbers from today and 
