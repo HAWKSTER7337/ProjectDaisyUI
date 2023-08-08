@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Daily3_UI;
+namespace Daily3_UI.Classes;
 
 public class WinningNumber
 {

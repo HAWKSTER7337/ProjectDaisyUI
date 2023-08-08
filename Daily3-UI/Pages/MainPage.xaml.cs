@@ -1,4 +1,6 @@
-﻿namespace Daily3_UI.Pages;
+﻿using Daily3_UI.Classes;
+
+namespace Daily3_UI.Pages;
 
 public partial class MainPage : ContentPage
 {
