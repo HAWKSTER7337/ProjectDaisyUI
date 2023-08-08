@@ -10,7 +10,11 @@ public partial class MainPage : ContentPage
     public MainPage()
     {
         InitializeComponent();
-        UpdateScreenLoop();
+    }
+
+    protected override async void OnAppearing()
+    {
+        await UpdatePage();
     }
 
     /// <summary>
@@ -18,7 +22,7 @@ public partial class MainPage : ContentPage
     /// </summary>
     private async Task UpdatePage()
     {
-        var winningNumbers = await WebScraper.GetWinningNumbers();
+        var winningNumbers = await WinningNumbersClient.GetWinningNumbers();
 
         switch (winningNumbers.Count)
         {
@@ -29,6 +33,7 @@ public partial class MainPage : ContentPage
                 TodayEvening3.Text = TodayEvening.Number3.ToString();
                 goto case 3;
             case 3:
+                TodayMidday = winningNumbers[2];
                 TodayMidday1.Text = TodayMidday.Number1.ToString();
                 TodayMidday2.Text = TodayMidday.Number2.ToString();
                 TodayMidday3.Text = TodayMidday.Number3.ToString();
@@ -45,19 +50,6 @@ public partial class MainPage : ContentPage
                 YesterdayMidday2.Text = YesterdayMidday.Number2.ToString();
                 YesterdayMidday3.Text = YesterdayMidday.Number3.ToString();
                 break;
-        }
-    }
-
-    /// <summary>
-    ///     Keeps the page updating while you are looking at it to
-    ///     make sure that everything is up to date
-    /// </summary>
-    private async Task UpdateScreenLoop()
-    {
-        while (true)
-        {
-            await UpdatePage();
-            await Task.Delay(10000, new CancellationToken());
         }
     }
 }
