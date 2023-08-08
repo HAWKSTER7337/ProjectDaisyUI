@@ -23,8 +23,8 @@
     <TabBar>
         <ShellContent
             Title="Daily Numbers"
-            ContentTemplate="{DataTemplate local:MainPage}"
-            Route="MainPage" />
+            ContentTemplate="{DataTemplate local:WinningNumbersPage}"
+            Route="WinningNumbersPage" />
 
         <ShellContent
             Title="Buy Tickets"

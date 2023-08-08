@@ -2,9 +2,9 @@
 
 namespace Daily3_UI.Pages;
 
-public partial class MainPage : ContentPage
+public partial class WinningNumbersPage : ContentPage
 {
-    public MainPage()
+    public WinningNumbersPage()
     {
         InitializeComponent();
     }
