@@ -5,35 +5,35 @@
              x:Class="Daily3_UI.BuyTickets"
              BackgroundColor="{StaticResource Secondary}"
              Shell.NavBarIsVisible="False">
-    
+
     <VerticalStackLayout
         Spacing="5"
         Padding="30,0"
         VerticalOptions="Fill"
         HorizontalOptions="Fill">
-        
+
         <!--Title-->
         <Border
             BackgroundColor="{StaticResource Primary}"
             WidthRequest="1000"
             Padding="5"
             StrokeShape="RoundRectangle 10,10,0,0">
-        <Label Text="Buy Tickets"
-               TextColor="{StaticResource Black}"
-               Style="{StaticResource Day}"/>
+            <Label Text="Buy Tickets"
+                   TextColor="{StaticResource Black}"
+                   Style="{StaticResource Day}" />
         </Border>
-        
+
         <!--Number Selectors-->
         <Label Text="Select Numbers"
                Style="{StaticResource Tod}"
-               TextColor="{StaticResource neutral4}"/>
+               TextColor="{StaticResource neutral4}" />
         <Grid Padding="10">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            
+
             <Border Grid.Column="0" Style="{StaticResource Picker-Ball}">
                 <Picker x:Name="Number1"
                         Title="-"
@@ -95,78 +95,78 @@
                 </Picker>
             </Border>
         </Grid>
-        
+
         <!--Select Payment amount-->
         <Label Text="Select Payment Amount"
-               Style="{StaticResource Tod}"/>
+               Style="{StaticResource Tod}" />
         <Grid
             Padding="5">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            
-            <Button Grid.Column="0" Style="{StaticResource Daily-Button}" Text="$0.50"/>
-            <Button Grid.Column="1" Style="{StaticResource Daily-Button}" Text="$1.00"/>
+
+            <Button Grid.Column="0" Style="{StaticResource Daily-Button}" Text="$0.50" />
+            <Button Grid.Column="1" Style="{StaticResource Daily-Button}" Text="$1.00" />
         </Grid>
-        
+
         <!--Select Bet Type-->
         <Label Text="Select Bet Type"
-               Style="{StaticResource Tod}"/>
+               Style="{StaticResource Tod}" />
         <Grid
             Padding="5">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            
+
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            
-            <Button Grid.Row="0" Grid.Column="0" Style="{StaticResource Daily-Button}" Text="Straight"/>
-            <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource Daily-Button}" Text="Box"/>
-            <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource Daily-Button}" Text="2-Way"/>
-            <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource Daily-Button}" Text="1-Off"/>
-            <Button Grid.Row="2" Grid.Column="0" Style="{StaticResource Daily-Button}" Text="Wheel"/>
+
+            <Button Grid.Row="0" Grid.Column="0" Style="{StaticResource Daily-Button}" Text="Straight" />
+            <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource Daily-Button}" Text="Box" />
+            <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource Daily-Button}" Text="2-Way" />
+            <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource Daily-Button}" Text="1-Off" />
+            <Button Grid.Row="2" Grid.Column="0" Style="{StaticResource Daily-Button}" Text="Wheel" />
         </Grid>
-        
+
         <!--Select Draw-->
         <Label Text="Select Draw"
-               Style="{StaticResource Tod}"/>
+               Style="{StaticResource Tod}" />
         <Grid
             Padding="5">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            
+
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            
-            <Button Grid.Row="0" Grid.Column="0" Style="{StaticResource Daily-Button}" Text="Midday"/>
-            <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource Daily-Button}" Text="Evening"/>
-            <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource Daily-Button}" Text="Both"/>
+
+            <Button Grid.Row="0" Grid.Column="0" Style="{StaticResource Daily-Button}" Text="Midday" />
+            <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource Daily-Button}" Text="Evening" />
+            <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource Daily-Button}" Text="Both" />
         </Grid>
-        
+
         <!--Buy Ticket-->
         <Grid
             Padding="5">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
-            
-            <Button Grid.Column="0" Style="{StaticResource Daily-Button}" Text="View"/>
-            <Button Grid.Column="1" Style="{StaticResource Daily-Button}" Text="Add"/>
-            <Button Grid.Column="2" Style="{StaticResource Daily-Button}" Text="Checkout"/>
+
+            <Button Grid.Column="0" Style="{StaticResource Daily-Button}" Text="View" />
+            <Button Grid.Column="1" Style="{StaticResource Daily-Button}" Text="Add" />
+            <Button Grid.Column="2" Style="{StaticResource Daily-Button}" Text="Checkout" />
         </Grid>
-        
-        
+
+
     </VerticalStackLayout>
 </ContentPage>

@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
+
 <Shell
     x:Class="Daily3_UI.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -10,11 +11,11 @@
         <ResourceDictionary>
             <Style TargetType="TabBar">
                 <Setter Property="Shell.TabBarBackgroundColor"
-                    Value="{DynamicResource Primary}" />
+                        Value="{DynamicResource Primary}" />
                 <Setter Property="Shell.TabBarTitleColor"
-                    Value="{DynamicResource Secondary}" />
+                        Value="{DynamicResource Secondary}" />
                 <Setter Property="Shell.TabBarUnselectedColor"
-                    Value="{DynamicResource Black}" />
+                        Value="{DynamicResource Black}" />
             </Style>
         </ResourceDictionary>
     </Shell.Resources>
@@ -23,18 +24,14 @@
         <ShellContent
             Title="Daily Numbers"
             ContentTemplate="{DataTemplate local:MainPage}"
-            Route="MainPage"
-        />
+            Route="MainPage" />
 
-       <ShellContent
-           Title="Buy Tickets"
-           ContentTemplate="{DataTemplate local:BuyTickets}"
-           Route="BuyTickets"/>
-        <ShellContent 
-            Title="View History"/>
+        <ShellContent
+            Title="Buy Tickets"
+            ContentTemplate="{DataTemplate local:BuyTickets}"
+            Route="BuyTickets" />
+        <ShellContent
+            Title="View History" />
     </TabBar>
-    
+
 </Shell>
-
-
-

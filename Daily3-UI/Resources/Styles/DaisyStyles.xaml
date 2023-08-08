@@ -1,74 +1,75 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <Style x:Key = "Tod-Border" TargetType="Border">
-        <Setter Property="HeightRequest" Value="120"/>
-        <Setter Property="HorizontalOptions" Value="Fill"/>
-        <Setter Property="BackgroundColor" Value="{StaticResource Secondary}"/>
-        <Setter Property="StrokeThickness" Value="4"/>
-        <Setter Property="Stroke" Value="{StaticResource neutral1}"/>
-    </Style>
-
-    <Style x:Key = "Ball" TargetType="Border">
-        <Setter Property="WidthRequest" Value="50"/>
-        <Setter Property="HeightRequest" Value="50"/>
-        <Setter Property="StrokeShape" Value="RoundRectangle 100,100,100,100"/>
-        <Setter Property="BackgroundColor" Value="{StaticResource White}"/>
-    </Style>
-    
-    <Style x:Key = "Picker-Ball" TargetType="Border">
-        <Setter Property="WidthRequest" Value="75"/>
-        <Setter Property="HeightRequest" Value="75"/>
-        <Setter Property="StrokeShape" Value="RoundRectangle 100,100,100,100"/>
-        <Setter Property="BackgroundColor" Value="{StaticResource White}"/>
-    </Style>
-    
-    <Style x:Key = "Tod" TargetType="Label">
-        <Setter Property="HorizontalTextAlignment" Value="Center"/>
-        <Setter Property="TextColor" Value="{StaticResource neutral1}"/>
-        <Setter Property="FontSize" Value="20"/>
-        <Setter Property="FontAttributes" Value="Italic"/>
-        <Setter Property="FontFamily" Value="Lobster-Regular"/>
+    <Style x:Key="Tod-Border" TargetType="Border">
+        <Setter Property="HeightRequest" Value="120" />
+        <Setter Property="HorizontalOptions" Value="Fill" />
+        <Setter Property="BackgroundColor" Value="{StaticResource Secondary}" />
+        <Setter Property="StrokeThickness" Value="4" />
+        <Setter Property="Stroke" Value="{StaticResource neutral1}" />
     </Style>
 
-    <Style x:Key = "Title" TargetType="Label">
-        <Setter Property="HorizontalTextAlignment" Value="Center"/>
-        <Setter Property="TextColor" Value="{StaticResource Secondary}"/>
-        <Setter Property="FontSize" Value="35"/>
-        <Setter Property="VerticalTextAlignment" Value="Center"/>
-        <Setter Property="FontAttributes" Value="Bold"/>
-        <Setter Property="FontFamily" Value="Lobster-Regular"/>
+    <Style x:Key="Ball" TargetType="Border">
+        <Setter Property="WidthRequest" Value="50" />
+        <Setter Property="HeightRequest" Value="50" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 100,100,100,100" />
+        <Setter Property="BackgroundColor" Value="{StaticResource White}" />
+    </Style>
+
+    <Style x:Key="Picker-Ball" TargetType="Border">
+        <Setter Property="WidthRequest" Value="75" />
+        <Setter Property="HeightRequest" Value="75" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 100,100,100,100" />
+        <Setter Property="BackgroundColor" Value="{StaticResource White}" />
+    </Style>
+
+    <Style x:Key="Tod" TargetType="Label">
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="TextColor" Value="{StaticResource neutral1}" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontAttributes" Value="Italic" />
+        <Setter Property="FontFamily" Value="Lobster-Regular" />
+    </Style>
+
+    <Style x:Key="Title" TargetType="Label">
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="TextColor" Value="{StaticResource Secondary}" />
+        <Setter Property="FontSize" Value="35" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontFamily" Value="Lobster-Regular" />
     </Style>
 
     <Style x:Key="Day" TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource neutral4}"/>
-        <Setter Property="HorizontalTextAlignment" Value="Center"/>
-        <Setter Property="FontSize" Value="30"/>
+        <Setter Property="TextColor" Value="{StaticResource neutral4}" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="30" />
     </Style>
 
     <Style x:Key="Number" TargetType="Label">
-        <Setter Property="HorizontalOptions" Value="Center"/>
-        <Setter Property="VerticalOptions" Value="Center"/>
-        <Setter Property="FontSize" Value="30"/>
-        <Setter Property="TextColor" Value="{StaticResource Black}"/>
-        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="FontSize" Value="30" />
+        <Setter Property="TextColor" Value="{StaticResource Black}" />
+        <Setter Property="FontAttributes" Value="Bold" />
     </Style>
-    
+
     <Style x:Key="Number-Setter" TargetType="Picker">
-        <Setter Property="HorizontalOptions" Value="Center"/>
-        <Setter Property="VerticalOptions" Value="Center"/>
-        <Setter Property="HorizontalTextAlignment" Value="Center"/>
-        <Setter Property="VerticalTextAlignment" Value="Center"/>
-        <Setter Property="FontSize" Value="24"/>
-        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontAttributes" Value="Bold" />
     </Style>
-    
+
     <Style x:Key="Daily-Button" TargetType="Button">
-        <Setter Property="Margin" Value="5"/>
-        <Setter Property="TextColor" Value="{StaticResource Black}"/>
-        <Setter Property="FontSize" Value="18"/>
-        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="TextColor" Value="{StaticResource Black}" />
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="FontAttributes" Value="Bold" />
     </Style>
-    
+
 </ResourceDictionary>

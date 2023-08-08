@@ -2,15 +2,15 @@
 
 public partial class MainPage : ContentPage
 {
-    private WinningNumber YesterdayMidday { get; set; }
-    private WinningNumber YesterdayEvening { get; set; }
-    private WinningNumber TodayMidday { get; set; }
-    private WinningNumber TodayEvening { get; set; }
-
     public MainPage()
     {
         InitializeComponent();
     }
+
+    private WinningNumber YesterdayMidday { get; set; }
+    private WinningNumber YesterdayEvening { get; set; }
+    private WinningNumber TodayMidday { get; set; }
+    private WinningNumber TodayEvening { get; set; }
 
     protected override async void OnAppearing()
     {
@@ -18,7 +18,7 @@ public partial class MainPage : ContentPage
     }
 
     /// <summary>
-    /// Updates all of the values to what they are stored as
+    ///     Updates all of the values to what they are stored as
     /// </summary>
     private async Task UpdatePage()
     {
