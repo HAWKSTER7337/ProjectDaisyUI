@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             BackgroundColor="{StaticResource Secondary}"
+             x:Class="Daily3_UI.Pages.LogInPage"
+             Shell.NavBarIsVisible="False">
+    <ContentPage.Content>
+           <StackLayout Spacing="10">
+
+                  <!--Title Image-->
+                  <Image Source="daily.png" />
+
+                  <!--Title-->
+                  <Label Text="Login"
+                         TextColor="{StaticResource neutral4}"
+                         Style="{StaticResource Day}"
+                         FontSize="40" />
+
+                  <!--User Name-->
+                  <Label Text="UserName"
+                         TextColor="{StaticResource neutral4}"
+                         Style="{StaticResource Day}"
+                         HorizontalOptions="Start" />
+
+                  <Entry Placeholder="username"
+                         HorizontalOptions="Fill"
+                         Style="{StaticResource Entry-Design}" />
+
+                  <!--Password Name-->
+                  <Label Text="Password"
+                         TextColor="{StaticResource neutral4}"
+                         Style="{StaticResource Day}"
+
+                         HorizontalOptions="Start" />
+
+                  <Entry Placeholder="password"
+                         HorizontalOptions="Fill"
+                         Style="{StaticResource Entry-Design}"
+                         IsPassword="True" />
+
+                  <!--Login Button-->
+                  <Button Text="Log In"
+                          Padding="20"
+                          Margin="20"
+                          Clicked="AttemptLogIn" />
+
+           </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

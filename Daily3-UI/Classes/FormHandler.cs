@@ -3,7 +3,7 @@
 using UIKit;
 #endif
 
-namespace Daily3_UI;
+namespace Daily3_UI.Classes;
 
 public static class FormHandler
 {

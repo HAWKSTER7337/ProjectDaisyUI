@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Daily3_UI.Classes;
+using Microsoft.Extensions.Logging;
 
 namespace Daily3_UI;
 
