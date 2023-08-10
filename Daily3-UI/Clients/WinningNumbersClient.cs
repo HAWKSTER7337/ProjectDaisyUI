@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
+using Daily3_UI.Classes;
 
-namespace Daily3_UI.Classes;
+namespace Daily3_UI.Clients;
 
 public static class WinningNumbersClient
 {

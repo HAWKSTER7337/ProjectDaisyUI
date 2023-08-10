@@ -25,6 +25,7 @@
 
                   <Entry Placeholder="username"
                          HorizontalOptions="Fill"
+                         x:Name="Username"
                          Style="{StaticResource Entry-Design}" />
 
                   <!--Password Name-->
@@ -36,6 +37,7 @@
 
                   <Entry Placeholder="password"
                          HorizontalOptions="Fill"
+                         x:Name="Password"
                          Style="{StaticResource Entry-Design}"
                          IsPassword="True" />
 
