@@ -1,4 +1,6 @@
-﻿namespace Daily3_UI.Pages;
+﻿using Daily3_UI.Clients;
+
+namespace Daily3_UI.Pages;
 
 /// <summary>
 ///     Page for handling logging into the application
@@ -11,12 +13,12 @@ public partial class LogInPage : ContentPage
     }
 
     /// <summary>
-    ///     Logging into the application
-    ///     This will attempt to log you in based on the password
-    ///     and username you give it but its not implemented yet
+    /// Logging you in if you have a account
     /// </summary>
-    private void AttemptLogIn(object sender, EventArgs e)
+    private async void AttemptLogIn(object sender, EventArgs e)
     {
-        Application.Current.MainPage = new AppShell();
+        var userID = await VerifyUserClient.VerifyUser(Username.Text, Password.Text);
+
+        if (userID is not null) Application.Current.MainPage = new AppShell();
     }
 }
