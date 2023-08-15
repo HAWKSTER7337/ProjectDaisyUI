@@ -78,4 +78,8 @@
         <Setter Property="IsTextPredictionEnabled" Value="False" />
     </Style>
 
+    <Style x:Key="Picker-Border" TargetType="Border">
+        <Setter Property="StrokeShape" Value="RoundRectangle 100,100,100,100" />
+    </Style>
+
 </ResourceDictionary>
