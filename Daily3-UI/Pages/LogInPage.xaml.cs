@@ -1,4 +1,5 @@
-﻿using Daily3_UI.Clients;
+﻿using Daily3_UI.Classes;
+using Daily3_UI.Clients;
 
 namespace Daily3_UI.Pages;
 
@@ -13,12 +14,12 @@ public partial class LogInPage : ContentPage
     }
 
     /// <summary>
-    /// Logging you in if you have a account
+    ///     Logging you in if you have a account
     /// </summary>
     private async void AttemptLogIn(object sender, EventArgs e)
     {
-        var userID = await VerifyUserClient.VerifyUser(Username.Text, Password.Text);
+        Globals.UserId = await VerifyUserClient.VerifyUser(Username.Text, Password.Text);
 
-        if (userID is not null) Application.Current.MainPage = new AppShell();
+        if (Globals.UserId is not null) Application.Current.MainPage = new AppShell();
     }
 }
