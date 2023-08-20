@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Daily3_UI.Pages.TicketHistory"
+             BackgroundColor="{StaticResource Secondary}"
+             Shell.NavBarIsVisible="False">
+    <VerticalStackLayout
+        Spacing="5"
+        Padding="30, 0"
+        VerticalOptions="Fill"
+        HorizontalOptions="Fill">
+        <!--Title-->
+        <Border
+            BackgroundColor="{StaticResource Primary}"
+            WidthRequest="1000"
+            Padding="5"
+            StrokeShape="RoundRectangle 10,10,0,0">
+            <Label Text="Ticket History"
+                   TextColor="{StaticResource Black}"
+                   Style="{StaticResource Day}" />
+        </Border>
+
+        <!--Date Search-->
+        <Label Text="Search by Date"
+               Style="{StaticResource Tod}" />
+        <Grid
+            Padding="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Border
+                Grid.Column="0"
+                Style="{StaticResource Picker-Border}">
+                <DatePicker
+                    DateSelected="DateChanged"
+                    HorizontalOptions="Center"
+                    BackgroundColor="{StaticResource White}" />
+            </Border>
+            <Label
+                Text="Search Toggle"
+                Grid.Column="1"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                TextColor="{StaticResource White}" />
+            <Switch
+                Toggled="ToggleDateSwitch"
+                Grid.Column="2" />
+        </Grid>
+
+        <!--Display Tickets-->
+        <ListView ItemsSource="{Binding Tickets}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding TextFormat}"
+                              TextColor="{StaticResource neutral4}"
+                              DetailColor="{StaticResource neutral3}"
+                              Detail="{Binding DetailsFormat}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </VerticalStackLayout>
+</ContentPage>
