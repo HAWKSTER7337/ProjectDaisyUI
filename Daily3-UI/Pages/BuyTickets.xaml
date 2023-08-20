@@ -149,11 +149,15 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <Button Grid.Row="0" Grid.Column="0" Style="{StaticResource Daily-Button}" Text="Straight" />
-            <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource Daily-Button}" Text="Box" />
-            <Button Grid.Row="0" Grid.Column="2" Style="{StaticResource Daily-Button}" Text="2-Way" />
-            <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource Daily-Button}" Text="1-Off" />
-            <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource Daily-Button}" Text="Wheel" />
+            <Button Grid.Row="0" Grid.Column="0" Clicked="SelectType" Style="{StaticResource Daily-Button}"
+                    Text="Straight" />
+            <Button Grid.Row="0" Grid.Column="1" Clicked="SelectType" Style="{StaticResource Daily-Button}" Text="Box" />
+            <Button Grid.Row="0" Grid.Column="2" Clicked="SelectType" Style="{StaticResource Daily-Button}"
+                    Text="2-Way" />
+            <Button Grid.Row="1" Grid.Column="0" Clicked="SelectType" Style="{StaticResource Daily-Button}"
+                    Text="1-Off" />
+            <Button Grid.Row="1" Grid.Column="1" Clicked="SelectType" Style="{StaticResource Daily-Button}"
+                    Text="Wheel" />
         </Grid>
 
         <!--Select Draw-->
@@ -167,9 +171,12 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Row="0" Grid.Column="0" Style="{StaticResource Daily-Button}" Text="Midday" />
-            <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource Daily-Button}" Text="Evening" />
-            <Button Grid.Row="0" Grid.Column="2" Style="{StaticResource Daily-Button}" Text="Both" />
+            <Button Grid.Row="0" Grid.Column="0" Clicked="SelectTimeOfDay" Style="{StaticResource Daily-Button}"
+                    Text="Midday" />
+            <Button Grid.Row="0" Grid.Column="1" Clicked="SelectTimeOfDay" Style="{StaticResource Daily-Button}"
+                    Text="Evening" />
+            <Button Grid.Row="0" Grid.Column="2" Clicked="SelectTimeOfDay" Style="{StaticResource Daily-Button}"
+                    Text="Both" />
         </Grid>
 
         <!--Select Date-->
@@ -179,7 +186,7 @@
         <Border
             Style="{StaticResource Picker-Border}">
             <DatePicker
-                DateSelected="properDatePicker"
+                DateSelected="ProperDatePicker"
                 x:Name="DatePicker"
                 HorizontalOptions="Center"
                 BackgroundColor="{StaticResource White}" />
@@ -194,10 +201,20 @@
                 <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Style="{StaticResource Daily-Button}" Text="View" />
-            <Button Grid.Column="1" Style="{StaticResource Daily-Button}" Text="Add" />
-            <Button Grid.Column="2" Style="{StaticResource Daily-Button}" Text="Checkout" />
+            <Button Grid.Column="0" Style="{StaticResource Daily-Button}"
+                    Text="View" />
+            <Button Grid.Column="1" Style="{StaticResource Daily-Button}"
+                    Text="Add"
+                    Clicked="AddTicketToCart" />
+            <Button Grid.Column="2" Style="{StaticResource Daily-Button}"
+                    Text="Checkout"
+                    Clicked="CheckOut" />
         </Grid>
+
+        <!--Error Message Label-->
+        <Label Text=""
+               x:Name="ErrorLabel"
+               Style="{StaticResource Error-Message}" />
 
 
     </VerticalStackLayout>
