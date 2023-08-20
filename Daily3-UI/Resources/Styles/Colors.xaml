@@ -7,11 +7,13 @@
 
     <Color x:Key="Primary">#F19D39</Color>
     <Color x:Key="Secondary">#335A9A</Color>
+    <Color x:Key="Selected">#744B18</Color>
     <Color x:Key="neutral1">#C2B999</Color>
     <Color x:Key="neutral2">#D5CBA8</Color>
     <Color x:Key="neutral3">#DAD1B2</Color>
     <Color x:Key="neutral4">#EDEBD6</Color>
     <Color x:Key="DailyGreen">#95C761</Color>
+    <Color x:Key="DailyRed">#CC0000</Color>
     <Color x:Key="Tertiary">#000000</Color>
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>

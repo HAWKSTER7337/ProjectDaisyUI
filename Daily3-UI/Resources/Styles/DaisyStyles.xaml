@@ -68,6 +68,7 @@
     <Style x:Key="Daily-Button" TargetType="Button">
         <Setter Property="Margin" Value="5" />
         <Setter Property="TextColor" Value="{StaticResource Black}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
         <Setter Property="FontSize" Value="18" />
         <Setter Property="FontAttributes" Value="Bold" />
     </Style>
@@ -80,6 +81,12 @@
 
     <Style x:Key="Picker-Border" TargetType="Border">
         <Setter Property="StrokeShape" Value="RoundRectangle 100,100,100,100" />
+    </Style>
+
+    <Style x:Key="Error-Message" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource DailyRed}" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="HorizontalOptions" Value="Center" />
     </Style>
 
 </ResourceDictionary>
