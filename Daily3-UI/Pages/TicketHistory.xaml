@@ -46,6 +46,7 @@
                 VerticalOptions="Center"
                 TextColor="{StaticResource White}" />
             <Switch
+                x:Name="SearchToggle"
                 Toggled="ToggleDateSwitch"
                 Grid.Column="2" />
         </Grid>
