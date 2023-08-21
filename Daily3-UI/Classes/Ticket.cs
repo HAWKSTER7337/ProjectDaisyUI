@@ -9,25 +9,30 @@ namespace Daily3_UI.Classes;
 public class Ticket
 {
     // Winning Numbers
-    public string Number1 { get; init; } = null;
-    public string Number2 { get; init; } = null;
-    public string Number3 { get; init; } = null;
+    public int? Number1 { get; init; } = null;
+    public int? Number2 { get; init; } = null;
+    public int? Number3 { get; init; } = null;
 
     // Specifications 
-    public string Price { get; init; } = null;
+    public double? Price { get; init; } = null;
     public TicketType? Type { get; init; } = null;
     public TOD? TimeOfDay { get; init; } = null;
     public string Date { get; init; } = null;
+
+    public string FormattedNumber1 => Number1.ToString();
+    public string FormattedNumber2 => Number2.ToString();
+    public string FormattedNumber3 => Number3.ToString();
+    public string FormattedPrice => Price.HasValue ? Price.Value.ToString("0.00") : "N/A";
 
     /// <summary>
     ///     returns a message if something was set as null
     /// </summary>
     public string MissingMessage()
     {
-        if (Number1 is null) return "Missing a First Number!";
-        if (Number2 is null) return "Missing a Second Number!";
-        if (Number3 is null) return "Missing a Third Number!";
-        if (Price is null) return "Pick a Price!";
+        if (FormattedNumber1 is null) return "Missing a First Number!";
+        if (FormattedNumber2 is null) return "Missing a Second Number!";
+        if (FormattedNumber3 is null) return "Missing a Third Number!";
+        if (FormattedPrice is null) return "Pick a Price!";
         if (Type is null) return "Pick a Ticket Type!";
         if (TimeOfDay is null) return "Time of day has not been entered!";
         return Date is null ? "No Date Entered" : null;
@@ -41,10 +46,10 @@ public class Ticket
         // Building Params
         var uriBuilder = new UriBuilder(baseUrl + endPoint);
         var queryParameters = HttpUtility.ParseQueryString(string.Empty);
-        queryParameters["number1"] = Number1;
-        queryParameters["number2"] = Number2;
-        queryParameters["number3"] = Number3;
-        queryParameters["price"] = Price;
+        queryParameters["number1"] = FormattedNumber1;
+        queryParameters["number2"] = FormattedNumber2;
+        queryParameters["number3"] = FormattedNumber3;
+        queryParameters["price"] = FormattedPrice;
         queryParameters["ticketType"] = ((int)Type).ToString();
         queryParameters["timeOfDay"] = ((int)TimeOfDay).ToString();
         queryParameters["date"] = Date;
@@ -56,10 +61,11 @@ public class Ticket
     /// <summary>
     ///     return the number for it to appear on screen
     /// </summary>
-    public string TextFormat => $"{Number1}-{Number2}-{Number3}   Type: {Type}   TOD: {TimeOfDay}";
+    public string TextFormat =>
+        $"{FormattedNumber1}-{FormattedNumber2}-{FormattedNumber3}   Type: {Type}   TOD: {TimeOfDay}";
 
     /// <summary>
     ///     returns the details format of the tickets bought
     /// </summary>
-    public string DetailsFormat => $"Price: ${Price}   Date: {DateTime.Parse(Date).ToString("MM/dd/yyyy")}";
+    public string DetailsFormat => $"Price: ${FormattedPrice}   Date: {DateTime.Parse(Date).ToString("MM/dd/yyyy")}";
 }

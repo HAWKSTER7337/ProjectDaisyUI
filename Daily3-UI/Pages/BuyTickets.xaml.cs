@@ -83,10 +83,10 @@ public partial class BuyTickets : ContentPage
         {
             var ticket = new Ticket
             {
-                Number1 = Number1.SelectedItem.ToString(),
-                Number2 = Number2.SelectedItem.ToString(),
-                Number3 = Number3.SelectedItem.ToString(),
-                Price = Price.SelectedItem.ToString(),
+                Number1 = short.Parse(Number1.SelectedItem.ToString()),
+                Number2 = short.Parse(Number2.SelectedItem.ToString()),
+                Number3 = short.Parse(Number3.SelectedItem.ToString()),
+                Price = double.Parse(Price.SelectedItem.ToString()),
                 Type = GetTicketTypeFromString(BetTypeSelcted.Text),
                 TimeOfDay = GetTodFromString(TimeOfDaySelected.Text),
                 Date = DatePicker.Date.ToString("yyyy-MM-dd")

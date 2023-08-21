@@ -1,5 +1,5 @@
 ﻿using Daily3_UI.Classes;
-using Daily3_UI.Enums;
+using Daily3_UI.Clients;
 
 namespace Daily3_UI.Pages;
 
@@ -8,25 +8,19 @@ public partial class TicketHistory : ContentPage
     public TicketHistory()
     {
         InitializeComponent();
+    }
+
+    protected override async void OnAppearing()
+    {
+        SearchToggle.IsToggled = false;
+        _userTickets = await TicketHistoryClient.GetTicketHistory();
         BindingContext = new HistoryPageViewModel(_userTickets);
     }
 
     /// <summary>
     ///     All of the users Tickets
     /// </summary>
-    private readonly List<Ticket> _userTickets = new()
-    {
-        new Ticket
-        {
-            Number1 = "1", Number2 = "2", Number3 = "3", Date = "2023-08-24", Price = "0.25", Type = TicketType.Box,
-            TimeOfDay = TOD.Evening
-        },
-        new Ticket
-        {
-            Number1 = "1", Number2 = "2", Number3 = "3", Date = "2023-09-24", Price = "1.00",
-            Type = TicketType.Straight, TimeOfDay = TOD.Evening
-        }
-    };
+    private List<Ticket> _userTickets;
 
     /// <summary>
     ///     Checking if the tickets should be filtered by date
@@ -64,8 +58,6 @@ public partial class TicketHistory : ContentPage
             return;
         }
 
-        var test = DateTime.Parse(_userTickets[0].Date).Date;
-        var simpletest = test == date.Date;
         var filteredDates = _userTickets.Where(ticket => DateTime.Parse(ticket.Date).Date == date.Date).ToList();
         BindingContext = new HistoryPageViewModel(filteredDates);
     }
