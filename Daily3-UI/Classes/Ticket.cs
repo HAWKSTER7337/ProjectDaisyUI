@@ -52,4 +52,14 @@ public class Ticket
         uriBuilder.Query = queryParameters.ToString();
         return uriBuilder.ToString();
     }
+
+    /// <summary>
+    ///     return the number for it to appear on screen
+    /// </summary>
+    public string TextFormat => $"{Number1}-{Number2}-{Number3}   Type: {Type}   TOD: {TimeOfDay}";
+
+    /// <summary>
+    ///     returns the details format of the tickets bought
+    /// </summary>
+    public string DetailsFormat => $"Price: ${Price}   Date: {DateTime.Parse(Date).ToString("MM/dd/yyyy")}";
 }
