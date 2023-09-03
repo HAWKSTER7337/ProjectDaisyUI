@@ -7,7 +7,7 @@ public static class VerifyUserClient
     public static async Task<int?> VerifyUser(string username, string password)
     {
         var httpClient = new HttpClient();
-        var baseUrl = "http://10.0.2.2:5198/";
+        var baseUrl = "http://10.0.2.2:8080/";
         var endPoint = "api/VerifyUser";
 
         var uriBuilder = new UriBuilder(baseUrl + endPoint);
