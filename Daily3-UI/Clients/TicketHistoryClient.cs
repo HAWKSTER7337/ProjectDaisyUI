@@ -8,7 +8,7 @@ public static class TicketHistoryClient
 {
     public static async Task<List<Ticket>> GetTicketHistory()
     {
-        var baseUrl = "http://10.0.2.2:5198/";
+        var baseUrl = "http://10.0.2.2:8080/";
         var endpoint = "api/TicketHistory";
         var uriBuilder = new UriBuilder(baseUrl + endpoint);
         var queryParameters = HttpUtility.ParseQueryString(string.Empty);
