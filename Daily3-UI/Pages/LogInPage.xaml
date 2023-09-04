@@ -54,6 +54,11 @@
                           Margin="20"
                           Clicked="AttemptLogIn" />
 
+                  <!--Error Line-->
+                  <Label Text=""
+                         Style="{StaticResource Error-Message}"
+                         x:Name="ErrorLabel" />
+
            </StackLayout>
     </ContentPage.Content>
 </ContentPage>
