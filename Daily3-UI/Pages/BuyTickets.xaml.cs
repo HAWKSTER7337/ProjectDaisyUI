@@ -102,7 +102,8 @@ public partial class BuyTickets : ContentPage
 
             // Adding Values to the shopping cart
             ShoppingCart.Add(ticket);
-            ErrorLabel.Text = "";
+            ErrorLabel.TextColor = (Color)Application.Current.Resources["DailyGreen"];
+            ErrorLabel.Text = $"{ShoppingCart.Count} Ticket(s) in cart.";
         }
         catch (NullReferenceException exception)
         {
@@ -134,7 +135,10 @@ public partial class BuyTickets : ContentPage
             await Task.Delay(TimeSpan.FromMilliseconds(200));
         }
 
-        ErrorLabel.Text = errorMessage;
+        ErrorLabel.TextColor = errorMessage != ""
+            ? (Color)Application.Current.Resources["DailyRed"]
+            : (Color)Application.Current.Resources["DailyGreen"];
+        ErrorLabel.Text = errorMessage != "" ? errorMessage : "Tickets Sent";
     }
 
     private TOD? GetTodFromString(string text)
