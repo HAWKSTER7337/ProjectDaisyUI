@@ -1,4 +1,5 @@
-﻿using Daily3_UI.Classes;
+﻿using CommunityToolkit.Maui;
+using Daily3_UI.Classes;
 using Microsoft.Extensions.Logging;
 
 namespace Daily3_UI;
@@ -10,6 +11,7 @@ public static class MauiProgram
         var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
+            .UseMauiCommunityToolkit()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

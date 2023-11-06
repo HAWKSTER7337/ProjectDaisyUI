@@ -1,4 +1,5 @@
-﻿using Daily3_UI.Classes;
+﻿using CommunityToolkit.Maui.Views;
+using Daily3_UI.Classes;
 using Daily3_UI.Clients;
 using Daily3_UI.Enums;
 
@@ -102,7 +103,7 @@ public partial class BuyTickets : ContentPage
 
             // Adding Values to the shopping cart
             ShoppingCart.Add(ticket);
-            ErrorLabel.TextColor = (Color)Application.Current.Resources["DailyGreen"];
+            //ErrorLabel.TextColor = (Color)Application.Current.Resources["DailyGreen"];
             ErrorLabel.Text = $"{ShoppingCart.Count} Ticket(s) in cart.";
         }
         catch (NullReferenceException exception)
@@ -136,8 +137,8 @@ public partial class BuyTickets : ContentPage
         }
 
         ErrorLabel.TextColor = errorMessage != ""
-            ? (Color)Application.Current.Resources["DailyRed"]
-            : (Color)Application.Current.Resources["DailyGreen"];
+            ? GetColor("DailyRed")
+            : GetColor("SuccessGreen");
         ErrorLabel.Text = errorMessage != "" ? errorMessage : "Tickets Sent";
     }
 
@@ -163,5 +164,12 @@ public partial class BuyTickets : ContentPage
             "Wheel" => TicketType.Wheel,
             _ => null
         };
+    }
+
+    public async void OpenTicketPopupPageAsync(object sender, EventArgs e)
+    {
+        var tickets = ShoppingCart;
+        var ticketPopupPage = new TicketPopupPage(tickets);
+        await Shell.Current.CurrentPage.ShowPopupAsync(ticketPopupPage);
     }
 }
