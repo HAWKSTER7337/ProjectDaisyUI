@@ -97,6 +97,7 @@ public partial class BuyTickets : ContentPage
             var emptyFieldMessage = ticket.MissingMessage();
             if (emptyFieldMessage is not null)
             {
+                ErrorLabel.TextColor = GetColor("DailyRed");
                 ErrorLabel.Text = emptyFieldMessage;
                 return;
             }
@@ -104,6 +105,7 @@ public partial class BuyTickets : ContentPage
             // Adding Values to the shopping cart
             ShoppingCart.Add(ticket);
             //ErrorLabel.TextColor = (Color)Application.Current.Resources["DailyGreen"];
+            ErrorLabel.TextColor = GetColor("SuccessGreen");
             ErrorLabel.Text = $"{ShoppingCart.Count} Ticket(s) in cart.";
         }
         catch (NullReferenceException exception)
