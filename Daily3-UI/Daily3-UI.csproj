@@ -49,6 +49,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="CommunityToolkit.Maui" Version="6.1.0"/>
         <PackageReference Include="csvhelper" Version="30.0.1"/>
         <PackageReference Include="htmlagilitypack" Version="1.11.50"/>
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0"/>

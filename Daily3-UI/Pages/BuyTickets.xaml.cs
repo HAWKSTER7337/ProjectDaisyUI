@@ -1,4 +1,5 @@
-﻿using Daily3_UI.Classes;
+﻿using CommunityToolkit.Maui.Views;
+using Daily3_UI.Classes;
 using Daily3_UI.Clients;
 using Daily3_UI.Enums;
 
@@ -96,13 +97,16 @@ public partial class BuyTickets : ContentPage
             var emptyFieldMessage = ticket.MissingMessage();
             if (emptyFieldMessage is not null)
             {
+                ErrorLabel.TextColor = GetColor("DailyRed");
                 ErrorLabel.Text = emptyFieldMessage;
                 return;
             }
 
             // Adding Values to the shopping cart
             ShoppingCart.Add(ticket);
-            ErrorLabel.Text = "";
+            //ErrorLabel.TextColor = (Color)Application.Current.Resources["DailyGreen"];
+            ErrorLabel.TextColor = GetColor("SuccessGreen");
+            ErrorLabel.Text = $"{ShoppingCart.Count} Ticket(s) in cart.";
         }
         catch (NullReferenceException exception)
         {
@@ -134,7 +138,10 @@ public partial class BuyTickets : ContentPage
             await Task.Delay(TimeSpan.FromMilliseconds(200));
         }
 
-        ErrorLabel.Text = errorMessage;
+        ErrorLabel.TextColor = errorMessage != ""
+            ? GetColor("DailyRed")
+            : GetColor("SuccessGreen");
+        ErrorLabel.Text = errorMessage != "" ? errorMessage : "Tickets Sent";
     }
 
     private TOD? GetTodFromString(string text)
@@ -159,5 +166,12 @@ public partial class BuyTickets : ContentPage
             "Wheel" => TicketType.Wheel,
             _ => null
         };
+    }
+
+    public async void OpenTicketPopupPageAsync(object sender, EventArgs e)
+    {
+        var tickets = ShoppingCart;
+        var ticketPopupPage = new TicketPopupPage(tickets);
+        await Shell.Current.CurrentPage.ShowPopupAsync(ticketPopupPage);
     }
 }

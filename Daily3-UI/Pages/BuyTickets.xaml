@@ -5,7 +5,7 @@
              x:Class="Daily3_UI.Pages.BuyTickets"
              BackgroundColor="{StaticResource Secondary}"
              Shell.NavBarIsVisible="False">
-
+    
     <VerticalStackLayout
         Spacing="5"
         Padding="30,0"
@@ -202,7 +202,8 @@
             </Grid.ColumnDefinitions>
 
             <Button Grid.Column="0" Style="{StaticResource Daily-Button}"
-                    Text="View" />
+                    Text="View"
+                    Clicked="OpenTicketPopupPageAsync" />
             <Button Grid.Column="1" Style="{StaticResource Daily-Button}"
                     Text="Add"
                     Clicked="AddTicketToCart" />
