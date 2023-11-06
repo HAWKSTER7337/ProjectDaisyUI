@@ -9,15 +9,37 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Orientation="Horizontal" Padding="5">
-                            <Label Text="{Binding TextFormat}"
-                                   TextColor="{DynamicResource Primary}" />
-                            <Button Text="Remove"
-                                    Command="{Binding Path=BindingContext.RemoveCommand, Source={x:Reference TicketListView}}"
-                                    CommandParameter="{Binding .}"
-                                    BackgroundColor="{DynamicResource Secondary}"
-                                    CornerRadius="10" />
-                        </StackLayout>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Grid.Column="0" Orientation="Vertical">
+                                <Label Text="{Binding TextFormat}"
+                                       TextColor="{DynamicResource Primary}" />
+                                <Label Text="{Binding DetailsFormat}"
+                                       TextColor="{DynamicResource Primary}" />
+                            </StackLayout>
+                            <Frame Grid.Column="1"
+                                   BackgroundColor="{StaticResource DailyRed}"
+                                   WidthRequest="60"
+                                   HeightRequest="30"
+                                   CornerRadius="15"
+                                   HorizontalOptions="EndAndExpand"
+                                   VerticalOptions="Center"
+                                   Padding="0">
+                                <Label Text="Remove"
+                                       TextColor="{StaticResource neutral1}"
+                                       HorizontalOptions="CenterAndExpand"
+                                       VerticalOptions="CenterAndExpand">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding Path=BindingContext.RemoveCommand, Source={x:Reference TicketListView}}"
+                                            CommandParameter="{Binding .}" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Frame>
+                        </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
