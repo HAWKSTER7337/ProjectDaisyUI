@@ -7,7 +7,7 @@ public static class WinningNumbersClient
 {
     public static async Task<List<WinningNumber>> GetWinningNumbers()
     {
-        var apiUrl = "http://10.0.2.2:8080/api/WinningNumbers";
+        var apiUrl = ClientSideData.BaseUrl + "api/WinningNumbers";
         var client = new HttpClient();
 
         try
