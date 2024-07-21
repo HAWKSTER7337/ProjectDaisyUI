@@ -1,4 +1,6 @@
-﻿namespace Daily3_UI.Pages;
+﻿using Daily3_UI.Clients;
+
+namespace Daily3_UI.Pages;
 
 public partial class CreateAccountPage : ContentPage
 {
@@ -10,6 +12,6 @@ public partial class CreateAccountPage : ContentPage
     private async void CreateAccount(object sender, EventArgs e)
     {
         ErrorLabel.Text = "";
-        // Add user client here
+        ErrorLabel.Text = await CreateAccountClient.CreateAccount(Username.Text, Password.Text);
     }
 }
