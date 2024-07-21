@@ -11,10 +11,9 @@ public static class BuyTicketClient
     public static async Task<string> BuyTicket(Ticket ticket)
     {
         var httpClient = new HttpClient();
-        var baseUrl = "http://10.0.2.2:8080/";
         var endPoint = "api/BuyTicket";
 
-        var apiUrl = ticket.ToApiUrl(baseUrl, endPoint);
+        var apiUrl = ticket.ToApiUrl(ClientSideData.BaseUrl, endPoint);
 
         if (!isValidDate(ticket.TimeOfDay, ticket.Date))
         {
