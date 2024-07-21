@@ -28,4 +28,12 @@ public partial class LogInPage : ContentPage
 
         Application.Current.MainPage = new AppShell();
     }
+
+    /// <summary>
+    ///     Takes you to the create account in page.
+    /// </summary>
+    private async void TakeToCreateAccountPage(object sender, EventArgs e)
+    {
+        Application.Current.MainPage = new CreateAccountPage();
+    }
 }

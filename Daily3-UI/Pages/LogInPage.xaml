@@ -47,12 +47,18 @@
                                 Style="{StaticResource Entry-Design}"
                                 IsPassword="True" />
                   </Border>
-
+                  
                   <!--Login Button-->
                   <Button Text="Log In"
-                          Padding="20"
-                          Margin="20"
+                          Padding="10"
+                          Margin="10"
                           Clicked="AttemptLogIn" />
+
+                  <!--Sign up Button-->
+                  <Button Text="Create Account"
+                          Padding="10"
+                          Margin="10"
+                          Clicked="TakeToCreateAccountPage" />
 
                   <!--Error Line-->
                   <Label Text=""
