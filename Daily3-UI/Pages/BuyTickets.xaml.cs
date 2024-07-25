@@ -42,7 +42,7 @@ public partial class BuyTickets : ContentPage
     ///     Trys to get color from static resources
     ///     returns white if the color is not found
     /// </summary>
-    private Color GetColor(string colorName)
+    public static Color GetColor(string colorName)
     {
         var resourceColor = Application.Current.Resources.TryGetValue(colorName, out var value) && value is Color color
             ? color

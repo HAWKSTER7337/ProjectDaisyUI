@@ -3,22 +3,21 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              BackgroundColor="{StaticResource Secondary}"
-             x:Class="Daily3_UI.Pages.LogInPage"
+             x:Class="Daily3_UI.Pages.CreateAccountPage"
              Shell.NavBarIsVisible="False">
     <ContentPage.Content>
            <StackLayout Spacing="10">
-
                   <!--Title Image-->
                   <Image Source="daily.png" />
 
                   <!--Title-->
-                  <Label Text="Login"
+                  <Label Text="Create Account"
                          TextColor="{StaticResource neutral4}"
                          Style="{StaticResource Day}"
                          FontSize="40" />
 
                   <!--User Name-->
-                  <Label Text="UserName"
+                  <Label Text="New Username"
                          TextColor="{StaticResource neutral4}"
                          Style="{StaticResource Day}"
                          HorizontalOptions="Start" />
@@ -33,7 +32,7 @@
                   </Border>
 
                   <!--Password Name-->
-                  <Label Text="Password"
+                  <Label Text="New Password"
                          TextColor="{StaticResource neutral4}"
                          Style="{StaticResource Day}"
 
@@ -47,24 +46,25 @@
                                 Style="{StaticResource Entry-Design}"
                                 IsPassword="True" />
                   </Border>
-                  
-                  <!--Login Button-->
-                  <Button Text="Log In"
-                          Padding="10"
-                          Margin="10"
-                          Clicked="AttemptLogIn" />
 
-                  <!--Sign up Button-->
+                  <!--Create Account Button-->
                   <Button Text="Create Account"
                           Padding="10"
                           Margin="10"
-                          Clicked="TakeToCreateAccountPage" />
+                          Clicked="CreateAccount" />
+
+                  <!--Go to the main menu button-->
+                  <Button Text="Back To Log in"
+                          Padding="10"
+                          Margin="10"
+                          Clicked="ToLogin" />
 
                   <!--Error Line-->
                   <Label Text=""
                          Style="{StaticResource Error-Message}"
-                         x:Name="ErrorLabel" />
-
+                         x:Name="ErrorLabel"
+                         HorizontalTextAlignment="Center"
+                         TextColor="Black" /> 
            </StackLayout>
     </ContentPage.Content>
 </ContentPage>
