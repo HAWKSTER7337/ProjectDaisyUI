@@ -19,14 +19,16 @@ public partial class LogInPage : ContentPage
     private async void AttemptLogIn(object sender, EventArgs e)
     {
         ErrorLabel.Text = "";
-        Globals.UserId = await VerifyUserClient.VerifyUser(Username.Text, Password.Text);
-        if (Globals.UserId is null)
+        var request_response = await VerifyUserClient.VerifyUser(Username.Text, Password.Text);
+        try
         {
-            ErrorLabel.Text = "Incorrect UserName Or Password";
-            return;
+            Globals.UserId = Guid.Parse(request_response);
+            Application.Current.MainPage = new AppShell();
         }
-
-        Application.Current.MainPage = new AppShell();
+        catch
+        {
+            ErrorLabel.Text = request_response;
+        }
     }
 
     /// <summary>

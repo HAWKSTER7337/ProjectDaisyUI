@@ -4,7 +4,7 @@ namespace Daily3_UI.Clients;
 
 public static class VerifyUserClient
 {
-    public static async Task<Guid?> VerifyUser(string username, string password)
+    public static async Task<string?> VerifyUser(string username, string password)
     {
         var httpClient = new HttpClient();
         var endPoint = "api/VerifyUser";
@@ -25,7 +25,8 @@ public static class VerifyUserClient
             {
                 var responseBody = await response.Content.ReadAsStringAsync();
                 Console.WriteLine("Response: " + responseBody);
-                return responseBody == "False" ? null : Guid.Parse(responseBody);
+                if (responseBody == "User has not been accepted") return "Still waiting to be accepted.";
+                return responseBody == "False" ? "Invalid Username or password" : responseBody;
             }
 
             Console.WriteLine("Request failed with status code: " + response.StatusCode);
