@@ -83,6 +83,14 @@
         <Setter Property="StrokeShape" Value="RoundRectangle 100,100,100,100" />
     </Style>
 
+    <Style x:Key="Left-Value-Border" TargetType="Border">
+        <Setter Property="StrokeShape" Value="RoundRectangle 100,0,100,0" />
+    </Style>
+
+    <Style x:Key="Right-Value-Border" TargetType="Border">
+        <Setter Property="StrokeShape" Value="RoundRectangle 0,100,0,100" />
+    </Style>
+        
     <Style x:Key="Error-Message" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource DailyRed}" />
         <Setter Property="FontSize" Value="20" />

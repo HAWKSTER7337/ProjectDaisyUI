@@ -2,6 +2,7 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sys="clr-namespace:System;assembly=System.Runtime"
              x:Class="Daily3_UI.Pages.BuyTickets"
              BackgroundColor="{StaticResource Secondary}"
              Shell.NavBarIsVisible="False">
@@ -183,14 +184,32 @@
         <Label Text="Select Date"
                Style="{StaticResource Tod}" />
 
-        <Border
-            Style="{StaticResource Picker-Border}">
-            <DatePicker
-                DateSelected="ProperDatePicker"
-                x:Name="DatePicker"
-                HorizontalOptions="Center"
-                BackgroundColor="{StaticResource White}" />
-        </Border>
+        <!--Date Selectors -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0"
+                    Style="{StaticResource Left-Value-Border}">
+                <DatePicker
+                    DateSelected="ProperDatePicker"
+                    x:Name="DatePicker"
+                    HorizontalOptions="Center"
+                    BackgroundColor="{StaticResource White}"
+                    MinimumDate="{x:Static sys:DateTime.Today}" />
+            </Border>
+            <Border Grid.Column="1"
+                    Style="{StaticResource Right-Value-Border}">
+                <DatePicker
+                    DateSelected="ProperDatePicker"
+                    x:Name="SecondDatePicker"
+                    HorizontalOptions="Center"
+                    BackgroundColor="{StaticResource White}"
+                    MinimumDate="{Binding Path=Date, Source={x:Reference DatePicker}}" />
+            </Border>
+        </Grid>
 
         <!--Buy Ticket-->
         <Grid
@@ -206,7 +225,7 @@
                     Clicked="OpenTicketPopupPageAsync" />
             <Button Grid.Column="1" Style="{StaticResource Daily-Button}"
                     Text="Add"
-                    Clicked="AddTicketToCart" />
+                    Clicked="AddTicketsInSpecifiedIntervalToCart" />
             <Button Grid.Column="2" Style="{StaticResource Daily-Button}"
                     Text="Checkout"
                     Clicked="CheckOut" />

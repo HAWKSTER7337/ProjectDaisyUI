@@ -75,10 +75,26 @@ public partial class BuyTickets : ContentPage
     }
 
     /// <summary>
+    ///     Adds tickets to the shopping cart for the specified date range.
+    /// </summary>
+    /// <param name="sender">The object that raised the event.</param>
+    /// <param name="e">The event data.</param>
+    private void AddTicketsInSpecifiedIntervalToCart(object sender, EventArgs e)
+    {
+        var beginningDate = DatePicker.Date;
+        var endDate = SecondDatePicker.Date;
+        while (DateTime.Compare(beginningDate, endDate) <= 0)
+        {
+            AddTicketToCart(beginningDate.ToString("yyyy-MM-dd"));
+            beginningDate = beginningDate.AddDays(1);
+        }
+    }
+
+    /// <summary>
     ///     Adds the ticket to the queue of the
     ///     tickets you are planning to buy
     /// </summary>
-    private void AddTicketToCart(object sender, EventArgs e)
+    private void AddTicketToCart(string date)
     {
         try
         {
@@ -90,7 +106,7 @@ public partial class BuyTickets : ContentPage
                 Price = double.Parse(Price.SelectedItem.ToString()),
                 Type = GetTicketTypeFromString(BetTypeSelcted.Text),
                 TimeOfDay = GetTodFromString(TimeOfDaySelected.Text),
-                Date = DatePicker.Date.ToString("yyyy-MM-dd")
+                Date = date
             };
 
             // Checking for missing fields 
