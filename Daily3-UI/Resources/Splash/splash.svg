@@ -21,11 +21,6 @@
         </linearGradient>
     </defs>
 
-    <!-- Text with gradient fill, stroke, and shadow -->
-    <text x="50%" y="75" font-family="'Comic Sans MS', cursive" font-size="72" text-anchor="middle" filter="url(#f1)"
-          fill="url(#gradient1)">Daily 3
-    </text>
-
     <!-- Three glossy balls with animated numbers -->
     <g stroke="#000000" stroke-width="3">
         <!-- Balls -->
@@ -35,13 +30,13 @@
 
         <!-- Numbers -->
         <text id="number1" x="200" y="180" font-family="Arial, sans-serif" font-size="40" text-anchor="middle"
-              alignment-baseline="middle" fill="#000000">0
+              alignment-baseline="middle" fill="#000000">7
         </text>
         <text id="number2" x="400" y="180" font-family="Arial, sans-serif" font-size="40" text-anchor="middle"
-              alignment-baseline="middle" fill="#000000">0
+              alignment-baseline="middle" fill="#000000">3
         </text>
         <text id="number3" x="600" y="180" font-family="Arial, sans-serif" font-size="40" text-anchor="middle"
-              alignment-baseline="middle" fill="#000000">0
+              alignment-baseline="middle" fill="#000000">7
         </text>
 
         <!-- Glossy circles adjusted lower -->
