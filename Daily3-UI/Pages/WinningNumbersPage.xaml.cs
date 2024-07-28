@@ -55,4 +55,44 @@ public partial class WinningNumbersPage : ContentPage
                 break;
         }
     }
+
+    private void OnSizeChanged(object sender, EventArgs e)
+    {
+        var screenWidth = Width;
+        var screenHeight = Height;
+
+        // Scale values for elements
+        var borderPadding = screenWidth * 0.05;
+        var labelFontSize = screenWidth * 0.05;
+        var numberFontSize = screenWidth * 0.07;
+        var imageHeight = screenHeight * 0.1;
+        var borderBallHeight = screenHeight * (3.0 / 7);
+        var groupingNumberBorderHeight = screenHeight * 0.2;
+
+        // Adjust elements accordingly
+        Daily3TitleImage.HeightRequest = imageHeight;
+
+        YesterdayLabel.FontSize = labelFontSize;
+        TodayLabel.FontSize = labelFontSize;
+
+        YesterdayMiddayBorder.HeightRequest = groupingNumberBorderHeight;
+        YesterdayEveningBorder.HeightRequest = groupingNumberBorderHeight;
+        TodayMiddayBorder.HeightRequest = groupingNumberBorderHeight;
+        TodayEveningBorder.HeightRequest = groupingNumberBorderHeight;
+
+        YesterdayMidday1.FontSize = numberFontSize;
+        YesterdayMidday2.FontSize = numberFontSize;
+        YesterdayMidday3.FontSize = numberFontSize;
+        YesterdayEvening1.FontSize = numberFontSize;
+        YesterdayEvening2.FontSize = numberFontSize;
+        YesterdayEvening3.FontSize = numberFontSize;
+        TodayMidday1.FontSize = numberFontSize;
+        TodayMidday2.FontSize = numberFontSize;
+        TodayMidday3.FontSize = numberFontSize;
+        TodayEvening1.FontSize = numberFontSize;
+        TodayEvening2.FontSize = numberFontSize;
+        TodayEvening3.FontSize = numberFontSize;
+
+        // The borders that are used to represent the balls
+    }
 }
