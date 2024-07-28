@@ -1,4 +1,5 @@
-﻿using Daily3_UI.Classes;
+﻿using System.Text;
+using Daily3_UI.Classes;
 using Daily3_UI.Enums;
 
 namespace Daily3_UI.Clients;
@@ -23,7 +24,8 @@ public static class BuyTicketClient
 
         try
         {
-            var response = await httpClient.GetAsync(apiUrl);
+            var stringContent = new StringContent(apiUrl, Encoding.UTF8, "application/json");
+            var response = await httpClient.PostAsync(apiUrl, stringContent);
 
             if (response.IsSuccessStatusCode)
             {
