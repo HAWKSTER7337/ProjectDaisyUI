@@ -199,12 +199,12 @@ public partial class BuyTickets : ContentPage
         // Scale values for elements
         var borderWidth = screenWidth * 0.8;
         var numberBorderWidth = borderWidth / 6;
-        var borderPadding = screenWidth * 0.05;
         var labelFontSize = screenWidth * 0.03;
         var pickerFontSize = screenWidth * 0.04;
         var buttonWidth = screenWidth * 0.25;
         var buttonHeight = screenHeight * 0.06;
-        var buttonFontSize = screenWidth * 0.02;
+        var buttonFontSize = screenWidth * 0.03;
+        var errorLabelFont = screenWidth * 0.05;
 
         // Adjust elements accordingly
         Number1Border.WidthRequest = Number1Border.HeightRequest = numberBorderWidth;
@@ -215,7 +215,7 @@ public partial class BuyTickets : ContentPage
         SelectBetTypeLabel.FontSize = labelFontSize;
         SelectDrawLabel.FontSize = labelFontSize;
         SelectDateLabel.FontSize = labelFontSize;
-        ErrorLabel.FontSize = labelFontSize;
+        ErrorLabel.FontSize = errorLabelFont;
 
         Number1.FontSize = pickerFontSize;
         Number2.FontSize = pickerFontSize;

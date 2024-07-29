@@ -131,7 +131,8 @@
                     Title="Select a Price"
                     BackgroundColor="{StaticResource White}"
                     FontAttributes="Bold"
-                    HorizontalTextAlignment="Center">
+                    HorizontalTextAlignment="Center"
+                    TextColor="Black">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>0.05</x:String>
@@ -238,7 +239,8 @@
                     x:Name="DatePicker"
                     HorizontalOptions="Center"
                     BackgroundColor="{StaticResource White}"
-                    MinimumDate="{x:Static sys:DateTime.Today}" />
+                    MinimumDate="{x:Static sys:DateTime.Today}"
+                    TextColor="Black" />
             </Border>
             <Border Grid.Column="1"
                     Style="{StaticResource Right-Value-Border}">
@@ -247,7 +249,8 @@
                     x:Name="SecondDatePicker"
                     HorizontalOptions="Center"
                     BackgroundColor="{StaticResource White}"
-                    MinimumDate="{Binding Path=Date, Source={x:Reference DatePicker}}" />
+                    MinimumDate="{Binding Path=Date, Source={x:Reference DatePicker}}"
+                    TextColor="Black" />
             </Border>
         </Grid>
 

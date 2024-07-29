@@ -67,13 +67,18 @@ public partial class WinningNumbersPage : ContentPage
         var numberFontSize = screenWidth * 0.07;
         var imageHeight = screenHeight * 0.1;
         var borderBallHeight = screenHeight * (3.0 / 7);
-        var groupingNumberBorderHeight = screenHeight * 0.2;
+        var groupingNumberBorderHeight = screenHeight * 0.19;
 
         // Adjust elements accordingly
         Daily3TitleImage.HeightRequest = imageHeight;
 
         YesterdayLabel.FontSize = labelFontSize;
         TodayLabel.FontSize = labelFontSize;
+
+        YesterdayMiddayLabel.FontSize = labelFontSize;
+        YesterdayEveningLabel.FontSize = labelFontSize;
+        TodayMiddayLabel.FontSize = labelFontSize;
+        TodayEveningLabel.FontSize = labelFontSize;
 
         YesterdayMiddayBorder.HeightRequest = groupingNumberBorderHeight;
         YesterdayEveningBorder.HeightRequest = groupingNumberBorderHeight;
@@ -92,7 +97,5 @@ public partial class WinningNumbersPage : ContentPage
         TodayEvening1.FontSize = numberFontSize;
         TodayEvening2.FontSize = numberFontSize;
         TodayEvening3.FontSize = numberFontSize;
-
-        // The borders that are used to represent the balls
     }
 }
