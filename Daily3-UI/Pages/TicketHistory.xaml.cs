@@ -61,6 +61,27 @@ public partial class TicketHistory : ContentPage
         var filteredDates = _userTickets.Where(ticket => DateTime.Parse(ticket.Date).Date == date.Date).ToList();
         BindingContext = new HistoryPageViewModel(filteredDates);
     }
+
+    private void OnSizeChanged(object sender, EventArgs e)
+    {
+        var screenWidth = Width;
+        var screenHeight = Height;
+
+        // Scale values for elements
+        var borderPadding = screenWidth * 0.05;
+        var labelFontSize = screenWidth * 0.03;
+        var titleFontSize = screenWidth * 0.05;
+        var pickerFontSize = screenWidth * 0.04;
+
+        // Adjust elements accordingly
+        BorderTitle.Padding = new Thickness(borderPadding);
+        Title.FontSize = titleFontSize;
+
+        DateSearchLabel.FontSize = labelFontSize;
+
+        DatePicker.FontSize = pickerFontSize;
+        SearchToggleLabel.FontSize = labelFontSize;
+    }
 }
 
 public class HistoryPageViewModel

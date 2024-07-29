@@ -190,4 +190,80 @@ public partial class BuyTickets : ContentPage
         var ticketPopupPage = new TicketPopupPage(tickets);
         await Shell.Current.CurrentPage.ShowPopupAsync(ticketPopupPage);
     }
+
+    private void OnSizeChanged(object sender, EventArgs e)
+    {
+        var screenWidth = Width;
+        var screenHeight = Height;
+
+        // Scale values for elements
+        var borderWidth = screenWidth * 0.8;
+        var numberBorderWidth = borderWidth / 6;
+        var labelFontSize = screenWidth * 0.03;
+        var pickerFontSize = screenWidth * 0.04;
+        var buttonWidth = screenWidth * 0.25;
+        var buttonHeight = screenHeight * 0.06;
+        var buttonFontSize = screenWidth * 0.03;
+        var errorLabelFont = screenWidth * 0.05;
+
+        // Adjust elements accordingly
+        Number1Border.WidthRequest = Number1Border.HeightRequest = numberBorderWidth;
+        Number2Border.WidthRequest = Number2Border.HeightRequest = numberBorderWidth;
+        Number3Border.WidthRequest = Number3Border.HeightRequest = numberBorderWidth;
+
+        SelectPaymentLabel.FontSize = labelFontSize;
+        SelectBetTypeLabel.FontSize = labelFontSize;
+        SelectDrawLabel.FontSize = labelFontSize;
+        SelectDateLabel.FontSize = labelFontSize;
+        ErrorLabel.FontSize = errorLabelFont;
+
+        Number1.FontSize = pickerFontSize;
+        Number2.FontSize = pickerFontSize;
+        Number3.FontSize = pickerFontSize;
+        Price.FontSize = pickerFontSize;
+
+        StraightButton.WidthRequest = buttonWidth;
+        StraightButton.HeightRequest = buttonHeight;
+        StraightButton.FontSize = buttonFontSize;
+
+        BoxButton.WidthRequest = buttonWidth;
+        BoxButton.HeightRequest = buttonHeight;
+        BoxButton.FontSize = buttonFontSize;
+
+        TwoWayButton.WidthRequest = buttonWidth;
+        TwoWayButton.HeightRequest = buttonHeight;
+        TwoWayButton.FontSize = buttonFontSize;
+
+        OneOffButton.WidthRequest = buttonWidth;
+        OneOffButton.HeightRequest = buttonHeight;
+        OneOffButton.FontSize = buttonFontSize;
+
+        WheelButton.WidthRequest = buttonWidth;
+        WheelButton.HeightRequest = buttonHeight;
+        WheelButton.FontSize = buttonFontSize;
+
+        MiddayButton.WidthRequest = buttonWidth;
+        MiddayButton.HeightRequest = buttonHeight;
+        MiddayButton.FontSize = buttonFontSize;
+
+        EveningButton.WidthRequest = buttonWidth;
+        EveningButton.HeightRequest = buttonHeight;
+        EveningButton.FontSize = buttonFontSize;
+
+        BothButton.WidthRequest = buttonWidth;
+        BothButton.HeightRequest = buttonHeight;
+        BothButton.FontSize = buttonFontSize;
+
+        OpenTicketCartButton.WidthRequest = buttonWidth;
+        OpenTicketCartButton.HeightRequest = buttonHeight;
+        OpenTicketCartButton.FontSize = buttonFontSize;
+
+        AddTicketsToCartButton.WidthRequest = buttonWidth;
+        AddTicketsToCartButton.HeightRequest = buttonHeight;
+        AddTicketsToCartButton.FontSize = buttonFontSize;
+
+        ButTicketsButton.WidthRequest = buttonWidth;
+        ButTicketsButton.HeightRequest = buttonHeight;
+        ButTicketsButton.FontSize = buttonFontSize;
+    }
 }
