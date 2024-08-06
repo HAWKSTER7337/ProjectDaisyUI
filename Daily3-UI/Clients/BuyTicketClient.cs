@@ -52,6 +52,8 @@ public static class BuyTicketClient
     private static bool isValidDate(TOD? timeOfDay, string date)
     {
         // todo make this work and actually pick a real time
+        // NOTE this is currently working on the other side. If you request to buy a ticket at a non valid time the ticket 
+        // will not be bought and you will get an error code on this side of the app how ever a double check would not be a bad idea at all
         return true;
     }
 }

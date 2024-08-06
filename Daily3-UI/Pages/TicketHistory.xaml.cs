@@ -12,9 +12,40 @@ public partial class TicketHistory : ContentPage
 
     protected override async void OnAppearing()
     {
+        TicketLoaderIsBusy = true;
         SearchToggle.IsToggled = false;
         _userTickets = await TicketHistoryClient.GetTicketHistory();
         BindingContext = new HistoryPageViewModel(_userTickets);
+        TicketLoaderIsBusy = false;
+    }
+
+    /// <summary>
+    ///     Displays the ticket history on the page. If not
+    ///     will show a loading bar when the ticket loader is busy
+    /// </summary>
+    private bool _ticketLoaderIsBusy;
+
+    public bool TicketLoaderIsBusy
+    {
+        get => _ticketLoaderIsBusy;
+        private set
+        {
+            _ticketLoaderIsBusy = value;
+            if (_ticketLoaderIsBusy)
+            {
+                TicketListView.IsVisible = false;
+                TicketLoader.IsRunning = true;
+                TicketLoader.IsVisible = true;
+            }
+            else
+            {
+                TicketLoader.IsVisible = false;
+                TicketLoader.IsRunning = false;
+                TicketListView.IsVisible = true;
+            }
+
+            OnPropertyChanged(nameof(TicketListView));
+        }
     }
 
     /// <summary>
@@ -27,6 +58,8 @@ public partial class TicketHistory : ContentPage
     /// </summary>
     private bool _shouldFilterByDate;
 
+    private bool ShouldNotFilterByDate => !_shouldFilterByDate;
+
     private DateTime _currentSetDate = DateTime.Today;
 
     /// <summary>
@@ -36,6 +69,7 @@ public partial class TicketHistory : ContentPage
     {
         _shouldFilterByDate = e.Value;
         FilterByDate(_currentSetDate);
+        OnPropertyChanged(nameof(TicketListView));
     }
 
     /// <summary>
@@ -48,20 +82,26 @@ public partial class TicketHistory : ContentPage
     }
 
     /// <summary>
-    ///     Actual filter
+    ///     The filter handling 
     /// </summary>
     private void FilterByDate(DateTime date)
     {
-        if (!_shouldFilterByDate)
+        if (ShouldNotFilterByDate)
         {
             BindingContext = new HistoryPageViewModel(_userTickets);
+            OnPropertyChanged(nameof(TicketListView));
             return;
         }
 
         var filteredDates = _userTickets.Where(ticket => DateTime.Parse(ticket.Date).Date == date.Date).ToList();
         BindingContext = new HistoryPageViewModel(filteredDates);
+        OnPropertyChanged(nameof(TicketListView));
     }
 
+    /// <summary>
+    ///     Used to scale the page with the users phone
+    ///     for the sake of consistency
+    /// </summary>
     private void OnSizeChanged(object sender, EventArgs e)
     {
         var screenWidth = Width;
