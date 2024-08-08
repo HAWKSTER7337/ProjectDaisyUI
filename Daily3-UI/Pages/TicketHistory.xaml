@@ -72,12 +72,17 @@
                     Grid.Column="2" />
             </Grid>
 
-        <!--Display Tickets-->
-            <ScrollView
-                VerticalOptions="FillAndExpand"
-                Grid.Row="3">
+            <!--Display Tickets-->
+            <ActivityIndicator
+                Color="{StaticResource White}"
+                Grid.Row="3"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                x:Name="TicketLoader" />
                 <ListView ItemsSource="{Binding Tickets}"
-                          x:Name="TicketListView">
+                          x:Name="TicketListView"
+                          Grid.Row="3"
+                          VerticalScrollBarVisibility="Always">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <TextCell Text="{Binding TextFormat}"
@@ -87,7 +92,6 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-            </ScrollView>
         </Grid>
     </VerticalStackLayout>
 </ContentPage>
