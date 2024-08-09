@@ -155,13 +155,6 @@ public class StatusToColorConverter : IValueConverter
         };
     }
 
-    private Color GetColorFromResources(string colorName)
-    {
-        return Application.Current.Resources.TryGetValue(colorName, out var value) && value is Color color
-            ? color
-            : Color.FromRgb(0, 0, 0);
-    }
-
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
