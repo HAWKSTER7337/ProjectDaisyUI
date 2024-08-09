@@ -1,4 +1,5 @@
-﻿using Daily3_UI.Clients;
+﻿using Daily3_UI.Classes;
+using Daily3_UI.Clients;
 
 namespace Daily3_UI.Pages;
 
@@ -15,8 +16,8 @@ public partial class CreateAccountPage : ContentPage
         var clientResponse = await CreateAccountClient.CreateAccount(Username.Text, Password.Text);
         var successString = "User has been added to the database now you have to wait for approval";
         ErrorLabel.TextColor = clientResponse == successString
-            ? BuyTickets.GetColor("SuccessGreen")
-            : BuyTickets.GetColor("DailyRed");
+            ? Globals.GetColor("SuccessGreen")
+            : Globals.GetColor("DailyRed");
         ErrorLabel.Text = clientResponse;
     }
 
