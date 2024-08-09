@@ -15,3 +15,10 @@ public enum TOD
     Evening = 1,
     Both = 2
 }
+
+public enum WinningStatus
+{
+    TBD = 0,
+    Loser = 1,
+    Winner = 2
+}

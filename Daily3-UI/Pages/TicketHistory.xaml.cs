@@ -1,5 +1,7 @@
-﻿using Daily3_UI.Classes;
+﻿using System.Globalization;
+using Daily3_UI.Classes;
 using Daily3_UI.Clients;
+using Daily3_UI.Enums;
 
 namespace Daily3_UI.Pages;
 
@@ -33,7 +35,7 @@ public partial class TicketHistory : ContentPage
             _ticketLoaderIsBusy = value;
             if (_ticketLoaderIsBusy)
             {
-                TicketListView.IsVisible = false;
+                TicketCollectionView.IsVisible = false;
                 TicketLoader.IsRunning = true;
                 TicketLoader.IsVisible = true;
             }
@@ -41,10 +43,10 @@ public partial class TicketHistory : ContentPage
             {
                 TicketLoader.IsVisible = false;
                 TicketLoader.IsRunning = false;
-                TicketListView.IsVisible = true;
+                TicketCollectionView.IsVisible = true;
             }
 
-            OnPropertyChanged(nameof(TicketListView));
+            OnPropertyChanged(nameof(TicketCollectionView));
         }
     }
 
@@ -69,7 +71,7 @@ public partial class TicketHistory : ContentPage
     {
         _shouldFilterByDate = e.Value;
         FilterByDate(_currentSetDate);
-        OnPropertyChanged(nameof(TicketListView));
+        OnPropertyChanged(nameof(TicketCollectionView));
     }
 
     /// <summary>
@@ -89,13 +91,13 @@ public partial class TicketHistory : ContentPage
         if (ShouldNotFilterByDate)
         {
             BindingContext = new HistoryPageViewModel(_userTickets);
-            OnPropertyChanged(nameof(TicketListView));
+            OnPropertyChanged(nameof(TicketCollectionView));
             return;
         }
 
         var filteredDates = _userTickets.Where(ticket => DateTime.Parse(ticket.Date).Date == date.Date).ToList();
         BindingContext = new HistoryPageViewModel(filteredDates);
-        OnPropertyChanged(nameof(TicketListView));
+        OnPropertyChanged(nameof(TicketCollectionView));
     }
 
     /// <summary>
@@ -131,5 +133,30 @@ public class HistoryPageViewModel
     public HistoryPageViewModel(List<Ticket> tickets)
     {
         Tickets = tickets;
+    }
+}
+
+/// <summary>
+///     Class used to transfer the WinningStatus Enum into a number to
+///     display the numbers on the screen
+/// </summary>
+public class StatusToColorConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (!(value is WinningStatus status))
+            throw new InvalidOperationException("Value must be a winning status");
+
+        return status switch
+        {
+            WinningStatus.Loser => Globals.GetColor("DailyRed"),
+            WinningStatus.Winner => Globals.GetColor("SuccessGreen"),
+            _ => Globals.GetColor("White")
+        };
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
     }
 }

@@ -2,10 +2,14 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:Daily3_UI.Pages"
              x:Class="Daily3_UI.Pages.TicketHistory"
              BackgroundColor="{StaticResource Secondary}"
              Shell.NavBarIsVisible="False"
              SizeChanged="OnSizeChanged">
+    <ContentPage.Resources>
+        <pages:StatusToColorConverter x:Key="StatusToColor" />
+    </ContentPage.Resources>
     <VerticalStackLayout
         Spacing="5"
         Padding="30, 0"
@@ -79,19 +83,29 @@
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
                 x:Name="TicketLoader" />
-                <ListView ItemsSource="{Binding Tickets}"
-                          x:Name="TicketListView"
-                          Grid.Row="3"
-                          VerticalScrollBarVisibility="Always">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <TextCell Text="{Binding TextFormat}"
-                                      TextColor="{StaticResource neutral4}"
-                                      DetailColor="{StaticResource neutral3}"
-                                      Detail="{Binding DetailsFormat}" />
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+            <CollectionView x:Name="TicketCollectionView"
+                            Grid.Row="3"
+                            ItemsSource="{Binding Tickets}"
+                            VerticalScrollBarVisibility="Always">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0"
+                                   Text="{Binding TextFormat}"
+                                   FontSize="16"
+                                   TextColor="{Binding WinningStatus, Converter={StaticResource StatusToColor}}" />
+                            <Label Grid.Row="1"
+                                   Text="{Binding DetailsFormat}"
+                                   FontSize="14"
+                                   TextColor="{StaticResource neutral3}" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </Grid>
     </VerticalStackLayout>
 </ContentPage>

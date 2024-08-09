@@ -20,4 +20,16 @@ public static class Globals
         get => _userid;
         set => _userid ??= value;
     }
+
+    /// <summary>
+    ///     Trys to get color from static resources
+    ///     returns white if the color is not found
+    /// </summary>
+    public static Color GetColor(string colorName)
+    {
+        var resourceColor = Application.Current.Resources.TryGetValue(colorName, out var value) && value is Color color
+            ? color
+            : Color.FromRgb(0, 0, 0);
+        return resourceColor;
+    }
 }

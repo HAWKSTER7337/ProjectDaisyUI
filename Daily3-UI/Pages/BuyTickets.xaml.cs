@@ -33,21 +33,9 @@ public partial class BuyTickets : ContentPage
     private void SelectTypeOrTimeOfDay(object sender, EventArgs e, ref Button selectedButton)
     {
         var senderButton = (Button)sender;
-        if (selectedButton is not null) selectedButton.BackgroundColor = GetColor("Primary");
+        if (selectedButton is not null) selectedButton.BackgroundColor = Globals.GetColor("Primary");
         selectedButton = senderButton;
-        selectedButton.BackgroundColor = GetColor("Selected");
-    }
-
-    /// <summary>
-    ///     Trys to get color from static resources
-    ///     returns white if the color is not found
-    /// </summary>
-    public static Color GetColor(string colorName)
-    {
-        var resourceColor = Application.Current.Resources.TryGetValue(colorName, out var value) && value is Color color
-            ? color
-            : Color.FromRgb(0, 0, 0);
-        return resourceColor;
+        selectedButton.BackgroundColor = Globals.GetColor("Selected");
     }
 
     private void SelectType(object sender, EventArgs e)
@@ -113,7 +101,7 @@ public partial class BuyTickets : ContentPage
             var emptyFieldMessage = ticket.MissingMessage();
             if (emptyFieldMessage is not null)
             {
-                ErrorLabel.TextColor = GetColor("DailyRed");
+                ErrorLabel.TextColor = Globals.GetColor("DailyRed");
                 ErrorLabel.Text = emptyFieldMessage;
                 return;
             }
@@ -121,7 +109,7 @@ public partial class BuyTickets : ContentPage
             // Adding Values to the shopping cart
             ShoppingCart.Add(ticket);
             //ErrorLabel.TextColor = (Color)Application.Current.Resources["DailyGreen"];
-            ErrorLabel.TextColor = GetColor("SuccessGreen");
+            ErrorLabel.TextColor = Globals.GetColor("SuccessGreen");
             ErrorLabel.Text = $"{ShoppingCart.Count} Ticket(s) in cart.";
         }
         catch (NullReferenceException exception)
@@ -155,8 +143,8 @@ public partial class BuyTickets : ContentPage
         }
 
         ErrorLabel.TextColor = errorMessage != ""
-            ? GetColor("DailyRed")
-            : GetColor("SuccessGreen");
+            ? Globals.GetColor("DailyRed")
+            : Globals.GetColor("SuccessGreen");
         ErrorLabel.Text = errorMessage != "" ? errorMessage : "Tickets Sent";
     }
 

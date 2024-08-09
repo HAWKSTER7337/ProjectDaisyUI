@@ -8,7 +8,7 @@ namespace Daily3_UI.Classes;
 /// </summary>
 public class Ticket
 {
-    // Winning Numbers
+    // Playing Numbers
     public int? Number1 { get; init; } = null;
     public int? Number2 { get; init; } = null;
     public int? Number3 { get; init; } = null;
@@ -19,6 +19,10 @@ public class Ticket
     public TOD? TimeOfDay { get; init; } = null;
     public string Date { get; init; } = null;
 
+    // Winning Status
+    public WinningStatus? WinningStatus { get; init; } = null;
+
+    // Format Functions
     public string FormattedNumber1 => Number1.ToString();
     public string FormattedNumber2 => Number2.ToString();
     public string FormattedNumber3 => Number3.ToString();
@@ -26,6 +30,8 @@ public class Ticket
 
     /// <summary>
     ///     returns a message if something was set as null
+    ///     This is for buying tickets so only values that
+    ///     are picked by the user should be here
     /// </summary>
     public string MissingMessage()
     {
