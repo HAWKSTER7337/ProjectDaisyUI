@@ -20,20 +20,24 @@
         </ResourceDictionary>
     </Shell.Resources>
 
-    <TabBar>
+    <TabBar
+        x:Name="TabBar">
+        
         <ShellContent
             Title="Daily Numbers"
             ContentTemplate="{DataTemplate local:WinningNumbersPage}"
             Route="WinningNumbersPage" />
-
+        
         <ShellContent
             Title="Buy Tickets"
             ContentTemplate="{DataTemplate local:BuyTickets}"
             Route="BuyTickets" />
+        
         <ShellContent
             Title="View History"
             ContentTemplate="{DataTemplate local:TicketHistory}"
             Route="TicketHistory" />
+
     </TabBar>
 
 </Shell>
