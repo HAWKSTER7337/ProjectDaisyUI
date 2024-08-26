@@ -22,3 +22,10 @@ public enum WinningStatus
     Loser = 1,
     Winner = 2
 }
+
+public enum Status
+{
+    User = 0,
+    House = 1,
+    Dog = 2
+}
