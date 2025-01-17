@@ -16,15 +16,15 @@ public partial class AppShell : Shell
         base.OnAppearing();
 
         var isAdmin =
-            !(Globals.Status is null) && // Checking if the value is defined
+            Globals.Status is not null && // Checking if the value is defined
             Globals.Status >= Status.House; // Checking if they are the proper Status
         if (!isAdmin) return;
 
         var shellContent = new ShellContent
         {
             Title = "Entrants Tickets",
-            ContentTemplate = new DataTemplate(typeof(TicketHistory)),
-            Route = "TicketHistory"
+            ContentTemplate = new DataTemplate(typeof(HousePage)),
+            Route = "HousePage"
         };
 
         TabBar.Items.Add(shellContent);
