@@ -1,5 +1,6 @@
 ﻿using Daily3_UI.Classes;
 using Daily3_UI.Clients;
+using Daily3_UI.Enums;
 
 namespace Daily3_UI.Pages;
 
@@ -22,13 +23,32 @@ public partial class LogInPage : ContentPage
         var request_response = await VerifyUserClient.VerifyUser(Username.Text, Password.Text);
         try
         {
-            Globals.UserId = Guid.Parse(request_response);
+            var guidAndStatusList = SplitResponse(request_response);
+
+            // Adding the users global info
+            Globals.UserId = Guid.Parse(guidAndStatusList[0]);
+            Globals.Status = (Status?)int.Parse(guidAndStatusList[1]);
             Application.Current.MainPage = new AppShell();
         }
         catch
         {
+            var errorCode = e.ToString();
             ErrorLabel.Text = request_response;
         }
+    }
+
+    /// <summary>
+    ///     Splitting up the response from the back end to make sure
+    ///     the value of the GUID of the user as well as the Status are
+    ///     both collected
+    /// </summary>
+    /// <param name="guidAndStatus">The string that is being parsed</param>
+    /// <returns>An array of the GUID and Status of the user as a string</returns>
+    private string[] SplitResponse(string guidAndStatus)
+    {
+        char[] separator = { ',' };
+        var parts = guidAndStatus.Split(separator);
+        return parts;
     }
 
     /// <summary>

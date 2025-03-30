@@ -1,4 +1,6 @@
-﻿namespace Daily3_UI.Classes;
+﻿using Daily3_UI.Enums;
+
+namespace Daily3_UI.Classes;
 
 /// <summary>
 ///     All Global values to the application
@@ -11,6 +13,11 @@ public static class Globals
     private static Guid? _userid;
 
     /// <summary>
+    ///     The status ranking of the user
+    /// </summary>
+    private static Status? _status;
+
+    /// <summary>
     ///     functions allowing you to only change the value of your UserID
     ///     once. This is to make sure you are not changing the value in some
     ///     weird way for security
@@ -19,6 +26,12 @@ public static class Globals
     {
         get => _userid;
         set => _userid ??= value;
+    }
+
+    public static Status? Status
+    {
+        get => _status;
+        set => _status ??= value;
     }
 
     /// <summary>

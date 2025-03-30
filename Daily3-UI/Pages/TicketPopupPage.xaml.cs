@@ -29,7 +29,6 @@ public partial class TicketPopupPage : Popup
 
     private void ClosePopup()
     {
-        // Close the popup
         Close();
     }
 }
