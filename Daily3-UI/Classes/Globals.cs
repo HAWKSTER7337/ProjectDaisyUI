@@ -1,4 +1,5 @@
 ﻿using Daily3_UI.Enums;
+using Daily3_UI.Pages;
 
 namespace Daily3_UI.Classes;
 
@@ -45,4 +46,20 @@ public static class Globals
             : Color.FromRgb(0, 0, 0);
         return resourceColor;
     }
+
+    public static List<KeyValuePair<string, ContentPage>> Daily3ContentPages = new()
+    {
+        new KeyValuePair<string, ContentPage>("Daily Numbers", new WinningNumbersPage()),
+        new KeyValuePair<string, ContentPage>("Buy Tickets", new BuyTickets()),
+        new KeyValuePair<string, ContentPage>("View History", new TicketHistory()),
+        new KeyValuePair<string, ContentPage>("Entrants Tickets", new HousePage())
+    };
+
+    public static List<KeyValuePair<string, ContentPage>> Daily4ContentPages = new()
+    {
+        new KeyValuePair<string, ContentPage>("Daily Numbers", new WinningNumbersPageDaily4()),
+        new KeyValuePair<string, ContentPage>("Buy Tickets", new BuyTickets()),
+        new KeyValuePair<string, ContentPage>("View History", new TicketHistory()),
+        new KeyValuePair<string, ContentPage>("Entrants Tickets", new HousePage())
+    };
 }

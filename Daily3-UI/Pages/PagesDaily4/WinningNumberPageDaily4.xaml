@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Daily3_UI.Pages.WinningNumbersPageDaily4"
-             BackgroundColor="{StaticResource SecondaryDaily4}"
-             Shell.NavBarIsVisible="False"
-             SizeChanged="OnSizeChanged">
+<pages:ChangeRaffle xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:pages="clr-namespace:Daily3_UI.Pages"
+                    x:Class="Daily3_UI.Pages.WinningNumbersPageDaily4"
+                    BackgroundColor="{StaticResource SecondaryDaily4}"
+                    Shell.NavBarIsVisible="False"
+                    SizeChanged="OnSizeChanged">
 
     <VerticalStackLayout
         Spacing="5"
@@ -31,7 +32,7 @@
                    x:Name="Daily3TitleImage">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer
-                        Tapped="ChangeToDaily3"
+                        Tapped="FlipToOtherRaffle"
                         NumberOfTapsRequired="1" />
                 </Image.GestureRecognizers>
             </Image>
@@ -271,4 +272,4 @@
     </VerticalStackLayout>
 
 
-</ContentPage>
+</pages:ChangeRaffle>

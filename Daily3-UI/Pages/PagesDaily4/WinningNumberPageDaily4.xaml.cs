@@ -3,10 +3,11 @@ using Daily3_UI.Clients;
 
 namespace Daily3_UI.Pages;
 
-public partial class WinningNumbersPageDaily4 : ContentPage
+public partial class WinningNumbersPageDaily4 : ChangeRaffle
 {
     public WinningNumbersPageDaily4()
     {
+        NewTaskBar = Globals.Daily3ContentPages;
         InitializeComponent();
     }
 
@@ -17,11 +18,12 @@ public partial class WinningNumbersPageDaily4 : ContentPage
 
     protected override async void OnAppearing()
     {
+        NewTaskBar = Globals.Daily3ContentPages;
         await UpdatePage();
     }
 
     /// <summary>
-    ///     Updates all of the values to what they are stored as
+    ///     Updates all the values to what they are stored as
     /// </summary>
     private async Task UpdatePage()
     {
@@ -105,10 +107,5 @@ public partial class WinningNumbersPageDaily4 : ContentPage
         TodayEvening2.FontSize = numberFontSize;
         TodayEvening3.FontSize = numberFontSize;
         TodayEvening4.FontSize = numberFontSize;
-    }
-
-    private async void ChangeToDaily3(object sender, EventArgs e)
-    {
-        await Navigation.PushAsync(new WinningNumbersPage());
     }
 }
