@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System.Text.Json.Serialization;
+using System.Web;
 using Daily3_UI.Enums;
 
 namespace Daily3_UI.Classes;
@@ -6,21 +7,26 @@ namespace Daily3_UI.Classes;
 /// <summary>
 ///     The storage system of Tickets
 /// </summary>
-public class Ticket
+public abstract class Ticket
 {
     // Playing Numbers
-    public int? Number1 { get; init; } = null;
-    public int? Number2 { get; init; } = null;
-    public int? Number3 { get; init; } = null;
+    [JsonPropertyName("number1")] public int? Number1 { get; init; } = null;
+
+    [JsonPropertyName("number2")] public int? Number2 { get; init; } = null;
+
+    [JsonPropertyName("number3")] public int? Number3 { get; init; } = null;
 
     // Specifications 
-    public double? Price { get; init; } = null;
-    public TicketType? Type { get; init; } = null;
-    public TOD? TimeOfDay { get; init; } = null;
-    public string Date { get; init; } = null;
+    [JsonPropertyName("price")] public double? Price { get; init; } = null;
 
-    // Winning Status
-    public WinningStatus? WinningStatus { get; init; } = null;
+    [JsonPropertyName("type")] public TicketType? Type { get; init; } = null;
+
+    [JsonPropertyName("timeOfDay")] public TOD? TimeOfDay { get; init; } = null;
+
+    [JsonPropertyName("date")] public string Date { get; init; } = null;
+
+
+    [JsonPropertyName("winningStatus")] public WinningStatus? WinningStatus { get; init; } = null;
 
     // Format Functions
     public string FormattedNumber1 => Number1.ToString();
@@ -33,7 +39,7 @@ public class Ticket
     ///     This is for buying tickets so only values that
     ///     are picked by the user should be here
     /// </summary>
-    public string MissingMessage()
+    public virtual string MissingMessage()
     {
         if (FormattedNumber1 is null) return "Missing a First Number!";
         if (FormattedNumber2 is null) return "Missing a Second Number!";
@@ -49,6 +55,12 @@ public class Ticket
     /// </summary>
     public string ToApiUrl(string baseUrl, string endPoint)
     {
+        var uriBuilder = BuildApiUrl(baseUrl, endPoint);
+        return uriBuilder.ToString();
+    }
+
+    protected virtual UriBuilder BuildApiUrl(string baseUrl, string endPoint)
+    {
         // Building Params
         var uriBuilder = new UriBuilder(baseUrl + endPoint);
         var queryParameters = HttpUtility.ParseQueryString(string.Empty);
@@ -61,17 +73,18 @@ public class Ticket
         queryParameters["date"] = Date;
         queryParameters["userId"] = Globals.UserId.ToString();
         uriBuilder.Query = queryParameters.ToString();
-        return uriBuilder.ToString();
+        return uriBuilder;
     }
 
     /// <summary>
     ///     return the number for it to appear on screen
     /// </summary>
-    public string TextFormat =>
+    public virtual string TextFormat =>
         $"{FormattedNumber1}-{FormattedNumber2}-{FormattedNumber3}   Type: {Type}   TOD: {TimeOfDay}";
 
     /// <summary>
     ///     returns the details format of the tickets bought
     /// </summary>
-    public string DetailsFormat => $"Price: ${FormattedPrice}   Date: {DateTime.Parse(Date).ToString("MM/dd/yyyy")}";
+    public string DetailsFormat =>
+        $"Price: ${FormattedPrice}   Date: {DateTime.Parse(Date).ToString("MM/dd/yyyy")}";
 }

@@ -32,6 +32,7 @@ public partial class LogInPage : ContentPage
         }
         catch
         {
+            var errorCode = e.ToString();
             ErrorLabel.Text = request_response;
         }
     }

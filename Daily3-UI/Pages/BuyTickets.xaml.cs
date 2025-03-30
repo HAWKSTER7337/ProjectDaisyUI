@@ -86,7 +86,7 @@ public partial class BuyTickets : ContentPage
     {
         try
         {
-            var ticket = new Ticket
+            var ticket = new Ticket3
             {
                 Number1 = short.Parse(Number1.SelectedItem.ToString()),
                 Number2 = short.Parse(Number2.SelectedItem.ToString()),

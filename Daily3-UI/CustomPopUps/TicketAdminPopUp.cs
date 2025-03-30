@@ -1,11 +1,12 @@
 ﻿using CommunityToolkit.Maui.Views;
 using Daily3_UI.Classes;
+using Daily3_UI.Pages;
 
 namespace Daily3_UI.CustomPopUps;
 
 public class TicketAdminPopUp : Popup
 {
-    public TicketAdminPopUp(List<Ticket> tickets)
+    public TicketAdminPopUp(List<Ticket3> tickets)
     {
         // Create layout for popup
         Application.Current.Resources.TryGetValue("Secondary", out var secondary);
@@ -17,6 +18,7 @@ public class TicketAdminPopUp : Popup
         var backgroundColor = (Color)secondary;
         var textColor = (Color)black;
         var buttonBackgroundColor = (Color)primary;
+        Application.Current.Resources["StatusToColor"] = new StatusToColorConverter();
 
         Content = new Frame
         {

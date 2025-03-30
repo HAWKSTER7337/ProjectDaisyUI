@@ -15,7 +15,8 @@ public class User
     public User(string username)
     {
         Username = username;
-        Tickets = new AddOnlyList<Ticket>();
+        Tickets3 = new AddOnlyList<Ticket3>();
+        Tickets4 = new AddOnlyList<Ticket4>();
     }
 
     /// <summary>
@@ -25,9 +26,14 @@ public class User
     public string Username { get; init; }
 
     /// <summary>
-    ///     The tickets that are connected to the given user
+    ///     The tickets that are connected to the given user for the daily 3 
     /// </summary>
-    public AddOnlyList<Ticket> Tickets { get; }
+    public AddOnlyList<Ticket3> Tickets3 { get; }
+
+    /// <summary>
+    ///     The Tickets that are connected to the given user for the daily 4
+    /// </summary>
+    public AddOnlyList<Ticket4> Tickets4 { get; }
 
     /// <summary>
     ///     Gives you the total winnings of the user
@@ -52,6 +58,11 @@ public class AddOnlyList<T> : IEnumerable<T>
     public void Add(T item)
     {
         _list.Add(item);
+    }
+
+    public void AddRange(List<T> listOfItems)
+    {
+        listOfItems.ForEach(item => _list.Add(item));
     }
 
     public List<T> ToList()

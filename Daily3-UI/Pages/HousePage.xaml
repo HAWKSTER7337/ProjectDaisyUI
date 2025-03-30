@@ -74,7 +74,8 @@
                             <Button Grid.Column="2"
                                     Grid.Row="0"
                                     Text="Tickets"
-                                    Clicked="OnTicketButtonClicked" />
+                                    Clicked="OnTicketButtonClicked"
+                                    BindingContext="{Binding}" />
 
                             <!--Line For Separation-->
                             <BoxView Grid.Column="0"
