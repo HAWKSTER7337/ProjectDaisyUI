@@ -80,5 +80,18 @@
         </Compile>
     </ItemGroup>
 
+    <ItemGroup>
+        <Folder Include="Pages\PagesDaily4\"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <AdditionalFiles Include="Pages\PagesDaily3\BuyTickets.xaml"/>
+        <AdditionalFiles Include="Pages\PagesDaily3\CreateAccountPage.xaml"/>
+        <AdditionalFiles Include="Pages\PagesDaily3\LogInPage.xaml"/>
+        <AdditionalFiles Include="Pages\PagesDaily3\TicketHistory.xaml"/>
+        <AdditionalFiles Include="Pages\PagesDaily3\TicketPopupPage.xaml"/>
+        <AdditionalFiles Include="Pages\PagesDaily3\WinningNumbersPage.xaml"/>
+    </ItemGroup>
+
 
 </Project>
