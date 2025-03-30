@@ -9,12 +9,24 @@ public static class BuyTicketClient
     /// <summary>
     ///     Client For Buying a Ticket
     /// </summary>
-    public static async Task<string> BuyTicket(Ticket ticket)
+    public static async Task<string> BuyTicketDaily3(Ticket3 ticket)
+    {
+        var endPoint = "api/BuyTicket";
+        return await BuyTicket(ticket, endPoint);
+    }
+
+    public static async Task<string> BuyTicketDaily4(Ticket4 ticket)
+    {
+        var endPoint = "api/BuyTicket/Daily4";
+        return await BuyTicket(ticket, endPoint);
+    }
+
+    private static async Task<string> BuyTicket<T>(T ticket, string apiEndpoint)
+        where T : Ticket
     {
         var httpClient = new HttpClient();
-        var endPoint = "api/BuyTicket";
 
-        var apiUrl = ticket.ToApiUrl(ClientSideData.BaseUrl, endPoint);
+        var apiUrl = ticket.ToApiUrl(ClientSideData.BaseUrl, apiEndpoint);
 
         if (!isValidDate(ticket.TimeOfDay, ticket.Date))
         {

@@ -58,7 +58,7 @@ public static class Globals
     public static List<KeyValuePair<string, ContentPage>> Daily4ContentPages = new()
     {
         new KeyValuePair<string, ContentPage>("Daily Numbers", new WinningNumbersPageDaily4()),
-        new KeyValuePair<string, ContentPage>("Buy Tickets", new BuyTickets()),
+        new KeyValuePair<string, ContentPage>("Buy Tickets", new BuyTicketsDaily4()),
         new KeyValuePair<string, ContentPage>("View History", new TicketHistory()),
         new KeyValuePair<string, ContentPage>("Entrants Tickets", new HousePage())
     };
