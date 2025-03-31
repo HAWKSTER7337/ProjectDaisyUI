@@ -5,8 +5,16 @@ namespace Daily3_UI.Classes;
 
 public class Ticket4 : Ticket
 {
-    // Extra Playing number
     [JsonPropertyName("Number4")] public int? Number4 { get; init; } = null;
+
+    public override Color TicketColorTheme
+    {
+        get
+        {
+            Application.Current.Resources.TryGetValue("SecondaryDaily4", out var secondary);
+            return (Color)secondary;
+        }
+    }
 
     public string FormattedNumber4 => Number4.ToString();
 

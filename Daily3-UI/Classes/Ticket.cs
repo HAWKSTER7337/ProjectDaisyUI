@@ -28,6 +28,8 @@ public abstract class Ticket
 
     [JsonPropertyName("WinningStatus")] public WinningStatus? WinningStatus { get; init; } = Enums.WinningStatus.TBD;
 
+    public abstract Color TicketColorTheme { get; }
+
     // Format Functions
     public string FormattedNumber1 => Number1.ToString();
     public string FormattedNumber2 => Number2.ToString();
@@ -86,5 +88,5 @@ public abstract class Ticket
     ///     returns the details format of the tickets bought
     /// </summary>
     public string DetailsFormat =>
-        $"Price: ${FormattedPrice}   Date: {DateTime.Parse(Date).ToString("MM/dd/yyyy")}";
+        $"Price: ${FormattedPrice}   Date: {DateTime.Parse(Date):MM/dd/yyyy}";
 }

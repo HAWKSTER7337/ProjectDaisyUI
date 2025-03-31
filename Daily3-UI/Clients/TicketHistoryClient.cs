@@ -46,6 +46,10 @@ public static class TicketHistoryClient
         {
             Console.WriteLine($"Error calling the API: {ex.Message}");
         }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error calling the API: {ex.Message}");
+        }
 
         return new List<T>();
     }

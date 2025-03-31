@@ -60,6 +60,6 @@ public static class Globals
         new KeyValuePair<string, ContentPage>("Daily Numbers", new WinningNumbersPageDaily4()),
         new KeyValuePair<string, ContentPage>("Buy Tickets", new BuyTicketsDaily4()),
         new KeyValuePair<string, ContentPage>("View History", new TicketHistoryDaily4()),
-        new KeyValuePair<string, ContentPage>("Entrants Tickets", new HousePage())
+        new KeyValuePair<string, ContentPage>("Entrants Tickets", new HousePageDaily4())
     };
 }
