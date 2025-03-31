@@ -2,4 +2,12 @@
 
 public class Ticket3 : Ticket
 {
+    public override Color TicketColorTheme
+    {
+        get
+        {
+            Application.Current.Resources.TryGetValue("Secondary", out var secondary);
+            return (Color)secondary;
+        }
+    }
 }

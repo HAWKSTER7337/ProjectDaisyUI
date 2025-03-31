@@ -5,9 +5,9 @@ using Daily3_UI.Enums;
 
 namespace Daily3_UI.Pages;
 
-public partial class BuyTickets : ContentPage
+public partial class BuyTicketsDaily4 : ContentPage
 {
-    public BuyTickets()
+    public BuyTicketsDaily4()
     {
         InitializeComponent();
     }
@@ -15,7 +15,7 @@ public partial class BuyTickets : ContentPage
     /// <summary>
     ///     Where all tickets are stored
     /// </summary>
-    private List<Ticket> ShoppingCart { get; } = new();
+    private List<Ticket4> ShoppingCart { get; } = new();
 
     /// <summary>
     ///     The bet type For the currently selected code
@@ -86,11 +86,12 @@ public partial class BuyTickets : ContentPage
     {
         try
         {
-            var ticket = new Ticket3
+            var ticket = new Ticket4
             {
                 Number1 = short.Parse(Number1.SelectedItem.ToString()),
                 Number2 = short.Parse(Number2.SelectedItem.ToString()),
                 Number3 = short.Parse(Number3.SelectedItem.ToString()),
+                Number4 = short.Parse(Number4.SelectedItem.ToString()),
                 Price = double.Parse(Price.SelectedItem.ToString()),
                 Type = GetTicketTypeFromString(BetTypeSelcted.Text),
                 TimeOfDay = GetTodFromString(TimeOfDaySelected.Text),
@@ -125,19 +126,19 @@ public partial class BuyTickets : ContentPage
     }
 
     /// <summary>
-    ///     Checkout and send all of the tickets
+    ///     Checkout and send all the tickets
     ///     to the server
     /// </summary>
     private async void CheckOut(object sender, EventArgs e)
     {
-        var copyShoppingCart = new List<Ticket>(ShoppingCart);
+        var copyShoppingCart = new List<Ticket4>(ShoppingCart);
         ShoppingCart.Clear();
 
         var errorMessage = "";
 
         foreach (var ticket in copyShoppingCart)
         {
-            errorMessage = await BuyTicketClient.BuyTicket(ticket);
+            errorMessage = await BuyTicketClient.BuyTicketDaily4(ticket);
             if (errorMessage != "") break;
             await Task.Delay(TimeSpan.FromMilliseconds(200));
         }
@@ -174,7 +175,7 @@ public partial class BuyTickets : ContentPage
 
     public async void OpenTicketPopupPageAsync(object sender, EventArgs e)
     {
-        var tickets = ShoppingCart;
+        var tickets = ShoppingCart.Cast<Ticket>().ToList();
         var ticketPopupPage = new TicketPopupPage(tickets);
         await Shell.Current.CurrentPage.ShowPopupAsync(ticketPopupPage);
     }
@@ -198,6 +199,7 @@ public partial class BuyTickets : ContentPage
         Number1Border.WidthRequest = Number1Border.HeightRequest = numberBorderWidth;
         Number2Border.WidthRequest = Number2Border.HeightRequest = numberBorderWidth;
         Number3Border.WidthRequest = Number3Border.HeightRequest = numberBorderWidth;
+        Number4Border.WidthRequest = Number4Border.HeightRequest = numberBorderWidth;
 
         SelectPaymentLabel.FontSize = labelFontSize;
         SelectBetTypeLabel.FontSize = labelFontSize;
@@ -208,6 +210,7 @@ public partial class BuyTickets : ContentPage
         Number1.FontSize = pickerFontSize;
         Number2.FontSize = pickerFontSize;
         Number3.FontSize = pickerFontSize;
+        Number4.FontSize = pickerFontSize;
         Price.FontSize = pickerFontSize;
 
         StraightButton.WidthRequest = buttonWidth;

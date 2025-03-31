@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:Daily3_UI.Pages"
+             x:Class="Daily3_UI.Pages.TicketHistoryDaily4"
+             BackgroundColor="{StaticResource SecondaryDaily4}"
+             Shell.NavBarIsVisible="False"
+             SizeChanged="OnSizeChanged">
+    <ContentPage.Resources>
+        <pages:StatusToColorConverter x:Key="StatusToColor" />
+    </ContentPage.Resources>
+    <VerticalStackLayout
+        Spacing="5"
+        Padding="30, 0"
+        VerticalOptions="FillAndExpand"
+        HorizontalOptions="FillAndExpand">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="20" />
+            </Grid.RowDefinitions>
+
+            <!--Title-->
+            <Border
+                BackgroundColor="{StaticResource Primary}"
+                WidthRequest="1000"
+                Padding="5"
+                StrokeShape="RoundRectangle 10,10,0,0"
+                x:Name="BorderTitle"
+                Grid.Row="0">
+                <Label Text="Ticket History"
+                       TextColor="{StaticResource Black}"
+                       Style="{StaticResource Day}"
+                       x:Name="Title" />
+            </Border>
+
+            <!--Date Search-->
+            <Label Text="Search by Date"
+                   Style="{StaticResource Tod}"
+                   x:Name="DateSearchLabel"
+                   Grid.Row="1" />
+            <Grid
+                Padding="5"
+                Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Border
+                    Grid.Column="0"
+                    Style="{StaticResource Picker-Border}"
+                    BackgroundColor="White">
+                    <DatePicker
+                        DateSelected="DateChanged"
+                        HorizontalOptions="Center"
+                        BackgroundColor="{StaticResource White}"
+                        x:Name="DatePicker"
+                        TextColor="Black" />
+                </Border>
+                <Label
+                    Text="Search Toggle"
+                    Grid.Column="1"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    TextColor="{StaticResource White}"
+                    x:Name="SearchToggleLabel" />
+                <Switch
+                    x:Name="SearchToggle"
+                    Toggled="ToggleDateSwitch"
+                    Grid.Column="2" />
+            </Grid>
+
+            <!--Display Tickets-->
+            <ActivityIndicator
+                Color="{StaticResource White}"
+                Grid.Row="3"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                x:Name="TicketLoader" />
+            <CollectionView x:Name="TicketCollectionView"
+                            Grid.Row="3"
+                            ItemsSource="{Binding Tickets}"
+                            VerticalScrollBarVisibility="Always">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0"
+                                   Text="{Binding TextFormat}"
+                                   FontSize="16"
+                                   TextColor="{Binding WinningStatus,
+                                   Converter={StaticResource StatusToColor}}" />
+                            <Label Grid.Row="1"
+                                   Text="{Binding DetailsFormat}"
+                                   FontSize="14"
+                                   TextColor="{StaticResource neutral3}" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>

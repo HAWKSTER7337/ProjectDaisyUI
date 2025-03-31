@@ -7,6 +7,7 @@
 
     <Color x:Key="Primary">#F19D39</Color>
     <Color x:Key="Secondary">#335A9A</Color>
+    <Color x:Key="SecondaryDaily4">#6a34a6</Color>
     <Color x:Key="Selected">#744B18</Color>
     <Color x:Key="neutral1">#C2B999</Color>
     <Color x:Key="neutral2">#D5CBA8</Color>

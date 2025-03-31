@@ -64,7 +64,7 @@
                          Style="{StaticResource Error-Message}"
                          x:Name="ErrorLabel"
                          HorizontalTextAlignment="Center"
-                         TextColor="Black" /> 
+                         TextColor="Black" />
            </StackLayout>
     </ContentPage.Content>
 </ContentPage>

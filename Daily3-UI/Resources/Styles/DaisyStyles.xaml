@@ -11,6 +11,14 @@
         <Setter Property="Stroke" Value="{StaticResource neutral1}" />
     </Style>
 
+    <Style x:Key="Tod-Border-Daily4" TargetType="Border">
+        <Setter Property="HeightRequest" Value="20" />
+        <Setter Property="HorizontalOptions" Value="Fill" />
+        <Setter Property="BackgroundColor" Value="{StaticResource SecondaryDaily4}" />
+        <Setter Property="StrokeThickness" Value="4" />
+        <Setter Property="Stroke" Value="{StaticResource neutral1}" />
+    </Style>
+
     <Style x:Key="Ball" TargetType="Border">
         <Setter Property="WidthRequest" Value="50" />
         <Setter Property="HeightRequest" Value="50" />
@@ -37,6 +45,15 @@
     <Style x:Key="Title" TargetType="Label">
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="TextColor" Value="{StaticResource Secondary}" />
+        <Setter Property="FontSize" Value="35" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontFamily" Value="Lobster-Regular" />
+    </Style>
+
+    <Style x:Key="TitleDaily4" TargetType="Label">
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="TextColor" Value="{StaticResource SecondaryDaily4}" />
         <Setter Property="FontSize" Value="35" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="FontAttributes" Value="Bold" />
@@ -94,7 +111,7 @@
         <Setter Property="StrokeShape" Value="RoundRectangle 0,100,0,100" />
         <Setter Property="BackgroundColor" Value="White" />
     </Style>
-        
+
     <Style x:Key="Error-Message" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource DailyRed}" />
         <Setter Property="FontSize" Value="20" />

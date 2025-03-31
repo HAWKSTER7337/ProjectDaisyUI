@@ -5,7 +5,7 @@ using Daily3_UI.CustomPopUps;
 
 namespace Daily3_UI.Pages;
 
-public partial class HousePage : ContentPage
+public partial class HousePageDaily4 : ContentPage
 {
     private List<User> _users = new();
 
@@ -14,7 +14,7 @@ public partial class HousePage : ContentPage
         return _users.OrderBy(user => user.Username).ToList();
     }
 
-    public HousePage()
+    public HousePageDaily4()
     {
         InitializeComponent();
     }
@@ -26,7 +26,7 @@ public partial class HousePage : ContentPage
             UserLoader.IsRunning = true;
             UserLoader.IsVisible = true;
 
-            _users = await GetUsersAndTicketsUnderHouse.getUsersDaily3();
+            _users = await GetUsersAndTicketsUnderHouse.getUsersDaily4();
             UserCollectionView.ItemsSource = Users();
         }
         catch (Exception ex)
@@ -45,7 +45,7 @@ public partial class HousePage : ContentPage
         if (sender is not Button button) return;
         var user = button.BindingContext as User;
         if (user == null) throw new Exception("User is not found");
-        var popup = new TicketAdminPopUp(user.Tickets3.ToList());
+        var popup = new TicketAdminPopUp<Ticket4>(user.Tickets4.ToList());
 
         if (this == null) throw new Exception("This is null for some reason");
         if (popup == null) throw new Exception("The Popup is null for some reason");

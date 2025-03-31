@@ -2,20 +2,20 @@
 
 namespace Daily3_UI.Classes;
 
-public class WinningNumber
+public class WinningNumberDaily3
 {
-    public WinningNumber(int number1, int number2, int number3)
+    public WinningNumberDaily3(int number1, int number2, int number3)
     {
         Number1 = number1;
         Number2 = number2;
         Number3 = number3;
     }
 
-    public WinningNumber()
+    public WinningNumberDaily3()
     {
     }
 
-    public WinningNumber(int number)
+    public WinningNumberDaily3(int number)
     {
         if (number < 100 || number > 999)
             throw new ArgumentOutOfRangeException();
@@ -24,7 +24,7 @@ public class WinningNumber
         Number3 = number % 10;
     }
 
-    public WinningNumber(IReadOnlyList<string> number)
+    public WinningNumberDaily3(IReadOnlyList<string> number)
     {
         if (number.Count < 3) throw new ArgumentOutOfRangeException();
         Number1 = int.Parse(number[0]);

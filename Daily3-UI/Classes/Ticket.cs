@@ -10,23 +10,25 @@ namespace Daily3_UI.Classes;
 public abstract class Ticket
 {
     // Playing Numbers
-    [JsonPropertyName("number1")] public int? Number1 { get; init; } = null;
+    [JsonPropertyName("Number1")] public int? Number1 { get; init; } = null;
 
-    [JsonPropertyName("number2")] public int? Number2 { get; init; } = null;
+    [JsonPropertyName("Number2")] public int? Number2 { get; init; } = null;
 
-    [JsonPropertyName("number3")] public int? Number3 { get; init; } = null;
+    [JsonPropertyName("Number3")] public int? Number3 { get; init; } = null;
 
     // Specifications 
-    [JsonPropertyName("price")] public double? Price { get; init; } = null;
+    [JsonPropertyName("Price")] public double? Price { get; init; } = null;
 
-    [JsonPropertyName("type")] public TicketType? Type { get; init; } = null;
+    [JsonPropertyName("Type")] public TicketType? Type { get; init; } = null;
 
-    [JsonPropertyName("timeOfDay")] public TOD? TimeOfDay { get; init; } = null;
+    [JsonPropertyName("TimeOfDay")] public TOD? TimeOfDay { get; init; } = null;
 
-    [JsonPropertyName("date")] public string Date { get; init; } = null;
+    [JsonPropertyName("Date")] public string Date { get; init; } = null;
 
 
-    [JsonPropertyName("winningStatus")] public WinningStatus? WinningStatus { get; init; } = null;
+    [JsonPropertyName("WinningStatus")] public WinningStatus? WinningStatus { get; init; } = Enums.WinningStatus.TBD;
+
+    public abstract Color TicketColorTheme { get; }
 
     // Format Functions
     public string FormattedNumber1 => Number1.ToString();
@@ -86,5 +88,5 @@ public abstract class Ticket
     ///     returns the details format of the tickets bought
     /// </summary>
     public string DetailsFormat =>
-        $"Price: ${FormattedPrice}   Date: {DateTime.Parse(Date).ToString("MM/dd/yyyy")}";
+        $"Price: ${FormattedPrice}   Date: {DateTime.Parse(Date):MM/dd/yyyy}";
 }

@@ -47,7 +47,7 @@
                                 Style="{StaticResource Entry-Design}"
                                 IsPassword="True" />
                   </Border>
-                  
+
                   <!--Login Button-->
                   <Button Text="Log In"
                           Padding="10"

@@ -3,20 +3,22 @@ using Daily3_UI.Clients;
 
 namespace Daily3_UI.Pages;
 
-public partial class WinningNumbersPage : ContentPage
+public partial class WinningNumbersPage : ChangeRaffle
 {
     public WinningNumbersPage()
     {
+        NewTaskBar = Globals.Daily4ContentPages;
         InitializeComponent();
     }
 
-    private WinningNumber YesterdayMidday { get; set; }
-    private WinningNumber YesterdayEvening { get; set; }
-    private WinningNumber TodayMidday { get; set; }
-    private WinningNumber TodayEvening { get; set; }
+    private WinningNumberDaily3 YesterdayMidday { get; set; }
+    private WinningNumberDaily3 YesterdayEvening { get; set; }
+    private WinningNumberDaily3 TodayMidday { get; set; }
+    private WinningNumberDaily3 TodayEvening { get; set; }
 
     protected override async void OnAppearing()
     {
+        NewTaskBar = Globals.Daily4ContentPages;
         await UpdatePage();
     }
 
@@ -25,7 +27,8 @@ public partial class WinningNumbersPage : ContentPage
     /// </summary>
     private async Task UpdatePage()
     {
-        var winningNumbers = await WinningNumbersClient.GetWinningNumbers();
+        ClearWinningNumbers();
+        var winningNumbers = await WinningNumbersClient.GetWinningNumbersDaily3();
 
         switch (winningNumbers.Count)
         {
@@ -54,6 +57,25 @@ public partial class WinningNumbersPage : ContentPage
                 YesterdayMidday3.Text = YesterdayMidday.Number3.ToString();
                 break;
         }
+    }
+
+    private void ClearWinningNumbers()
+    {
+        YesterdayMidday1.Text = "-";
+        YesterdayMidday2.Text = "-";
+        YesterdayMidday3.Text = "-";
+
+        YesterdayEvening1.Text = "-";
+        YesterdayEvening2.Text = "-";
+        YesterdayEvening3.Text = "-";
+
+        TodayMidday1.Text = "-";
+        TodayMidday2.Text = "-";
+        TodayMidday3.Text = "-";
+
+        TodayEvening1.Text = "-";
+        TodayEvening2.Text = "-";
+        TodayEvening3.Text = "-";
     }
 
     private void OnSizeChanged(object sender, EventArgs e)
