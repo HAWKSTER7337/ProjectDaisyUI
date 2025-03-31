@@ -6,9 +6,21 @@ namespace Daily3_UI.Clients;
 
 public static class TicketHistoryClient
 {
-    public static async Task<List<Ticket>> GetTicketHistory()
+    public static async Task<List<Ticket4>> GetTicketHistoryDaily4()
+    {
+        var endpoint = "api/TicketHistory/Daily4";
+        return await GetTicketHistory<Ticket4>(endpoint);
+    }
+
+    public static async Task<List<Ticket3>> GetTicketHistoryDaily3()
     {
         var endpoint = "api/TicketHistory";
+        return await GetTicketHistory<Ticket3>(endpoint);
+    }
+
+    private static async Task<List<T>> GetTicketHistory<T>(string endpoint)
+        where T : Ticket
+    {
         var uriBuilder = new UriBuilder(ClientSideData.BaseUrl + endpoint);
         var queryParameters = HttpUtility.ParseQueryString(string.Empty);
         queryParameters["userId"] = Globals.UserId.ToString();
@@ -24,7 +36,7 @@ public static class TicketHistoryClient
             if (response.IsSuccessStatusCode)
             {
                 var responseContent = await response.Content.ReadAsStringAsync();
-                var formattedResponse = JsonSerializer.Deserialize<List<Ticket>>(responseContent);
+                var formattedResponse = JsonSerializer.Deserialize<List<T>>(responseContent);
                 return formattedResponse;
             }
 
@@ -35,6 +47,6 @@ public static class TicketHistoryClient
             Console.WriteLine($"Error calling the API: {ex.Message}");
         }
 
-        return new List<Ticket>();
+        return new List<T>();
     }
 }

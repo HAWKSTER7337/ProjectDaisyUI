@@ -210,6 +210,7 @@ public partial class BuyTicketsDaily4 : ContentPage
         Number1.FontSize = pickerFontSize;
         Number2.FontSize = pickerFontSize;
         Number3.FontSize = pickerFontSize;
+        Number4.FontSize = pickerFontSize;
         Price.FontSize = pickerFontSize;
 
         StraightButton.WidthRequest = buttonWidth;

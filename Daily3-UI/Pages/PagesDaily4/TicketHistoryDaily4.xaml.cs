@@ -1,14 +1,11 @@
-﻿using System.Diagnostics;
-using System.Globalization;
-using Daily3_UI.Classes;
+﻿using Daily3_UI.Classes;
 using Daily3_UI.Clients;
-using Daily3_UI.Enums;
 
 namespace Daily3_UI.Pages;
 
-public partial class TicketHistory : ContentPage
+public partial class TicketHistoryDaily4 : ContentPage
 {
-    public TicketHistory()
+    public TicketHistoryDaily4()
     {
         InitializeComponent();
     }
@@ -17,8 +14,8 @@ public partial class TicketHistory : ContentPage
     {
         TicketLoaderIsBusy = true;
         SearchToggle.IsToggled = false;
-        _userTickets = await TicketHistoryClient.GetTicketHistoryDaily3();
-        BindingContext = new HistoryPageViewModel<Ticket3>(_userTickets);
+        _userTickets = await TicketHistoryClient.GetTicketHistoryDaily4();
+        BindingContext = new HistoryPageViewModel<Ticket4>(_userTickets);
         TicketLoaderIsBusy = false;
     }
 
@@ -54,7 +51,7 @@ public partial class TicketHistory : ContentPage
     /// <summary>
     ///     All the users Tickets
     /// </summary>
-    private List<Ticket3> _userTickets;
+    private List<Ticket4> _userTickets;
 
     /// <summary>
     ///     Checking if the tickets should be filtered by date
@@ -85,19 +82,19 @@ public partial class TicketHistory : ContentPage
     }
 
     /// <summary>
-    ///     The filter handling 
+    ///     The filter handling
     /// </summary>
     private void FilterByDate(DateTime date)
     {
         if (ShouldNotFilterByDate)
         {
-            BindingContext = new HistoryPageViewModel<Ticket3>(_userTickets);
+            BindingContext = new HistoryPageViewModel<Ticket4>(_userTickets);
             OnPropertyChanged(nameof(TicketCollectionView));
             return;
         }
 
         var filteredDates = _userTickets.Where(ticket => DateTime.Parse(ticket.Date).Date == date.Date).ToList();
-        BindingContext = new HistoryPageViewModel<Ticket3>(filteredDates);
+        BindingContext = new HistoryPageViewModel<Ticket4>(filteredDates);
         OnPropertyChanged(nameof(TicketCollectionView));
     }
 
@@ -124,44 +121,5 @@ public partial class TicketHistory : ContentPage
 
         DatePicker.FontSize = pickerFontSize;
         SearchToggleLabel.FontSize = labelFontSize;
-    }
-}
-
-public class HistoryPageViewModel<T>
-    where T : Ticket
-{
-    public List<T> Tickets { get; set; }
-
-    public HistoryPageViewModel(List<T> tickets)
-    {
-        Tickets = tickets;
-    }
-}
-
-/// <summary>
-///     Class used to transfer the WinningStatus Enum into a number to
-///     display the numbers on the screen
-/// </summary>
-public class StatusToColorConverter : IValueConverter
-{
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        if (!(value is WinningStatus status))
-        {
-            Debug.WriteLine("Value must be a winning status");
-            return Colors.Black;
-        }
-
-        return status switch
-        {
-            WinningStatus.Loser => Globals.GetColor("DailyRed"),
-            WinningStatus.Winner => Globals.GetColor("SuccessGreen"),
-            _ => Globals.GetColor("White")
-        };
-    }
-
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
     }
 }

@@ -27,6 +27,7 @@ public partial class WinningNumbersPageDaily4 : ChangeRaffle
     /// </summary>
     private async Task UpdatePage()
     {
+        ClearWinningNumbers();
         var winningNumbers = await WinningNumbersClient.GetWinningNumbersDaily4();
 
         switch (winningNumbers.Count)
@@ -60,6 +61,29 @@ public partial class WinningNumbersPageDaily4 : ChangeRaffle
                 YesterdayMidday4.Text = YesterdayMidday.Number4.ToString();
                 break;
         }
+    }
+
+    private void ClearWinningNumbers()
+    {
+        YesterdayMidday1.Text = "-";
+        YesterdayMidday2.Text = "-";
+        YesterdayMidday3.Text = "-";
+        YesterdayMidday4.Text = "-";
+
+        YesterdayEvening1.Text = "-";
+        YesterdayEvening2.Text = "-";
+        YesterdayEvening3.Text = "-";
+        YesterdayEvening4.Text = "-";
+
+        TodayMidday1.Text = "-";
+        TodayMidday2.Text = "-";
+        TodayMidday3.Text = "-";
+        TodayMidday4.Text = "-";
+
+        TodayEvening1.Text = "-";
+        TodayEvening2.Text = "-";
+        TodayEvening3.Text = "-";
+        TodayEvening4.Text = "-";
     }
 
     private void OnSizeChanged(object sender, EventArgs e)

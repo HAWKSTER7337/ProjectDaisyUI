@@ -6,7 +6,7 @@ namespace Daily3_UI.Classes;
 public class Ticket4 : Ticket
 {
     // Extra Playing number
-    [JsonPropertyName("number4")] public int? Number4 { get; init; } = null;
+    [JsonPropertyName("Number4")] public int? Number4 { get; init; } = null;
 
     public string FormattedNumber4 => Number4.ToString();
 

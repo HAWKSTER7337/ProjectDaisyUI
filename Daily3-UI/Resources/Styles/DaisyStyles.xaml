@@ -51,6 +51,15 @@
         <Setter Property="FontFamily" Value="Lobster-Regular" />
     </Style>
 
+    <Style x:Key="TitleDaily4" TargetType="Label">
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="TextColor" Value="{StaticResource SecondaryDaily4}" />
+        <Setter Property="FontSize" Value="35" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontFamily" Value="Lobster-Regular" />
+    </Style>
+
     <Style x:Key="Day" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource neutral4}" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
