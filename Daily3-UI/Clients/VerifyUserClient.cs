@@ -1,4 +1,6 @@
-﻿using System.Web;
+﻿using System.Text;
+using System.Text.Json;
+using Daily3_UI.Clients.ClientRequests;
 
 namespace Daily3_UI.Clients;
 
@@ -6,20 +8,20 @@ public static class VerifyUserClient
 {
     public static async Task<string?> VerifyUser(string username, string password)
     {
+        var credentials = new Credentials
+        {
+            Username = username,
+            Password = password
+        };
+
         var httpClient = new HttpClient();
         var endPoint = "api/VerifyUser";
 
-        var uriBuilder = new UriBuilder(ClientSideData.BaseUrl + endPoint);
-        var queryParameters = HttpUtility.ParseQueryString(string.Empty);
-        queryParameters["username"] = username;
-        queryParameters["password"] = password;
-        uriBuilder.Query = queryParameters.ToString();
-        var apiUrl = uriBuilder.ToString();
-        Console.WriteLine(apiUrl);
-
+        var jsonString = JsonSerializer.Serialize(credentials);
+        var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
         try
         {
-            var response = await httpClient.GetAsync(apiUrl);
+            var response = await httpClient.PostAsync(ClientSideData.BaseUrl + endPoint, content);
 
             if (response.IsSuccessStatusCode)
             {

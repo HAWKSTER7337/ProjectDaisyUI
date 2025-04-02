@@ -1,7 +1,6 @@
 ﻿using System.Text;
 using System.Text.Json;
 using Daily3_UI.Classes;
-using Daily3_UI.Enums;
 
 namespace Daily3_UI.Clients;
 
@@ -24,12 +23,12 @@ public static class BuyTicketClient
     {
         tickets.ForEach(ticket => ticket.UserId = Globals.UserId);
 
-        string jsonString = JsonSerializer.Serialize(tickets);
+        var jsonString = JsonSerializer.Serialize(tickets);
 
         var httpClient = new HttpClient();
         var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
-        HttpResponseMessage response = await httpClient.PostAsync(ClientSideData.BaseUrl + apiEndpoint, content);
+        var response = await httpClient.PostAsync(ClientSideData.BaseUrl + apiEndpoint, content);
 
         if (response.IsSuccessStatusCode)
         {
