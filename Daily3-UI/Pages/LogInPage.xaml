@@ -60,6 +60,11 @@
                           Margin="10"
                           Clicked="TakeToCreateAccountPage" />
 
+                  <Button Text="Change Password"
+                          Padding="10"
+                          Margin="10"
+                          Clicked="TakeToChangePasswordPage" />
+
                   <!--Error Line-->
                   <Label Text=""
                          Style="{StaticResource Error-Message}"

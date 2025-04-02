@@ -70,6 +70,9 @@
         <MauiXaml Update="Pages\LogInPage.xaml">
             <SubType>Designer</SubType>
         </MauiXaml>
+        <MauiXaml Update="Pages\CreateAccountPage.xaml">
+            <SubType>Designer</SubType>
+        </MauiXaml>
     </ItemGroup>
 
     <ItemGroup>
@@ -85,11 +88,14 @@
             <DependentUpon>LogInPage.xaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
+        <Compile Update="Pages\CreateAccountPage.xaml.cs">
+            <DependentUpon>CreateAccountPage.xaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
     </ItemGroup>
 
     <ItemGroup>
         <AdditionalFiles Include="Pages\PagesDaily3\BuyTickets.xaml"/>
-        <AdditionalFiles Include="Pages\PagesDaily3\CreateAccountPage.xaml"/>
         <AdditionalFiles Include="Pages\PagesDaily3\TicketHistory.xaml"/>
         <AdditionalFiles Include="Pages\PagesDaily3\TicketPopupPage.xaml"/>
         <AdditionalFiles Include="Pages\PagesDaily3\WinningNumbersPage.xaml"/>
