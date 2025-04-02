@@ -1,5 +1,5 @@
-﻿using System.Text.Json;
-using System.Web;
+﻿using System.Text;
+using System.Text.Json;
 using Daily3_UI.Classes;
 
 namespace Daily3_UI.Clients;
@@ -21,17 +21,14 @@ public static class TicketHistoryClient
     private static async Task<List<T>> GetTicketHistory<T>(string endpoint)
         where T : Ticket
     {
-        var uriBuilder = new UriBuilder(ClientSideData.BaseUrl + endpoint);
-        var queryParameters = HttpUtility.ParseQueryString(string.Empty);
-        queryParameters["userId"] = Globals.UserId.ToString();
-        uriBuilder.Query = queryParameters.ToString();
-        var uriString = uriBuilder.ToString();
+        var jsonString = JsonSerializer.Serialize(Globals.UserId);
         var client = new HttpClient();
-
+        var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+        var uriString = $"{ClientSideData.BaseUrl}{endpoint}";
 
         try
         {
-            var response = await client.GetAsync(uriString);
+            var response = await client.PostAsync(uriString, content);
 
             if (response.IsSuccessStatusCode)
             {

@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Text;
+using System.Text.Json;
 using Daily3_UI.Classes;
 
 namespace Daily3_UI.Clients;
@@ -7,8 +8,7 @@ public static class GetUsersAndTicketsUnderHouse
 {
     public static async Task<List<User>> getUsersDaily3()
     {
-        var guid = Globals.UserId.ToString();
-        var apiUrl = $"{ClientSideData.BaseUrl}api/TicketHistory/house-tickets?userId={guid}";
+        var apiUrl = $"{ClientSideData.BaseUrl}api/TicketHistory/house-tickets";
         var jsonResponse = await GetUsers(apiUrl);
         var dictionary = JsonSerializer.Deserialize<Dictionary<string, List<Ticket3>>>(jsonResponse);
 
@@ -25,8 +25,7 @@ public static class GetUsersAndTicketsUnderHouse
 
     public static async Task<List<User>> getUsersDaily4()
     {
-        var guid = Globals.UserId.ToString();
-        var apiUrl = $"{ClientSideData.BaseUrl}api/TicketHistory/daily4/house-tickets?userId={guid}";
+        var apiUrl = $"{ClientSideData.BaseUrl}api/TicketHistory/daily4/house-tickets";
         var jsonResponse = await GetUsers(apiUrl);
         var dictionary = JsonSerializer.Deserialize<Dictionary<string, List<Ticket4>>>(jsonResponse);
 
@@ -44,10 +43,13 @@ public static class GetUsersAndTicketsUnderHouse
     private static async Task<string> GetUsers(string apiUrl)
     {
         var httpClient = new HttpClient();
+        var guid = Globals.UserId;
 
         try
         {
-            var response = await httpClient.GetAsync(apiUrl);
+            var jsonString = JsonSerializer.Serialize(guid);
+            var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+            var response = await httpClient.PostAsync(apiUrl, content);
 
             if (response.IsSuccessStatusCode)
             {
