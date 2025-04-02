@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using System.Text.Json;
 using Daily3_UI.Classes;
 using Daily3_UI.Enums;
 
@@ -6,66 +7,37 @@ namespace Daily3_UI.Clients;
 
 public static class BuyTicketClient
 {
-    /// <summary>
-    ///     Client For Buying a Ticket
-    /// </summary>
-    public static async Task<string> BuyTicketDaily3(Ticket3 ticket)
+    public static async Task<string> BuyTicketsDaily3(List<Ticket3> tickets)
     {
-        var endPoint = "api/BuyTicket";
-        return await BuyTicket(ticket, endPoint);
+        var endPoint = "api/BuyTicket/bulk";
+        return await BuyTicket(tickets, endPoint);
     }
 
-    public static async Task<string> BuyTicketDaily4(Ticket4 ticket)
+    public static async Task<string> BuyTicketsDaily4(List<Ticket4> tickets)
     {
-        var endPoint = "api/BuyTicket/Daily4";
-        return await BuyTicket(ticket, endPoint);
+        var endPoint = "api/BuyTicket/bulk/Daily4";
+        return await BuyTicket(tickets, endPoint);
     }
 
-    private static async Task<string> BuyTicket<T>(T ticket, string apiEndpoint)
+    private static async Task<string> BuyTicket<T>(List<T> tickets, string apiEndpoint)
         where T : Ticket
     {
+        tickets.ForEach(ticket => ticket.UserId = Globals.UserId);
+
+        string jsonString = JsonSerializer.Serialize(tickets);
+
         var httpClient = new HttpClient();
+        var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
-        var apiUrl = ticket.ToApiUrl(ClientSideData.BaseUrl, apiEndpoint);
+        HttpResponseMessage response = await httpClient.PostAsync(ClientSideData.BaseUrl + apiEndpoint, content);
 
-        if (!isValidDate(ticket.TimeOfDay, ticket.Date))
+        if (response.IsSuccessStatusCode)
         {
-            Console.WriteLine("Not valid date to buy Ticket");
-            return "Not Valid Date to Buy Ticket";
+            return "Tickets sent successfully";
         }
-
-        try
+        else
         {
-            var stringContent = new StringContent(apiUrl, Encoding.UTF8, "application/json");
-            var response = await httpClient.PostAsync(apiUrl, stringContent);
-
-            if (response.IsSuccessStatusCode)
-            {
-                var responseBody = await response.Content.ReadAsStringAsync();
-                Console.WriteLine("Response: " + responseBody);
-                return "";
-            }
-
-            Console.WriteLine("Request failed with status code: " + response.StatusCode);
-            return "Request failed";
+            return response.StatusCode.ToString();
         }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Error: " + ex.Message);
-            return "Shi....ooot something went wrong!";
-        }
-    }
-
-    /// <summary>
-    ///     Validating that the date given is still valid to buy Tickets for
-    /// </summary>
-    /// <param name="timeOfDay">The Time of day that the ticket is being bought for</param>
-    /// <param name="date">The date that the ticket is designed for</param>
-    private static bool isValidDate(TOD? timeOfDay, string date)
-    {
-        // todo make this work and actually pick a real time
-        // NOTE this is currently working on the other side. If you request to buy a ticket at a non valid time the ticket 
-        // will not be bought and you will get an error code on this side of the app how ever a double check would not be a bad idea at all
-        return true;
     }
 }

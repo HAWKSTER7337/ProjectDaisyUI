@@ -28,13 +28,15 @@ public abstract class Ticket
 
     [JsonPropertyName("WinningStatus")] public WinningStatus? WinningStatus { get; init; } = Enums.WinningStatus.TBD;
 
-    public abstract Color TicketColorTheme { get; }
+    [JsonPropertyName("UserId")] public Guid? UserId { get; set; } = null;
+
+    [JsonIgnore] public abstract Color TicketColorTheme { get; }
 
     // Format Functions
-    public string FormattedNumber1 => Number1.ToString();
-    public string FormattedNumber2 => Number2.ToString();
-    public string FormattedNumber3 => Number3.ToString();
-    public string FormattedPrice => Price.HasValue ? Price.Value.ToString("0.00") : "N/A";
+    [JsonIgnore] public string FormattedNumber1 => Number1.ToString();
+    [JsonIgnore] public string FormattedNumber2 => Number2.ToString();
+    [JsonIgnore] public string FormattedNumber3 => Number3.ToString();
+    [JsonIgnore] public string FormattedPrice => Price.HasValue ? Price.Value.ToString("0.00") : "N/A";
 
     /// <summary>
     ///     returns a message if something was set as null

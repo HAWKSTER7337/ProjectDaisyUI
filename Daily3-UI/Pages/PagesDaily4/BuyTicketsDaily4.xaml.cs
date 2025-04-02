@@ -116,11 +116,13 @@ public partial class BuyTicketsDaily4 : ContentPage
         catch (NullReferenceException exception)
         {
             Console.WriteLine(exception);
+            ErrorLabel.TextColor = Globals.GetColor("DailyRed");
             ErrorLabel.Text = "A Specification Has Not Been Set";
         }
         catch (Exception exception)
         {
             Console.WriteLine(exception);
+            ErrorLabel.TextColor = Globals.GetColor("DailyRed");
             ErrorLabel.Text = "Something is fishy here....";
         }
     }
@@ -134,16 +136,9 @@ public partial class BuyTicketsDaily4 : ContentPage
         var copyShoppingCart = new List<Ticket4>(ShoppingCart);
         ShoppingCart.Clear();
 
-        var errorMessage = "";
+        var errorMessage = await BuyTicketClient.BuyTicketsDaily4(copyShoppingCart);
 
-        foreach (var ticket in copyShoppingCart)
-        {
-            errorMessage = await BuyTicketClient.BuyTicketDaily4(ticket);
-            if (errorMessage != "") break;
-            await Task.Delay(TimeSpan.FromMilliseconds(200));
-        }
-
-        ErrorLabel.TextColor = errorMessage != ""
+        ErrorLabel.TextColor = errorMessage != "Tickets sent successfully"
             ? Globals.GetColor("DailyRed")
             : Globals.GetColor("SuccessGreen");
         ErrorLabel.Text = errorMessage != "" ? errorMessage : "Tickets Sent";
