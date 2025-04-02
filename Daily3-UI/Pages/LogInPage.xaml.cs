@@ -58,4 +58,12 @@ public partial class LogInPage : ContentPage
     {
         Application.Current.MainPage = new CreateAccountPage();
     }
+
+    /// <summary>
+    ///     Takes you to the create account in page.
+    /// </summary>
+    private void TakeToChangePasswordPage(object sender, EventArgs e)
+    {
+        Application.Current.MainPage = new ChangePasswordPage();
+    }
 }

@@ -39,4 +39,35 @@ public static class CreateAccountClient
             return null;
         }
     }
+
+    public static async Task<string?> ChangePassword(string username, string oldPassword, string newPassword)
+    {
+        var changePasswordRequest = new ChangePasswordRequest
+        {
+            Credentials = new Credentials
+            {
+                Username = username,
+                Password = oldPassword
+            },
+            NewPassword = newPassword
+        };
+
+        var httpClient = new HttpClient();
+        var endpoint = $"{ClientSideData.BaseUrl}api/CreateUser/ChangePassword";
+
+        var jsonString = JsonSerializer.Serialize(changePasswordRequest);
+        var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+        try
+        {
+            var response = await httpClient.PostAsync(endpoint, content);
+            if (response.IsSuccessStatusCode)
+                return response.Content.ReadAsStringAsync().Result;
+            return "Something went wrong";
+        }
+        catch (Exception ex)
+        {
+            return ex.Message;
+        }
+    }
 }
