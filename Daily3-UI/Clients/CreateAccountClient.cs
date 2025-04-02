@@ -1,16 +1,27 @@
-﻿namespace Daily3_UI.Clients;
+﻿using System.Text;
+using System.Text.Json;
+using Daily3_UI.Clients.ClientRequests;
+
+namespace Daily3_UI.Clients;
 
 public static class CreateAccountClient
 {
     public static async Task<string> CreateAccount(string username, string password)
     {
-        var httpClient = new HttpClient();
+        var credentials = new Credentials
+        {
+            Username = username,
+            Password = password
+        };
 
-        var apiUrl = $"{ClientSideData.BaseUrl}api/CreateUser?username={username}&password={password}";
+        var httpClient = new HttpClient();
+        var apiUrl = $"{ClientSideData.BaseUrl}api/CreateUser";
+        var jsonString = JsonSerializer.Serialize(credentials);
+        var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
         try
         {
-            var response = await httpClient.PostAsync(apiUrl, null);
+            var response = await httpClient.PostAsync(apiUrl, content);
 
             if (response.IsSuccessStatusCode)
             {
