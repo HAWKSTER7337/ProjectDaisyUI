@@ -170,8 +170,7 @@ public partial class BuyTicketsDaily4 : ContentPage
 
     public async void OpenTicketPopupPageAsync(object sender, EventArgs e)
     {
-        var tickets = ShoppingCart.Cast<Ticket>().ToList();
-        var ticketPopupPage = new TicketPopupPage(tickets);
+        var ticketPopupPage = new TicketPopupPage(ShoppingCart);
         await Shell.Current.CurrentPage.ShowPopupAsync(ticketPopupPage);
     }
 
