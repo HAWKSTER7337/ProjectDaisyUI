@@ -7,6 +7,7 @@ public partial class ChangePasswordPage : ContentPage
     public ChangePasswordPage()
     {
         InitializeComponent();
+        // AdjustLayoutForScreenSize();
     }
 
     private void ToLogin(object sender, EventArgs e)
@@ -31,4 +32,25 @@ public partial class ChangePasswordPage : ContentPage
         var response = await CreateAccountClient.ChangePassword(username, oldPassword, newPassword);
         ErrorLabel.Text = response;
     }
+    
+    private void AdjustLayoutForScreenSize()
+    {
+        var width = DeviceDisplay.MainDisplayInfo.Width;
+        var height = DeviceDisplay.MainDisplayInfo.Height;
+        double widthScaleFactor = width / 375;  
+        double heightScaleFactor = height / 667; 
+        double scaleFactor = Math.Min(widthScaleFactor, heightScaleFactor) * 0.5;  
+        
+        Username.FontSize = 12 * scaleFactor;
+        OldPassword.FontSize = 12 * scaleFactor;
+        NewPassword.FontSize = 12 * scaleFactor; 
+        NewPassword2.FontSize = 12 * scaleFactor;
+        
+        var buttonScale = scaleFactor * 0.9; 
+        ChangePasswordButton.FontSize = 12 * buttonScale; 
+        BackToLogInButton.FontSize = 12 * buttonScale;  
+        
+        ErrorLabel.FontSize = 10 * scaleFactor;  
+    }
+
 }

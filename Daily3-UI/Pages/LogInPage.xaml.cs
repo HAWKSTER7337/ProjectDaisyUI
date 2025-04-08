@@ -12,6 +12,7 @@ public partial class LogInPage : ContentPage
     public LogInPage()
     {
         InitializeComponent();
+        ScaleUIForDevice();
     }
 
     /// <summary>
@@ -65,5 +66,48 @@ public partial class LogInPage : ContentPage
     private void TakeToChangePasswordPage(object sender, EventArgs e)
     {
         Application.Current.MainPage = new ChangePasswordPage();
+    }
+    
+    /// <summary>
+    /// Scales the applications buttons and such to look good
+    /// on any screen 
+    /// </summary>
+    private void ScaleUIForDevice()
+    {
+        var displayInfo = DeviceDisplay.MainDisplayInfo;
+
+        // Width in pixels / density = device-independent width
+        double width = displayInfo.Width / displayInfo.Density;
+        double height = displayInfo.Height / displayInfo.Density;
+
+        // Simple scale factor: based on a baseline device width
+        double scaleFactor = width / 375.0; // 375 is base width of iPhone 11 for reference
+
+        // Minimum and max limits to prevent extreme scaling
+        scaleFactor = Math.Clamp(scaleFactor, 0.8, 1.5);
+
+        // Scale font sizes
+        Username.FontSize *= scaleFactor;
+        Password.FontSize *= scaleFactor;
+        ErrorLabel.FontSize *= scaleFactor;
+
+        // Optionally scale margins/padding (example for button)
+        foreach (var child in (this.Content as Layout).Children)
+        {
+            if (child is Button btn)
+            {
+                btn.FontSize *= scaleFactor;
+                btn.Margin = new Thickness(
+                    btn.Margin.Left * scaleFactor,
+                    btn.Margin.Top * scaleFactor,
+                    btn.Margin.Right * scaleFactor,
+                    btn.Margin.Bottom * scaleFactor
+                );
+            }
+            else if (child is Label label)
+            {
+                label.FontSize *= scaleFactor;
+            }
+        }
     }
 }

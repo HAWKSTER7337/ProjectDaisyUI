@@ -25,7 +25,7 @@ public static class GetUsersAndTicketsUnderHouse
 
     public static async Task<List<User>> getUsersDaily4()
     {
-        var apiUrl = $"{ClientSideData.BaseUrl}api/TicketHistory/daily4/house-tickets";
+        var apiUrl = $"{ClientSideData.BaseUrl}api/TicketHistory/house-tickets/daily4";
         var jsonResponse = await GetUsers(apiUrl);
         var dictionary = JsonSerializer.Deserialize<Dictionary<string, List<Ticket4>>>(jsonResponse);
 
