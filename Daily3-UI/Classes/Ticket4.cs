@@ -33,6 +33,12 @@ public class Ticket4 : Ticket
         return uriBuilder;
     }
 
-    public override string TextFormat =>
-        $"{FormattedNumber1}-{FormattedNumber2}-{FormattedNumber3}-{FormattedNumber4}   Type: {Type}   TOD: {TimeOfDay}";
+    protected override string TextFormatFunction()
+    {
+        var information =
+            $"{FormattedNumber1}-{FormattedNumber2}-{FormattedNumber3}-{FormattedNumber4}   Type: {Type}   TOD: {TimeOfDay}";
+        if (WinningStatus == Enums.WinningStatus.Winner) information += $"\nPayout: {WinningPayout:F2}";
+
+        return information;
+    }
 }

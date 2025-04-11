@@ -28,6 +28,7 @@ public abstract class Ticket
 
     [JsonPropertyName("WinningStatus")] public WinningStatus? WinningStatus { get; init; } = Enums.WinningStatus.TBD;
 
+    [JsonPropertyName("WinningPayout")] public double WinningPayout { get; init; }
     [JsonPropertyName("UserId")] public Guid? UserId { get; set; } = null;
 
     [JsonIgnore] public abstract Color TicketColorTheme { get; }
@@ -83,8 +84,15 @@ public abstract class Ticket
     /// <summary>
     ///     return the number for it to appear on screen
     /// </summary>
-    public virtual string TextFormat =>
-        $"{FormattedNumber1}-{FormattedNumber2}-{FormattedNumber3}   Type: {Type}   TOD: {TimeOfDay}";
+    protected virtual string TextFormatFunction()
+    {
+        var information = $"{FormattedNumber1}-{FormattedNumber2}-{FormattedNumber3}   Type: {Type}   TOD: {TimeOfDay}";
+        if (WinningStatus == Enums.WinningStatus.Winner) information += $"\nPayout: {WinningPayout:F2}";
+
+        return information;
+    }
+
+    public string TextFormat => TextFormatFunction();
 
     /// <summary>
     ///     returns the details format of the tickets bought
