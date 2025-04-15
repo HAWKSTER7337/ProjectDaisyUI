@@ -12,6 +12,14 @@ public class User
     ///     Constructor
     /// </summary>
     /// <param name="username">The name of the user</param>
+    public User(string username, double totalWinnings)
+    {
+        Username = username;
+        _totalWinnings = totalWinnings;
+        Tickets3 = new AddOnlyList<Ticket3>();
+        Tickets4 = new AddOnlyList<Ticket4>();
+    }
+
     public User(string username)
     {
         Username = username;
@@ -35,20 +43,12 @@ public class User
     /// </summary>
     public AddOnlyList<Ticket4> Tickets4 { get; }
 
+    private readonly double _totalWinnings;
+
     /// <summary>
     ///     Gives you the total winnings of the user
     /// </summary>
-    public string TotalWinnings => $"$ {CalculateTotalWinnings()}";
-
-    /// <summary>
-    ///     This is a function that will run though all the tickets that the player
-    ///     has in play for the given period and return the sum of the total earnings
-    /// </summary>
-    /// <returns>Total earnings</returns>
-    private float CalculateTotalWinnings()
-    {
-        return 100;
-    }
+    public string TotalWinnings => $"$ {_totalWinnings:F2}";
 }
 
 public class AddOnlyList<T> : IEnumerable<T>

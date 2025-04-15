@@ -10,13 +10,13 @@ public static class GetUsersAndTicketsUnderHouse
     {
         var apiUrl = $"{ClientSideData.BaseUrl}api/TicketHistory/house-tickets";
         var jsonResponse = await GetUsers(apiUrl);
-        var dictionary = JsonSerializer.Deserialize<Dictionary<string, List<Ticket3>>>(jsonResponse);
+        var dictionary = JsonSerializer.Deserialize<Dictionary<string, TicketAndWeeklyTotal<Ticket3>>>(jsonResponse);
 
         List<User> listOfUsers = new();
         foreach (var userPair in dictionary)
         {
-            var user = new User(userPair.Key);
-            user.Tickets3.AddRange(userPair.Value);
+            var user = new User(userPair.Key, userPair.Value.WinningTotal);
+            user.Tickets3.AddRange(userPair.Value.Tickets);
             listOfUsers.Add(user);
         }
 
@@ -27,13 +27,13 @@ public static class GetUsersAndTicketsUnderHouse
     {
         var apiUrl = $"{ClientSideData.BaseUrl}api/TicketHistory/house-tickets/daily4";
         var jsonResponse = await GetUsers(apiUrl);
-        var dictionary = JsonSerializer.Deserialize<Dictionary<string, List<Ticket4>>>(jsonResponse);
+        var dictionary = JsonSerializer.Deserialize<Dictionary<string, TicketAndWeeklyTotal<Ticket4>>>(jsonResponse);
 
         List<User> listOfUsers = new();
         foreach (var userPair in dictionary)
         {
-            var user = new User(userPair.Key);
-            user.Tickets4.AddRange(userPair.Value);
+            var user = new User(userPair.Key, userPair.Value.WinningTotal);
+            user.Tickets4.AddRange(userPair.Value.Tickets);
             listOfUsers.Add(user);
         }
 
