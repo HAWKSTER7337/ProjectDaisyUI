@@ -20,8 +20,13 @@ public static class TicketHistoryClient
 
     public static async Task<double> GetWeeklyTotal()
     {
+        return await GetWeeklyTotalWithGuid((Guid)Globals.UserId);
+    }
+
+    public static async Task<double> GetWeeklyTotalWithGuid(Guid userId)
+    {
         var endpoint = "api/TicketHistory/weekly-total";
-        var jsonString = JsonSerializer.Serialize(Globals.UserId);
+        var jsonString = JsonSerializer.Serialize(userId);
         var client = new HttpClient();
         var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
         var uriString = $"{ClientSideData.BaseUrl}{endpoint}";
