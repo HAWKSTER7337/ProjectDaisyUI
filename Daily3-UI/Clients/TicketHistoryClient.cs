@@ -18,6 +18,37 @@ public static class TicketHistoryClient
         return await GetTicketHistory<Ticket3>(endpoint);
     }
 
+    public static async Task<double> GetWeeklyTotal()
+    {
+        var endpoint = "api/TicketHistory/weekly-total";
+        var jsonString = JsonSerializer.Serialize(Globals.UserId);
+        var client = new HttpClient();
+        var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+        var uriString = $"{ClientSideData.BaseUrl}{endpoint}";
+
+        try
+        {
+            var response = await client.PostAsync(uriString, content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                var formattedResponse = JsonSerializer.Deserialize<double>(responseContent);
+                return formattedResponse;
+            }
+        }
+        catch (HttpRequestException ex)
+        {
+            Console.WriteLine($"Error calling the API: {ex.Message}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error calling the API: {ex.Message}");
+        }
+
+        return 0.0;
+    }
+
     private static async Task<List<T>> GetTicketHistory<T>(string endpoint)
         where T : Ticket
     {

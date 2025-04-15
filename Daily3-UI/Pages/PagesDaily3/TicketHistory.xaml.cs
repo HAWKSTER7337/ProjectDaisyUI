@@ -16,10 +16,17 @@ public partial class TicketHistory : ContentPage
     protected override async void OnAppearing()
     {
         TicketLoaderIsBusy = true;
+        Title.Text = await GetTitleString();
         SearchToggle.IsToggled = false;
         _userTickets = await TicketHistoryClient.GetTicketHistoryDaily3();
         BindingContext = new HistoryPageViewModel<Ticket3>(_userTickets);
         TicketLoaderIsBusy = false;
+    }
+
+    private static async Task<string> GetTitleString()
+    {
+        var winningTotal = await TicketHistoryClient.GetWeeklyTotal();
+        return $"Ticket History | Weekly Total: ${winningTotal:F2}";
     }
 
     /// <summary>
@@ -113,7 +120,7 @@ public partial class TicketHistory : ContentPage
         // Scale values for elements
         var borderPadding = screenWidth * 0.05;
         var labelFontSize = screenWidth * 0.03;
-        var titleFontSize = screenWidth * 0.05;
+        var titleFontSize = screenWidth * 0.04;
         var pickerFontSize = screenWidth * 0.04;
 
         // Adjust elements accordingly
