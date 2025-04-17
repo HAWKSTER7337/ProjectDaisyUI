@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Globalization;
 using Daily3_UI.Classes;
 using Daily3_UI.Clients;
@@ -11,15 +12,25 @@ public partial class TicketHistory : ContentPage
     public TicketHistory()
     {
         InitializeComponent();
+        _viewModel = new HistoryPageViewModel<Ticket3>(new ObservableCollection<Ticket3>());
+        BindingContext = _viewModel;
     }
+
+    private readonly HistoryPageViewModel<Ticket3> _viewModel;
 
     protected override async void OnAppearing()
     {
         TicketLoaderIsBusy = true;
         Title.Text = await GetTitleString();
         SearchToggle.IsToggled = false;
-        _userTickets = await TicketHistoryClient.GetTicketHistoryDaily3();
-        BindingContext = new HistoryPageViewModel<Ticket3>(_userTickets);
+
+        var allTickets = await TicketHistoryClient.GetTicketHistoryDaily3();
+        _userTickets = new ObservableCollection<Ticket3>(allTickets);
+
+        _viewModel.Tickets.Clear();
+        foreach (var ticket in _userTickets)
+            _viewModel.Tickets.Add(ticket);
+
         TicketLoaderIsBusy = false;
     }
 
@@ -61,7 +72,7 @@ public partial class TicketHistory : ContentPage
     /// <summary>
     ///     All the users Tickets
     /// </summary>
-    private List<Ticket3> _userTickets;
+    private ObservableCollection<Ticket3> _userTickets;
 
     /// <summary>
     ///     Checking if the tickets should be filtered by date
@@ -96,16 +107,19 @@ public partial class TicketHistory : ContentPage
     /// </summary>
     private void FilterByDate(DateTime date)
     {
+        _viewModel.Tickets.Clear();
+
         if (ShouldNotFilterByDate)
         {
-            BindingContext = new HistoryPageViewModel<Ticket3>(_userTickets);
-            OnPropertyChanged(nameof(TicketCollectionView));
-            return;
+            foreach (var ticket in _userTickets)
+                _viewModel.Tickets.Add(ticket);
         }
-
-        var filteredDates = _userTickets.Where(ticket => DateTime.Parse(ticket.Date).Date == date.Date).ToList();
-        BindingContext = new HistoryPageViewModel<Ticket3>(filteredDates);
-        OnPropertyChanged(nameof(TicketCollectionView));
+        else
+        {
+            var filtered = _userTickets.Where(t => DateTime.Parse(t.Date).Date == date.Date);
+            foreach (var ticket in filtered)
+                _viewModel.Tickets.Add(ticket);
+        }
     }
 
     /// <summary>
@@ -137,9 +151,9 @@ public partial class TicketHistory : ContentPage
 public class HistoryPageViewModel<T>
     where T : Ticket
 {
-    public List<T> Tickets { get; set; }
+    public ObservableCollection<T> Tickets { get; set; }
 
-    public HistoryPageViewModel(List<T> tickets)
+    public HistoryPageViewModel(ObservableCollection<T> tickets)
     {
         Tickets = tickets;
     }
