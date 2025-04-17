@@ -7,7 +7,9 @@ public partial class WinningNumbersPage : ChangeRaffle
 {
     public WinningNumbersPage()
     {
-        NewTaskBar = Globals.Daily4ContentPages;
+        NewTaskBar = Globals.Daily4ContentPages
+            .Select(pair => new KeyValuePair<string, Type>(pair.Key, pair.Value.GetType()))
+            .ToList();
         InitializeComponent();
     }
 
@@ -18,7 +20,9 @@ public partial class WinningNumbersPage : ChangeRaffle
 
     protected override async void OnAppearing()
     {
-        NewTaskBar = Globals.Daily4ContentPages;
+        NewTaskBar = Globals.Daily4ContentPages
+            .Select(pair => new KeyValuePair<string, Type>(pair.Key, pair.Value.GetType()))
+            .ToList();
         await UpdatePage();
     }
 

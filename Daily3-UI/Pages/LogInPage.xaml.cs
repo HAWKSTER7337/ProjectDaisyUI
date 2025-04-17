@@ -19,24 +19,55 @@ public partial class LogInPage : ContentPage
     ///     Logging you in if you have a account
     /// </summary>
     private async void AttemptLogIn(object sender, EventArgs e)
-    {
-        ErrorLabel.Text = "";
-        var request_response = await VerifyUserClient.VerifyUser(Username.Text, Password.Text);
-        try
-        {
-            var guidAndStatusList = SplitResponse(request_response);
+{
+    ErrorLabel.Text = "";
 
-            // Adding the users global info
-            Globals.UserId = Guid.Parse(guidAndStatusList[0]);
-            Globals.Status = (Status?)int.Parse(guidAndStatusList[1]);
-            Application.Current.MainPage = new AppShell();
-        }
-        catch
+    var request_response = await VerifyUserClient.VerifyUser(Username.Text, Password.Text);
+    Console.WriteLine($"\n\nResponse received: {request_response}\n");
+
+    try
+    {
+        var guidAndStatusList = SplitResponse(request_response);
+
+        if (guidAndStatusList == null || guidAndStatusList.Count < 2)
         {
-            var errorCode = e.ToString();
-            ErrorLabel.Text = request_response;
+            Console.WriteLine("⚠️ SplitResponse returned an invalid result.");
+            ErrorLabel.Text = "Unexpected server response format.";
+            return;
         }
+
+        Console.WriteLine($"Parsed Response: GUID = {guidAndStatusList[0]}, Status = {guidAndStatusList[1]}");
+
+        if (!Guid.TryParse(guidAndStatusList[0], out Guid parsedGuid))
+        {
+            Console.WriteLine($"❌ Failed to parse GUID: '{guidAndStatusList[0]}'");
+            ErrorLabel.Text = "Login failed: Invalid user ID.";
+            return;
+        }
+
+        Globals.UserId = parsedGuid;
+        Console.WriteLine($"✅ Parsed User ID: {Globals.UserId}");
+
+        if (!int.TryParse(guidAndStatusList[1], out int parsedStatus))
+        {
+            Console.WriteLine($"❌ Failed to parse Status: '{guidAndStatusList[1]}'");
+            ErrorLabel.Text = "Login failed: Invalid status code.";
+            return;
+        }
+
+        Globals.Status = (Status?)parsedStatus;
+        Console.WriteLine($"✅ Parsed Status: {Globals.Status}");
+
+        Application.Current.MainPage = new AppShell();
     }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"🔥 Exception occurred during login process: {ex.Message}");
+        Console.WriteLine($"📜 StackTrace:\n{ex.StackTrace}");
+        ErrorLabel.Text = $"Login failed: {ex.Message}";
+    }
+}
+
 
     /// <summary>
     ///     Splitting up the response from the back end to make sure
@@ -45,10 +76,12 @@ public partial class LogInPage : ContentPage
     /// </summary>
     /// <param name="guidAndStatus">The string that is being parsed</param>
     /// <returns>An array of the GUID and Status of the user as a string</returns>
-    private string[] SplitResponse(string guidAndStatus)
+    private List<string> SplitResponse(string guidAndStatus)
     {
         char[] separator = { ',' };
-        var parts = guidAndStatus.Split(separator);
+        Console.WriteLine($"In the method");
+        var parts = guidAndStatus.Split(separator).ToList();
+        Console.WriteLine($"Splitting");
         return parts;
     }
 
