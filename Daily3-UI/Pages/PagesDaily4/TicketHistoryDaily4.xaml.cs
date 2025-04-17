@@ -1,4 +1,5 @@
-﻿using Daily3_UI.Classes;
+﻿using System.Collections.ObjectModel;
+using Daily3_UI.Classes;
 using Daily3_UI.Clients;
 
 namespace Daily3_UI.Pages;
@@ -16,7 +17,7 @@ public partial class TicketHistoryDaily4 : ContentPage
         Title.Text = await GetTitleString();
         SearchToggle.IsToggled = false;
         _userTickets = await TicketHistoryClient.GetTicketHistoryDaily4();
-        BindingContext = new HistoryPageViewModel<Ticket4>(_userTickets);
+        BindingContext = new HistoryPageViewModel<Ticket4>(new ObservableCollection<Ticket4>(_userTickets));
         TicketLoaderIsBusy = false;
     }
 
@@ -96,13 +97,13 @@ public partial class TicketHistoryDaily4 : ContentPage
     {
         if (ShouldNotFilterByDate)
         {
-            BindingContext = new HistoryPageViewModel<Ticket4>(_userTickets);
+            BindingContext = new HistoryPageViewModel<Ticket4>(new ObservableCollection<Ticket4>(_userTickets));
             OnPropertyChanged(nameof(TicketCollectionView));
             return;
         }
 
         var filteredDates = _userTickets.Where(ticket => DateTime.Parse(ticket.Date).Date == date.Date).ToList();
-        BindingContext = new HistoryPageViewModel<Ticket4>(filteredDates);
+        BindingContext = new HistoryPageViewModel<Ticket4>(new ObservableCollection<Ticket4>(filteredDates));
         OnPropertyChanged(nameof(TicketCollectionView));
     }
 
