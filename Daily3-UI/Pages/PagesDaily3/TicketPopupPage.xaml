@@ -4,42 +4,49 @@
                x:Class="Daily3_UI.Pages.TicketPopupPage">
     <Grid Padding="10"
           HeightRequest="{OnPlatform iOS=400, Android=500}">
+
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <!-- Scrollable ListView -->
-        <ListView Grid.Row="0"
-                  x:Name="TicketListView"
-                  ItemsSource="{Binding Tickets}"
-                  SeparatorVisibility="None">
-            <ListView.ItemTemplate>
+        <!-- Scrollable Ticket List -->
+        <CollectionView Grid.Row="0"
+                        x:Name="TicketListView"
+                        ItemsSource="{Binding Tickets}"
+                        ItemSizingStrategy="MeasureAllItems"
+                        Margin="0,0,0,10">
+            <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell>
-                        <Grid>
+                    <Frame Margin="0,5"
+                           Padding="10"
+                           BorderColor="{DynamicResource Primary}"
+                           CornerRadius="10">
+                        <Grid ColumnSpacing="10">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
+
                             <StackLayout Grid.Column="0" Orientation="Vertical">
                                 <Label Text="{Binding TextFormat}"
                                        TextColor="{DynamicResource Primary}" />
                                 <Label Text="{Binding DetailsFormat}"
                                        TextColor="{DynamicResource Primary}" />
                             </StackLayout>
+
                             <Frame Grid.Column="1"
                                    BackgroundColor="{StaticResource DailyRed}"
                                    WidthRequest="60"
                                    HeightRequest="30"
                                    CornerRadius="15"
-                                   HorizontalOptions="EndAndExpand"
+                                   HorizontalOptions="End"
                                    VerticalOptions="Center"
                                    Padding="0">
                                 <Label Text="Remove"
                                        TextColor="{StaticResource neutral1}"
-                                       HorizontalOptions="CenterAndExpand"
-                                       VerticalOptions="CenterAndExpand">
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center">
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer
                                             Command="{Binding Path=BindingContext.RemoveCommand, Source={x:Reference TicketListView}}"
@@ -48,10 +55,10 @@
                                 </Label>
                             </Frame>
                         </Grid>
-                    </ViewCell>
+                    </Frame>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
         <!-- Close button -->
         <Button Grid.Row="1"

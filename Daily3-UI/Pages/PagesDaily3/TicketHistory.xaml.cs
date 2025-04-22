@@ -134,7 +134,7 @@ public partial class TicketHistory : ContentPage
         // Scale values for elements
         var borderPadding = screenWidth * 0.05;
         var labelFontSize = screenWidth * 0.03;
-        var titleFontSize = screenWidth * 0.04;
+        var titleFontSize = screenWidth * 0.03;
         var pickerFontSize = screenWidth * 0.04;
 
         // Adjust elements accordingly

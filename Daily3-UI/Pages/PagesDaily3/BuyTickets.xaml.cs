@@ -91,7 +91,7 @@ public partial class BuyTickets : ContentPage
                 Number1 = short.TryParse(Number1Entry.Text, out var n1) ? n1 : (short?)null,
                 Number2 = short.TryParse(Number2Entry.Text, out var n2) ? n2 : (short?)null,
                 Number3 = short.TryParse(Number3Entry.Text, out var n3) ? n3 : (short?)null,
-                Price = double.Parse(Price.SelectedItem.ToString()),
+                Price = double.Parse(PriceButton.Text),
                 Type = GetTicketTypeFromString(BetTypeSelcted.Text),
                 TimeOfDay = GetTodFromString(TimeOfDaySelected.Text),
                 Date = date
@@ -181,7 +181,7 @@ public partial class BuyTickets : ContentPage
         // Scale values for elements
         var borderWidth = screenWidth * 0.8;
         var numberBorderWidth = borderWidth / 6;
-        var labelFontSize = screenWidth * 0.03;
+        var labelFontSize = screenWidth * 0.02;
         var pickerFontSize = screenWidth * 0.04;
         var buttonWidth = screenWidth * 0.25;
         var buttonHeight = screenHeight * 0.06;
@@ -202,7 +202,7 @@ public partial class BuyTickets : ContentPage
         Number1Entry.FontSize = pickerFontSize;
         Number2Entry.FontSize = pickerFontSize;
         Number3Entry.FontSize = pickerFontSize;
-        Price.FontSize = pickerFontSize;
+        PriceButton.FontSize = pickerFontSize;
 
         StraightButton.WidthRequest = buttonWidth;
         StraightButton.HeightRequest = buttonHeight;
@@ -263,9 +263,39 @@ public partial class BuyTickets : ContentPage
 
     private void OnNumber3TextChanged(object sender, TextChangedEventArgs e)
     {
-        // Optional: Dismiss keyboard, or move to next logical step
         if (!string.IsNullOrEmpty(Number3Entry.Text))
-            Number3Entry.Unfocus(); // Or submit, or validate, etc.
+            Number3Entry.Unfocus();
     }
+
+
+    private async void OnPriceButtonClicked(object sender, EventArgs e)
+    {
+        var priceOptions = new List<string>();
+        priceOptions.Add("1.00");
+        priceOptions.Add("0.50");
+        priceOptions.Add("0.25");
+
+        for (double price = 0.05; price <= 1.00; price += 0.05)
+        {
+            priceOptions.Add(price.ToString("0.00"));
+        }
+
+        var result = await DisplayActionSheet("Select a Price", "Cancel", null, priceOptions.ToArray());
+
+
+        if (result != null && result != "Cancel")
+        {
+            PriceButton.Text = result;
+        }
+    }
+
+    private void OnNumberEntryFocused(object sender, FocusEventArgs e)
+    {
+        if (sender is Entry entry)
+        {
+            entry.Text = string.Empty;
+        }
+    }
+
 
 }

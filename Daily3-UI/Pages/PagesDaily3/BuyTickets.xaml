@@ -61,6 +61,7 @@
                     <Entry x:Name="Number1Entry"
                             MaxLength="1"
                             Keyboard="Numeric"
+                            Focused="OnNumberEntryFocused"
                             TextChanged="OnNumber1TextChanged"
                             Style="{StaticResource Number-Setter}"
                             HorizontalTextAlignment="Center"/>
@@ -70,6 +71,7 @@
                     <Entry x:Name="Number2Entry"
                         MaxLength="1"
                         Keyboard="Numeric"
+                        Focused="OnNumberEntryFocused"
                         TextChanged="OnNumber2TextChanged"
                         Style="{StaticResource Number-Setter}"
                         HorizontalTextAlignment="Center"/>
@@ -79,6 +81,7 @@
                     <Entry x:Name="Number3Entry"
                         MaxLength="1"
                         Keyboard="Numeric"
+                        Focused="OnNumberEntryFocused"
                         TextChanged="OnNumber3TextChanged"
                         Style="{StaticResource Number-Setter}"
                         HorizontalTextAlignment="Center"/>
@@ -94,41 +97,12 @@
             <Border
                 Style="{StaticResource Picker-Border}"
                 Grid.Row="4">
-                <Picker x:Name="Price"
-                        Title="Select a Price"
-                        SelectedIndex="0"
-                        BackgroundColor="{StaticResource White}"
-                        FontAttributes="Bold"
-                        HorizontalTextAlignment="Center"
-                        TextColor="Black">
-                    <Picker.ItemsSource>
-                        <x:Array Type="{x:Type x:String}">
-                            <x:String>1.00</x:String>
-                            <x:String>0.50</x:String>
-                            <x:String>0.25</x:String>
-                            <x:String>0.05</x:String>
-                            <x:String>0.10</x:String>
-                            <x:String>0.15</x:String>
-                            <x:String>0.20</x:String>
-                            <x:String>0.25</x:String>
-                            <x:String>0.30</x:String>
-                            <x:String>0.35</x:String>
-                            <x:String>0.40</x:String>
-                            <x:String>0.45</x:String>
-                            <x:String>0.50</x:String>
-                            <x:String>0.55</x:String>
-                            <x:String>0.60</x:String>
-                            <x:String>0.65</x:String>
-                            <x:String>0.70</x:String>
-                            <x:String>0.75</x:String>
-                            <x:String>0.80</x:String>
-                            <x:String>0.85</x:String>
-                            <x:String>0.90</x:String>
-                            <x:String>0.95</x:String>
-                            <x:String>1.00</x:String>
-                        </x:Array>
-                    </Picker.ItemsSource>
-                </Picker>
+                <Button x:Name="PriceButton"
+                    Text="1.00"
+                    Clicked="OnPriceButtonClicked"
+                    BackgroundColor="White"
+                    TextColor="Black"
+                    FontAttributes="Bold" />
             </Border>
 
             <!--Select Bet Type-->

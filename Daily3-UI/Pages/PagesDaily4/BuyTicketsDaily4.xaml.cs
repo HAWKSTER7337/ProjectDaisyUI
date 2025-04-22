@@ -92,7 +92,7 @@ public partial class BuyTicketsDaily4 : ContentPage
                 Number2 = short.TryParse(Number2Entry.Text, out var n2) ? n2 : (short?)null,
                 Number3 = short.TryParse(Number3Entry.Text, out var n3) ? n3 : (short?)null,
                 Number4 = short.TryParse(Number4Entry.Text, out var n4) ? n4 : (short?)null,
-                Price = double.Parse(Price.SelectedItem.ToString()),
+                Price = double.Parse(PriceButton.Text),
                 Type = GetTicketTypeFromString(BetTypeSelcted.Text),
                 TimeOfDay = GetTodFromString(TimeOfDaySelected.Text),
                 Date = date
@@ -205,7 +205,7 @@ public partial class BuyTicketsDaily4 : ContentPage
         Number2Entry.FontSize = pickerFontSize;
         Number3Entry.FontSize = pickerFontSize;
         Number4Entry.FontSize = pickerFontSize;
-        Price.FontSize = pickerFontSize;
+        PriceButton.FontSize = pickerFontSize;
 
         StraightButton.WidthRequest = buttonWidth;
         StraightButton.HeightRequest = buttonHeight;
@@ -274,5 +274,34 @@ public partial class BuyTicketsDaily4 : ContentPage
     {
         if (!string.IsNullOrEmpty(Number4Entry.Text))
             Number4Entry.Unfocus();
+    }
+
+    private async void OnPriceButtonClicked(object sender, EventArgs e)
+    {
+        var priceOptions = new List<string>();
+        priceOptions.Add("1.00");
+        priceOptions.Add("0.50");
+        priceOptions.Add("0.25");
+
+        for (double price = 0.05; price <= 1.00; price += 0.05)
+        {
+            priceOptions.Add(price.ToString("0.00"));
+        }
+
+        var result = await DisplayActionSheet("Select a Price", "Cancel", null, priceOptions.ToArray());
+
+
+        if (result != null && result != "Cancel")
+        {
+            PriceButton.Text = result;
+        }
+    }
+
+    private void OnNumberEntryFocused(object sender, FocusEventArgs e)
+    {
+        if (sender is Entry entry)
+        {
+            entry.Text = string.Empty;
+        }
     }
 }
