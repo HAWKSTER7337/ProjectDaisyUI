@@ -59,84 +59,39 @@
                 </Grid.ColumnDefinitions>
 
                 <Border Grid.Column="0" Style="{StaticResource Picker-Ball}" x:Name="Number1Border">
-                    <Picker x:Name="Number1"
-                            Title="-"
-                            Style="{StaticResource Number-Setter}">
-                        <Picker.ItemsSource>
-                            <x:Array Type="{x:Type x:String}">
-                                <x:String>0</x:String>
-                                <x:String>1</x:String>
-                                <x:String>2</x:String>
-                                <x:String>3</x:String>
-                                <x:String>4</x:String>
-                                <x:String>5</x:String>
-                                <x:String>6</x:String>
-                                <x:String>7</x:String>
-                                <x:String>8</x:String>
-                                <x:String>9</x:String>
-                            </x:Array>
-                        </Picker.ItemsSource>
-                    </Picker>
+                    <Entry x:Name="Number1Entry"
+                            MaxLength="1"
+                            Keyboard="Numeric"
+                            TextChanged="OnNumber1TextChanged"
+                            Style="{StaticResource Number-Setter}"
+                            HorizontalTextAlignment="Center"/>
                 </Border>
+
                 <Border Grid.Column="1" Style="{StaticResource Picker-Ball}" x:Name="Number2Border">
-                    <Picker x:Name="Number2"
-                            Title="-"
-                            Style="{StaticResource Number-Setter}">
-                        <Picker.ItemsSource>
-                            <x:Array Type="{x:Type x:String}">
-                                <x:String>0</x:String>
-                                <x:String>1</x:String>
-                                <x:String>2</x:String>
-                                <x:String>3</x:String>
-                                <x:String>4</x:String>
-                                <x:String>5</x:String>
-                                <x:String>6</x:String>
-                                <x:String>7</x:String>
-                                <x:String>8</x:String>
-                                <x:String>9</x:String>
-                            </x:Array>
-                        </Picker.ItemsSource>
-                    </Picker>
+                    <Entry x:Name="Number2Entry"
+                        MaxLength="1"
+                        Keyboard="Numeric"
+                        TextChanged="OnNumber2TextChanged"
+                        Style="{StaticResource Number-Setter}"
+                        HorizontalTextAlignment="Center"/>
                 </Border>
+
                 <Border Grid.Column="2" Style="{StaticResource Picker-Ball}" x:Name="Number3Border">
-                    <Picker x:Name="Number3"
-                            Title="-"
-                            Style="{StaticResource Number-Setter}">
-                        <Picker.ItemsSource>
-                            <x:Array Type="{x:Type x:String}">
-                                <x:String>0</x:String>
-                                <x:String>1</x:String>
-                                <x:String>2</x:String>
-                                <x:String>3</x:String>
-                                <x:String>4</x:String>
-                                <x:String>5</x:String>
-                                <x:String>6</x:String>
-                                <x:String>7</x:String>
-                                <x:String>8</x:String>
-                                <x:String>9</x:String>
-                            </x:Array>
-                        </Picker.ItemsSource>
-                    </Picker>
+                    <Entry x:Name="Number3Entry"
+                        MaxLength="1"
+                        Keyboard="Numeric"
+                        TextChanged="OnNumber3TextChanged"
+                        Style="{StaticResource Number-Setter}"
+                        HorizontalTextAlignment="Center"/>
                 </Border>
+
                 <Border Grid.Column="3" Style="{StaticResource Picker-Ball}" x:Name="Number4Border">
-                    <Picker x:Name="Number4"
-                            Title="-"
-                            Style="{StaticResource Number-Setter}">
-                        <Picker.ItemsSource>
-                            <x:Array Type="{x:Type x:String}">
-                                <x:String>0</x:String>
-                                <x:String>1</x:String>
-                                <x:String>2</x:String>
-                                <x:String>3</x:String>
-                                <x:String>4</x:String>
-                                <x:String>5</x:String>
-                                <x:String>6</x:String>
-                                <x:String>7</x:String>
-                                <x:String>8</x:String>
-                                <x:String>9</x:String>
-                            </x:Array>
-                        </Picker.ItemsSource>
-                    </Picker>
+                    <Entry x:Name="Number4Entry"
+                        MaxLength="1"
+                        Keyboard="Numeric"
+                        TextChanged="OnNumber4TextChanged"
+                        Style="{StaticResource Number-Setter}"
+                        HorizontalTextAlignment="Center"/>
                 </Border>
             </Grid>
 
@@ -150,12 +105,16 @@
                 Grid.Row="4">
                 <Picker x:Name="Price"
                         Title="Select a Price"
+                        SelectedIndex="0"
                         BackgroundColor="{StaticResource White}"
                         FontAttributes="Bold"
                         HorizontalTextAlignment="Center"
                         TextColor="Black">
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}">
+                            <x:String>1.00</x:String>
+                            <x:String>0.50</x:String>
+                            <x:String>0.25</x:String>
                             <x:String>0.05</x:String>
                             <x:String>0.10</x:String>
                             <x:String>0.15</x:String>

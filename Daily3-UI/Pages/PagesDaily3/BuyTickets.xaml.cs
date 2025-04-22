@@ -88,9 +88,9 @@ public partial class BuyTickets : ContentPage
         {
             var ticket = new Ticket3
             {
-                Number1 = short.Parse(Number1.SelectedItem.ToString()),
-                Number2 = short.Parse(Number2.SelectedItem.ToString()),
-                Number3 = short.Parse(Number3.SelectedItem.ToString()),
+                Number1 = short.TryParse(Number1Entry.Text, out var n1) ? n1 : (short?)null,
+                Number2 = short.TryParse(Number2Entry.Text, out var n2) ? n2 : (short?)null,
+                Number3 = short.TryParse(Number3Entry.Text, out var n3) ? n3 : (short?)null,
                 Price = double.Parse(Price.SelectedItem.ToString()),
                 Type = GetTicketTypeFromString(BetTypeSelcted.Text),
                 TimeOfDay = GetTodFromString(TimeOfDaySelected.Text),
@@ -199,9 +199,9 @@ public partial class BuyTickets : ContentPage
         SelectDateLabel.FontSize = labelFontSize;
         ErrorLabel.FontSize = errorLabelFont;
 
-        Number1.FontSize = pickerFontSize;
-        Number2.FontSize = pickerFontSize;
-        Number3.FontSize = pickerFontSize;
+        Number1Entry.FontSize = pickerFontSize;
+        Number2Entry.FontSize = pickerFontSize;
+        Number3Entry.FontSize = pickerFontSize;
         Price.FontSize = pickerFontSize;
 
         StraightButton.WidthRequest = buttonWidth;
@@ -248,4 +248,24 @@ public partial class BuyTickets : ContentPage
         ButTicketsButton.HeightRequest = buttonHeight;
         ButTicketsButton.FontSize = buttonFontSize;
     }
+
+    private void OnNumber1TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (!string.IsNullOrEmpty(Number1Entry.Text))
+            Number2Entry.Focus();
+    }
+
+    private void OnNumber2TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (!string.IsNullOrEmpty(Number2Entry.Text))
+            Number3Entry.Focus();
+    }
+
+    private void OnNumber3TextChanged(object sender, TextChangedEventArgs e)
+    {
+        // Optional: Dismiss keyboard, or move to next logical step
+        if (!string.IsNullOrEmpty(Number3Entry.Text))
+            Number3Entry.Unfocus(); // Or submit, or validate, etc.
+    }
+
 }
