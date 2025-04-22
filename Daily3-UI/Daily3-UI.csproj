@@ -19,6 +19,7 @@
         <ApplicationId>com.companyname.daily3_ui</ApplicationId>
         <ApplicationIdGuid>7c1aa4e5-91ca-45f5-b82d-d0dd69b56f7d</ApplicationIdGuid>
 
+
         <!-- Versions -->
         <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
         <ApplicationVersion>1</ApplicationVersion>
@@ -102,5 +103,11 @@
         <AdditionalFiles Include="Pages\PagesDaily3\WinningNumbersPage.xaml"/>
     </ItemGroup>
 
+    <!-- iOS signing configuration -->
+    <PropertyGroup Condition="'$(TargetFramework)' == 'net8.0-ios'">
+        <RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
+        <CodesignKey>Apple Development: Alex Hawkins (874LFZDF5C)</CodesignKey>
+        <CodesignProvision>iOS Team Provisioning Profile: com.alexhawkins.daily3</CodesignProvision>
+    </PropertyGroup>
 
 </Project>
