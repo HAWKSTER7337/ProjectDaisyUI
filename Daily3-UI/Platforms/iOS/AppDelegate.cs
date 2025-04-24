@@ -15,26 +15,19 @@ public class AppDelegate : MauiUIApplicationDelegate
     public override bool FinishedLaunching(UIApplication app, NSDictionary options)
     {
         // Set the font name - this must be the internal font name, not the filename
-        var fontName = "BebasNeue-Regular"; // Replace with your actual font name
-        var fontSize = 14f;
+        var fontSize = 32f;
+        var fontName = "Bebas"; // Replace with your actual font name
 
         var customFont = UIFont.FromName(fontName, fontSize);
-
-        if (customFont != null)
+        
+        var attributes = new UIStringAttributes
         {
-            var attributes = new UIStringAttributes
-            {
-                Font = customFont
-            };
-
-            UITabBarItem.Appearance.SetTitleTextAttributes(attributes, UIControlState.Normal);
-            UITabBarItem.Appearance.SetTitleTextAttributes(attributes, UIControlState.Selected);
-        }
-        else
-        {
-            Debug.WriteLine($"❌ Font '{fontName}' could not be loaded.");
-        }
-
+            Font = customFont
+        };
+        
+        UITabBarItem.Appearance.SetTitleTextAttributes(attributes, UIControlState.Normal);
+        UITabBarItem.Appearance.SetTitleTextAttributes(attributes, UIControlState.Selected);
+        
         return base.FinishedLaunching(app, options);
     }
 }

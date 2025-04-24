@@ -32,7 +32,7 @@ public abstract class ChangeRaffle : ContentPage
         for (var i = 0; i < NewTaskBar.Count; i++)
         {
             // Check if the status is 0 and skip index 3 (or add any other condition you need)
-            if (i == 3 && Globals.Status == 0) return;
+            if (i == 3 && Globals.Status == 0) break;
 
             KeyValuePair<string, ContentPage> kvp = NewTaskBar[i];
 
