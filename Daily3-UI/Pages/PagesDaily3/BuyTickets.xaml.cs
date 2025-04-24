@@ -252,13 +252,14 @@ public partial class BuyTickets : ContentPage
     private void OnNumber1TextChanged(object sender, TextChangedEventArgs e)
     {
         if (!string.IsNullOrEmpty(Number1Entry.Text))
-            Number2Entry.Focus();
+            Number1Entry.Unfocus();
     }
 
     private void OnNumber2TextChanged(object sender, TextChangedEventArgs e)
     {
         if (!string.IsNullOrEmpty(Number2Entry.Text))
-            Number3Entry.Focus();
+            Number2Entry.Unfocus();
+        ;
     }
 
     private void OnNumber3TextChanged(object sender, TextChangedEventArgs e)
@@ -296,6 +297,4 @@ public partial class BuyTickets : ContentPage
             entry.Text = string.Empty;
         }
     }
-
-
 }
