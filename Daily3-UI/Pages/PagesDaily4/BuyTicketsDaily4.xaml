@@ -230,7 +230,7 @@
                         Clicked="AddTicketsInSpecifiedIntervalToCart"
                         x:Name="AddTicketsToCartButton" />
                 <Button Grid.Column="2" Style="{StaticResource Daily-Button}"
-                        Text="Checkout"
+                        Text="Buy"
                         Clicked="CheckOut"
                         x:Name="ButTicketsButton" />
             </Grid>
