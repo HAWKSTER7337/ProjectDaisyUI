@@ -59,32 +59,32 @@
 
                 <Border Grid.Column="0" Style="{StaticResource Picker-Ball}" x:Name="Number1Border">
                     <Entry x:Name="Number1Entry"
-                            MaxLength="1"
-                            Keyboard="Numeric"
-                            Focused="OnNumberEntryFocused"
-                            TextChanged="OnNumber1TextChanged"
-                            Style="{StaticResource Number-Setter}"
-                            HorizontalTextAlignment="Center"/>
+                           MaxLength="1"
+                           Keyboard="Numeric"
+                           Focused="OnNumberEntryFocused"
+                           TextChanged="OnNumber1TextChanged"
+                           Style="{StaticResource Number-Setter}"
+                           HorizontalTextAlignment="Center" />
                 </Border>
 
                 <Border Grid.Column="1" Style="{StaticResource Picker-Ball}" x:Name="Number2Border">
                     <Entry x:Name="Number2Entry"
-                        MaxLength="1"
-                        Keyboard="Numeric"
-                        Focused="OnNumberEntryFocused"
-                        TextChanged="OnNumber2TextChanged"
-                        Style="{StaticResource Number-Setter}"
-                        HorizontalTextAlignment="Center"/>
+                           MaxLength="1"
+                           Keyboard="Numeric"
+                           Focused="OnNumberEntryFocused"
+                           TextChanged="OnNumber2TextChanged"
+                           Style="{StaticResource Number-Setter}"
+                           HorizontalTextAlignment="Center" />
                 </Border>
 
                 <Border Grid.Column="2" Style="{StaticResource Picker-Ball}" x:Name="Number3Border">
                     <Entry x:Name="Number3Entry"
-                        MaxLength="1"
-                        Keyboard="Numeric"
-                        Focused="OnNumberEntryFocused"
-                        TextChanged="OnNumber3TextChanged"
-                        Style="{StaticResource Number-Setter}"
-                        HorizontalTextAlignment="Center"/>
+                           MaxLength="1"
+                           Keyboard="Numeric"
+                           Focused="OnNumberEntryFocused"
+                           TextChanged="OnNumber3TextChanged"
+                           Style="{StaticResource Number-Setter}"
+                           HorizontalTextAlignment="Center" />
                 </Border>
 
             </Grid>
@@ -96,13 +96,15 @@
                    x:Name="SelectPaymentLabel" />
             <Border
                 Style="{StaticResource Picker-Border}"
+                BackgroundColor="White"
                 Grid.Row="4">
                 <Button x:Name="PriceButton"
-                    Text="1.00"
-                    Clicked="OnPriceButtonClicked"
-                    BackgroundColor="White"
-                    TextColor="Black"
-                    FontAttributes="Bold" />
+                        Text="1.00"
+                        Clicked="OnPriceButtonClicked"
+                        BackgroundColor="White"
+                        TextColor="Black"
+                        BorderColor="White"
+                        FontAttributes="Bold" />
             </Border>
 
             <!--Select Bet Type-->
