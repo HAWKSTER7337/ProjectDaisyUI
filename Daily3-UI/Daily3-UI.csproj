@@ -35,27 +35,28 @@
 
     <ItemGroup>
         <!-- App Icon -->
-        <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4"/>
+        <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 
         <!-- Splash Screen -->
-        <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128"/>
+        <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
 
         <!-- Images -->
-        <MauiImage Include="Resources\Images\*"/>
-        <MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208"/>
+        <MauiImage Include="Resources\Images\*" />
+        <MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
 
         <!-- Custom Fonts -->
-        <MauiFont Include="Resources\Fonts\*"/>
+        <MauiFont Include="Resources\Fonts\*" />
 
         <!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
-        <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)"/>
+        <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="CommunityToolkit.Maui" Version="6.1.0"/>
-        <PackageReference Include="csvhelper" Version="30.0.1"/>
-        <PackageReference Include="htmlagilitypack" Version="1.11.50"/>
-        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0"/>
+        <PackageReference Include="CommunityToolkit.Maui" Version="6.1.0" />
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+        <PackageReference Include="csvhelper" Version="30.0.1" />
+        <PackageReference Include="htmlagilitypack" Version="1.11.50" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -75,6 +76,7 @@
         <MauiXaml Update="Pages\CreateAccountPage.xaml">
             <SubType>Designer</SubType>
         </MauiXaml>
+        <MauiXaml Remove="Pages\MainShellPage.xaml" />
     </ItemGroup>
 
     <ItemGroup>
@@ -94,13 +96,14 @@
             <DependentUpon>CreateAccountPage.xaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
+        <Compile Remove="Pages\MainShellPage.xaml.cs" />
     </ItemGroup>
 
     <ItemGroup>
-        <AdditionalFiles Include="Pages\PagesDaily3\BuyTickets.xaml"/>
-        <AdditionalFiles Include="Pages\PagesDaily3\TicketHistory.xaml"/>
-        <AdditionalFiles Include="Pages\PagesDaily3\TicketPopupPage.xaml"/>
-        <AdditionalFiles Include="Pages\PagesDaily3\WinningNumbersPage.xaml"/>
+        <AdditionalFiles Include="Pages\PagesDaily3\BuyTickets.xaml" />
+        <AdditionalFiles Include="Pages\PagesDaily3\TicketHistory.xaml" />
+        <AdditionalFiles Include="Pages\PagesDaily3\TicketPopupPage.xaml" />
+        <AdditionalFiles Include="Pages\PagesDaily3\WinningNumbersPage.xaml" />
     </ItemGroup>
 
     <!-- iOS signing configuration -->

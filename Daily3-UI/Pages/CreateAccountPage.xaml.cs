@@ -22,10 +22,9 @@ public partial class CreateAccountPage : ContentPage
         ErrorLabel.Text = clientResponse;
     }
 
-    private void ToLogin(object sender, EventArgs e)
+    private async void ToLogin(object sender, EventArgs e)
     {
-        if (Application.Current != null)
-            Application.Current.MainPage = new LogInPage();
+        await Shell.Current.GoToAsync("..");
     }
     
     private void AdjustLayoutForScreenSize()

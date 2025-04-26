@@ -9,24 +9,20 @@ public partial class AppShell : Shell
     public AppShell()
     {
         InitializeComponent();
-    }
-
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-
-        var isAdmin =
-            Globals.Status is not null && // Checking if the value is defined
-            Globals.Status >= Status.House; // Checking if they are the proper Status
-        if (!isAdmin) return;
-
-        var shellContent = new ShellContent
-        {
-            Title = "Entrants Tickets",
-            ContentTemplate = new DataTemplate(typeof(HousePage)),
-            Route = "HousePage"
-        };
-
-        TabBar.Items.Add(shellContent);
+        
+        // Register routes
+        Routing.RegisterRoute("Home3", typeof(WinningNumbersPage));
+        Routing.RegisterRoute("Buy3", typeof(BuyTickets));
+        Routing.RegisterRoute("History3", typeof(TicketHistory));
+        Routing.RegisterRoute("Entrants3", typeof(HousePage));
+        
+        Routing.RegisterRoute("Home4", typeof(WinningNumbersPageDaily4));
+        Routing.RegisterRoute("Buy4", typeof(BuyTicketsDaily4));
+        Routing.RegisterRoute("History4", typeof(TicketHistoryDaily4));
+        Routing.RegisterRoute("Entrants4", typeof(HousePageDaily4));
+   
+        Routing.RegisterRoute("LoginPage", typeof(LogInPage));
+        Routing.RegisterRoute("ChangePassword", typeof(ChangePasswordPage));
+        Routing.RegisterRoute("CreateAccount", typeof(CreateAccountPage));
     }
 }

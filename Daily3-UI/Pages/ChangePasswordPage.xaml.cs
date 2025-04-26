@@ -10,10 +10,9 @@ public partial class ChangePasswordPage : ContentPage
         // AdjustLayoutForScreenSize();
     }
 
-    private void ToLogin(object sender, EventArgs e)
+    private async void ToLogin(object sender, EventArgs e)
     {
-        if (Application.Current != null)
-            Application.Current.MainPage = new LogInPage();
+        await Shell.Current.GoToAsync("..");
     }
 
     private async void ChangePassword(object sender, EventArgs e)
