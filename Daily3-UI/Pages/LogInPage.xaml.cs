@@ -29,12 +29,13 @@ public partial class LogInPage : ContentPage
             // Adding the users global info
             Globals.UserId = Guid.Parse(guidAndStatusList[0]);
             Globals.Status = (Status?)int.Parse(guidAndStatusList[1]);
-            await Shell.Current.GoToAsync("Home3");
+            
+            await Shell.Current.GoToAsync("//Buy3", true);
         }
         catch(Exception ex)
         {
             var errorCode = ex.Message;
-            ErrorLabel.Text = request_response;
+            ErrorLabel.Text = errorCode;
         }
     }
 
