@@ -8,7 +8,7 @@ namespace Daily3_UI.Pages.PagesDaily3;
 
 public partial class TicketPopupPage : Popup
 {
-    private ObservableCollection<Ticket> Tickets { get; }
+    public ObservableCollection<Ticket> Tickets { get; }
 
     private readonly BuyTickets _daily3Page;
     
@@ -77,6 +77,7 @@ public partial class TicketPopupPage : Popup
             Tickets.Remove(ticket);
             var index = tickets.IndexOf(ticket);
             if (index != -1) tickets.RemoveAt(index);
+            if (Tickets.Count == 0) Close();
         });
         CloseCommand = new Command(CancelTicketPurchase);
         BuyTicketsCommand = new Command(BuyTickets4);

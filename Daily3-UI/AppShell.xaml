@@ -9,4 +9,5 @@
     FlyoutBehavior="Disabled">
     <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LogInPage}" />
     <ShellContent Route="Buy3" ContentTemplate="{DataTemplate pagesDaily3:BuyTickets}"/>
+    <ShellContent Route="Buy4" ContentTemplate="{DataTemplate local:BuyTicketsDaily4}"/>
 </Shell>

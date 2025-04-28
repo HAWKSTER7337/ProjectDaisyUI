@@ -77,6 +77,11 @@ public partial class BuyTickets : ContentPage
         await Shell.Current.GoToAsync("WinningNumbers3");
     }
     
+    private async void ChangeLotto(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("//Buy4");
+    }
+    
     private bool AddTicketToCart(string date)
     {
         try
@@ -173,7 +178,7 @@ public partial class BuyTickets : ContentPage
         var pickerFontSize = screenWidth * 0.04;
         var buttonWidth = screenWidth * 0.25;
         var buttonHeight = screenHeight * 0.06;
-        var buttonFontSize = screenWidth * 0.03;
+        var buttonFontSize = screenWidth * 0.05;
         var errorLabelFont = screenWidth * 0.05;
 
         // Adjust elements accordingly

@@ -10,11 +10,14 @@
 
     <VerticalStackLayout
         Spacing="5"
-        Padding="30,0"
+        Padding="0,0"
         VerticalOptions="Fill"
         HorizontalOptions="Fill">
 
         <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
@@ -35,13 +38,28 @@
             <!--Title-->
             <Border
                 BackgroundColor="{StaticResource Primary}"
-                WidthRequest="1000"
                 Padding="5"
                 StrokeShape="RoundRectangle 10,10,0,0"
                 Grid.Row="0">
-                <Label Text="Buy Tickets"
-                       TextColor="{StaticResource Black}"
-                       Style="{StaticResource Day}" />
+                <Grid ColumnSpacing="0"
+                      HorizontalOptions="Fill"
+                      VerticalOptions="Start">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Text="Buy Tickets"
+                           Grid.Column="0"
+                           TextColor="{StaticResource Black}"
+                           Style="{StaticResource Day}" />
+
+                    <Button
+                        Grid.Column="1"
+                        Text="Switch Lotto"
+                        Clicked="ChangeLotto"
+                        Style="{StaticResource Daily-Button}"/>
+                </Grid>
             </Border>
 
             <!--Number Selectors-->
@@ -211,28 +229,28 @@
                 </Border>
             </Grid>
 
-            <!--Buy Ticket-->
+            <!--Menu Actions-->
             <Grid
                 Padding="5"
                 Grid.Row="11">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="1.5*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
                 <Button Grid.Column="0" Style="{StaticResource Daily-Button}"
-                        Text="View"
-                        Clicked="OpenTicketPopupPageAsync"
-                        x:Name="OpenTicketCartButton" />
-                <Button Grid.Column="1" Style="{StaticResource Daily-Button}"
-                        Text="Add"
-                        Clicked="AddTicketsInSpecifiedIntervalToCart"
-                        x:Name="AddTicketsToCartButton" />
-                <Button Grid.Column="2" Style="{StaticResource Daily-Button}"
-                        Text="Buy"
+                        Text="Buy Tickets"
                         Clicked="CheckOut"
-                        x:Name="ButTicketsButton" />
+                        x:Name="BuyTicketsButton" />
+                <Button Grid.Column="1" Style="{StaticResource Daily-Button}"
+                        Text="History"
+                        Clicked="TakeUserToTicketHistoryPage"
+                        x:Name="HistoryButton" />
+                <Button Grid.Column="2" Style="{StaticResource Daily-Button}"
+                        Text="Daily Nums"
+                        Clicked="TakeUserToWinningNumberPage"
+                        x:Name="WinningNumbersButton" />
             </Grid>
 
             <!--Error Message Label-->
