@@ -23,7 +23,7 @@ public partial class WinningNumbersPageDaily4 : ContentPage
     
     private async void FlipToOtherRaffle(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new WinningNumbersPage());
+        await Shell.Current.GoToAsync("WinningNumbers3");
     }
 
     /// <summary>
@@ -65,6 +65,11 @@ public partial class WinningNumbersPageDaily4 : ContentPage
                 YesterdayMidday4.Text = YesterdayMidday.Number4.ToString();
                 break;
         }
+    }
+    
+    private async void ToBuyTicketPage(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("//Buy4");
     }
 
     private void ClearWinningNumbers()

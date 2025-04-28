@@ -30,15 +30,29 @@
                 </Grid.RowDefinitions>
 
                 <!-- Title Image -->
-                <Image Source="daily.png"
-                       Grid.Row="0"
-                       x:Name="Daily3TitleImage">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer
-                            Tapped="FlipToOtherRaffle"
-                            NumberOfTapsRequired="1" />
-                    </Image.GestureRecognizers>
-                </Image>
+                <Grid
+                    Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Image Source="daily.png"
+                           Grid.Column="0"
+                           x:Name="Daily3TitleImage">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Tapped="FlipToOtherRaffle"
+                                NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    
+                    <Button
+                        Grid.Column="1"
+                        Text="Buy Tickets"
+                        Clicked="ToBuyTicketPage"
+                        Style="{StaticResource Daily-Button}" />
+                </Grid>
 
                 <!-- Yesterday's Daily Numbers -->
                 <Label Text="Yesterday"

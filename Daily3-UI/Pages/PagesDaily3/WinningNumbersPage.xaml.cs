@@ -57,6 +57,11 @@ public partial class WinningNumbersPage : ContentPage
         }
     }
 
+    private async void ToBuyTicketPage(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("//Buy3");
+    }
+
     private void ClearWinningNumbers()
     {
         YesterdayMidday1.Text = "-";
@@ -78,7 +83,7 @@ public partial class WinningNumbersPage : ContentPage
 
     private async void FlipToOtherRaffle(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new WinningNumbersPageDaily4());
+        await Shell.Current.GoToAsync("WinningNumbers4");
     }
 
     private void OnSizeChanged(object sender, EventArgs e)
