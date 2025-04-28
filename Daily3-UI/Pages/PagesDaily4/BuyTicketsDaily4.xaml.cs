@@ -2,6 +2,7 @@
 using Daily3_UI.Classes;
 using Daily3_UI.Clients;
 using Daily3_UI.Enums;
+using Daily3_UI.Pages.PagesDaily3;
 
 namespace Daily3_UI.Pages;
 
@@ -26,6 +27,16 @@ public partial class BuyTicketsDaily4 : ContentPage
     ///     TimeOfDay for the bet
     /// </summary>
     private Button? TimeOfDaySelected;
+    
+    public void SetErrorLabel(string error)
+    {
+        ErrorLabel.Text = error;
+    }
+    
+    public void ChangeErrorLabelColor(Color color)
+    {
+        ErrorLabel.TextColor = color;
+    }
 
     /// <summary>
     ///     Function to select a button from a group of buttons
@@ -170,8 +181,13 @@ public partial class BuyTicketsDaily4 : ContentPage
 
     public async void OpenTicketPopupPageAsync(object sender, EventArgs e)
     {
-        var ticketPopupPage = new TicketPopupPage(ShoppingCart);
+        var ticketPopupPage = new TicketPopupPage(ShoppingCart, this);
         await Shell.Current.CurrentPage.ShowPopupAsync(ticketPopupPage);
+    }
+    
+    public void ClearShoppingCart()
+    {
+        ShoppingCart.Clear();
     }
 
     private void OnSizeChanged(object sender, EventArgs e)

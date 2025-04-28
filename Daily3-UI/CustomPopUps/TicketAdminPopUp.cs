@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui.Views;
 using Daily3_UI.Classes;
 using Daily3_UI.Pages;
+using Daily3_UI.Pages.PagesDaily3;
 
 namespace Daily3_UI.CustomPopUps;
 

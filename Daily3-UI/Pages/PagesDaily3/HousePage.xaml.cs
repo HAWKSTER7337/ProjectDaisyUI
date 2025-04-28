@@ -3,7 +3,7 @@ using Daily3_UI.Classes;
 using Daily3_UI.Clients;
 using Daily3_UI.CustomPopUps;
 
-namespace Daily3_UI.Pages;
+namespace Daily3_UI.Pages.PagesDaily3;
 
 public partial class HousePage : ContentPage
 {

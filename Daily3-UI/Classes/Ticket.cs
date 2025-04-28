@@ -46,9 +46,9 @@ public abstract class Ticket
     /// </summary>
     public virtual string MissingMessage()
     {
-        if (FormattedNumber1 is null) return "Missing a First Number!";
-        if (FormattedNumber2 is null) return "Missing a Second Number!";
-        if (FormattedNumber3 is null) return "Missing a Third Number!";
+        if (Number1 is null) return "Missing a First Number!";
+        if (Number2 is null) return "Missing a Second Number!";
+        if (Number3 is null) return "Missing a Third Number!";
         if (FormattedPrice is null) return "Pick a Price!";
         if (Type is null) return "Pick a Ticket Type!";
         if (TimeOfDay is null) return "Time of day has not been entered!";

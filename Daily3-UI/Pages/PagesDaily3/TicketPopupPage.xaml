@@ -1,11 +1,12 @@
 ﻿<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-               x:Class="Daily3_UI.Pages.TicketPopupPage">
+               x:Class="Daily3_UI.Pages.PagesDaily3.TicketPopupPage">
     <Grid Padding="10"
           HeightRequest="{OnPlatform iOS=400, Android=500}">
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
@@ -61,13 +62,34 @@
         </CollectionView>
 
         <!-- Close button -->
-        <Button Grid.Row="1"
-                Text="Close"
-                Command="{Binding CloseCommand}"
+        <Label
+            Grid.Row="1"
+            Text="Buy Tickets?"
+            FontSize="12"/>
+        <Grid
+            Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button
+                    Grid.Column="0"
+                    Text="No"
+                    Command="{Binding CloseCommand}"
+                    BackgroundColor="{DynamicResource neutral1}"
+                    TextColor="White"
+                    BorderWidth="1"
+                    CornerRadius="10"
+                    Margin="10" />
+            <Button
+                Grid.Column="1"
+                Text="Yes"
+                Command="{Binding BuyTicketsCommand}"
                 BackgroundColor="{DynamicResource neutral1}"
                 TextColor="White"
                 BorderWidth="1"
                 CornerRadius="10"
                 Margin="10" />
+        </Grid>
     </Grid>
 </toolkit:Popup>

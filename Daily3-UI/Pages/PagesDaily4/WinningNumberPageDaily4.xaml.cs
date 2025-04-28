@@ -1,13 +1,13 @@
 ﻿using Daily3_UI.Classes;
 using Daily3_UI.Clients;
+using Daily3_UI.Pages.PagesDaily3;
 
 namespace Daily3_UI.Pages;
 
-public partial class WinningNumbersPageDaily4 : ChangeRaffle
+public partial class WinningNumbersPageDaily4 : ContentPage
 {
     public WinningNumbersPageDaily4()
     {
-        NewTaskBar = Globals.Daily3ContentPages;
         InitializeComponent();
     }
 
@@ -18,8 +18,12 @@ public partial class WinningNumbersPageDaily4 : ChangeRaffle
 
     protected override async void OnAppearing()
     {
-        NewTaskBar = Globals.Daily3ContentPages;
         await UpdatePage();
+    }
+    
+    private async void FlipToOtherRaffle(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new WinningNumbersPage());
     }
 
     /// <summary>

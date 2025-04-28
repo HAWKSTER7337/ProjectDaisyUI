@@ -3,13 +3,14 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pages="clr-namespace:Daily3_UI.Pages"
+             xmlns:pagesDaily3="clr-namespace:Daily3_UI.Pages.PagesDaily3"
              x:Class="Daily3_UI.Pages.TicketHistoryDaily4"
              BackgroundColor="{StaticResource SecondaryDaily4}"
              Shell.NavBarIsVisible="False"
              SizeChanged="OnSizeChanged">
 
     <ContentPage.Resources>
-        <pages:StatusToColorConverter x:Key="StatusToColor" />
+        <pagesDaily3:StatusToColorConverter x:Key="StatusToColor" />
     </ContentPage.Resources>
 
     <Grid Padding="30,0">

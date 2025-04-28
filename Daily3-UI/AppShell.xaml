@@ -5,7 +5,8 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Daily3_UI.Pages"
+    xmlns:pagesDaily3="clr-namespace:Daily3_UI.Pages.PagesDaily3"
     FlyoutBehavior="Disabled">
     <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LogInPage}" />
-    <ShellContent Route="Buy3" ContentTemplate="{DataTemplate local:BuyTickets}"/>
+    <ShellContent Route="Buy3" ContentTemplate="{DataTemplate pagesDaily3:BuyTickets}"/>
 </Shell>

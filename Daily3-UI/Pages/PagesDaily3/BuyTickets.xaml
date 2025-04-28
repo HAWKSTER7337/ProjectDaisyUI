@@ -3,7 +3,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:sys="clr-namespace:System;assembly=System.Runtime"
-             x:Class="Daily3_UI.Pages.BuyTickets"
+             x:Class="Daily3_UI.Pages.PagesDaily3.BuyTickets"
              BackgroundColor="{StaticResource Secondary}"
              Shell.NavBarIsVisible="False"
              SizeChanged="OnSizeChanged">
@@ -201,28 +201,28 @@
                 </Border>
             </Grid>
 
-            <!--Buy Ticket-->
+            <!--Menu Actions -->
             <Grid
                 Padding="5"
                 Grid.Row="11">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="1.5*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
                 <Button Grid.Column="0" Style="{StaticResource Daily-Button}"
-                        Text="View"
-                        Clicked="OpenTicketPopupPageAsync"
-                        x:Name="OpenTicketCartButton" />
-                <Button Grid.Column="1" Style="{StaticResource Daily-Button}"
-                        Text="Add"
-                        Clicked="AddTicketsInSpecifiedIntervalToCart"
-                        x:Name="AddTicketsToCartButton" />
-                <Button Grid.Column="2" Style="{StaticResource Daily-Button}"
-                        Text="Buy"
+                        Text="Buy Tickets"
                         Clicked="CheckOut"
-                        x:Name="ButTicketsButton" />
+                        x:Name="BuyTicketsButton" />
+                <Button Grid.Column="1" Style="{StaticResource Daily-Button}"
+                        Text="History"
+                        Clicked="TakeUserToTicketHistoryPage"
+                        x:Name="HistoryButton" />
+                <Button Grid.Column="2" Style="{StaticResource Daily-Button}"
+                        Text="Daily Nums"
+                        Clicked="TakeUserToWinningNumberPage"
+                        x:Name="WinningNumbersButton" />
             </Grid>
 
             <!--Error Message Label-->

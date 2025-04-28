@@ -1,9 +1,8 @@
 ﻿using CommunityToolkit.Maui.Views;
 using Daily3_UI.Classes;
-using Daily3_UI.Clients;
 using Daily3_UI.Enums;
 
-namespace Daily3_UI.Pages;
+namespace Daily3_UI.Pages.PagesDaily3;
 
 public partial class BuyTickets : ContentPage
 {
@@ -11,25 +10,23 @@ public partial class BuyTickets : ContentPage
     {
         InitializeComponent();
     }
-
-    /// <summary>
-    ///     Where all tickets are stored
-    /// </summary>
+    
     private List<Ticket3> ShoppingCart { get; } = new();
-
-    /// <summary>
-    ///     The bet type For the currently selected code
-    /// </summary>
+    
     private Button? BetTypeSelcted;
-
-    /// <summary>
-    ///     TimeOfDay for the bet
-    /// </summary>
+    
     private Button? TimeOfDaySelected;
 
-    /// <summary>
-    ///     Function to select a button from a group of buttons
-    /// </summary>
+    public void SetErrorLabel(string error)
+    {
+        ErrorLabel.Text = error;
+    }
+
+    public void ChangeErrorLabelColor(Color color)
+    {
+        ErrorLabel.TextColor = color;
+    }
+
     private void SelectTypeOrTimeOfDay(object sender, EventArgs e, ref Button selectedButton)
     {
         var senderButton = (Button)sender;
@@ -47,13 +44,7 @@ public partial class BuyTickets : ContentPage
     {
         SelectTypeOrTimeOfDay(sender, e, ref TimeOfDaySelected);
     }
-
-    /// <summary>
-    ///     Allows you to only pick for
-    ///     times that have not been called yet.
-    ///     Meaning you can't buy tickets fot lottery
-    ///     numbers that have already been called
-    /// </summary>
+    
     private void ProperDatePicker(object sender, DateChangedEventArgs e)
     {
         var selectedDate = e.NewDate;
@@ -61,36 +52,44 @@ public partial class BuyTickets : ContentPage
 
         if (selectedDate < currentDate) DatePicker.Date = currentDate;
     }
-
-    /// <summary>
-    ///     Adds tickets to the shopping cart for the specified date range.
-    /// </summary>
-    /// <param name="sender">The object that raised the event.</param>
-    /// <param name="e">The event data.</param>
-    private void AddTicketsInSpecifiedIntervalToCart(object sender, EventArgs e)
+    
+    private bool AddTicketsInSpecifiedIntervalToCart()
     {
         var beginningDate = DatePicker.Date;
         var endDate = SecondDatePicker.Date;
         while (DateTime.Compare(beginningDate, endDate) <= 0)
         {
-            AddTicketToCart(beginningDate.ToString("yyyy-MM-dd"));
+            var ticketValid = AddTicketToCart(beginningDate.ToString("yyyy-MM-dd"));
+            if (!ticketValid) return false;
             beginningDate = beginningDate.AddDays(1);
         }
+
+        return true;
     }
 
-    /// <summary>
-    ///     Adds the ticket to the queue of the
-    ///     tickets you are planning to buy
-    /// </summary>
-    private void AddTicketToCart(string date)
+    private async void TakeUserToTicketHistoryPage(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("History3");
+    }
+
+    private async void TakeUserToWinningNumberPage(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("WinningNumbers3");
+    }
+    
+    private bool AddTicketToCart(string date)
     {
         try
         {
+            var number1 = int.TryParse(Number1Entry.Text, out var n1) ? n1 : (int?)null;
+            var number2 = int.TryParse(Number2Entry.Text, out var n2) ? n2 : (int?)null;
+            var number3 = int.TryParse(Number3Entry.Text, out var n3) ? n3 : (int?)null;
+            
             var ticket = new Ticket3
             {
-                Number1 = short.TryParse(Number1Entry.Text, out var n1) ? n1 : (short?)null,
-                Number2 = short.TryParse(Number2Entry.Text, out var n2) ? n2 : (short?)null,
-                Number3 = short.TryParse(Number3Entry.Text, out var n3) ? n3 : (short?)null,
+                Number1 = number1,
+                Number2 = number2,
+                Number3 = number3,
                 Price = double.Parse(PriceButton.Text),
                 Type = GetTicketTypeFromString(BetTypeSelcted.Text),
                 TimeOfDay = GetTodFromString(TimeOfDaySelected.Text),
@@ -103,44 +102,33 @@ public partial class BuyTickets : ContentPage
             {
                 ErrorLabel.TextColor = Globals.GetColor("DailyRed");
                 ErrorLabel.Text = emptyFieldMessage;
-                return;
+                return false;
             }
-
-            // Adding Values to the shopping cart
+            
             ShoppingCart.Add(ticket);
-            //ErrorLabel.TextColor = (Color)Application.Current.Resources["DailyGreen"];
-            ErrorLabel.TextColor = Globals.GetColor("SuccessGreen");
-            ErrorLabel.Text = $"{ShoppingCart.Count} Ticket(s) in cart.";
+            return true;
         }
         catch (NullReferenceException exception)
         {
             Console.WriteLine(exception);
             ErrorLabel.TextColor = Globals.GetColor("DailyRed");
             ErrorLabel.Text = "A Specification Has Not Been Set";
+            return false;
         }
         catch (Exception exception)
         {
             Console.WriteLine(exception);
             ErrorLabel.TextColor = Globals.GetColor("DailyRed");
             ErrorLabel.Text = "Something is fishy here....";
+            return false;
         }
     }
-
-    /// <summary>
-    ///     Checkout and send all the tickets
-    ///     to the server
-    /// </summary>
+    
     private async void CheckOut(object sender, EventArgs e)
     {
-        var copyShoppingCart = new List<Ticket3>(ShoppingCart);
-        ShoppingCart.Clear();
-
-        var errorMessage = await BuyTicketClient.BuyTicketsDaily3(copyShoppingCart);
-
-        ErrorLabel.TextColor = errorMessage != "Tickets sent successfully"
-            ? Globals.GetColor("DailyRed")
-            : Globals.GetColor("SuccessGreen");
-        ErrorLabel.Text = errorMessage != "" ? errorMessage : "Tickets Sent";
+        var validTickets = AddTicketsInSpecifiedIntervalToCart();
+        if (!validTickets) return;
+        await OpenTicketPopupPageAsync();
     }
 
     private TOD? GetTodFromString(string text)
@@ -167,9 +155,9 @@ public partial class BuyTickets : ContentPage
         };
     }
 
-    public async void OpenTicketPopupPageAsync(object sender, EventArgs e)
+    private async Task OpenTicketPopupPageAsync()
     {
-        var ticketPopupPage = new TicketPopupPage(ShoppingCart);
+        var ticketPopupPage = new TicketPopupPage(ShoppingCart , this);
         await Shell.Current.CurrentPage.ShowPopupAsync(ticketPopupPage);
     }
 
@@ -235,37 +223,49 @@ public partial class BuyTickets : ContentPage
         BothButton.WidthRequest = buttonWidth;
         BothButton.HeightRequest = buttonHeight;
         BothButton.FontSize = buttonFontSize;
-
-        OpenTicketCartButton.WidthRequest = buttonWidth;
-        OpenTicketCartButton.HeightRequest = buttonHeight;
-        OpenTicketCartButton.FontSize = buttonFontSize;
-
-        AddTicketsToCartButton.WidthRequest = buttonWidth;
-        AddTicketsToCartButton.HeightRequest = buttonHeight;
-        AddTicketsToCartButton.FontSize = buttonFontSize;
-
-        ButTicketsButton.WidthRequest = buttonWidth;
-        ButTicketsButton.HeightRequest = buttonHeight;
-        ButTicketsButton.FontSize = buttonFontSize;
+        
+        BuyTicketsButton.FontSize = buttonFontSize;
+        HistoryButton.FontSize = buttonFontSize;
+        WinningNumbersButton.FontSize = buttonFontSize;
     }
 
     private void OnNumber1TextChanged(object sender, TextChangedEventArgs e)
     {
-        if (!string.IsNullOrEmpty(Number1Entry.Text))
+        var currentIsEmpty = string.IsNullOrEmpty(Number1Entry.Text);
+        var nextIsEmpty = string.IsNullOrEmpty(Number2Entry.Text);
+        if (!currentIsEmpty && nextIsEmpty)
+        {
+            Number2Entry.Focus();
+        }
+        else if (!currentIsEmpty)
+        {
             Number1Entry.Unfocus();
+        }
     }
 
     private void OnNumber2TextChanged(object sender, TextChangedEventArgs e)
     {
-        if (!string.IsNullOrEmpty(Number2Entry.Text))
+        var currentIsEmpty = string.IsNullOrEmpty(Number2Entry.Text);
+        var nextIsEmpty = string.IsNullOrEmpty(Number3Entry.Text);
+        if (!currentIsEmpty && nextIsEmpty)
+        {
+            Number3Entry.Focus();
+        }
+        else if (!currentIsEmpty)
+        {
             Number2Entry.Unfocus();
-        ;
+        }
     }
 
     private void OnNumber3TextChanged(object sender, TextChangedEventArgs e)
     {
         if (!string.IsNullOrEmpty(Number3Entry.Text))
             Number3Entry.Unfocus();
+    }
+
+    public void ClearShoppingCart()
+    {
+        ShoppingCart.Clear();
     }
 
 
