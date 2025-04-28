@@ -2,6 +2,7 @@
 using Daily3_UI.Enums;
 using Daily3_UI.Pages;
 using Daily3_UI.Pages.PagesDaily3;
+using TicketHistory = Daily3_UI.Pages.TicketHistory;
 
 namespace Daily3_UI;
 

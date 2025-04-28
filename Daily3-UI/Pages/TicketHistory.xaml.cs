@@ -5,18 +5,18 @@ using Daily3_UI.Classes;
 using Daily3_UI.Clients;
 using Daily3_UI.Enums;
 
-namespace Daily3_UI.Pages.PagesDaily3;
+namespace Daily3_UI.Pages;
 
 public partial class TicketHistory : ContentPage
 {
     public TicketHistory()
     {
         InitializeComponent();
-        _viewModel = new HistoryPageViewModel<Ticket3>(new ObservableCollection<Ticket3>());
+        _viewModel = new HistoryPageViewModel<Ticket>(new ObservableCollection<Ticket>());
         BindingContext = _viewModel;
     }
 
-    private readonly HistoryPageViewModel<Ticket3> _viewModel;
+    private readonly HistoryPageViewModel<Ticket> _viewModel;
 
     protected override async void OnAppearing()
     {
@@ -32,6 +32,11 @@ public partial class TicketHistory : ContentPage
             _viewModel.Tickets.Add(ticket);
 
         TicketLoaderIsBusy = false;
+    }
+
+    private async void BackToBuyTicketsPage(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("..");
     }
 
     private static async Task<string> GetTitleString()

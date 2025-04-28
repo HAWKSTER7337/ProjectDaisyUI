@@ -4,16 +4,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pages="clr-namespace:Daily3_UI.Pages"
              xmlns:pagesDaily3="clr-namespace:Daily3_UI.Pages.PagesDaily3"
-             x:Class="Daily3_UI.Pages.PagesDaily3.TicketHistory"
-             BackgroundColor="{StaticResource Secondary}"
+             x:Class="Daily3_UI.Pages.TicketHistory"
+             BackgroundColor="{StaticResource Gray500}"
              Shell.NavBarIsVisible="False"
              SizeChanged="OnSizeChanged">
 
     <ContentPage.Resources>
-        <pagesDaily3:StatusToColorConverter x:Key="StatusToColor" />
+        <pages:StatusToColorConverter x:Key="StatusToColor" />
     </ContentPage.Resources>
 
-    <Grid Padding="30,0">
+    <Grid Padding="0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -22,18 +22,29 @@
         </Grid.RowDefinitions>
 
         <!-- Title -->
-        <Border
-            BackgroundColor="{StaticResource Primary}"
-            WidthRequest="1000"
-            Padding="5"
-            StrokeShape="RoundRectangle 10,10,0,0"
-            x:Name="BorderTitle"
-            Grid.Row="0">
-            <Label Text="Ticket History"
-                   TextColor="{StaticResource Black}"
-                   Style="{StaticResource Day}"
-                   x:Name="Title" />
-        </Border>
+            <Border
+                BackgroundColor="{StaticResource Primary}"
+                Padding="5"
+                Grid.Row="0"
+                StrokeShape="RoundRectangle 10,10,0,0"
+                x:Name="BorderTitle">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Ticket History"
+                           Grid.Column="0"
+                           TextColor="{StaticResource Black}"
+                           Style="{StaticResource Day}"
+                           x:Name="Title" />
+                    <Button
+                        Grid.Column="1"
+                        Text="Buy Tickets"
+                        Clicked="BackToBuyTicketsPage"/>
+                </Grid>
+            </Border>
+
 
         <!-- Date Search Label -->
         <Label Text="Search by Date"
@@ -102,7 +113,7 @@
                         <Label Grid.Row="1"
                                Text="{Binding DetailsFormat}"
                                FontSize="14"
-                               TextColor="{StaticResource neutral3}" />
+                               TextColor="{StaticResource White}" />
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
