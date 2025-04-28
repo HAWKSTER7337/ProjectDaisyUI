@@ -7,7 +7,8 @@
              x:Class="Daily3_UI.Pages.TicketHistory"
              BackgroundColor="{StaticResource Gray500}"
              Shell.NavBarIsVisible="False"
-             SizeChanged="OnSizeChanged">
+             SizeChanged="OnSizeChanged"
+             x:Name="ContentPage">
 
     <ContentPage.Resources>
         <pages:StatusToColorConverter x:Key="StatusToColor" />
@@ -53,26 +54,28 @@
                Grid.Row="1"
                Margin="0,10,0,0" />
 
-        <!-- Date Search Controls -->
+        <!-- filter Controls -->
         <Grid Padding="5" Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" />
-                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <Border Grid.Column="0"
                     Style="{StaticResource Picker-Border}"
                     BackgroundColor="White">
-                <DatePicker DateSelected="DateChanged"
+                <DatePicker DateSelected="HandleFiltering"
                             HorizontalOptions="Center"
                             BackgroundColor="{StaticResource White}"
                             x:Name="DatePicker"
                             TextColor="Black" />
             </Border>
 
-            <Label Text="Search Toggle"
+            <Label Text="Filter By Date"
                    Grid.Column="1"
+                   Padding = "3, 0, 0, 0"
                    HorizontalOptions="Center"
                    VerticalOptions="Center"
                    TextColor="{StaticResource White}"
@@ -81,6 +84,18 @@
             <Switch x:Name="SearchToggle"
                     Toggled="ToggleDateSwitch"
                     Grid.Column="2" />
+            
+            <Border Grid.Column="3"
+                    Style="{StaticResource Picker-Border}"
+                    BackgroundColor="White">
+            <Picker
+                ItemsSource="{Binding RaffleOptions}"
+                SelectedItem="{Binding SelectedRaffleOption}"
+                FontAutoScalingEnabled="True"
+                BackgroundColor="White"
+                HorizontalTextAlignment="Center"
+                SelectedIndexChanged="HandleFiltering"/>
+            </Border>
         </Grid>
 
         <!-- Display Tickets -->

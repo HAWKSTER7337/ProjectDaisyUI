@@ -6,16 +6,41 @@ namespace Daily3_UI.Clients;
 
 public static class TicketHistoryClient
 {
-    public static async Task<List<Ticket4>> GetTicketHistoryDaily4()
-    {
-        var endpoint = "api/TicketHistory/Daily4";
-        return await GetTicketHistory<Ticket4>(endpoint);
-    }
-
-    public static async Task<List<Ticket3>> GetTicketHistoryDaily3()
+    public static async Task<List<Ticket>> GetTicketHistory()
     {
         var endpoint = "api/TicketHistory";
-        return await GetTicketHistory<Ticket3>(endpoint);
+        var jsonString = JsonSerializer.Serialize((Guid)Globals.UserId);
+        var client = new HttpClient();
+        var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+        var uriString = $"{ClientSideData.BaseUrl}{endpoint}";
+
+        try
+        {
+            var response = await client.PostAsync(uriString, content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                var formattedResponse =
+                    JsonSerializer.Deserialize<KeyValuePair<List<Ticket3>, List<Ticket4>>>(responseContent);
+                return MergeTickets(formattedResponse);
+            }
+        }
+        catch (HttpRequestException e)
+        {
+            Console.WriteLine($"Error calling the api: {e.Message}");
+        }
+
+        return new List<Ticket>();
+    }
+
+    private static List<Ticket> MergeTickets(KeyValuePair<List<Ticket3>, List<Ticket4>> ticketGroups)
+    {
+        List<Ticket> tickets = new();
+        
+        ticketGroups.Key.ForEach(ticket => tickets.Add(ticket));
+        ticketGroups.Value.ForEach(ticket => tickets.Add(ticket));
+        return tickets.OrderBy(ticket => DateTime.Parse(ticket.Date)).ToList();
     }
 
     public static async Task<double> GetWeeklyTotal()
@@ -52,38 +77,5 @@ public static class TicketHistoryClient
         }
 
         return 0.0;
-    }
-
-    private static async Task<List<T>> GetTicketHistory<T>(string endpoint)
-        where T : Ticket
-    {
-        var jsonString = JsonSerializer.Serialize(Globals.UserId);
-        var client = new HttpClient();
-        var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
-        var uriString = $"{ClientSideData.BaseUrl}{endpoint}";
-
-        try
-        {
-            var response = await client.PostAsync(uriString, content);
-
-            if (response.IsSuccessStatusCode)
-            {
-                var responseContent = await response.Content.ReadAsStringAsync();
-                var formattedResponse = JsonSerializer.Deserialize<List<T>>(responseContent);
-                return formattedResponse;
-            }
-
-            Console.WriteLine($"API call failed Status code: {response.StatusCode}");
-        }
-        catch (HttpRequestException ex)
-        {
-            Console.WriteLine($"Error calling the API: {ex.Message}");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error calling the API: {ex.Message}");
-        }
-
-        return new List<T>();
     }
 }
