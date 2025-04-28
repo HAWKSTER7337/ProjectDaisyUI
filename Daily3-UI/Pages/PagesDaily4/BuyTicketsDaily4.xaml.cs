@@ -47,7 +47,7 @@ public partial class BuyTicketsDaily4 : ContentPage
 
     private async void TakeUserToTicketHistoryPage(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("History4");
+        await Shell.Current.GoToAsync("HistoryPage");
     }
 
     private async void TakeUserToWinningNumberPage(object sender, EventArgs e)

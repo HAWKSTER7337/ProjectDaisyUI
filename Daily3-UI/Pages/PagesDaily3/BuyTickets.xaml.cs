@@ -69,7 +69,7 @@ public partial class BuyTickets : ContentPage
 
     private async void TakeUserToTicketHistoryPage(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("History3");
+        await Shell.Current.GoToAsync("HistoryPage");
     }
 
     private async void TakeUserToWinningNumberPage(object sender, EventArgs e)
