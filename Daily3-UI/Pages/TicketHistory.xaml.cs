@@ -21,25 +21,25 @@ public partial class TicketHistory : ContentPage
 
     public List<RaffleOptionsEnum> RaffleOptions { get; set; } = new() 
     {
-        RaffleOptionsEnum.Both,
+        RaffleOptionsEnum.All,
         RaffleOptionsEnum.Daily3,
         RaffleOptionsEnum.Daily4
     };
 
-    public RaffleOptionsEnum SelectedRaffleOption { get; set; } = RaffleOptionsEnum.Both;
+    public RaffleOptionsEnum SelectedRaffleOption { get; set; } = RaffleOptionsEnum.All;
 
     private void OnRaffleChanged(object sender, EventArgs e)
     {
         Tickets.Clear();
         ChangeBackGroundToDailyColor();
 
-        if (SelectedRaffleOption is RaffleOptionsEnum.Both or RaffleOptionsEnum.Daily3)
+        if (SelectedRaffleOption is RaffleOptionsEnum.All or RaffleOptionsEnum.Daily3)
         {
             var ticket3s = _userTickets.Where(ticket => ticket is Ticket3).ToList();
             ticket3s.ForEach(ticket => Tickets.Add(ticket));
         }
 
-        if (SelectedRaffleOption is RaffleOptionsEnum.Both or RaffleOptionsEnum.Daily4)
+        if (SelectedRaffleOption is RaffleOptionsEnum.All or RaffleOptionsEnum.Daily4)
         {
             var ticket4s = _userTickets.Where(ticket => ticket is Ticket4).ToList();
             ticket4s.ForEach(ticket => Tickets.Add(ticket));
@@ -55,7 +55,7 @@ public partial class TicketHistory : ContentPage
     {
         switch (SelectedRaffleOption)
         {
-            case (RaffleOptionsEnum.Both):
+            case (RaffleOptionsEnum.All):
                 ContentPage.BackgroundColor = (Color)Application.Current.Resources["Gray500"];
                 break;
             case (RaffleOptionsEnum.Daily3):
@@ -211,7 +211,7 @@ public partial class TicketHistory : ContentPage
 
 public enum RaffleOptionsEnum
 {
-    Both,
+    All,
     Daily3,
     Daily4
 }
@@ -220,7 +220,7 @@ public enum RaffleOptionsEnum
 ///     Class used to transfer the WinningStatus Enum into a number to
 ///     display the numbers on the screen
 /// </summary>
-public class StatusToColorConverter : IValueConverter
+public class StatusToColorConverter : IValueConverter 
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {

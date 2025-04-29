@@ -42,7 +42,8 @@
                     <Button
                         Grid.Column="1"
                         Text="Buy Tickets"
-                        Clicked="BackToBuyTicketsPage"/>
+                        Clicked="BackToBuyTicketsPage"
+                        Style="{StaticResource Daily-Button}"/>
                 </Grid>
             </Border>
 
@@ -66,7 +67,7 @@
             <Border Grid.Column="0"
                     Style="{StaticResource Picker-Border}"
                     BackgroundColor="White">
-                <DatePicker DateSelected="HandleFiltering"
+                <DatePicker DateSelected="DateChanged"
                             HorizontalOptions="Center"
                             BackgroundColor="{StaticResource White}"
                             x:Name="DatePicker"
@@ -92,7 +93,8 @@
                 ItemsSource="{Binding RaffleOptions}"
                 SelectedItem="{Binding SelectedRaffleOption}"
                 FontAutoScalingEnabled="True"
-                BackgroundColor="White"
+                BackgroundColor="{StaticResource White}"
+                TextColor="{StaticResource Black}"
                 HorizontalTextAlignment="Center"
                 SelectedIndexChanged="HandleFiltering"/>
             </Border>

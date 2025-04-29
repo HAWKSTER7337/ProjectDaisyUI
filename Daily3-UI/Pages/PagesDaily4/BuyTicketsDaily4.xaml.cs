@@ -1,10 +1,9 @@
 ﻿using CommunityToolkit.Maui.Views;
 using Daily3_UI.Classes;
-using Daily3_UI.Clients;
 using Daily3_UI.Enums;
 using Daily3_UI.Pages.PagesDaily3;
 
-namespace Daily3_UI.Pages;
+namespace Daily3_UI.Pages.PagesDaily4;
 
 public partial class BuyTicketsDaily4 : ContentPage
 {
@@ -229,37 +228,14 @@ public partial class BuyTicketsDaily4 : ContentPage
         Number3Entry.FontSize = pickerFontSize;
         Number4Entry.FontSize = pickerFontSize;
         PriceButton.FontSize = pickerFontSize;
-
-        StraightButton.WidthRequest = buttonWidth;
-        StraightButton.HeightRequest = buttonHeight;
+        
         StraightButton.FontSize = buttonFontSize;
-
-        BoxButton.WidthRequest = buttonWidth;
-        BoxButton.HeightRequest = buttonHeight;
         BoxButton.FontSize = buttonFontSize;
-
-        TwoWayButton.WidthRequest = buttonWidth;
-        TwoWayButton.HeightRequest = buttonHeight;
         TwoWayButton.FontSize = buttonFontSize;
-
-        OneOffButton.WidthRequest = buttonWidth;
-        OneOffButton.HeightRequest = buttonHeight;
         OneOffButton.FontSize = buttonFontSize;
-
-        WheelButton.WidthRequest = buttonWidth;
-        WheelButton.HeightRequest = buttonHeight;
         WheelButton.FontSize = buttonFontSize;
-
-        MiddayButton.WidthRequest = buttonWidth;
-        MiddayButton.HeightRequest = buttonHeight;
         MiddayButton.FontSize = buttonFontSize;
-
-        EveningButton.WidthRequest = buttonWidth;
-        EveningButton.HeightRequest = buttonHeight;
         EveningButton.FontSize = buttonFontSize;
-
-        BothButton.WidthRequest = buttonWidth;
-        BothButton.HeightRequest = buttonHeight;
         BothButton.FontSize = buttonFontSize;
 
         BuyTicketsButton.FontSize = buttonFontSize;
@@ -278,6 +254,7 @@ public partial class BuyTicketsDaily4 : ContentPage
         else if (!currentIsEmpty)
         {
             Number1Entry.Unfocus();
+            KeyboardHelper.HideKeyboard();
         }
     }
 
@@ -292,6 +269,7 @@ public partial class BuyTicketsDaily4 : ContentPage
         else if (!currentIsEmpty)
         {
             Number2Entry.Unfocus();
+            KeyboardHelper.HideKeyboard();
         }
     }
     
@@ -306,13 +284,17 @@ public partial class BuyTicketsDaily4 : ContentPage
         else if (!currentIsEmpty)
         {
             Number3Entry.Unfocus();
+            KeyboardHelper.HideKeyboard();
         }
     }
 
     private void OnNumber4TextChanged(object sender, TextChangedEventArgs e)
     {
         if (!string.IsNullOrEmpty(Number4Entry.Text))
+        {
             Number4Entry.Unfocus();
+            KeyboardHelper.HideKeyboard();
+        }
     }
 
     private async void OnPriceButtonClicked(object sender, EventArgs e)
@@ -341,6 +323,7 @@ public partial class BuyTicketsDaily4 : ContentPage
         if (sender is Entry entry)
         {
             entry.Text = string.Empty;
+            entry.Focus();
         }
     }
 }

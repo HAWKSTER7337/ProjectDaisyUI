@@ -34,6 +34,8 @@ public static class Globals
         get => _status;
         set => _status ??= value;
     }
+    
+    public const int CurrentYear = 2025;
 
     /// <summary>
     ///     Trys to get color from static resources

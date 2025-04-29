@@ -3,6 +3,7 @@ using System.Windows.Input;
 using CommunityToolkit.Maui.Views;
 using Daily3_UI.Classes;
 using Daily3_UI.Clients;
+using Daily3_UI.Pages.PagesDaily4;
 
 namespace Daily3_UI.Pages.PagesDaily3;
 

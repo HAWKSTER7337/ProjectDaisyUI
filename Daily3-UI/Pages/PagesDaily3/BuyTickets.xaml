@@ -193,6 +193,7 @@
 
             <!--Date Selectors -->
             <Grid
+                Padding="5"
                 Grid.Row="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -201,23 +202,27 @@
 
                 <Border Grid.Column="0"
                         Style="{StaticResource Left-Value-Border}">
-                    <DatePicker
-                        DateSelected="ProperDatePicker"
-                        x:Name="DatePicker"
+                    <Button
+                        x:Name="FirstDateButton"
                         HorizontalOptions="Center"
                         BackgroundColor="{StaticResource White}"
-                        MinimumDate="{x:Static sys:DateTime.Today}"
-                        TextColor="Black" />
+                        BorderColor="{StaticResource White}"
+                        Text="{Binding FirstDateString}"
+                        Clicked="FirstDatePressed"
+                        FontSize="20"
+                        TextColor="{StaticResource Black}"/>
                 </Border>
                 <Border Grid.Column="1"
                         Style="{StaticResource Right-Value-Border}">
-                    <DatePicker
-                        DateSelected="ProperDatePicker"
-                        x:Name="SecondDatePicker"
+                    <Button
+                        x:Name="SecondDateButton"
                         HorizontalOptions="Center"
                         BackgroundColor="{StaticResource White}"
-                        MinimumDate="{Binding Path=Date, Source={x:Reference DatePicker}}"
-                        TextColor="Black" />
+                        BorderColor="{StaticResource White}"
+                        Text="{Binding SecondDateString}"
+                        Clicked="SecondDatePressed"
+                        FontSize="20"
+                        TextColor="{StaticResource Black}"/>
                 </Border>
             </Grid>
 

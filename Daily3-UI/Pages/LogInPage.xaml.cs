@@ -1,4 +1,5 @@
-﻿using Daily3_UI.Classes;
+﻿using CommunityToolkit.Maui.Views;
+using Daily3_UI.Classes;
 using Daily3_UI.Clients;
 using Daily3_UI.Enums;
 
@@ -110,5 +111,13 @@ public partial class LogInPage : ContentPage
                 label.FontSize *= scaleFactor;
             }
         }
+    }
+
+    private void OnBackgroundTapped(object sender, EventArgs args)
+    {
+        Username.Unfocus();
+        Password.Unfocus();
+        
+        KeyboardHelper.HideKeyboard();
     }
 }

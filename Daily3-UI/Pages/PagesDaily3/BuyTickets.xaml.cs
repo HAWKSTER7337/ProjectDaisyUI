@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Maui.Views;
+﻿using System.Globalization;
+using CommunityToolkit.Maui.Views;
 using Daily3_UI.Classes;
 using Daily3_UI.Enums;
 
@@ -9,6 +10,7 @@ public partial class BuyTickets : ContentPage
     public BuyTickets()
     {
         InitializeComponent();
+        BindingContext = this;
     }
     
     private List<Ticket3> ShoppingCart { get; } = new();
@@ -16,6 +18,37 @@ public partial class BuyTickets : ContentPage
     private Button? BetTypeSelcted;
     
     private Button? TimeOfDaySelected;
+
+    private DateTime _firstDate = DateTime.Today;
+    private DateTime _secondDate = DateTime.Today;
+
+    public DateTime FirstDate
+    {
+        get => _firstDate;
+
+        set
+        {
+            if (_firstDate == value) return;
+            _firstDate = value <= DateTime.Today ? DateTime.Today : value;
+            if (_firstDate > _secondDate) SecondDate = _firstDate;
+            OnPropertyChanged(nameof(FirstDateString));
+        }
+    }
+
+    public DateTime SecondDate
+    {
+        get => _secondDate;
+
+        set
+        {
+            if (_secondDate == value) return;
+            _secondDate = value <= _firstDate ? _firstDate : value;
+            OnPropertyChanged(nameof(SecondDateString));
+        }
+    }
+    
+    public string FirstDateString => FirstDate.ToString("MM/dd/yyyy");
+    public string SecondDateString => SecondDate.ToString("MM/dd/yyyy");
 
     public void SetErrorLabel(string error)
     {
@@ -44,26 +77,60 @@ public partial class BuyTickets : ContentPage
     {
         SelectTypeOrTimeOfDay(sender, e, ref TimeOfDaySelected);
     }
-    
-    private void ProperDatePicker(object sender, DateChangedEventArgs e)
-    {
-        var selectedDate = e.NewDate;
-        var currentDate = DateTime.Now.Date;
 
-        if (selectedDate < currentDate) DatePicker.Date = currentDate;
+    private async void FirstDatePressed(object sender, EventArgs e)
+    {
+        var dateAndMonth = GetDateAndMonth(FirstDate);
+        var popup = new DatePopUpPage(dateAndMonth);
+        await Shell.Current.CurrentPage.ShowPopupAsync(popup);
+        FirstDate = UpdateMonthAndDay(dateAndMonth);
+    }
+    
+    private async void SecondDatePressed(object sender, EventArgs e)
+    {
+        var dateAndMonth = GetDateAndMonth(SecondDate);
+        var popup = new DatePopUpPage(dateAndMonth);
+        await Shell.Current.CurrentPage.ShowPopupAsync(popup);
+        SecondDate = UpdateMonthAndDay(dateAndMonth);
+    }
+
+    private MonthAndDay GetDateAndMonth(DateTime date)
+    {
+        return new MonthAndDay()
+        {
+            Month = date.Month,
+            Day = date.Day,
+        };
+    }
+
+    private DateTime UpdateMonthAndDay(MonthAndDay monthAndDay)
+    {
+        var format = "MM/dd/yyyy";
+        var dateString = $"{monthAndDay.Month:D2}/{monthAndDay.Day}/{Globals.CurrentYear}";
+
+        if (DateTime.TryParseExact(
+                dateString, 
+                format, 
+                new CultureInfo("en-US"),
+                DateTimeStyles.None, 
+                out DateTime parsedDate))
+        {
+            return parsedDate;
+        }
+        
+        throw new FormatException($"Failed to parse date from input: {dateString}");
     }
     
     private bool AddTicketsInSpecifiedIntervalToCart()
     {
-        var beginningDate = DatePicker.Date;
-        var endDate = SecondDatePicker.Date;
+        var beginningDate = FirstDate;
+        var endDate = SecondDate;
         while (DateTime.Compare(beginningDate, endDate) <= 0)
-        {
+        { 
             var ticketValid = AddTicketToCart(beginningDate.ToString("yyyy-MM-dd"));
             if (!ticketValid) return false;
             beginningDate = beginningDate.AddDays(1);
         }
-
         return true;
     }
 
@@ -131,6 +198,7 @@ public partial class BuyTickets : ContentPage
     
     private async void CheckOut(object sender, EventArgs e)
     {
+        ErrorLabel.Text = "";
         var validTickets = AddTicketsInSpecifiedIntervalToCart();
         if (!validTickets) return;
         await OpenTicketPopupPageAsync();
@@ -196,37 +264,14 @@ public partial class BuyTickets : ContentPage
         Number2Entry.FontSize = pickerFontSize;
         Number3Entry.FontSize = pickerFontSize;
         PriceButton.FontSize = pickerFontSize;
-
-        StraightButton.WidthRequest = buttonWidth;
-        StraightButton.HeightRequest = buttonHeight;
+        
         StraightButton.FontSize = buttonFontSize;
-
-        BoxButton.WidthRequest = buttonWidth;
-        BoxButton.HeightRequest = buttonHeight;
         BoxButton.FontSize = buttonFontSize;
-
-        TwoWayButton.WidthRequest = buttonWidth;
-        TwoWayButton.HeightRequest = buttonHeight;
         TwoWayButton.FontSize = buttonFontSize;
-
-        OneOffButton.WidthRequest = buttonWidth;
-        OneOffButton.HeightRequest = buttonHeight;
         OneOffButton.FontSize = buttonFontSize;
-
-        WheelButton.WidthRequest = buttonWidth;
-        WheelButton.HeightRequest = buttonHeight;
         WheelButton.FontSize = buttonFontSize;
-
-        MiddayButton.WidthRequest = buttonWidth;
-        MiddayButton.HeightRequest = buttonHeight;
         MiddayButton.FontSize = buttonFontSize;
-
-        EveningButton.WidthRequest = buttonWidth;
-        EveningButton.HeightRequest = buttonHeight;
         EveningButton.FontSize = buttonFontSize;
-
-        BothButton.WidthRequest = buttonWidth;
-        BothButton.HeightRequest = buttonHeight;
         BothButton.FontSize = buttonFontSize;
         
         BuyTicketsButton.FontSize = buttonFontSize;
@@ -245,6 +290,7 @@ public partial class BuyTickets : ContentPage
         else if (!currentIsEmpty)
         {
             Number1Entry.Unfocus();
+            KeyboardHelper.HideKeyboard();
         }
     }
 
@@ -259,13 +305,17 @@ public partial class BuyTickets : ContentPage
         else if (!currentIsEmpty)
         {
             Number2Entry.Unfocus();
+            KeyboardHelper.HideKeyboard();
         }
     }
 
     private void OnNumber3TextChanged(object sender, TextChangedEventArgs e)
     {
         if (!string.IsNullOrEmpty(Number3Entry.Text))
+        {
             Number3Entry.Unfocus();
+            KeyboardHelper.HideKeyboard();
+        }
     }
 
     public void ClearShoppingCart()
@@ -300,6 +350,7 @@ public partial class BuyTickets : ContentPage
         if (sender is Entry entry)
         {
             entry.Text = string.Empty;
+            entry.Focus();
         }
     }
 }
