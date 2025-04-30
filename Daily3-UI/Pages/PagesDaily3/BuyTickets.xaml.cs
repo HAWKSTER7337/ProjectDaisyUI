@@ -125,12 +125,25 @@ public partial class BuyTickets : ContentPage
     {
         var beginningDate = FirstDate;
         var endDate = SecondDate;
-        while (DateTime.Compare(beginningDate, endDate) <= 0)
+        return AddToCart(beginningDate, endDate);
+    }
+
+    private bool AddTicketsFromPreSetToCart()
+    {
+        var beginningDate = DateTime.Today;
+        var endDate = beginningDate.AddDays(_currentNumberOfDaysSelected - 1);
+        return AddToCart(beginningDate, endDate);
+    }
+
+    private bool AddToCart(DateTime startTime, DateTime endTime)
+    {
+        while (DateTime.Compare(startTime, endTime) <= 0)
         { 
-            var ticketValid = AddTicketToCart(beginningDate.ToString("yyyy-MM-dd"));
+            var ticketValid = AddTicketToCart(startTime.ToString("yyyy-MM-dd"));
             if (!ticketValid) return false;
-            beginningDate = beginningDate.AddDays(1);
+            startTime = startTime.AddDays(1);
         }
+
         return true;
     }
 
@@ -148,6 +161,9 @@ public partial class BuyTickets : ContentPage
     {
         await Shell.Current.GoToAsync("//Buy4");
     }
+    
+    private readonly DateTime _middayCutOff = DateTime.Today.AddHours(12).AddMinutes(39);
+    private readonly DateTime _eveningCutOff = DateTime.Today.AddHours(7).AddMinutes(08);
     
     private bool AddTicketToCart(string date)
     {
@@ -176,7 +192,14 @@ public partial class BuyTickets : ContentPage
                 ErrorLabel.Text = emptyFieldMessage;
                 return false;
             }
+
+            if (ticket.TimeOfDay == TOD.Both)
+            {
+                SplitBothTicketIntoTwo(ticket);
+                return true;
+            }
             
+            HandleTicketDate(ticket);
             ShoppingCart.Add(ticket);
             return true;
         }
@@ -195,11 +218,48 @@ public partial class BuyTickets : ContentPage
             return false;
         }
     }
+
+    private void HandleTicketDate(Ticket ticket)
+    {
+        if ((ticket.TimeOfDay == TOD.Midday && DateTime.Now > _middayCutOff) ||
+            (ticket.TimeOfDay == TOD.Evening && DateTime.Now > _eveningCutOff))
+            ticket.AddNumberOfDaysToTicketDate(1);
+    }
+
+    private void SplitBothTicketIntoTwo(Ticket3 ticket)
+    {
+        var otherTicket = ticket.ShallowCopy();
+
+        var currentTime = DateTime.Now;
+
+        if (currentTime < _middayCutOff)
+        {
+            ticket.TimeOfDay = TOD.Midday;
+            otherTicket.TimeOfDay = TOD.Evening;
+        }
+        else if (currentTime < _eveningCutOff)
+        {
+            ticket.TimeOfDay = TOD.Evening;
+            
+            otherTicket.TimeOfDay = TOD.Midday;
+            otherTicket.AddNumberOfDaysToTicketDate(1);
+        }
+        else
+        {
+            ticket.TimeOfDay = TOD.Midday;
+            ticket.AddNumberOfDaysToTicketDate(1);
+            
+            otherTicket.TimeOfDay = TOD.Evening;
+            otherTicket.AddNumberOfDaysToTicketDate(1);
+        }
+        ShoppingCart.Add(ticket);
+        ShoppingCart.Add(otherTicket);
+    }
     
     private async void CheckOut(object sender, EventArgs e)
     {
         ErrorLabel.Text = "";
-        var validTickets = AddTicketsInSpecifiedIntervalToCart();
+        var validTickets = IsCalenderMode ? AddTicketsInSpecifiedIntervalToCart() : AddTicketsFromPreSetToCart();
         if (!validTickets) return;
         await OpenTicketPopupPageAsync();
     }
@@ -277,6 +337,13 @@ public partial class BuyTickets : ContentPage
         BuyTicketsButton.FontSize = buttonFontSize;
         HistoryButton.FontSize = buttonFontSize;
         WinningNumbersButton.FontSize = buttonFontSize;
+
+        Days2.FontSize = buttonFontSize;
+        Days3.FontSize = buttonFontSize;
+        Days4.FontSize = buttonFontSize;
+        Days5.FontSize = buttonFontSize;
+        Days6.FontSize = buttonFontSize;
+        Days7.FontSize = buttonFontSize;
     }
 
     private void OnNumber1TextChanged(object sender, TextChangedEventArgs e)
@@ -352,5 +419,51 @@ public partial class BuyTickets : ContentPage
             entry.Text = string.Empty;
             entry.Focus();
         }
+    }
+
+    private bool _isCalenderMode = false;
+    public bool IsCalenderMode => _isCalenderMode;
+    public bool IsNumberOfDaysMode => !_isCalenderMode;
+    
+    private void SwitchDateSelectionStyle(object sender, EventArgs e)
+    {
+        _isCalenderMode = !_isCalenderMode;
+        OnPropertyChanged(nameof(IsCalenderMode));
+        OnPropertyChanged(nameof(IsNumberOfDaysMode));
+    }
+
+    private int _currentNumberOfDaysSelected = 1;
+
+    private void OnPresetDateSelected(object sender, EventArgs e)
+    {
+        var senderButton = (Button)sender;
+        var selectedColor = Globals.GetColor("Selected");
+        if (Equals(senderButton.BackgroundColor, selectedColor))
+        {
+            _currentNumberOfDaysSelected = 1;
+            senderButton.BackgroundColor = Globals.GetColor("Primary");
+            return;
+        }
+        DeselectAllOtherPresetDates();
+        if (int.TryParse(senderButton.Text[0].ToString(), out int number))
+        {
+            senderButton.BackgroundColor = selectedColor;
+            _currentNumberOfDaysSelected = number;
+        }
+        else
+        {
+            throw new FormatException(
+                "The button that is using this methods text is invalid. Needs to start with a number");
+        }
+    }
+
+    private void DeselectAllOtherPresetDates()
+    {
+        Days2.BackgroundColor = Globals.GetColor("Primary");
+        Days3.BackgroundColor = Globals.GetColor("Primary");
+        Days4.BackgroundColor = Globals.GetColor("Primary");
+        Days5.BackgroundColor = Globals.GetColor("Primary");
+        Days6.BackgroundColor = Globals.GetColor("Primary");
+        Days7.BackgroundColor = Globals.GetColor("Primary");
     }
 }

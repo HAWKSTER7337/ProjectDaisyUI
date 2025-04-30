@@ -10,4 +10,9 @@ public class Ticket3 : Ticket
             return (Color)secondary;
         }
     }
+    
+    public override Ticket3 ShallowCopy()
+    {
+        return (Ticket3)this.MemberwiseClone();
+    }
 }

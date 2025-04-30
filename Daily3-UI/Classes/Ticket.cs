@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Globalization;
+using System.Text.Json.Serialization;
 using System.Web;
 using Daily3_UI.Enums;
 
@@ -21,11 +22,10 @@ public abstract class Ticket
 
     [JsonPropertyName("Type")] public TicketType? Type { get; init; } = null;
 
-    [JsonPropertyName("TimeOfDay")] public TOD? TimeOfDay { get; init; } = null;
+    [JsonPropertyName("TimeOfDay")] public TOD? TimeOfDay { get; set; } = null;
 
-    [JsonPropertyName("Date")] public string Date { get; init; } = null;
-
-
+    [JsonPropertyName("Date")] public string Date { get; set; } = null;
+    
     [JsonPropertyName("WinningStatus")] public WinningStatus? WinningStatus { get; init; } = Enums.WinningStatus.TBD;
 
     [JsonPropertyName("WinningPayout")] public double WinningPayout { get; init; }
@@ -90,6 +90,15 @@ public abstract class Ticket
         if (WinningStatus == Enums.WinningStatus.Winner) information += $"\nPayout: {WinningPayout:F2}";
 
         return information;
+    }
+
+    public abstract Ticket ShallowCopy();
+
+    public void AddNumberOfDaysToTicketDate(int numberOfDays)
+    {
+        Date = DateTime.ParseExact(Date, "yyyy-MM-dd", CultureInfo.InvariantCulture)
+            .AddDays(numberOfDays)
+            .ToString("yyyy-MM-dd");
     }
 
     public string TextFormat => TextFormatFunction();

@@ -191,10 +191,11 @@
                    Grid.Row="9"
                    x:Name="SelectDateLabel" />
 
-            <!--Date Selectors -->
+            <!--Calender Selector -->
             <Grid
                 Padding="5"
-                Grid.Row="10">
+                Grid.Row="10"
+                IsVisible="{Binding IsCalenderMode}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
@@ -225,11 +226,90 @@
                         TextColor="{StaticResource Black}"/>
                 </Border>
             </Grid>
+            <Button
+                Style="{StaticResource Daily-Button}"
+                Text="Select Date From Presets"
+                Clicked="SwitchDateSelectionStyle"
+                Margin="5,0,5,0"
+                Grid.Row="11"
+                IsVisible="{Binding IsCalenderMode}"/>
+            
+            <!--Button Date Selectors-->
+            <Grid
+                IsVisible="{Binding IsNumberOfDaysMode}"
+                Grid.Row="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <Button
+                    Style="{StaticResource Daily-Button}"
+                    Text="2 Days"
+                    x:Name="Days2"
+                    Margin="5,1"
+                    Clicked="OnPresetDateSelected"
+                    Grid.Row="0"
+                    Grid.Column="0"/>
+                <Button
+                    Style="{StaticResource Daily-Button}"
+                    Text="3 Days"
+                    x:Name="Days3"
+                    Margin="5,1"
+                    Clicked="OnPresetDateSelected"
+                    Grid.Row="0"
+                    Grid.Column="1"/>
+                <Button
+                    Style="{StaticResource Daily-Button}"
+                    Text="4 Days"
+                    x:Name="Days4"
+                    Margin="5,1"
+                    Clicked="OnPresetDateSelected"
+                    Grid.Row="0"
+                    Grid.Column="2"/>
+                <Button
+                    Style="{StaticResource Daily-Button}"
+                    Text="5 Days"
+                    x:Name="Days5"
+                    Margin="5,1"
+                    Clicked="OnPresetDateSelected"
+                    Grid.Row="1"
+                    Grid.Column="0"/>
+                <Button
+                    Style="{StaticResource Daily-Button}"
+                    Text="6 Days"
+                    x:Name="Days6"
+                    Margin="5, 1"
+                    Clicked="OnPresetDateSelected"
+                    Grid.Row="1"
+                    Grid.Column="1"/>
+                <Button
+                    Style="{StaticResource Daily-Button}"
+                    Text="7 Days"
+                    x:Name="Days7"
+                    Margin="5,1"
+                    Clicked="OnPresetDateSelected"
+                    Grid.Row="1"
+                    Grid.Column="2"/>
+                
+            </Grid>
+            <Button
+                Style="{StaticResource Daily-Button}"
+                Text="Select Dates from Calender"
+                Clicked="SwitchDateSelectionStyle"
+                IsVisible="{Binding IsNumberOfDaysMode}"
+                Margin="5,2,5,0"
+                Grid.Row="11"/>
 
             <!--Menu Actions -->
             <Grid
                 Padding="5"
-                Grid.Row="11">
+                Grid.Row="12">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1.5*" />
                     <ColumnDefinition Width="*" />
@@ -254,7 +334,7 @@
             <Label Text=""
                    x:Name="ErrorLabel"
                    Style="{StaticResource Error-Message}"
-                   Grid.Row="12" />
+                   Grid.Row="13" />
 
         </Grid>
     </VerticalStackLayout>
