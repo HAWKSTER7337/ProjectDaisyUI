@@ -13,7 +13,7 @@ public partial class BuyTickets : ContentPage
         BindingContext = this;
     }
     
-    private List<Ticket3> ShoppingCart { get; } = new();
+    private List<Ticket> ShoppingCart { get; } = new();
     
     private Button? BetTypeSelcted;
     
@@ -21,6 +21,23 @@ public partial class BuyTickets : ContentPage
 
     private DateTime _firstDate = DateTime.Today;
     private DateTime _secondDate = DateTime.Today;
+
+    private bool _isDaily3 = true;
+
+    public bool IsDaily3
+    {
+        get => _isDaily3;
+        set
+        {
+            _isDaily3 = value;
+            if (IsDaily3) BackgroundColor = Globals.GetColor("Secondary");
+            else if(IsDaily4) BackgroundColor = Globals.GetColor("SecondaryDaily4");
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(IsDaily4));
+        }
+    }
+    
+    public bool IsDaily4 => !_isDaily3;
 
     public DateTime FirstDate
     {
@@ -157,9 +174,9 @@ public partial class BuyTickets : ContentPage
         await Shell.Current.GoToAsync("WinningNumbers3");
     }
     
-    private async void ChangeLotto(object sender, EventArgs e)
+    private void ChangeLotto(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("//Buy4");
+        IsDaily3 = !IsDaily3;
     }
     
     private readonly DateTime _middayCutOff = DateTime.Today.AddHours(12).AddMinutes(39);
@@ -169,20 +186,43 @@ public partial class BuyTickets : ContentPage
     {
         try
         {
-            var number1 = int.TryParse(Number1Entry.Text, out var n1) ? n1 : (int?)null;
-            var number2 = int.TryParse(Number2Entry.Text, out var n2) ? n2 : (int?)null;
-            var number3 = int.TryParse(Number3Entry.Text, out var n3) ? n3 : (int?)null;
-            
-            var ticket = new Ticket3
+            Ticket ticket;
+            if (IsDaily3)
             {
-                Number1 = number1,
-                Number2 = number2,
-                Number3 = number3,
-                Price = double.Parse(PriceButton.Text),
-                Type = GetTicketTypeFromString(BetTypeSelcted.Text),
-                TimeOfDay = GetTodFromString(TimeOfDaySelected.Text),
-                Date = date
-            };
+                var number1 = int.TryParse(Number1Entry.Text, out var n1) ? n1 : (int?)null;
+                var number2 = int.TryParse(Number2Entry.Text, out var n2) ? n2 : (int?)null;
+                var number3 = int.TryParse(Number3Entry.Text, out var n3) ? n3 : (int?)null;
+
+                ticket = new Ticket3
+                {
+                    Number1 = number1,
+                    Number2 = number2,
+                    Number3 = number3,
+                    Price = double.Parse(PriceButton.Text),
+                    Type = GetTicketTypeFromString(BetTypeSelcted.Text),
+                    TimeOfDay = GetTodFromString(TimeOfDaySelected.Text),
+                    Date = date
+                };
+            }
+            else
+            {
+                var number1 = int.TryParse(Number1Entry4.Text, out var n1) ? n1 : (int?)null;
+                var number2 = int.TryParse(Number2Entry4.Text, out var n2) ? n2 : (int?)null;
+                var number3 = int.TryParse(Number3Entry4.Text, out var n3) ? n3 : (int?)null;
+                var number4 = int.TryParse(Number3Entry4.Text, out var n4) ? n4 : (int?)null;
+
+                ticket = new Ticket4
+                {
+                    Number1 = number1,
+                    Number2 = number2,
+                    Number3 = number3,
+                    Number4 = number4,
+                    Price = double.Parse(PriceButton.Text),
+                    Type = GetTicketTypeFromString(BetTypeSelcted.Text),
+                    TimeOfDay = GetTodFromString(TimeOfDaySelected.Text),
+                    Date = date
+                };
+            }
 
             // Checking for missing fields 
             var emptyFieldMessage = ticket.MissingMessage();
@@ -226,7 +266,7 @@ public partial class BuyTickets : ContentPage
             ticket.AddNumberOfDaysToTicketDate(1);
     }
 
-    private void SplitBothTicketIntoTwo(Ticket3 ticket)
+    private void SplitBothTicketIntoTwo(Ticket ticket)
     {
         var otherTicket = ticket.ShallowCopy();
 
@@ -313,6 +353,11 @@ public partial class BuyTickets : ContentPage
         Number1Border.WidthRequest = Number1Border.HeightRequest = numberBorderWidth;
         Number2Border.WidthRequest = Number2Border.HeightRequest = numberBorderWidth;
         Number3Border.WidthRequest = Number3Border.HeightRequest = numberBorderWidth;
+        
+        Number1BorderD1.WidthRequest = Number1BorderD1.HeightRequest = numberBorderWidth;
+        Number2BorderD2.WidthRequest = Number2BorderD2.HeightRequest = numberBorderWidth;
+        Number3BorderD3.WidthRequest = Number3BorderD3.HeightRequest = numberBorderWidth;
+        Number3BorderD4.WidthRequest = Number3BorderD4.HeightRequest = numberBorderWidth;
 
         SelectPaymentLabel.FontSize = labelFontSize;
         SelectBetTypeLabel.FontSize = labelFontSize;
@@ -323,6 +368,12 @@ public partial class BuyTickets : ContentPage
         Number1Entry.FontSize = pickerFontSize;
         Number2Entry.FontSize = pickerFontSize;
         Number3Entry.FontSize = pickerFontSize;
+        
+        Number1Entry4.FontSize = pickerFontSize;
+        Number2Entry4.FontSize = pickerFontSize;
+        Number3Entry4.FontSize = pickerFontSize;
+        Number4Entry4.FontSize = pickerFontSize;
+        
         PriceButton.FontSize = pickerFontSize;
         
         StraightButton.FontSize = buttonFontSize;
@@ -381,6 +432,60 @@ public partial class BuyTickets : ContentPage
         if (!string.IsNullOrEmpty(Number3Entry.Text))
         {
             Number3Entry.Unfocus();
+            KeyboardHelper.HideKeyboard();
+        }
+    }
+    
+    private void OnNumber1TextChangedD(object sender, TextChangedEventArgs e)
+    {
+        var currentIsEmpty = string.IsNullOrEmpty(Number1Entry4.Text);
+        var nextIsEmpty = string.IsNullOrEmpty(Number2Entry4.Text);
+        if (!currentIsEmpty && nextIsEmpty)
+        {
+            Number2Entry4.Focus();
+        }
+        else if (!currentIsEmpty)
+        {
+            Number1Entry4.Unfocus();
+            KeyboardHelper.HideKeyboard();
+        }
+    }
+
+    private void OnNumber2TextChangedD(object sender, TextChangedEventArgs e)
+    {
+        var currentIsEmpty = string.IsNullOrEmpty(Number2Entry4.Text);
+        var nextIsEmpty = string.IsNullOrEmpty(Number3Entry4.Text);
+        if (!currentIsEmpty && nextIsEmpty)
+        {
+            Number3Entry4.Focus();
+        }
+        else if (!currentIsEmpty)
+        {
+            Number2Entry4.Unfocus();
+            KeyboardHelper.HideKeyboard();
+        }
+    }
+    
+    private void OnNumber3TextChangedD(object sender, TextChangedEventArgs e)
+    {
+        var currentIsEmpty = string.IsNullOrEmpty(Number3Entry4.Text);
+        var nextIsEmpty = string.IsNullOrEmpty(Number4Entry4.Text);
+        if (!currentIsEmpty && nextIsEmpty)
+        {
+            Number4Entry4.Focus();
+        }
+        else if (!currentIsEmpty)
+        {
+            Number3Entry.Unfocus();
+            KeyboardHelper.HideKeyboard();
+        }
+    }
+
+    private void OnNumber4TextChangedD(object sender, TextChangedEventArgs e)
+    {
+        if (!string.IsNullOrEmpty(Number4Entry4.Text))
+        {
+            Number4Entry4.Unfocus();
             KeyboardHelper.HideKeyboard();
         }
     }
