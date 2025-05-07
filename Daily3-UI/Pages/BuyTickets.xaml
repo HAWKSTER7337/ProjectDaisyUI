@@ -32,6 +32,7 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
                 <RowDefinition Height="30" />
             </Grid.RowDefinitions>
 
@@ -170,15 +171,22 @@
 
             </Grid>
 
+            <!--Number Selector Clear Button-->
+            <Button
+                Grid.Row="3"
+                Text="Clear"
+                Style="{StaticResource Daily-Button}"
+                Clicked="ClearNumbers" />
+
             <!--Select Payment amount-->
             <Label Text="Select Payment Amount"
                    Style="{StaticResource Tod}"
-                   Grid.Row="3"
+                   Grid.Row="4"
                    x:Name="SelectPaymentLabel" />
             <Border
                 Style="{StaticResource Picker-Border}"
                 BackgroundColor="White"
-                Grid.Row="4">
+                Grid.Row="5">
                 <Button x:Name="PriceButton"
                         Text="1.00"
                         Clicked="OnPriceButtonClicked"
@@ -192,10 +200,10 @@
             <Label Text="Select Bet Type"
                    Style="{StaticResource Tod}"
                    x:Name="SelectBetTypeLabel"
-                   Grid.Row="5" />
+                   Grid.Row="6" />
             <Grid
                 Padding="5"
-                Grid.Row="6">
+                Grid.Row="7">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
@@ -228,11 +236,11 @@
             <!--Select Draw-->
             <Label Text="Select Draw"
                    Style="{StaticResource Tod}"
-                   Grid.Row="7"
+                   Grid.Row="8"
                    x:Name="SelectDrawLabel" />
             <Grid
                 Padding="5"
-                Grid.Row="8">
+                Grid.Row="9">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
@@ -250,13 +258,13 @@
             <!--Select Date-->
             <Label Text="Select Date"
                    Style="{StaticResource Tod}"
-                   Grid.Row="9"
+                   Grid.Row="10"
                    x:Name="SelectDateLabel" />
 
             <!--Calender Selector -->
             <Grid
                 Padding="5"
-                Grid.Row="10"
+                Grid.Row="11"
                 IsVisible="{Binding IsCalenderMode}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -293,13 +301,13 @@
                 Text="Select Date From Presets"
                 Clicked="SwitchDateSelectionStyle"
                 Margin="5,0,5,0"
-                Grid.Row="11"
+                Grid.Row="12"
                 IsVisible="{Binding IsCalenderMode}" />
 
             <!--Button Date Selectors-->
             <Grid
                 IsVisible="{Binding IsNumberOfDaysMode}"
-                Grid.Row="10">
+                Grid.Row="11">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
@@ -366,12 +374,12 @@
                 Clicked="SwitchDateSelectionStyle"
                 IsVisible="{Binding IsNumberOfDaysMode}"
                 Margin="5,2,5,0"
-                Grid.Row="11" />
+                Grid.Row="12" />
 
             <!--Menu Actions -->
             <Grid
                 Padding="5"
-                Grid.Row="12">
+                Grid.Row="13">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1.5*" />
                     <ColumnDefinition Width="*" />
@@ -396,7 +404,7 @@
             <Label Text=""
                    x:Name="ErrorLabel"
                    Style="{StaticResource Error-Message}"
-                   Grid.Row="13" />
+                   Grid.Row="14" />
 
         </Grid>
     </VerticalStackLayout>

@@ -126,7 +126,7 @@ public partial class BuyTickets : ContentPage
     private DateTime UpdateMonthAndDay(MonthAndDay monthAndDay)
     {
         var format = "MM/dd/yyyy";
-        var dateString = $"{monthAndDay.Month:D2}/{monthAndDay.Day}/{Globals.CurrentYear}";
+        var dateString = $"{monthAndDay.Month:D2}/{monthAndDay.Day:D2}/{Globals.CurrentYear}";
 
         if (DateTime.TryParseExact(
                 dateString,
@@ -321,6 +321,18 @@ public partial class BuyTickets : ContentPage
         var validTickets = IsCalenderMode ? AddTicketsInSpecifiedIntervalToCart() : AddTicketsFromPreSetToCart();
         if (!validTickets) return;
         await OpenTicketPopupPageAsync();
+    }
+
+    private void ClearNumbers(object sender, EventArgs e)
+    {
+        Number1Entry.Text = string.Empty;
+        Number2Entry.Text = string.Empty;
+        Number3Entry.Text = string.Empty;
+
+        Number1Entry4.Text = string.Empty;
+        Number2Entry4.Text = string.Empty;
+        Number3Entry4.Text = string.Empty;
+        Number4Entry4.Text = string.Empty;
     }
 
     private TOD? GetTodFromString(string text)
