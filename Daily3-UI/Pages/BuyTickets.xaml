@@ -16,7 +16,7 @@
 
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -50,15 +50,23 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Text="Buy Tickets"
+                           IsVisible="{Binding IsUser}"
                            Grid.Column="0"
                            TextColor="{StaticResource Black}"
                            Style="{StaticResource Day}" />
+
+                    <Button Text="Admin Page"
+                            IsVisible="{Binding IsHouse}"
+                            Clicked="ToAdminPage"
+                            Grid.Column="0"
+                            TextColor="{StaticResource Black}"
+                            Style="{StaticResource Daily-Button}" />
 
                     <Button
                         Grid.Column="1"
                         Text="Switch Lotto"
                         Clicked="ChangeLotto"
-                        Style="{StaticResource Daily-Button}"/>
+                        Style="{StaticResource Daily-Button}" />
                 </Grid>
             </Border>
 
@@ -108,7 +116,7 @@
                 </Border>
 
             </Grid>
-            
+
             <!--Number Selectors Daily 4-->
             <Grid Padding="10"
                   Grid.Row="2"
@@ -149,8 +157,8 @@
                            Style="{StaticResource Number-Setter}"
                            HorizontalTextAlignment="Center" />
                 </Border>
-                
-                <Border Grid.Column="3" Style="{StaticResource Picker-Ball}" x:Name="Number3BorderD4">
+
+                <Border Grid.Column="3" Style="{StaticResource Picker-Ball}" x:Name="Number4BorderD4">
                     <Entry x:Name="Number4Entry4"
                            MaxLength="1"
                            Keyboard="Numeric"
@@ -192,29 +200,29 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                
+
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                
-                        
-                    <Button Grid.Row="0"  Grid.Column="0" Clicked="SelectType" Style="{StaticResource Daily-Button}"
-                            Text="Straight"
-                            x:Name="StraightButton" />
-                    <Button Grid.Row="0" Grid.Column="1" Clicked="SelectType" Style="{StaticResource Daily-Button}"
-                            Text="Box"
-                            x:Name="BoxButton" />
-                    <Button Grid.Row="0"  Grid.Column="2" Clicked="SelectType" Style="{StaticResource Daily-Button}"
-                            Text="2-Way"
-                            x:Name="TwoWayButton"/>
-                    <Button Grid.Row="1" Grid.Column="0" Clicked="SelectType" Style="{StaticResource Daily-Button}"
-                            Text="1-Off"
-                            x:Name="OneOffButton" />
-                    <Button Grid.Row="1"  Grid.Column="1" Clicked="SelectType" Style="{StaticResource Daily-Button}"
-                            Text="Wheel"
-                            x:Name="WheelButton" />
+
+
+                <Button Grid.Row="0" Grid.Column="0" Clicked="SelectType" Style="{StaticResource Daily-Button}"
+                        Text="Straight"
+                        x:Name="StraightButton" />
+                <Button Grid.Row="0" Grid.Column="1" Clicked="SelectType" Style="{StaticResource Daily-Button}"
+                        Text="Box"
+                        x:Name="BoxButton" />
+                <Button Grid.Row="0" Grid.Column="2" Clicked="SelectType" Style="{StaticResource Daily-Button}"
+                        Text="2-Way"
+                        x:Name="TwoWayButton" />
+                <Button Grid.Row="1" Grid.Column="0" Clicked="SelectType" Style="{StaticResource Daily-Button}"
+                        Text="1-Off"
+                        x:Name="OneOffButton" />
+                <Button Grid.Row="1" Grid.Column="1" Clicked="SelectType" Style="{StaticResource Daily-Button}"
+                        Text="Wheel"
+                        x:Name="WheelButton" />
             </Grid>
 
             <!--Select Draw-->
@@ -265,7 +273,7 @@
                         Text="{Binding FirstDateString}"
                         Clicked="FirstDatePressed"
                         FontSize="20"
-                        TextColor="{StaticResource Black}"/>
+                        TextColor="{StaticResource Black}" />
                 </Border>
                 <Border Grid.Column="1"
                         Style="{StaticResource Right-Value-Border}">
@@ -277,7 +285,7 @@
                         Text="{Binding SecondDateString}"
                         Clicked="SecondDatePressed"
                         FontSize="20"
-                        TextColor="{StaticResource Black}"/>
+                        TextColor="{StaticResource Black}" />
                 </Border>
             </Grid>
             <Button
@@ -286,22 +294,22 @@
                 Clicked="SwitchDateSelectionStyle"
                 Margin="5,0,5,0"
                 Grid.Row="11"
-                IsVisible="{Binding IsCalenderMode}"/>
-            
+                IsVisible="{Binding IsCalenderMode}" />
+
             <!--Button Date Selectors-->
             <Grid
                 IsVisible="{Binding IsNumberOfDaysMode}"
                 Grid.Row="10">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                
+
                 <Button
                     Style="{StaticResource Daily-Button}"
                     Text="2 Days"
@@ -309,7 +317,7 @@
                     Margin="5,1"
                     Clicked="OnPresetDateSelected"
                     Grid.Row="0"
-                    Grid.Column="0"/>
+                    Grid.Column="0" />
                 <Button
                     Style="{StaticResource Daily-Button}"
                     Text="3 Days"
@@ -317,7 +325,7 @@
                     Margin="5,1"
                     Clicked="OnPresetDateSelected"
                     Grid.Row="0"
-                    Grid.Column="1"/>
+                    Grid.Column="1" />
                 <Button
                     Style="{StaticResource Daily-Button}"
                     Text="4 Days"
@@ -325,7 +333,7 @@
                     Margin="5,1"
                     Clicked="OnPresetDateSelected"
                     Grid.Row="0"
-                    Grid.Column="2"/>
+                    Grid.Column="2" />
                 <Button
                     Style="{StaticResource Daily-Button}"
                     Text="5 Days"
@@ -333,7 +341,7 @@
                     Margin="5,1"
                     Clicked="OnPresetDateSelected"
                     Grid.Row="1"
-                    Grid.Column="0"/>
+                    Grid.Column="0" />
                 <Button
                     Style="{StaticResource Daily-Button}"
                     Text="6 Days"
@@ -341,7 +349,7 @@
                     Margin="5, 1"
                     Clicked="OnPresetDateSelected"
                     Grid.Row="1"
-                    Grid.Column="1"/>
+                    Grid.Column="1" />
                 <Button
                     Style="{StaticResource Daily-Button}"
                     Text="7 Days"
@@ -349,8 +357,8 @@
                     Margin="5,1"
                     Clicked="OnPresetDateSelected"
                     Grid.Row="1"
-                    Grid.Column="2"/>
-                
+                    Grid.Column="2" />
+
             </Grid>
             <Button
                 Style="{StaticResource Daily-Button}"
@@ -358,7 +366,7 @@
                 Clicked="SwitchDateSelectionStyle"
                 IsVisible="{Binding IsNumberOfDaysMode}"
                 Margin="5,2,5,0"
-                Grid.Row="11"/>
+                Grid.Row="11" />
 
             <!--Menu Actions -->
             <Grid

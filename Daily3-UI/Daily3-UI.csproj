@@ -80,6 +80,12 @@
         <MauiXaml Update="Pages\TicketHistory.xaml">
           <SubType>Designer</SubType>
         </MauiXaml>
+        <MauiXaml Update="Pages\BuyTickets.xaml">
+            <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Pages\TicketPopupPage.xaml">
+            <SubType>Designer</SubType>
+        </MauiXaml>
     </ItemGroup>
 
     <ItemGroup>
@@ -104,11 +110,17 @@
           <DependentUpon>TicketHistory.xaml</DependentUpon>
           <SubType>Code</SubType>
         </Compile>
+        <Compile Update="Pages\BuyTickets.xaml.cs">
+            <DependentUpon>BuyTickets.xaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Pages\TicketPopupPage.xaml.cs">
+            <DependentUpon>TicketPopupPage.xaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
     </ItemGroup>
 
     <ItemGroup>
-        <AdditionalFiles Include="Pages\PagesDaily3\BuyTickets.xaml" />
-        <AdditionalFiles Include="Pages\PagesDaily3\TicketPopupPage.xaml" />
         <AdditionalFiles Include="Pages\PagesDaily3\WinningNumbersPage.xaml" />
     </ItemGroup>
 

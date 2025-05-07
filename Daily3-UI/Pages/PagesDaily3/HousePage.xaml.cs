@@ -26,7 +26,8 @@ public partial class HousePage : ContentPage
             UserLoader.IsRunning = true;
             UserLoader.IsVisible = true;
 
-            _users = await GetUsersAndTicketsUnderHouse.getUsersDaily3();
+            _users = await GetUsersAndTicketsUnderHouse.GetUsersDaily();
+
             UserCollectionView.ItemsSource = Users();
         }
         catch (Exception ex)
@@ -40,12 +41,17 @@ public partial class HousePage : ContentPage
         }
     }
 
+    private async void ToBuyTicketsClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("..");
+    }
+
     private void OnTicketButtonClicked(object sender, EventArgs e)
     {
         if (sender is not Button button) return;
         var user = button.BindingContext as User;
         if (user == null) throw new Exception("User is not found");
-        var popup = new TicketAdminPopUp<Ticket3>(user.Tickets3.ToList());
+        var popup = new TicketAdminPopUp(user.Tickets);
 
         if (this == null) throw new Exception("This is null for some reason");
         if (popup == null) throw new Exception("The Popup is null for some reason");

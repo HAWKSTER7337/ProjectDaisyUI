@@ -1,6 +1,5 @@
 ﻿using Daily3_UI.Classes;
 using Daily3_UI.Clients;
-using Daily3_UI.Pages.PagesDaily3;
 
 namespace Daily3_UI.Pages;
 
@@ -20,7 +19,7 @@ public partial class WinningNumbersPageDaily4 : ContentPage
     {
         await UpdatePage();
     }
-    
+
     private async void FlipToOtherRaffle(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("WinningNumbers3");
@@ -66,10 +65,10 @@ public partial class WinningNumbersPageDaily4 : ContentPage
                 break;
         }
     }
-    
+
     private async void ToBuyTicketPage(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("//Buy4");
+        await Shell.Current.GoToAsync("..");
     }
 
     private void ClearWinningNumbers()

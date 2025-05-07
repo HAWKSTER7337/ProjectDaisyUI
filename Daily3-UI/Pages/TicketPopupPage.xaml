@@ -9,6 +9,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <!-- Scrollable Ticket List -->
@@ -61,28 +62,36 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <!-- Close button -->
+        <!--Total Price-->
         <Label
             Grid.Row="1"
+            FontAttributes="Bold"
+            HorizontalOptions="Center"
+            FontSize="19"
+            Text="{Binding TotalPriceString}" />
+
+        <!-- Close button -->
+        <Label
+            Grid.Row="2"
             Text="Buy Tickets?"
             FontAttributes="Bold"
             HorizontalTextAlignment="Center"
-            FontSize="20"/>
+            FontSize="20" />
         <Grid
-            Grid.Row="2">
+            Grid.Row="3">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Button
-                    Grid.Column="0"
-                    Text="No"
-                    Command="{Binding CloseCommand}"
-                    BackgroundColor="{DynamicResource neutral1}"
-                    TextColor="White"
-                    BorderWidth="1"
-                    CornerRadius="10"
-                    Margin="10" />
+                Grid.Column="0"
+                Text="No"
+                Command="{Binding CloseCommand}"
+                BackgroundColor="{DynamicResource neutral1}"
+                TextColor="White"
+                BorderWidth="1"
+                CornerRadius="10"
+                Margin="10" />
             <Button
                 Grid.Column="1"
                 Text="Yes"

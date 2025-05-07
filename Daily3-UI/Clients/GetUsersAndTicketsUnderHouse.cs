@@ -6,34 +6,17 @@ namespace Daily3_UI.Clients;
 
 public static class GetUsersAndTicketsUnderHouse
 {
-    public static async Task<List<User>> getUsersDaily3()
+    public static async Task<List<User>> GetUsersDaily()
     {
         var apiUrl = $"{ClientSideData.BaseUrl}api/TicketHistory/house-tickets";
         var jsonResponse = await GetUsers(apiUrl);
-        var dictionary = JsonSerializer.Deserialize<Dictionary<string, TicketAndWeeklyTotal<Ticket3>>>(jsonResponse);
+        var dictionary = JsonSerializer.Deserialize<Dictionary<string, TicketAndWeeklyTotal>>(jsonResponse);
 
         List<User> listOfUsers = new();
         foreach (var userPair in dictionary)
         {
             var user = new User(userPair.Key, userPair.Value.WinningTotal);
-            user.Tickets3.AddRange(userPair.Value.Tickets);
-            listOfUsers.Add(user);
-        }
-
-        return listOfUsers;
-    }
-
-    public static async Task<List<User>> getUsersDaily4()
-    {
-        var apiUrl = $"{ClientSideData.BaseUrl}api/TicketHistory/house-tickets/daily4";
-        var jsonResponse = await GetUsers(apiUrl);
-        var dictionary = JsonSerializer.Deserialize<Dictionary<string, TicketAndWeeklyTotal<Ticket4>>>(jsonResponse);
-
-        List<User> listOfUsers = new();
-        foreach (var userPair in dictionary)
-        {
-            var user = new User(userPair.Key, userPair.Value.WinningTotal);
-            user.Tickets4.AddRange(userPair.Value.Tickets);
+            user.Tickets.AddRange(userPair.Value.Tickets());
             listOfUsers.Add(user);
         }
 

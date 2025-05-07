@@ -1,12 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                    xmlns:pages="clr-namespace:Daily3_UI.Pages"
-                    x:Class="Daily3_UI.Pages.PagesDaily3.WinningNumbersPage"
-                    BackgroundColor="{StaticResource Secondary}"
-                    Shell.NavBarIsVisible="False"
-                    SizeChanged="OnSizeChanged">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Daily3_UI.Pages.PagesDaily3.WinningNumbersPage"
+             BackgroundColor="{StaticResource Secondary}"
+             Shell.NavBarIsVisible="False"
+             SizeChanged="OnSizeChanged">
 
     <VerticalStackLayout
         Spacing="5"
@@ -33,20 +32,15 @@
                 <Grid
                     Grid.Row="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    
+
                     <Image Source="daily.png"
                            Grid.Column="0"
                            x:Name="Daily3TitleImage">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer
-                                Tapped="FlipToOtherRaffle"
-                                NumberOfTapsRequired="1" />
-                        </Image.GestureRecognizers>
                     </Image>
-                    
+
                     <Button
                         Grid.Column="1"
                         Text="Buy Tickets"

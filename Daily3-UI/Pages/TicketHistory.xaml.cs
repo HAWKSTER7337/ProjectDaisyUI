@@ -4,8 +4,6 @@ using System.Globalization;
 using Daily3_UI.Classes;
 using Daily3_UI.Clients;
 using Daily3_UI.Enums;
-using System.Linq;
-
 
 namespace Daily3_UI.Pages;
 
@@ -19,7 +17,7 @@ public partial class TicketHistory : ContentPage
 
     public ObservableCollection<Ticket> Tickets { get; set; } = new();
 
-    public List<RaffleOptionsEnum> RaffleOptions { get; set; } = new() 
+    public List<RaffleOptionsEnum> RaffleOptions { get; set; } = new()
     {
         RaffleOptionsEnum.All,
         RaffleOptionsEnum.Daily3,
@@ -44,7 +42,7 @@ public partial class TicketHistory : ContentPage
             var ticket4s = _userTickets.Where(ticket => ticket is Ticket4).ToList();
             ticket4s.ForEach(ticket => Tickets.Add(ticket));
         }
-        
+
         Tickets = new ObservableCollection<Ticket>(
             Tickets.OrderBy(ticket => DateTime.Parse(ticket.Date))
         );
@@ -70,7 +68,7 @@ public partial class TicketHistory : ContentPage
     protected override async void OnAppearing()
     {
         TicketLoaderIsBusy = true;
-        Title.Text = await GetTitleString();
+        await GetWinningTotal();
         SearchToggle.IsToggled = false;
 
         var allTickets = await TicketHistoryClient.GetTicketHistory();
@@ -88,10 +86,14 @@ public partial class TicketHistory : ContentPage
         await Shell.Current.GoToAsync("..");
     }
 
-    private static async Task<string> GetTitleString()
+    private double _winningTotal;
+
+    public string WinningTotalString => $"Weekly Total: ${_winningTotal:F2}";
+
+    private async Task GetWinningTotal()
     {
-        var winningTotal = await TicketHistoryClient.GetWeeklyTotal();
-        return $"Ticket History | Weekly Total: ${winningTotal:F2}";
+        _winningTotal = await TicketHistoryClient.GetWeeklyTotal();
+        OnPropertyChanged(nameof(WinningTotalString));
     }
 
     /// <summary>
@@ -195,7 +197,7 @@ public partial class TicketHistory : ContentPage
         // Scale values for elements
         var borderPadding = screenWidth * 0.05;
         var labelFontSize = screenWidth * 0.03;
-        var titleFontSize = screenWidth * 0.03;
+        var titleFontSize = screenWidth * 0.05;
         var pickerFontSize = screenWidth * 0.04;
 
         // Adjust elements accordingly
@@ -220,7 +222,7 @@ public enum RaffleOptionsEnum
 ///     Class used to transfer the WinningStatus Enum into a number to
 ///     display the numbers on the screen
 /// </summary>
-public class StatusToColorConverter : IValueConverter 
+public class StatusToColorConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {

@@ -26,11 +26,20 @@ public partial class TicketPopupPage : Popup
         }
     }
 
+    public string TotalPriceString => $"Total Price: ${TotalPrice():F2}";
+
+    private double TotalPrice()
+    {
+        var total = TicketList.Sum(ticket => ticket.Price);
+        if (total is not null) return (double)total;
+        throw new NullReferenceException("The total price cannot be null");
+    }
+
     public ICommand RemoveCommand { get; }
     public ICommand CloseCommand { get; }
-    public ICommand BuyTicketsCommand { get;  }
-    
-    
+    public ICommand BuyTicketsCommand { get; }
+
+
     public TicketPopupPage(List<Ticket> tickets, BuyTickets page)
     {
         InitializeComponent();
@@ -70,9 +79,10 @@ public partial class TicketPopupPage : Popup
             var ticket4List = TicketList.Select(ticket => (Ticket4)ticket).ToList();
             errorCode = await BuyTicketClient.BuyTicketsDaily4(ticket4List);
         }
-        _page.ChangeErrorLabelColor( errorCode != "Tickets sent successfully"
-             ? Globals.GetColor("DailyRed")
-             : Globals.GetColor("SuccessGreen"));
+
+        _page.ChangeErrorLabelColor(errorCode != "Tickets sent successfully"
+            ? Globals.GetColor("DailyRed")
+            : Globals.GetColor("SuccessGreen"));
         _page.SetErrorLabel(errorCode);
         _page.ClearShoppingCart();
         Close();
