@@ -571,7 +571,14 @@ public partial class BuyTickets : ContentPage
     private int GetDayValue()
     {
         var today = DateTime.Now.DayOfWeek;
-        return today == DayOfWeek.Sunday ? 6 : (int)today - 1;
+        var currentDay = today == DayOfWeek.Sunday ? 6 : (int)today - 1;
+        
+        var michiganTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+        var michiganTime = TimeZoneInfo.ConvertTime(DateTime.Now, michiganTimeZone);
+        var targetTime = michiganTime.Date.AddHours(19).AddMinutes(8);
+        
+        currentDay = michiganTime > targetTime ? currentDay + 1 : currentDay;
+        return currentDay % 7;
     }
 
     private void MoveNumberOfDays()
@@ -605,7 +612,5 @@ public partial class BuyTickets : ContentPage
                 Days7.IsVisible = false;
                 break;  
         }
-        
-        
     }
 }
