@@ -188,13 +188,14 @@
                 Style="{StaticResource Picker-Border}"
                 BackgroundColor="White"
                 Grid.Row="5">
-                <Button x:Name="PriceButton"
-                        Text="1.00"
-                        Clicked="OnPriceButtonClicked"
-                        BackgroundColor="White"
-                        TextColor="Black"
-                        BorderColor="White"
-                        FontAttributes="Bold" />
+                <Entry
+                    Text="1.00"
+                    x:Name="PriceEntry"
+                    BackgroundColor="White"
+                    TextColor="Black"
+                    Keyboard="Numeric"
+                    HorizontalTextAlignment="Center"
+                    Completed="OnPriceSet"/>
             </Border>
 
             <!--Select Bet Type-->
