@@ -30,10 +30,7 @@ public partial class BuyTickets : ContentPage
 
     private double PriceLimit => _isDaily3 ? 20.0 : 4.0;
 
-    public bool IsHouse => Globals.Status >= Status.House;
-    public bool IsUser => !IsHouse;
-
-    public bool IsDaily3
+    private bool IsDaily3
     {
         get => _isDaily3;
         set
@@ -134,11 +131,6 @@ public partial class BuyTickets : ContentPage
             await Shell.Current.GoToAsync("WinningNumbers3");
         else
             await Shell.Current.GoToAsync("WinningNumbers4");
-    }
-
-    private async void ToAdminPage(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("Entrants3");
     }
 
     private void ChangeLotto(object sender, EventArgs e)

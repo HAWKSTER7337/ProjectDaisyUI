@@ -30,8 +30,10 @@ public partial class LogInPage : ContentPage
             // Adding the users global info
             Globals.UserId = Guid.Parse(guidAndStatusList[0]);
             Globals.Status = (Status?)int.Parse(guidAndStatusList[1]);
-            
-            await Shell.Current.GoToAsync("//Buy3", true);
+
+            var nextPage = Globals.Status > Status.User ? "//Entrants" : "//Buy3";
+            await Shell.Current.GoToAsync(nextPage, true);
+
         }
         catch(Exception ex)
         {

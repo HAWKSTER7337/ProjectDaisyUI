@@ -41,11 +41,6 @@ public partial class HousePage : ContentPage
         }
     }
 
-    private async void ToBuyTicketsClicked(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("..");
-    }
-
     private void OnTicketButtonClicked(object sender, EventArgs e)
     {
         if (sender is not Button button) return;
