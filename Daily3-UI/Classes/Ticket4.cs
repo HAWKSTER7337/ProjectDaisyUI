@@ -36,7 +36,7 @@ public class Ticket4 : Ticket
     protected override string TextFormatFunction()
     {
         var information =
-            $"{FormattedNumber1}-{FormattedNumber2}-{FormattedNumber3}-{FormattedNumber4}   Type: {Type}   TOD: {TimeOfDay}";
+            $"{FormattedNumber1}-{FormattedNumber2}-{FormattedNumber3}-{FormattedNumber4}   Type: {Type}   {TimeOfDay}";
         if (WinningStatus == Enums.WinningStatus.Winner) information += $"\nPayout: {WinningPayout:F2}";
 
         return information;

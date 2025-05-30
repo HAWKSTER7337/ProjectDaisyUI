@@ -86,7 +86,7 @@ public abstract class Ticket
     /// </summary>
     protected virtual string TextFormatFunction()
     {
-        var information = $"{FormattedNumber1}-{FormattedNumber2}-{FormattedNumber3}   Type: {Type}   TOD: {TimeOfDay}";
+        var information = $"{FormattedNumber1}-{FormattedNumber2}-{FormattedNumber3}   Type: {Type}   {TimeOfDay}";
         if (WinningStatus == Enums.WinningStatus.Winner) information += $"\nPayout: {WinningPayout:F2}";
 
         return information;
