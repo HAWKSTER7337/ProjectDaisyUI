@@ -12,7 +12,6 @@ public partial class AppShell : Shell
 
         // Register routes
         Routing.RegisterRoute("WinningNumbers3", typeof(WinningNumbersPage));
-        Routing.RegisterRoute("Entrants3", typeof(HousePage));
 
         Routing.RegisterRoute("WinningNumbers4", typeof(WinningNumbersPageDaily4));
 

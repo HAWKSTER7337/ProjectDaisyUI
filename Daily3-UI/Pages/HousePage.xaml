@@ -32,11 +32,6 @@
                            Style="{StaticResource Day}"
                            x:Name="Title" />
 
-                    <Button Text="Buy Tickets"
-                            Grid.Column="1"
-                            Clicked="ToBuyTicketsClicked"
-                            Style="{StaticResource Daily-Button}" />
-
                 </Grid>
             </Border>
 

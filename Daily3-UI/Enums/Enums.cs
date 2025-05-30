@@ -5,7 +5,6 @@ public enum TicketType
     Straight = 0,
     Box = 1,
     TwoWay = 2,
-    OneOff = 3,
     Wheel = 4
 }
 

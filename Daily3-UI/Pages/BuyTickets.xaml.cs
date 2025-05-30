@@ -13,21 +13,24 @@ public partial class BuyTickets : ContentPage
         BindingContext = this;
     }
 
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        
+        MoveNumberOfDays();
+    }
+
     private List<Ticket> ShoppingCart { get; } = new();
 
     private Button? BetTypeSelcted;
 
     private Button? TimeOfDaySelected;
 
-    private DateTime _firstDate = DateTime.Today;
-    private DateTime _secondDate = DateTime.Today;
-
     private bool _isDaily3 = true;
 
-    public bool IsHouse => Globals.Status >= Status.House;
-    public bool IsUser => !IsHouse;
+    private double PriceLimit => _isDaily3 ? 20.0 : 4.0;
 
-    public bool IsDaily3
+    private bool IsDaily3
     {
         get => _isDaily3;
         set
@@ -41,34 +44,7 @@ public partial class BuyTickets : ContentPage
     }
 
     public bool IsDaily4 => !_isDaily3;
-
-    public DateTime FirstDate
-    {
-        get => _firstDate;
-
-        set
-        {
-            if (_firstDate == value) return;
-            _firstDate = value <= DateTime.Today ? DateTime.Today : value;
-            if (_firstDate > _secondDate) SecondDate = _firstDate;
-            OnPropertyChanged(nameof(FirstDateString));
-        }
-    }
-
-    public DateTime SecondDate
-    {
-        get => _secondDate;
-
-        set
-        {
-            if (_secondDate == value) return;
-            _secondDate = value <= _firstDate ? _firstDate : value;
-            OnPropertyChanged(nameof(SecondDateString));
-        }
-    }
-
-    public string FirstDateString => FirstDate.ToString("MM/dd/yyyy");
-    public string SecondDateString => SecondDate.ToString("MM/dd/yyyy");
+    
 
     public void SetErrorLabel(string error)
     {
@@ -98,22 +74,6 @@ public partial class BuyTickets : ContentPage
         SelectTypeOrTimeOfDay(sender, e, ref TimeOfDaySelected);
     }
 
-    private async void FirstDatePressed(object sender, EventArgs e)
-    {
-        var dateAndMonth = GetDateAndMonth(FirstDate);
-        var popup = new DatePopUpPage(dateAndMonth);
-        await Shell.Current.CurrentPage.ShowPopupAsync(popup);
-        FirstDate = UpdateMonthAndDay(dateAndMonth);
-    }
-
-    private async void SecondDatePressed(object sender, EventArgs e)
-    {
-        var dateAndMonth = GetDateAndMonth(SecondDate);
-        var popup = new DatePopUpPage(dateAndMonth);
-        await Shell.Current.CurrentPage.ShowPopupAsync(popup);
-        SecondDate = UpdateMonthAndDay(dateAndMonth);
-    }
-
     private MonthAndDay GetDateAndMonth(DateTime date)
     {
         return new MonthAndDay()
@@ -139,13 +99,6 @@ public partial class BuyTickets : ContentPage
         }
 
         throw new FormatException($"Failed to parse date from input: {dateString}");
-    }
-
-    private bool AddTicketsInSpecifiedIntervalToCart()
-    {
-        var beginningDate = FirstDate;
-        var endDate = SecondDate;
-        return AddToCart(beginningDate, endDate);
     }
 
     private bool AddTicketsFromPreSetToCart()
@@ -180,14 +133,10 @@ public partial class BuyTickets : ContentPage
             await Shell.Current.GoToAsync("WinningNumbers4");
     }
 
-    private async void ToAdminPage(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("Entrants3");
-    }
-
     private void ChangeLotto(object sender, EventArgs e)
     {
         IsDaily3 = !IsDaily3;
+        OnPriceSet(sender, e);
     }
 
     private static DateTime MiddayCutOff => DateTime.Today.AddHours(12).AddMinutes(39);
@@ -214,7 +163,7 @@ public partial class BuyTickets : ContentPage
                 return true;
             }
 
-            if (IsNumberOfDaysMode) HandleTicketDate(ticket);
+            HandleTicketDate(ticket);
             ShoppingCart.Add(ticket);
             return true;
         }
@@ -248,7 +197,7 @@ public partial class BuyTickets : ContentPage
                 Number1 = number1,
                 Number2 = number2,
                 Number3 = number3,
-                Price = double.Parse(PriceButton.Text),
+                Price = double.Parse(PriceEntry.Text),
                 Type = GetTicketTypeFromString(BetTypeSelcted.Text),
                 TimeOfDay = GetTodFromString(TimeOfDaySelected.Text),
                 Date = date
@@ -267,7 +216,7 @@ public partial class BuyTickets : ContentPage
                 Number2 = number2,
                 Number3 = number3,
                 Number4 = number4,
-                Price = double.Parse(PriceButton.Text),
+                Price = double.Parse(PriceEntry.Text),
                 Type = GetTicketTypeFromString(BetTypeSelcted.Text),
                 TimeOfDay = GetTodFromString(TimeOfDaySelected.Text),
                 Date = date
@@ -318,7 +267,7 @@ public partial class BuyTickets : ContentPage
     private async void CheckOut(object sender, EventArgs e)
     {
         ErrorLabel.Text = "";
-        var validTickets = IsCalenderMode ? AddTicketsInSpecifiedIntervalToCart() : AddTicketsFromPreSetToCart();
+        var validTickets = AddTicketsFromPreSetToCart();
         if (!validTickets) return;
         await OpenTicketPopupPageAsync();
     }
@@ -353,7 +302,6 @@ public partial class BuyTickets : ContentPage
             "Straight" => TicketType.Straight,
             "Box" => TicketType.Box,
             "2-Way" => TicketType.TwoWay,
-            "1-Off" => TicketType.OneOff,
             "Wheel" => TicketType.Wheel,
             _ => null
         };
@@ -394,6 +342,7 @@ public partial class BuyTickets : ContentPage
         SelectBetTypeLabel.FontSize = labelFontSize;
         SelectDrawLabel.FontSize = labelFontSize;
         SelectDateLabel.FontSize = labelFontSize;
+        MenuOptionsLabel.FontSize = labelFontSize;
         ErrorLabel.FontSize = errorLabelFont;
 
         Number1Entry.FontSize = pickerFontSize;
@@ -405,12 +354,11 @@ public partial class BuyTickets : ContentPage
         Number3Entry4.FontSize = pickerFontSize;
         Number4Entry4.FontSize = pickerFontSize;
 
-        PriceButton.FontSize = pickerFontSize;
+        PriceEntry.FontSize = pickerFontSize;
 
         StraightButton.FontSize = buttonFontSize;
         BoxButton.FontSize = buttonFontSize;
         TwoWayButton.FontSize = buttonFontSize;
-        OneOffButton.FontSize = buttonFontSize;
         WheelButton.FontSize = buttonFontSize;
         MiddayButton.FontSize = buttonFontSize;
         EveningButton.FontSize = buttonFontSize;
@@ -544,7 +492,7 @@ public partial class BuyTickets : ContentPage
 
         if (result != null && result != "Cancel")
         {
-            PriceButton.Text = result;
+            PriceEntry.Text = result;
         }
     }
 
@@ -555,17 +503,6 @@ public partial class BuyTickets : ContentPage
             entry.Text = string.Empty;
             entry.Focus();
         }
-    }
-
-    private bool _isCalenderMode = false;
-    public bool IsCalenderMode => _isCalenderMode;
-    public bool IsNumberOfDaysMode => !_isCalenderMode;
-
-    private void SwitchDateSelectionStyle(object sender, EventArgs e)
-    {
-        _isCalenderMode = !_isCalenderMode;
-        OnPropertyChanged(nameof(IsCalenderMode));
-        OnPropertyChanged(nameof(IsNumberOfDaysMode));
     }
 
     private int _currentNumberOfDaysSelected = 1;
@@ -602,5 +539,70 @@ public partial class BuyTickets : ContentPage
         Days5.BackgroundColor = Globals.GetColor("Primary");
         Days6.BackgroundColor = Globals.GetColor("Primary");
         Days7.BackgroundColor = Globals.GetColor("Primary");
+    }
+
+    private void OnPriceSet(object sender, EventArgs e)
+    {
+        try
+        {
+            var roundedValue = RoundToNearestPoint05(double.Parse(PriceEntry.Text));
+            if (roundedValue > PriceLimit) roundedValue = PriceLimit;
+            PriceEntry.Text = roundedValue.ToString("0.00");
+        }
+        catch (FormatException ex)
+        {
+            PriceEntry.Text = "1.00";
+        }
+    }
+
+    private double RoundToNearestPoint05(double value)
+    {
+        return Math.Round(value / 0.05) * 0.05;
+    }
+    
+    private int GetDayValue()
+    {
+        var today = DateTime.Now.DayOfWeek;
+        var currentDay = today == DayOfWeek.Sunday ? 6 : (int)today - 1;
+        
+        var michiganTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+        var michiganTime = TimeZoneInfo.ConvertTime(DateTime.Now, michiganTimeZone);
+        var targetTime = michiganTime.Date.AddHours(19).AddMinutes(8);
+        
+        currentDay = michiganTime > targetTime ? currentDay + 1 : currentDay;
+        return currentDay % 7;
+    }
+
+    private void MoveNumberOfDays()
+    {
+        var currentDayNumber = GetDayValue();
+
+        var days = new List<Button>()
+        {
+            Days2, Days3, Days4, Days5, Days6, Days7
+        };
+        days.ForEach(d => d.IsVisible = true);
+
+        switch (currentDayNumber)
+        {
+            case 6:
+                Days2.IsVisible = false;
+                goto case 5;
+            case 5:
+                Days3.IsVisible = false;
+                goto case 4;
+            case 4:
+                Days4.IsVisible = false;
+                goto case 3; 
+            case 3:
+                Days5.IsVisible = false;
+                goto case 2;
+            case 2:
+                Days6.IsVisible = false;
+                goto case 1;
+            case 1:
+                Days7.IsVisible = false;
+                break;  
+        }
     }
 }
