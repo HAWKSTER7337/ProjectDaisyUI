@@ -214,7 +214,7 @@ public partial class BuyTickets : ContentPage
                 return true;
             }
 
-            if (IsNumberOfDaysMode) HandleTicketDate(ticket);
+            HandleTicketDate(ticket);
             ShoppingCart.Add(ticket);
             return true;
         }
@@ -318,7 +318,7 @@ public partial class BuyTickets : ContentPage
     private async void CheckOut(object sender, EventArgs e)
     {
         ErrorLabel.Text = "";
-        var validTickets = IsCalenderMode ? AddTicketsInSpecifiedIntervalToCart() : AddTicketsFromPreSetToCart();
+        var validTickets = AddTicketsFromPreSetToCart();
         if (!validTickets) return;
         await OpenTicketPopupPageAsync();
     }
@@ -393,6 +393,7 @@ public partial class BuyTickets : ContentPage
         SelectBetTypeLabel.FontSize = labelFontSize;
         SelectDrawLabel.FontSize = labelFontSize;
         SelectDateLabel.FontSize = labelFontSize;
+        MenuOptionsLabel.FontSize = labelFontSize;
         ErrorLabel.FontSize = errorLabelFont;
 
         Number1Entry.FontSize = pickerFontSize;
@@ -553,17 +554,6 @@ public partial class BuyTickets : ContentPage
             entry.Text = string.Empty;
             entry.Focus();
         }
-    }
-
-    private bool _isCalenderMode = false;
-    public bool IsCalenderMode => _isCalenderMode;
-    public bool IsNumberOfDaysMode => !_isCalenderMode;
-
-    private void SwitchDateSelectionStyle(object sender, EventArgs e)
-    {
-        _isCalenderMode = !_isCalenderMode;
-        OnPropertyChanged(nameof(IsCalenderMode));
-        OnPropertyChanged(nameof(IsNumberOfDaysMode));
     }
 
     private int _currentNumberOfDaysSelected = 1;
