@@ -353,7 +353,6 @@ public partial class BuyTickets : ContentPage
             "Straight" => TicketType.Straight,
             "Box" => TicketType.Box,
             "2-Way" => TicketType.TwoWay,
-            "1-Off" => TicketType.OneOff,
             "Wheel" => TicketType.Wheel,
             _ => null
         };
@@ -410,7 +409,6 @@ public partial class BuyTickets : ContentPage
         StraightButton.FontSize = buttonFontSize;
         BoxButton.FontSize = buttonFontSize;
         TwoWayButton.FontSize = buttonFontSize;
-        OneOffButton.FontSize = buttonFontSize;
         WheelButton.FontSize = buttonFontSize;
         MiddayButton.FontSize = buttonFontSize;
         EveningButton.FontSize = buttonFontSize;

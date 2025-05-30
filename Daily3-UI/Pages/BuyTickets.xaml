@@ -226,9 +226,6 @@
                         Text="2-Way"
                         x:Name="TwoWayButton" />
                 <Button Grid.Row="1" Grid.Column="0" Clicked="SelectType" Style="{StaticResource Daily-Button}"
-                        Text="1-Off"
-                        x:Name="OneOffButton" />
-                <Button Grid.Row="1" Grid.Column="1" Clicked="SelectType" Style="{StaticResource Daily-Button}"
                         Text="Wheel"
                         x:Name="WheelButton" />
             </Grid>
