@@ -4,19 +4,17 @@ using Daily3_UI.Pages;
 
 namespace Daily3_UI.CustomPopUps;
 
-public class TicketAdminPopUp<T> : Popup
-    where T : Ticket, new()
+public class TicketAdminPopUp : Popup
 {
-    public TicketAdminPopUp(List<T> tickets)
+    public TicketAdminPopUp(List<Ticket> tickets)
     {
         // Resource references
         Application.Current.Resources.TryGetValue("Black", out var black);
         Application.Current.Resources.TryGetValue("Primary", out var primary);
         Application.Current.Resources.TryGetValue("neutral3", out var neutral3);
 
-        var ticket = new T();
         var neutralThree = (Color)neutral3;
-        var backgroundColor = ticket.TicketColorTheme;
+        var backgroundColor = Globals.GetColor("Gray500");
         var textColor = (Color)black;
         var buttonBackgroundColor = (Color)primary;
         Application.Current.Resources["StatusToColor"] = new StatusToColorConverter();

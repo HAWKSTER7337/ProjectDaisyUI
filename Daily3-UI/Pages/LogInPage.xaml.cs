@@ -1,4 +1,5 @@
-﻿using Daily3_UI.Classes;
+﻿using CommunityToolkit.Maui.Views;
+using Daily3_UI.Classes;
 using Daily3_UI.Clients;
 using Daily3_UI.Enums;
 
@@ -29,12 +30,13 @@ public partial class LogInPage : ContentPage
             // Adding the users global info
             Globals.UserId = Guid.Parse(guidAndStatusList[0]);
             Globals.Status = (Status?)int.Parse(guidAndStatusList[1]);
-            Application.Current.MainPage = new AppShell();
+            
+            await Shell.Current.GoToAsync("//Buy3", true);
         }
-        catch
+        catch(Exception ex)
         {
-            var errorCode = e.ToString();
-            ErrorLabel.Text = request_response;
+            var errorCode = ex.Message;
+            ErrorLabel.Text = errorCode;
         }
     }
 
@@ -45,27 +47,27 @@ public partial class LogInPage : ContentPage
     /// </summary>
     /// <param name="guidAndStatus">The string that is being parsed</param>
     /// <returns>An array of the GUID and Status of the user as a string</returns>
-    private string[] SplitResponse(string guidAndStatus)
+    private List<string> SplitResponse(string guidAndStatus)
     {
         char[] separator = { ',' };
-        var parts = guidAndStatus.Split(separator);
+        var parts = guidAndStatus.Split(separator).ToList();
         return parts;
     }
 
     /// <summary>
     ///     Takes you to the create account in page.
     /// </summary>
-    private void TakeToCreateAccountPage(object sender, EventArgs e)
+    private async void TakeToCreateAccountPage(object sender, EventArgs e)
     {
-        Application.Current.MainPage = new CreateAccountPage();
+        await Shell.Current.GoToAsync("CreateAccount");
     }
 
     /// <summary>
     ///     Takes you to the create account in page.
     /// </summary>
-    private void TakeToChangePasswordPage(object sender, EventArgs e)
+    private async void TakeToChangePasswordPage(object sender, EventArgs e)
     {
-        Application.Current.MainPage = new ChangePasswordPage();
+        await Shell.Current.GoToAsync("ChangePassword");
     }
     
     /// <summary>
@@ -109,5 +111,13 @@ public partial class LogInPage : ContentPage
                 label.FontSize *= scaleFactor;
             }
         }
+    }
+
+    private void OnBackgroundTapped(object sender, EventArgs args)
+    {
+        Username.Unfocus();
+        Password.Unfocus();
+        
+        KeyboardHelper.HideKeyboard();
     }
 }

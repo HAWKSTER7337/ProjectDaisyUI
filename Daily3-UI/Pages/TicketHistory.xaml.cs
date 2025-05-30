@@ -12,32 +12,88 @@ public partial class TicketHistory : ContentPage
     public TicketHistory()
     {
         InitializeComponent();
-        _viewModel = new HistoryPageViewModel<Ticket3>(new ObservableCollection<Ticket3>());
-        BindingContext = _viewModel;
+        BindingContext = this;
     }
 
-    private readonly HistoryPageViewModel<Ticket3> _viewModel;
+    public ObservableCollection<Ticket> Tickets { get; set; } = new();
+
+    public List<RaffleOptionsEnum> RaffleOptions { get; set; } = new()
+    {
+        RaffleOptionsEnum.All,
+        RaffleOptionsEnum.Daily3,
+        RaffleOptionsEnum.Daily4
+    };
+
+    public RaffleOptionsEnum SelectedRaffleOption { get; set; } = RaffleOptionsEnum.All;
+
+    private void OnRaffleChanged(object sender, EventArgs e)
+    {
+        Tickets.Clear();
+        ChangeBackGroundToDailyColor();
+
+        if (SelectedRaffleOption is RaffleOptionsEnum.All or RaffleOptionsEnum.Daily3)
+        {
+            var ticket3s = _userTickets.Where(ticket => ticket is Ticket3).ToList();
+            ticket3s.ForEach(ticket => Tickets.Add(ticket));
+        }
+
+        if (SelectedRaffleOption is RaffleOptionsEnum.All or RaffleOptionsEnum.Daily4)
+        {
+            var ticket4s = _userTickets.Where(ticket => ticket is Ticket4).ToList();
+            ticket4s.ForEach(ticket => Tickets.Add(ticket));
+        }
+
+        Tickets = new ObservableCollection<Ticket>(
+            Tickets.OrderBy(ticket => DateTime.Parse(ticket.Date))
+        );
+        OnPropertyChanged(nameof(Tickets));
+    }
+
+    private void ChangeBackGroundToDailyColor()
+    {
+        switch (SelectedRaffleOption)
+        {
+            case (RaffleOptionsEnum.All):
+                ContentPage.BackgroundColor = (Color)Application.Current.Resources["Gray500"];
+                break;
+            case (RaffleOptionsEnum.Daily3):
+                ContentPage.BackgroundColor = (Color)Application.Current.Resources["Secondary"];
+                break;
+            case (RaffleOptionsEnum.Daily4):
+                ContentPage.BackgroundColor = (Color)Application.Current.Resources["SecondaryDaily4"];
+                break;
+        }
+    }
 
     protected override async void OnAppearing()
     {
         TicketLoaderIsBusy = true;
-        Title.Text = await GetTitleString();
+        await GetWinningTotal();
         SearchToggle.IsToggled = false;
 
-        var allTickets = await TicketHistoryClient.GetTicketHistoryDaily3();
-        _userTickets = new ObservableCollection<Ticket3>(allTickets);
+        var allTickets = await TicketHistoryClient.GetTicketHistory();
+        _userTickets = new ObservableCollection<Ticket>(allTickets);
 
-        _viewModel.Tickets.Clear();
+        Tickets.Clear();
         foreach (var ticket in _userTickets)
-            _viewModel.Tickets.Add(ticket);
+            Tickets.Add(ticket);
 
         TicketLoaderIsBusy = false;
     }
 
-    private static async Task<string> GetTitleString()
+    private async void BackToBuyTicketsPage(object sender, EventArgs e)
     {
-        var winningTotal = await TicketHistoryClient.GetWeeklyTotal();
-        return $"Ticket History | Weekly Total: ${winningTotal:F2}";
+        await Shell.Current.GoToAsync("..");
+    }
+
+    private double _winningTotal;
+
+    public string WinningTotalString => $"Weekly Total: ${_winningTotal:F2}";
+
+    private async Task GetWinningTotal()
+    {
+        _winningTotal = await TicketHistoryClient.GetWeeklyTotal();
+        OnPropertyChanged(nameof(WinningTotalString));
     }
 
     /// <summary>
@@ -72,7 +128,7 @@ public partial class TicketHistory : ContentPage
     /// <summary>
     ///     All the users Tickets
     /// </summary>
-    private ObservableCollection<Ticket3> _userTickets;
+    private ObservableCollection<Ticket> _userTickets = new();
 
     /// <summary>
     ///     Checking if the tickets should be filtered by date
@@ -89,7 +145,7 @@ public partial class TicketHistory : ContentPage
     private void ToggleDateSwitch(object sender, ToggledEventArgs e)
     {
         _shouldFilterByDate = e.Value;
-        FilterByDate(_currentSetDate);
+        HandleFiltering(sender, e);
         OnPropertyChanged(nameof(TicketCollectionView));
     }
 
@@ -99,26 +155,33 @@ public partial class TicketHistory : ContentPage
     private void DateChanged(object sender, DateChangedEventArgs e)
     {
         _currentSetDate = e.NewDate;
-        FilterByDate(_currentSetDate);
+        HandleFiltering(sender, e);
+    }
+
+    private void HandleFiltering(object sender, EventArgs e)
+    {
+        OnRaffleChanged(sender, e);
+        var ticketListCopy = new List<Ticket>(Tickets);
+        FilterByDate(_currentSetDate, ticketListCopy);
     }
 
     /// <summary>
     ///     The filter handling 
     /// </summary>
-    private void FilterByDate(DateTime date)
+    private void FilterByDate(DateTime date, List<Ticket> copyList)
     {
-        _viewModel.Tickets.Clear();
+        Tickets.Clear();
 
         if (ShouldNotFilterByDate)
         {
-            foreach (var ticket in _userTickets)
-                _viewModel.Tickets.Add(ticket);
+            foreach (var ticket in copyList)
+                Tickets.Add(ticket);
         }
         else
         {
-            var filtered = _userTickets.Where(t => DateTime.Parse(t.Date).Date == date.Date);
+            var filtered = copyList.Where(t => DateTime.Parse(t.Date).Date == date.Date);
             foreach (var ticket in filtered)
-                _viewModel.Tickets.Add(ticket);
+                Tickets.Add(ticket);
         }
     }
 
@@ -134,7 +197,7 @@ public partial class TicketHistory : ContentPage
         // Scale values for elements
         var borderPadding = screenWidth * 0.05;
         var labelFontSize = screenWidth * 0.03;
-        var titleFontSize = screenWidth * 0.04;
+        var titleFontSize = screenWidth * 0.05;
         var pickerFontSize = screenWidth * 0.04;
 
         // Adjust elements accordingly
@@ -148,15 +211,11 @@ public partial class TicketHistory : ContentPage
     }
 }
 
-public class HistoryPageViewModel<T>
-    where T : Ticket
+public enum RaffleOptionsEnum
 {
-    public ObservableCollection<T> Tickets { get; set; }
-
-    public HistoryPageViewModel(ObservableCollection<T> tickets)
-    {
-        Tickets = tickets;
-    }
+    All,
+    Daily3,
+    Daily4
 }
 
 /// <summary>

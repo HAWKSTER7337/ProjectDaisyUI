@@ -3,9 +3,9 @@ using Daily3_UI.Classes;
 using Daily3_UI.Clients;
 using Daily3_UI.CustomPopUps;
 
-namespace Daily3_UI.Pages;
+namespace Daily3_UI.Pages.PagesDaily3;
 
-public partial class HousePageDaily4 : ContentPage
+public partial class HousePage : ContentPage
 {
     private List<User> _users = new();
 
@@ -14,7 +14,7 @@ public partial class HousePageDaily4 : ContentPage
         return _users.OrderBy(user => user.Username).ToList();
     }
 
-    public HousePageDaily4()
+    public HousePage()
     {
         InitializeComponent();
     }
@@ -26,7 +26,8 @@ public partial class HousePageDaily4 : ContentPage
             UserLoader.IsRunning = true;
             UserLoader.IsVisible = true;
 
-            _users = await GetUsersAndTicketsUnderHouse.getUsersDaily4();
+            _users = await GetUsersAndTicketsUnderHouse.GetUsersDaily();
+
             UserCollectionView.ItemsSource = Users();
         }
         catch (Exception ex)
@@ -40,12 +41,17 @@ public partial class HousePageDaily4 : ContentPage
         }
     }
 
+    private async void ToBuyTicketsClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("..");
+    }
+
     private void OnTicketButtonClicked(object sender, EventArgs e)
     {
         if (sender is not Button button) return;
         var user = button.BindingContext as User;
         if (user == null) throw new Exception("User is not found");
-        var popup = new TicketAdminPopUp<Ticket4>(user.Tickets4.ToList());
+        var popup = new TicketAdminPopUp(user.Tickets);
 
         if (this == null) throw new Exception("This is null for some reason");
         if (popup == null) throw new Exception("The Popup is null for some reason");

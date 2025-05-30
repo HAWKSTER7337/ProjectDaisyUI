@@ -2,8 +2,8 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Daily3_UI.Pages.HousePageDaily4"
-             BackgroundColor="{StaticResource SecondaryDaily4}"
+             x:Class="Daily3_UI.Pages.PagesDaily3.HousePage"
+             BackgroundColor="{StaticResource Gray400}"
              Shell.NavBarIsVisible="False">
     <ContentPage.Content>
         <Grid>
@@ -15,15 +15,29 @@
             <!--Title Card-->
             <Border
                 BackgroundColor="{StaticResource Primary}"
-                WidthRequest="1000"
                 Padding="5"
                 StrokeShape="RoundRectangle 10,10,0,0"
                 x:Name="BorderTitle"
                 Grid.Row="0">
-                <Label Text="Admin Page"
-                       TextColor="{StaticResource Black}"
-                       Style="{StaticResource Day}"
-                       x:Name="Title" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+
+                    <Label Text="Admin Page"
+                           Grid.Column="0"
+                           TextColor="{StaticResource Black}"
+                           Style="{StaticResource Day}"
+                           x:Name="Title" />
+
+                    <Button Text="Buy Tickets"
+                            Grid.Column="1"
+                            Clicked="ToBuyTicketsClicked"
+                            Style="{StaticResource Daily-Button}" />
+
+                </Grid>
             </Border>
 
             <!--Listing Players Below You-->

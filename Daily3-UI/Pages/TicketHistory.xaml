@@ -3,16 +3,18 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pages="clr-namespace:Daily3_UI.Pages"
-             x:Class="Daily3_UI.Pages.TicketHistoryDaily4"
-             BackgroundColor="{StaticResource SecondaryDaily4}"
+             xmlns:pagesDaily3="clr-namespace:Daily3_UI.Pages.PagesDaily3"
+             x:Class="Daily3_UI.Pages.TicketHistory"
+             BackgroundColor="{StaticResource Gray500}"
              Shell.NavBarIsVisible="False"
-             SizeChanged="OnSizeChanged">
+             SizeChanged="OnSizeChanged"
+             x:Name="ContentPage">
 
     <ContentPage.Resources>
         <pages:StatusToColorConverter x:Key="StatusToColor" />
     </ContentPage.Resources>
 
-    <Grid Padding="30,0">
+    <Grid Padding="0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -23,16 +25,29 @@
         <!-- Title -->
         <Border
             BackgroundColor="{StaticResource Primary}"
-            WidthRequest="1000"
             Padding="5"
+            Grid.Row="0"
             StrokeShape="RoundRectangle 10,10,0,0"
-            x:Name="BorderTitle"
-            Grid.Row="0">
-            <Label Text="Ticket History"
-                   TextColor="{StaticResource Black}"
-                   Style="{StaticResource Day}"
-                   x:Name="Title" />
+            x:Name="BorderTitle">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Text="{Binding WinningTotalString}"
+                       FontSize="24"
+                       Grid.Column="0"
+                       TextColor="{StaticResource Black}"
+                       Style="{StaticResource Day}"
+                       x:Name="Title" />
+                <Button
+                    Grid.Column="1"
+                    Text="Buy Tickets"
+                    Clicked="BackToBuyTicketsPage"
+                    Style="{StaticResource Daily-Button}" />
+            </Grid>
         </Border>
+
 
         <!-- Date Search Label -->
         <Label Text="Search by Date"
@@ -41,11 +56,12 @@
                Grid.Row="1"
                Margin="0,10,0,0" />
 
-        <!-- Date Search Controls -->
+        <!-- filter Controls -->
         <Grid Padding="5" Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" />
-                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
@@ -59,8 +75,9 @@
                             TextColor="Black" />
             </Border>
 
-            <Label Text="Search Toggle"
+            <Label Text="Filter By Date"
                    Grid.Column="1"
+                   Padding="3, 0, 0, 0"
                    HorizontalOptions="Center"
                    VerticalOptions="Center"
                    TextColor="{StaticResource White}"
@@ -69,6 +86,19 @@
             <Switch x:Name="SearchToggle"
                     Toggled="ToggleDateSwitch"
                     Grid.Column="2" />
+
+            <Border Grid.Column="3"
+                    Style="{StaticResource Picker-Border}"
+                    BackgroundColor="White">
+                <Picker
+                    ItemsSource="{Binding RaffleOptions}"
+                    SelectedItem="{Binding SelectedRaffleOption}"
+                    FontAutoScalingEnabled="True"
+                    BackgroundColor="{StaticResource White}"
+                    TextColor="{StaticResource Black}"
+                    HorizontalTextAlignment="Center"
+                    SelectedIndexChanged="HandleFiltering" />
+            </Border>
         </Grid>
 
         <!-- Display Tickets -->
@@ -101,7 +131,7 @@
                         <Label Grid.Row="1"
                                Text="{Binding DetailsFormat}"
                                FontSize="14"
-                               TextColor="{StaticResource neutral3}" />
+                               TextColor="{StaticResource White}" />
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

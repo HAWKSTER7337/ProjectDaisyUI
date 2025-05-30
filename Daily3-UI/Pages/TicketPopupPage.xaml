@@ -1,45 +1,54 @@
 ﻿<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-               x:Class="Daily3_UI.Pages.TicketPopupPage">
+               x:Class="Daily3_UI.Pages.PagesDaily3.TicketPopupPage">
     <Grid Padding="10"
           HeightRequest="{OnPlatform iOS=400, Android=500}">
+
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <!-- Scrollable ListView -->
-        <ListView Grid.Row="0"
-                  x:Name="TicketListView"
-                  ItemsSource="{Binding Tickets}"
-                  SeparatorVisibility="None">
-            <ListView.ItemTemplate>
+        <!-- Scrollable Ticket List -->
+        <CollectionView Grid.Row="0"
+                        x:Name="TicketListView"
+                        ItemsSource="{Binding Tickets}"
+                        ItemSizingStrategy="MeasureAllItems"
+                        Margin="0,0,0,10">
+            <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell>
-                        <Grid>
+                    <Frame Margin="0,5"
+                           Padding="10"
+                           BorderColor="{DynamicResource Primary}"
+                           CornerRadius="10">
+                        <Grid ColumnSpacing="10">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
+
                             <StackLayout Grid.Column="0" Orientation="Vertical">
                                 <Label Text="{Binding TextFormat}"
                                        TextColor="{DynamicResource Primary}" />
                                 <Label Text="{Binding DetailsFormat}"
                                        TextColor="{DynamicResource Primary}" />
                             </StackLayout>
+
                             <Frame Grid.Column="1"
                                    BackgroundColor="{StaticResource DailyRed}"
                                    WidthRequest="60"
                                    HeightRequest="30"
                                    CornerRadius="15"
-                                   HorizontalOptions="EndAndExpand"
+                                   HorizontalOptions="End"
                                    VerticalOptions="Center"
                                    Padding="0">
                                 <Label Text="Remove"
                                        TextColor="{StaticResource neutral1}"
-                                       HorizontalOptions="CenterAndExpand"
-                                       VerticalOptions="CenterAndExpand">
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center">
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer
                                             Command="{Binding Path=BindingContext.RemoveCommand, Source={x:Reference TicketListView}}"
@@ -48,19 +57,50 @@
                                 </Label>
                             </Frame>
                         </Grid>
-                    </ViewCell>
+                    </Frame>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!--Total Price-->
+        <Label
+            Grid.Row="1"
+            FontAttributes="Bold"
+            HorizontalOptions="Center"
+            FontSize="19"
+            Text="{Binding TotalPriceString}" />
 
         <!-- Close button -->
-        <Button Grid.Row="1"
-                Text="Close"
+        <Label
+            Grid.Row="2"
+            Text="Buy Tickets?"
+            FontAttributes="Bold"
+            HorizontalTextAlignment="Center"
+            FontSize="20" />
+        <Grid
+            Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button
+                Grid.Column="0"
+                Text="No"
                 Command="{Binding CloseCommand}"
                 BackgroundColor="{DynamicResource neutral1}"
                 TextColor="White"
                 BorderWidth="1"
                 CornerRadius="10"
                 Margin="10" />
+            <Button
+                Grid.Column="1"
+                Text="Yes"
+                Command="{Binding BuyTicketsCommand}"
+                BackgroundColor="{DynamicResource neutral1}"
+                TextColor="White"
+                BorderWidth="1"
+                CornerRadius="10"
+                Margin="10" />
+        </Grid>
     </Grid>
 </toolkit:Popup>

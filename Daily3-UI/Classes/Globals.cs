@@ -34,6 +34,8 @@ public static class Globals
         get => _status;
         set => _status ??= value;
     }
+    
+    public const int CurrentYear = 2025;
 
     /// <summary>
     ///     Trys to get color from static resources
@@ -47,19 +49,19 @@ public static class Globals
         return resourceColor;
     }
 
-    public static List<KeyValuePair<string, ContentPage>> Daily3ContentPages = new()
+    public static List<KeyValuePair<string, string>> Daily3ContentPages = new()
     {
-        new KeyValuePair<string, ContentPage>("Daily Numbers", new WinningNumbersPage()),
-        new KeyValuePair<string, ContentPage>("Buy Tickets", new BuyTickets()),
-        new KeyValuePair<string, ContentPage>("View History", new TicketHistory()),
-        new KeyValuePair<string, ContentPage>("Entrants Tickets", new HousePage())
+        new ("Daily Numbers", "Home3"),
+        new ("Buy Tickets", "Buy3"),
+        new ("View History", "History3"),
+        new ("Entrants Tickets", "Entrants3")
     };
 
-    public static List<KeyValuePair<string, ContentPage>> Daily4ContentPages = new()
+    public static List<KeyValuePair<string, string>> Daily4ContentPages = new()
     {
-        new KeyValuePair<string, ContentPage>("Daily Numbers", new WinningNumbersPageDaily4()),
-        new KeyValuePair<string, ContentPage>("Buy Tickets", new BuyTicketsDaily4()),
-        new KeyValuePair<string, ContentPage>("View History", new TicketHistoryDaily4()),
-        new KeyValuePair<string, ContentPage>("Entrants Tickets", new HousePageDaily4())
+        new ("Daily Numbers", "Home4"),
+        new ("Buy Tickets", "Buy4"),
+        new ("View History", "History4"),
+        new ("Entrants Tickets", "Entrants4")
     };
 }

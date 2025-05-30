@@ -20,11 +20,11 @@
     </Style>
 
     <Style x:Key="Ball" TargetType="Border">
-        <Setter Property="WidthRequest" Value="50" />
-        <Setter Property="HeightRequest" Value="50" />
+        <Setter Property="WidthRequest" Value="60" />
+        <Setter Property="HeightRequest" Value="60" />
         <Setter Property="StrokeShape" Value="RoundRectangle 100,100,100,100" />
         <Setter Property="BackgroundColor" Value="{StaticResource White}" />
-        <Setter Property="Margin" Value="5" />
+        <Setter Property="Margin" Value="5,10,5,10" />
     </Style>
 
     <Style x:Key="Picker-Ball" TargetType="Border">
@@ -85,10 +85,10 @@
     </Style>
 
     <Style x:Key="Daily-Button" TargetType="Button">
-        <Setter Property="Margin" Value="5" />
+        <Setter Property="Margin" Value="1,4" />
         <Setter Property="TextColor" Value="{StaticResource Black}" />
         <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
-        <Setter Property="FontSize" Value="18" />
+        <Setter Property="FontSize" Value="15" />
         <Setter Property="FontAttributes" Value="Bold" />
     </Style>
 

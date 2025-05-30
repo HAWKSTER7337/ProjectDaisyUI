@@ -1,6 +1,4 @@
-﻿using System.Collections;
-
-namespace Daily3_UI.Classes;
+﻿namespace Daily3_UI.Classes;
 
 /// <summary>
 ///     A simple class to show a user and the tickets that
@@ -16,16 +14,14 @@ public class User
     {
         Username = username;
         _totalWinnings = totalWinnings;
-        Tickets3 = new AddOnlyList<Ticket3>();
-        Tickets4 = new AddOnlyList<Ticket4>();
     }
 
     public User(string username)
     {
         Username = username;
-        Tickets3 = new AddOnlyList<Ticket3>();
-        Tickets4 = new AddOnlyList<Ticket4>();
     }
+
+    public List<Ticket> Tickets = new();
 
     /// <summary>
     ///     The actual username the player goes under.
@@ -33,50 +29,10 @@ public class User
     /// </summary>
     public string Username { get; init; }
 
-    /// <summary>
-    ///     The tickets that are connected to the given user for the daily 3 
-    /// </summary>
-    public AddOnlyList<Ticket3> Tickets3 { get; }
-
-    /// <summary>
-    ///     The Tickets that are connected to the given user for the daily 4
-    /// </summary>
-    public AddOnlyList<Ticket4> Tickets4 { get; }
-
     private readonly double _totalWinnings;
 
     /// <summary>
     ///     Gives you the total winnings of the user
     /// </summary>
     public string TotalWinnings => $"$ {_totalWinnings:F2}";
-}
-
-public class AddOnlyList<T> : IEnumerable<T>
-{
-    private readonly List<T> _list = new();
-
-    public void Add(T item)
-    {
-        _list.Add(item);
-    }
-
-    public void AddRange(List<T> listOfItems)
-    {
-        listOfItems.ForEach(item => _list.Add(item));
-    }
-
-    public List<T> ToList()
-    {
-        return _list.ToList();
-    }
-
-    public IEnumerator<T> GetEnumerator()
-    {
-        return _list.GetEnumerator();
-    }
-
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return GetEnumerator();
-    }
 }

@@ -1,0 +1,411 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+             x:Class="Daily3_UI.Pages.PagesDaily3.BuyTickets"
+             BackgroundColor="{StaticResource Secondary}"
+             Shell.NavBarIsVisible="False"
+             SizeChanged="OnSizeChanged">
+
+    <VerticalStackLayout
+        Spacing="5"
+        Padding="0,0"
+        VerticalOptions="Fill"
+        HorizontalOptions="Fill">
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="30" />
+            </Grid.RowDefinitions>
+
+            <!--Title-->
+            <Border
+                BackgroundColor="{StaticResource Primary}"
+                Padding="5"
+                StrokeShape="RoundRectangle 10,10,0,0"
+                Grid.Row="0">
+                <Grid ColumnSpacing="0"
+                      HorizontalOptions="Fill"
+                      VerticalOptions="Start">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Text="Buy Tickets"
+                           IsVisible="{Binding IsUser}"
+                           Grid.Column="0"
+                           TextColor="{StaticResource Black}"
+                           Style="{StaticResource Day}" />
+
+                    <Button Text="Admin Page"
+                            IsVisible="{Binding IsHouse}"
+                            Clicked="ToAdminPage"
+                            Grid.Column="0"
+                            TextColor="{StaticResource Black}"
+                            Style="{StaticResource Daily-Button}" />
+
+                    <Button
+                        Grid.Column="1"
+                        Text="Switch Lotto"
+                        Clicked="ChangeLotto"
+                        Style="{StaticResource Daily-Button}" />
+                </Grid>
+            </Border>
+
+
+            <!--Number Selectors-->
+            <Label Text="Select Numbers"
+                   Style="{StaticResource Tod}"
+                   TextColor="{StaticResource neutral4}"
+                   Grid.Row="1" />
+            <Grid Padding="10"
+                  Grid.Row="2"
+                  IsVisible="{Binding IsDaily3}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" Style="{StaticResource Picker-Ball}" x:Name="Number1Border">
+                    <Entry x:Name="Number1Entry"
+                           MaxLength="1"
+                           Keyboard="Numeric"
+                           Focused="OnNumberEntryFocused"
+                           TextChanged="OnNumber1TextChanged"
+                           Style="{StaticResource Number-Setter}"
+                           HorizontalTextAlignment="Center" />
+                </Border>
+
+                <Border Grid.Column="1" Style="{StaticResource Picker-Ball}" x:Name="Number2Border">
+                    <Entry x:Name="Number2Entry"
+                           MaxLength="1"
+                           Keyboard="Numeric"
+                           Focused="OnNumberEntryFocused"
+                           TextChanged="OnNumber2TextChanged"
+                           Style="{StaticResource Number-Setter}"
+                           HorizontalTextAlignment="Center" />
+                </Border>
+
+                <Border Grid.Column="2" Style="{StaticResource Picker-Ball}" x:Name="Number3Border">
+                    <Entry x:Name="Number3Entry"
+                           MaxLength="1"
+                           Keyboard="Numeric"
+                           Focused="OnNumberEntryFocused"
+                           TextChanged="OnNumber3TextChanged"
+                           Style="{StaticResource Number-Setter}"
+                           HorizontalTextAlignment="Center" />
+                </Border>
+
+            </Grid>
+
+            <!--Number Selectors Daily 4-->
+            <Grid Padding="10"
+                  Grid.Row="2"
+                  IsVisible="{Binding IsDaily4}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" Style="{StaticResource Picker-Ball}" x:Name="Number1BorderD1">
+                    <Entry x:Name="Number1Entry4"
+                           MaxLength="1"
+                           Keyboard="Numeric"
+                           Focused="OnNumberEntryFocused"
+                           TextChanged="OnNumber1TextChangedD"
+                           Style="{StaticResource Number-Setter}"
+                           HorizontalTextAlignment="Center" />
+                </Border>
+
+                <Border Grid.Column="1" Style="{StaticResource Picker-Ball}" x:Name="Number2BorderD2">
+                    <Entry x:Name="Number2Entry4"
+                           MaxLength="1"
+                           Keyboard="Numeric"
+                           Focused="OnNumberEntryFocused"
+                           TextChanged="OnNumber2TextChangedD"
+                           Style="{StaticResource Number-Setter}"
+                           HorizontalTextAlignment="Center" />
+                </Border>
+
+                <Border Grid.Column="2" Style="{StaticResource Picker-Ball}" x:Name="Number3BorderD3">
+                    <Entry x:Name="Number3Entry4"
+                           MaxLength="1"
+                           Keyboard="Numeric"
+                           Focused="OnNumberEntryFocused"
+                           TextChanged="OnNumber3TextChangedD"
+                           Style="{StaticResource Number-Setter}"
+                           HorizontalTextAlignment="Center" />
+                </Border>
+
+                <Border Grid.Column="3" Style="{StaticResource Picker-Ball}" x:Name="Number4BorderD4">
+                    <Entry x:Name="Number4Entry4"
+                           MaxLength="1"
+                           Keyboard="Numeric"
+                           Focused="OnNumberEntryFocused"
+                           TextChanged="OnNumber3TextChangedD"
+                           Style="{StaticResource Number-Setter}"
+                           HorizontalTextAlignment="Center" />
+                </Border>
+
+            </Grid>
+
+            <!--Number Selector Clear Button-->
+            <Button
+                Grid.Row="3"
+                Text="Clear"
+                Style="{StaticResource Daily-Button}"
+                Clicked="ClearNumbers" />
+
+            <!--Select Payment amount-->
+            <Label Text="Select Payment Amount"
+                   Style="{StaticResource Tod}"
+                   Grid.Row="4"
+                   x:Name="SelectPaymentLabel" />
+            <Border
+                Style="{StaticResource Picker-Border}"
+                BackgroundColor="White"
+                Grid.Row="5">
+                <Button x:Name="PriceButton"
+                        Text="1.00"
+                        Clicked="OnPriceButtonClicked"
+                        BackgroundColor="White"
+                        TextColor="Black"
+                        BorderColor="White"
+                        FontAttributes="Bold" />
+            </Border>
+
+            <!--Select Bet Type-->
+            <Label Text="Select Bet Type"
+                   Style="{StaticResource Tod}"
+                   x:Name="SelectBetTypeLabel"
+                   Grid.Row="6" />
+            <Grid
+                Padding="5"
+                Grid.Row="7">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+
+                <Button Grid.Row="0" Grid.Column="0" Clicked="SelectType" Style="{StaticResource Daily-Button}"
+                        Text="Straight"
+                        x:Name="StraightButton" />
+                <Button Grid.Row="0" Grid.Column="1" Clicked="SelectType" Style="{StaticResource Daily-Button}"
+                        Text="Box"
+                        x:Name="BoxButton" />
+                <Button Grid.Row="0" Grid.Column="2" Clicked="SelectType" Style="{StaticResource Daily-Button}"
+                        Text="2-Way"
+                        x:Name="TwoWayButton" />
+                <Button Grid.Row="1" Grid.Column="0" Clicked="SelectType" Style="{StaticResource Daily-Button}"
+                        Text="1-Off"
+                        x:Name="OneOffButton" />
+                <Button Grid.Row="1" Grid.Column="1" Clicked="SelectType" Style="{StaticResource Daily-Button}"
+                        Text="Wheel"
+                        x:Name="WheelButton" />
+            </Grid>
+
+            <!--Select Draw-->
+            <Label Text="Select Draw"
+                   Style="{StaticResource Tod}"
+                   Grid.Row="8"
+                   x:Name="SelectDrawLabel" />
+            <Grid
+                Padding="5"
+                Grid.Row="9">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Row="0" Grid.Column="0" Clicked="SelectTimeOfDay" Style="{StaticResource Daily-Button}"
+                        Text="Midday" x:Name="MiddayButton" />
+                <Button Grid.Row="0" Grid.Column="1" Clicked="SelectTimeOfDay" Style="{StaticResource Daily-Button}"
+                        Text="Evening" x:Name="EveningButton" />
+                <Button Grid.Row="0" Grid.Column="2" Clicked="SelectTimeOfDay" Style="{StaticResource Daily-Button}"
+                        Text="Both" x:Name="BothButton" />
+            </Grid>
+
+            <!--Select Date-->
+            <Label Text="Select Date"
+                   Style="{StaticResource Tod}"
+                   Grid.Row="10"
+                   x:Name="SelectDateLabel" />
+
+            <!--Calender Selector -->
+            <Grid
+                Padding="5"
+                Grid.Row="11"
+                IsVisible="{Binding IsCalenderMode}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0"
+                        Style="{StaticResource Left-Value-Border}">
+                    <Button
+                        x:Name="FirstDateButton"
+                        HorizontalOptions="Center"
+                        BackgroundColor="{StaticResource White}"
+                        BorderColor="{StaticResource White}"
+                        Text="{Binding FirstDateString}"
+                        Clicked="FirstDatePressed"
+                        FontSize="20"
+                        TextColor="{StaticResource Black}" />
+                </Border>
+                <Border Grid.Column="1"
+                        Style="{StaticResource Right-Value-Border}">
+                    <Button
+                        x:Name="SecondDateButton"
+                        HorizontalOptions="Center"
+                        BackgroundColor="{StaticResource White}"
+                        BorderColor="{StaticResource White}"
+                        Text="{Binding SecondDateString}"
+                        Clicked="SecondDatePressed"
+                        FontSize="20"
+                        TextColor="{StaticResource Black}" />
+                </Border>
+            </Grid>
+            <Button
+                Style="{StaticResource Daily-Button}"
+                Text="Select Date From Presets"
+                Clicked="SwitchDateSelectionStyle"
+                Margin="5,0,5,0"
+                Grid.Row="12"
+                IsVisible="{Binding IsCalenderMode}" />
+
+            <!--Button Date Selectors-->
+            <Grid
+                IsVisible="{Binding IsNumberOfDaysMode}"
+                Grid.Row="11">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button
+                    Style="{StaticResource Daily-Button}"
+                    Text="2 Days"
+                    x:Name="Days2"
+                    Margin="5,1"
+                    Clicked="OnPresetDateSelected"
+                    Grid.Row="0"
+                    Grid.Column="0" />
+                <Button
+                    Style="{StaticResource Daily-Button}"
+                    Text="3 Days"
+                    x:Name="Days3"
+                    Margin="5,1"
+                    Clicked="OnPresetDateSelected"
+                    Grid.Row="0"
+                    Grid.Column="1" />
+                <Button
+                    Style="{StaticResource Daily-Button}"
+                    Text="4 Days"
+                    x:Name="Days4"
+                    Margin="5,1"
+                    Clicked="OnPresetDateSelected"
+                    Grid.Row="0"
+                    Grid.Column="2" />
+                <Button
+                    Style="{StaticResource Daily-Button}"
+                    Text="5 Days"
+                    x:Name="Days5"
+                    Margin="5,1"
+                    Clicked="OnPresetDateSelected"
+                    Grid.Row="1"
+                    Grid.Column="0" />
+                <Button
+                    Style="{StaticResource Daily-Button}"
+                    Text="6 Days"
+                    x:Name="Days6"
+                    Margin="5, 1"
+                    Clicked="OnPresetDateSelected"
+                    Grid.Row="1"
+                    Grid.Column="1" />
+                <Button
+                    Style="{StaticResource Daily-Button}"
+                    Text="7 Days"
+                    x:Name="Days7"
+                    Margin="5,1"
+                    Clicked="OnPresetDateSelected"
+                    Grid.Row="1"
+                    Grid.Column="2" />
+
+            </Grid>
+            <Button
+                Style="{StaticResource Daily-Button}"
+                Text="Select Dates from Calender"
+                Clicked="SwitchDateSelectionStyle"
+                IsVisible="{Binding IsNumberOfDaysMode}"
+                Margin="5,2,5,0"
+                Grid.Row="12" />
+
+            <!--Menu Actions -->
+            <Grid
+                Padding="5"
+                Grid.Row="13">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Style="{StaticResource Daily-Button}"
+                        Text="Buy Tickets"
+                        Clicked="CheckOut"
+                        x:Name="BuyTicketsButton" />
+                <Button Grid.Column="1" Style="{StaticResource Daily-Button}"
+                        Text="History"
+                        Clicked="TakeUserToTicketHistoryPage"
+                        x:Name="HistoryButton" />
+                <Button Grid.Column="2" Style="{StaticResource Daily-Button}"
+                        Text="Daily Nums"
+                        Clicked="TakeUserToWinningNumberPage"
+                        x:Name="WinningNumbersButton" />
+            </Grid>
+
+            <!--Error Message Label-->
+            <Label Text=""
+                   x:Name="ErrorLabel"
+                   Style="{StaticResource Error-Message}"
+                   Grid.Row="14" />
+
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>

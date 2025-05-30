@@ -4,72 +4,81 @@
              x:Class="Daily3_UI.Pages.LogInPage"
              Shell.NavBarIsVisible="False">
 
-    <Grid RowDefinitions="*, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, *"
-          Padding="20">
+       <Grid>
+       <Grid.GestureRecognizers>
+              <TapGestureRecognizer Tapped="OnBackgroundTapped"/>
+       </Grid.GestureRecognizers>
+              <Entry x:Name="DummyEntry" IsVisible="False"/>
+           <Grid RowDefinitions="*, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, *"
+                 Padding="20">
 
-        <!-- Title Image -->
-        <Image Source="daily.png" Grid.Row="1" HeightRequest="80" />
+                  <!-- Title Image -->
+               <Image Source="daily.png" Grid.Row="1" HeightRequest="80" />
 
-        <!-- Title -->
-        <Label Text="Login"
-               Grid.Row="2"
-               HorizontalOptions="Center"
-               FontSize="{OnPlatform Default=28, Android=24}"
-               TextColor="{StaticResource neutral4}" />
+               <!-- Title -->
+               <Label Text="Login"
+                      Grid.Row="2"
+                      HorizontalOptions="Center"
+                      FontSize="{OnPlatform Default=28, Android=24}"
+                      TextColor="{StaticResource neutral4}" />
 
-        <!-- Username -->
-        <Label Text="Username"
-               Grid.Row="3"
-               TextColor="{StaticResource neutral4}"
-               HorizontalOptions="Start"
-               FontSize="{OnPlatform Default=16, Android=14}" />
-        <Border Grid.Row="4" Style="{StaticResource Picker-Border}">
-            <Entry Placeholder="username"
-                   HorizontalTextAlignment="Center"
-                   x:Name="Username"
-                   Style="{StaticResource Entry-Design}" />
-        </Border>
+               <!-- Username -->
+               <Label Text="Username"
+                      Grid.Row="3"
+                      TextColor="{StaticResource neutral4}"
+                      HorizontalOptions="Start"
+                      FontSize="{OnPlatform Default=16, Android=14}" />
+               <Border Grid.Row="4" Style="{StaticResource Picker-Border}">
+                   <Entry Placeholder="username"
+                          HorizontalTextAlignment="Center"
+                          x:Name="Username"
+                          Style="{StaticResource Entry-Design}" />
+               </Border>
 
-        <!-- Password -->
-        <Label Text="Password"
-               Grid.Row="5"
-               TextColor="{StaticResource neutral4}"
-               HorizontalOptions="Start"
-               FontSize="{OnPlatform Default=16, Android=14}" />
-        <Border Grid.Row="6" Style="{StaticResource Picker-Border}">
-            <Entry Placeholder="password"
-                   HorizontalTextAlignment="Center"
-                   IsPassword="True"
-                   x:Name="Password"
-                   Style="{StaticResource Entry-Design}" />
-        </Border>
+               <!-- Password -->
+               <Label Text="Password"
+                      Grid.Row="5"
+                      TextColor="{StaticResource neutral4}"
+                      HorizontalOptions="Start"
+                      FontSize="{OnPlatform Default=16, Android=14}" />
+               <Border Grid.Row="6" Style="{StaticResource Picker-Border}">
+                   <Entry Placeholder="password"
+                          HorizontalTextAlignment="Center"
+                          IsPassword="True"
+                          x:Name="Password"
+                          Style="{StaticResource Entry-Design}" />
+               </Border>
 
-        <!-- Login Button -->
-        <Button Text="Log In"
-                Grid.Row="7"
-                HeightRequest="40"
-                Clicked="AttemptLogIn"
-                FontSize="{OnPlatform Default=16, Android=14}" />
+               <!-- Login Button -->
+               <Button Text="Log In"
+                       Grid.Row="7"
+                       HeightRequest="40"
+                       Clicked="AttemptLogIn"
+                       Style="{StaticResource Daily-Button}"
+                       FontSize="{OnPlatform Default=16, Android=14}" />
 
-        <!-- Create Account + Change Password -->
-        <Grid Grid.Row="8" ColumnDefinitions="*,*">
-            <Button Text="Create Account"
-                    HeightRequest="35"
-                    Clicked="TakeToCreateAccountPage"
-                    FontSize="{OnPlatform Default=14, Android=12}" />
-            <Button Text="Change Password"
-                    HeightRequest="35"
-                    Clicked="TakeToChangePasswordPage"
-                    FontSize="{OnPlatform Default=14, Android=12}"
-                    Grid.Column="1" />
-        </Grid>
+               <!-- Create Account + Change Password -->
+               <Grid Grid.Row="8" ColumnDefinitions="*,*">
+                   <Button Text="Create Account"
+                           HeightRequest="35"
+                           Clicked="TakeToCreateAccountPage"
+                           Style="{StaticResource Daily-Button}"
+                           FontSize="{OnPlatform Default=14, Android=12}" />
+                   <Button Text="Change Password"
+                           HeightRequest="35"
+                           Clicked="TakeToChangePasswordPage"
+                           Style="{StaticResource Daily-Button}"
+                           FontSize="{OnPlatform Default=14, Android=12}"
+                           Grid.Column="1" />
+               </Grid>
 
-        <!-- Error Message -->
-        <Label Text=""
-               Grid.Row="9"
-               FontSize="{OnPlatform Default=12, Android=10}"
-               x:Name="ErrorLabel"
-               HorizontalOptions="Center"
-               Style="{StaticResource Error-Message}" />
-    </Grid>
+               <!-- Error Message -->
+               <Label Text=""
+                      Grid.Row="9"
+                      FontSize="{OnPlatform Default=12, Android=10}"
+                      x:Name="ErrorLabel"
+                      HorizontalOptions="Center"
+                      Style="{StaticResource Error-Message}" />
+           </Grid>
+       </Grid>
 </ContentPage>

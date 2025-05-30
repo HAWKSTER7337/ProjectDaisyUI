@@ -19,6 +19,7 @@
         <ApplicationId>com.companyname.daily3_ui</ApplicationId>
         <ApplicationIdGuid>7c1aa4e5-91ca-45f5-b82d-d0dd69b56f7d</ApplicationIdGuid>
 
+
         <!-- Versions -->
         <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
         <ApplicationVersion>1</ApplicationVersion>
@@ -34,27 +35,28 @@
 
     <ItemGroup>
         <!-- App Icon -->
-        <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4"/>
+        <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 
         <!-- Splash Screen -->
-        <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128"/>
+        <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
 
         <!-- Images -->
-        <MauiImage Include="Resources\Images\*"/>
-        <MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208"/>
+        <MauiImage Include="Resources\Images\*" />
+        <MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
 
         <!-- Custom Fonts -->
-        <MauiFont Include="Resources\Fonts\*"/>
+        <MauiFont Include="Resources\Fonts\*" />
 
         <!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
-        <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)"/>
+        <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="CommunityToolkit.Maui" Version="6.1.0"/>
-        <PackageReference Include="csvhelper" Version="30.0.1"/>
-        <PackageReference Include="htmlagilitypack" Version="1.11.50"/>
-        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0"/>
+        <PackageReference Include="CommunityToolkit.Maui" Version="6.1.0" />
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+        <PackageReference Include="csvhelper" Version="30.0.1" />
+        <PackageReference Include="htmlagilitypack" Version="1.11.50" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -72,6 +74,25 @@
             <SubType>Designer</SubType>
         </MauiXaml>
         <MauiXaml Update="Pages\CreateAccountPage.xaml">
+            <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Remove="Pages\MainShellPage.xaml" />
+        <MauiXaml Update="Pages\TicketHistory.xaml">
+          <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Pages\BuyTickets.xaml">
+            <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Pages\TicketPopupPage.xaml">
+            <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Pages\HousePage.xaml">
+            <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Pages\WinningNumbersPage.xaml">
+            <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Pages\WinningNumberPageDaily4.xaml">
             <SubType>Designer</SubType>
         </MauiXaml>
     </ItemGroup>
@@ -93,14 +114,38 @@
             <DependentUpon>CreateAccountPage.xaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
+        <Compile Remove="Pages\MainShellPage.xaml.cs" />
+        <Compile Update="Pages\TicketHistory.xaml.cs">
+          <DependentUpon>TicketHistory.xaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Pages\BuyTickets.xaml.cs">
+            <DependentUpon>BuyTickets.xaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Pages\TicketPopupPage.xaml.cs">
+            <DependentUpon>TicketPopupPage.xaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Pages\HousePage.xaml.cs">
+            <DependentUpon>HousePage.xaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Pages\WinningNumbersPage.xaml.cs">
+            <DependentUpon>WinningNumbersPage.xaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Pages\WinningNumberPageDaily4.xaml.cs">
+            <DependentUpon>WinningNumberPageDaily4.xaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
     </ItemGroup>
 
-    <ItemGroup>
-        <AdditionalFiles Include="Pages\PagesDaily3\BuyTickets.xaml"/>
-        <AdditionalFiles Include="Pages\PagesDaily3\TicketHistory.xaml"/>
-        <AdditionalFiles Include="Pages\PagesDaily3\TicketPopupPage.xaml"/>
-        <AdditionalFiles Include="Pages\PagesDaily3\WinningNumbersPage.xaml"/>
-    </ItemGroup>
-
+    <!-- iOS signing configuration -->
+    <PropertyGroup Condition="'$(TargetFramework)' == 'net8.0-ios'">
+        <RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
+        <CodesignKey>Apple Development: Alex Hawkins (874LFZDF5C)</CodesignKey>
+        <CodesignProvision>iOS Team Provisioning Profile: com.alexhawkins.daily3</CodesignProvision>
+    </PropertyGroup>
 
 </Project>

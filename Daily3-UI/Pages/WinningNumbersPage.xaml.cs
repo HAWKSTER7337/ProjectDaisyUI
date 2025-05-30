@@ -1,24 +1,22 @@
 ﻿using Daily3_UI.Classes;
 using Daily3_UI.Clients;
 
-namespace Daily3_UI.Pages;
+namespace Daily3_UI.Pages.PagesDaily3;
 
-public partial class WinningNumbersPageDaily4 : ChangeRaffle
+public partial class WinningNumbersPage : ContentPage
 {
-    public WinningNumbersPageDaily4()
+    public WinningNumbersPage()
     {
-        NewTaskBar = Globals.Daily3ContentPages;
         InitializeComponent();
     }
 
-    private WinningNumberDaily4 YesterdayMidday { get; set; }
-    private WinningNumberDaily4 YesterdayEvening { get; set; }
-    private WinningNumberDaily4 TodayMidday { get; set; }
-    private WinningNumberDaily4 TodayEvening { get; set; }
+    private WinningNumberDaily3 YesterdayMidday { get; set; }
+    private WinningNumberDaily3 YesterdayEvening { get; set; }
+    private WinningNumberDaily3 TodayMidday { get; set; }
+    private WinningNumberDaily3 TodayEvening { get; set; }
 
     protected override async void OnAppearing()
     {
-        NewTaskBar = Globals.Daily3ContentPages;
         await UpdatePage();
     }
 
@@ -28,7 +26,7 @@ public partial class WinningNumbersPageDaily4 : ChangeRaffle
     private async Task UpdatePage()
     {
         ClearWinningNumbers();
-        var winningNumbers = await WinningNumbersClient.GetWinningNumbersDaily4();
+        var winningNumbers = await WinningNumbersClient.GetWinningNumbersDaily3();
 
         switch (winningNumbers.Count)
         {
@@ -37,30 +35,31 @@ public partial class WinningNumbersPageDaily4 : ChangeRaffle
                 TodayEvening1.Text = TodayEvening.Number1.ToString();
                 TodayEvening2.Text = TodayEvening.Number2.ToString();
                 TodayEvening3.Text = TodayEvening.Number3.ToString();
-                TodayEvening4.Text = TodayEvening.Number4.ToString();
                 goto case 3;
             case 3:
                 TodayMidday = winningNumbers[2];
                 TodayMidday1.Text = TodayMidday.Number1.ToString();
                 TodayMidday2.Text = TodayMidday.Number2.ToString();
                 TodayMidday3.Text = TodayMidday.Number3.ToString();
-                TodayMidday4.Text = TodayMidday.Number4.ToString();
                 goto case 2;
             case 2:
                 YesterdayEvening = winningNumbers[1];
                 YesterdayEvening1.Text = YesterdayEvening.Number1.ToString();
                 YesterdayEvening2.Text = YesterdayEvening.Number2.ToString();
                 YesterdayEvening3.Text = YesterdayEvening.Number3.ToString();
-                YesterdayEvening4.Text = YesterdayEvening.Number4.ToString();
                 goto case 1;
             case 1:
                 YesterdayMidday = winningNumbers[0];
                 YesterdayMidday1.Text = YesterdayMidday.Number1.ToString();
                 YesterdayMidday2.Text = YesterdayMidday.Number2.ToString();
                 YesterdayMidday3.Text = YesterdayMidday.Number3.ToString();
-                YesterdayMidday4.Text = YesterdayMidday.Number4.ToString();
                 break;
         }
+    }
+
+    private async void ToBuyTicketPage(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("..");
     }
 
     private void ClearWinningNumbers()
@@ -68,22 +67,18 @@ public partial class WinningNumbersPageDaily4 : ChangeRaffle
         YesterdayMidday1.Text = "-";
         YesterdayMidday2.Text = "-";
         YesterdayMidday3.Text = "-";
-        YesterdayMidday4.Text = "-";
 
         YesterdayEvening1.Text = "-";
         YesterdayEvening2.Text = "-";
         YesterdayEvening3.Text = "-";
-        YesterdayEvening4.Text = "-";
 
         TodayMidday1.Text = "-";
         TodayMidday2.Text = "-";
         TodayMidday3.Text = "-";
-        TodayMidday4.Text = "-";
 
         TodayEvening1.Text = "-";
         TodayEvening2.Text = "-";
         TodayEvening3.Text = "-";
-        TodayEvening4.Text = "-";
     }
 
     private void OnSizeChanged(object sender, EventArgs e)
@@ -118,18 +113,14 @@ public partial class WinningNumbersPageDaily4 : ChangeRaffle
         YesterdayMidday1.FontSize = numberFontSize;
         YesterdayMidday2.FontSize = numberFontSize;
         YesterdayMidday3.FontSize = numberFontSize;
-        YesterdayMidday4.FontSize = numberFontSize;
         YesterdayEvening1.FontSize = numberFontSize;
         YesterdayEvening2.FontSize = numberFontSize;
         YesterdayEvening3.FontSize = numberFontSize;
-        YesterdayEvening4.FontSize = numberFontSize;
         TodayMidday1.FontSize = numberFontSize;
         TodayMidday2.FontSize = numberFontSize;
         TodayMidday3.FontSize = numberFontSize;
-        TodayMidday4.FontSize = numberFontSize;
         TodayEvening1.FontSize = numberFontSize;
         TodayEvening2.FontSize = numberFontSize;
         TodayEvening3.FontSize = numberFontSize;
-        TodayEvening4.FontSize = numberFontSize;
     }
 }

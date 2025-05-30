@@ -8,6 +8,13 @@ public partial class App : Application
     {
         InitializeComponent();
 
-        MainPage = new LogInPage();
+        MainPage = new AppShell();
+
+        NavigateToLogin();
+    }
+
+    private async void NavigateToLogin()
+    {
+        await Shell.Current.GoToAsync("//LoginPage");
     }
 }

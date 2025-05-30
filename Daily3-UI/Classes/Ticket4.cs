@@ -41,4 +41,9 @@ public class Ticket4 : Ticket
 
         return information;
     }
+
+    public override Ticket4 ShallowCopy()
+    {
+        return (Ticket4)this.MemberwiseClone();
+    }
 }

@@ -5,39 +5,8 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Daily3_UI.Pages"
+    xmlns:pagesDaily3="clr-namespace:Daily3_UI.Pages.PagesDaily3"
     FlyoutBehavior="Disabled">
-
-    <Shell.Resources>
-        <ResourceDictionary>
-            <Style TargetType="TabBar">
-                <Setter Property="Shell.TabBarBackgroundColor"
-                        Value="{DynamicResource Primary}" />
-                <Setter Property="Shell.TabBarTitleColor"
-                        Value="{DynamicResource Secondary}" />
-                <Setter Property="Shell.TabBarUnselectedColor"
-                        Value="{DynamicResource Black}" />
-            </Style>
-        </ResourceDictionary>
-    </Shell.Resources>
-
-    <TabBar
-        x:Name="TabBar">
-        
-        <ShellContent
-            Title="Daily Numbers"
-            ContentTemplate="{DataTemplate local:WinningNumbersPage}"
-            Route="WinningNumbersPage" />
-        
-        <ShellContent
-            Title="Buy Tickets"
-            ContentTemplate="{DataTemplate local:BuyTickets}"
-            Route="BuyTickets" />
-        
-        <ShellContent
-            Title="View History"
-            ContentTemplate="{DataTemplate local:TicketHistory}"
-            Route="TicketHistory" />
-
-    </TabBar>
-
+    <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LogInPage}" />
+    <ShellContent Route="Buy3" ContentTemplate="{DataTemplate pagesDaily3:BuyTickets}" />
 </Shell>
