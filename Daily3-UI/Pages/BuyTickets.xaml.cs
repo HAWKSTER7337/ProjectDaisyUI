@@ -13,6 +13,13 @@ public partial class BuyTickets : ContentPage
         BindingContext = this;
     }
 
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        
+        MoveNumberOfDays();
+    }
+
     private List<Ticket> ShoppingCart { get; } = new();
 
     private Button? BetTypeSelcted;
@@ -559,5 +566,46 @@ public partial class BuyTickets : ContentPage
     private double RoundToNearestPoint05(double value)
     {
         return Math.Round(value / 0.05) * 0.05;
+    }
+    
+    private int GetDayValue()
+    {
+        var today = DateTime.Now.DayOfWeek;
+        return today == DayOfWeek.Sunday ? 6 : (int)today - 1;
+    }
+
+    private void MoveNumberOfDays()
+    {
+        var currentDayNumber = GetDayValue();
+
+        var days = new List<Button>()
+        {
+            Days2, Days3, Days4, Days5, Days6, Days7
+        };
+        days.ForEach(d => d.IsVisible = true);
+
+        switch (currentDayNumber)
+        {
+            case 6:
+                Days2.IsVisible = false;
+                goto case 5;
+            case 5:
+                Days3.IsVisible = false;
+                goto case 4;
+            case 4:
+                Days4.IsVisible = false;
+                goto case 3; 
+            case 3:
+                Days5.IsVisible = false;
+                goto case 2;
+            case 2:
+                Days6.IsVisible = false;
+                goto case 1;
+            case 1:
+                Days7.IsVisible = false;
+                break;  
+        }
+        
+        
     }
 }
