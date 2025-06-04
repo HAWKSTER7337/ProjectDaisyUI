@@ -11,7 +11,7 @@ public partial class BuyTickets : ContentPage
     {
         InitializeComponent();
         BindingContext = this;
-    }
+    } 
 
     protected override void OnAppearing()
     {
@@ -36,14 +36,24 @@ public partial class BuyTickets : ContentPage
         set
         {
             _isDaily3 = value;
-            if (IsDaily3) BackgroundColor = Globals.GetColor("Secondary");
-            else if (IsDaily4) BackgroundColor = Globals.GetColor("SecondaryDaily4");
+            if (IsDaily3)
+            {
+                BackgroundColor = Globals.GetColor("Secondary");
+                Daily3Numbers.IsVisible = true;
+                Daily4Numbers.IsVisible = false;
+            }
+            else if (IsDaily4)
+            {
+                BackgroundColor = Globals.GetColor("SecondaryDaily4");
+                Daily3Numbers.IsVisible = false; 
+                Daily4Numbers.IsVisible = true;
+            }
             OnPropertyChanged();
             OnPropertyChanged(nameof(IsDaily4));
         }
     }
 
-    public bool IsDaily4 => !_isDaily3;
+    public bool IsDaily4 => !IsDaily3;
     
 
     public void SetErrorLabel(string error)
