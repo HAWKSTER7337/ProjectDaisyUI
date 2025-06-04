@@ -73,7 +73,8 @@
                    Grid.Row="1" />
             <Grid Padding="10"
                   Grid.Row="2"
-                  IsVisible="{Binding IsDaily3}">
+                  IsVisible="{Binding IsDaily3}"
+                  x:Name="Daily3Numbers">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
@@ -115,7 +116,8 @@
             <!--Number Selectors Daily 4-->
             <Grid Padding="10"
                   Grid.Row="2"
-                  IsVisible="{Binding IsDaily4}">
+                  IsVisible="{Binding IsDaily4}"
+                  x:Name="Daily4Numbers">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
