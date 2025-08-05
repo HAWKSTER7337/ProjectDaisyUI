@@ -23,8 +23,10 @@ public abstract class Ticket
     [JsonPropertyName("Type")] public TicketType? Type { get; init; } = null;
 
     [JsonPropertyName("TimeOfDay")] public TOD? TimeOfDay { get; set; } = null;
-
+    
     [JsonPropertyName("Date")] public string Date { get; set; } = null;
+    
+    [JsonPropertyName("PurchaseTimestamp")] public DateTime? PurchaseTimeStamp { get; set; }
     
     [JsonPropertyName("WinningStatus")] public WinningStatus? WinningStatus { get; init; } = Enums.WinningStatus.TBD;
 
