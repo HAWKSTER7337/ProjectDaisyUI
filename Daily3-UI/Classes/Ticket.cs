@@ -25,8 +25,9 @@ public abstract class Ticket
     [JsonPropertyName("TimeOfDay")] public TOD? TimeOfDay { get; set; } = null;
     
     [JsonPropertyName("Date")] public string Date { get; set; } = null;
-    
-    [JsonPropertyName("PurchaseTimestamp")] public DateTime? PurchaseTimeStamp { get; set; }
+
+    [JsonPropertyName("PurchaseTimestamp")]
+    public string PurchaseTimestamp { get; set; } = null;
     
     [JsonPropertyName("WinningStatus")] public WinningStatus? WinningStatus { get; init; } = Enums.WinningStatus.TBD;
 
@@ -109,5 +110,5 @@ public abstract class Ticket
     ///     returns the details format of the tickets bought
     /// </summary>
     public string DetailsFormat =>
-        $"Price: ${FormattedPrice}   Date: {DateTime.Parse(Date):MM/dd/yyyy}";
+        $"Price: ${FormattedPrice}   Date: {DateTime.Parse(Date):MM/dd/yyyy}   Time of purchase: {DateTime.Parse(PurchaseTimestamp):MM/dd/yyyy h:mm tt}";
 }
