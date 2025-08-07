@@ -8,16 +8,104 @@
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            
+
+            <!--Title Card-->
+            <Border
+                BackgroundColor="{StaticResource Primary}"
+                Padding="5"
+                StrokeShape="RoundRectangle 10,10,0,0"
+                x:Name="BorderTitle"
+                Grid.Row="0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+
+                    <Label Text="Unverified Users"
+                           Grid.Column="0"
+                           TextColor="{StaticResource Black}"
+                           Style="{StaticResource Day}"
+                           x:Name="Title" />
+
+                </Grid>
+            </Border>
+
+            <!--Listing Players Below You-->
+            <ActivityIndicator
+                Grid.Row="1"
+                Color="{StaticResource White}"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                x:Name="UserLoader" />
+            <CollectionView
+                x:Name="UserCollectionView"
+                Grid.Row="1"
+                ItemsSource="{Binding Users}"
+                VerticalScrollBarVisibility="Always">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+
+
+                        <Grid Padding="10">
+
+                            <!--Grid Configuration-->
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <!--Values Displayed-->
+                            <Label Grid.Column="0"
+                                   Grid.Row="0"
+                                   Text="{Binding Username}"
+                                   Padding="10"
+                                   FontSize="16"
+                                   TextColor="{StaticResource White}" />
+
+                            <!--Button For Tickets-->
+                            <Button Grid.Column="2"
+                                    Grid.Row="0"
+                                    Text="Add User"
+                                    Clicked="RequestToAddUser"
+                                    BindingContext="{Binding}"
+                                    Style="{StaticResource Daily-Button}" />
+
+                            <!--Line For Separation-->
+                            <BoxView Grid.Column="0"
+                                     Grid.Row="1"
+                                     HeightRequest="1"
+                                     Color="{StaticResource Gray200}"
+                                     Margin="0,0,0,6" />
+                            <BoxView Grid.Column="1"
+                                     Grid.Row="1"
+                                     HeightRequest="1"
+                                     Color="{StaticResource Gray200}"
+                                     Margin="0,0,0,6" />
+                        </Grid>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
             <!--Back To House Page Button-->
             <Button
                 Grid.Row="2"
                 Text="To Tickets Page"
-                Clicked="OnHousePageButtonClicked"/>
+                Clicked="OnHousePageButtonClicked"
+                Style="{StaticResource Daily-Button}"
+                VerticalOptions="End" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>

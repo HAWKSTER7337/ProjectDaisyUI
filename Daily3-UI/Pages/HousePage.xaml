@@ -9,7 +9,7 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
@@ -27,7 +27,7 @@
                     </Grid.ColumnDefinitions>
 
 
-                    <Label Text="Admin Page"
+                    <Label Text="Weekly Payout"
                            Grid.Column="0"
                            TextColor="{StaticResource Black}"
                            Style="{StaticResource Day}"
@@ -85,7 +85,8 @@
                                     Grid.Row="0"
                                     Text="Tickets"
                                     Clicked="OnTicketButtonClicked"
-                                    BindingContext="{Binding}" />
+                                    BindingContext="{Binding}"
+                                    Style="{StaticResource Daily-Button}" />
 
                             <!--Line For Separation-->
                             <BoxView Grid.Column="0"
@@ -103,13 +104,16 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            
+
+
             <!--Change Screen Button-->
             <Button
                 Grid.Row="2"
                 Text="See Unaccepted Users"
-                Clicked="OnToUnacceptedUsersClicked"/>
-                
+                Clicked="OnToUnacceptedUsersClicked"
+                VerticalOptions="End"
+                Style="{StaticResource Daily-Button}" />
+
         </Grid>
     </ContentPage.Content>
 </ContentPage>
