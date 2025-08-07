@@ -10,6 +10,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <!--Title Card-->
@@ -102,7 +103,13 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-
+            
+            <!--Change Screen Button-->
+            <Button
+                Grid.Row="2"
+                Text="See Unaccepted Users"
+                Clicked="OnToUnacceptedUsersClicked"/>
+                
         </Grid>
     </ContentPage.Content>
 </ContentPage>

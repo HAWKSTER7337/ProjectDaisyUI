@@ -53,4 +53,9 @@ public partial class HousePage : ContentPage
 
         this.ShowPopup(popup);
     }
+
+    private async void OnToUnacceptedUsersClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("HouseAddUsersPage");
+    }
 }
