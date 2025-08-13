@@ -1,5 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 using System.Web;
+using Daily3_UI.Enums;
 
 namespace Daily3_UI.Classes;
 
@@ -45,5 +46,24 @@ public class Ticket4 : Ticket
     public override Ticket4 ShallowCopy()
     {
         return (Ticket4)this.MemberwiseClone();
+    }
+    
+    /// <summary>
+    /// Creates a serializable Ticket4 object without PurchaseTimestamp
+    /// </summary>
+    public override SerializableTicket ToSerializableTicket()
+    {
+        return new SerializableTicket4
+        {
+            Number1 = this.Number1,
+            Number2 = this.Number2,
+            Number3 = this.Number3,
+            Number4 = this.Number4,
+            Price = this.Price ?? 0.0,
+            Type = this.Type ?? TicketType.Straight,
+            TimeOfDay = this.TimeOfDay ?? TOD.Midday,
+            Date = this.Date ?? string.Empty,
+            UserId = this.UserId ?? Guid.Empty
+        };
     }
 }

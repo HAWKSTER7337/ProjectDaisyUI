@@ -75,7 +75,7 @@ public class TicketAdminPopUp : Popup
                     FontSize = 14,
                     TextColor = neutralThree
                 };
-                label2.SetBinding(Label.TextProperty, "DetailsFormat");
+                label2.SetBinding(Label.TextProperty, "DetailsFormatWithDateTime");
 
                 cellGrid.Add(label1, 0);
                 cellGrid.Add(label2, 0, 1);

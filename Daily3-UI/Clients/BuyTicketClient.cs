@@ -23,7 +23,25 @@ public static class BuyTicketClient
     {
         tickets.ForEach(ticket => ticket.UserId = Globals.UserId);
 
-        var jsonString = JsonSerializer.Serialize(tickets);
+        // Create serializable copies without PurchaseTimestamp
+        var serializableTickets = tickets.Select(ticket => ticket.ToSerializableTicket()).ToList();
+        
+        // Serialize each ticket individually to preserve type information
+        var jsonStrings = new List<string>();
+        foreach (var ticket in serializableTickets)
+        {
+            if (ticket is SerializableTicket4 ticket4)
+            {
+                jsonStrings.Add(JsonSerializer.Serialize(ticket4));
+            }
+            else
+            {
+                jsonStrings.Add(JsonSerializer.Serialize(ticket));
+            }
+        }
+        
+        // Combine into a JSON array
+        var jsonString = "[" + string.Join(",", jsonStrings) + "]";
 
         var httpClient = new HttpClient();
         var content = new StringContent(jsonString, Encoding.UTF8, "application/json");

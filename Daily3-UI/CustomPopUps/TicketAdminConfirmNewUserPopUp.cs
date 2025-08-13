@@ -17,13 +17,15 @@ public class TicketAdminConfirmNewUserPopUp : Popup
         var yesButton = new Button
         {
             Text = "Yes",
-            HorizontalOptions = LayoutOptions.EndAndExpand
+            HorizontalOptions = LayoutOptions.EndAndExpand,
+            Style = Application.Current.Resources["Daily-Button"] as Style
         };
 
         var noButton = new Button
         {
             Text = "No",
-            HorizontalOptions = LayoutOptions.StartAndExpand
+            HorizontalOptions = LayoutOptions.StartAndExpand,
+            Style = Application.Current.Resources["Daily-Button"] as Style
         };
 
         yesButton.Clicked += (s, e) => { Close(true); };
