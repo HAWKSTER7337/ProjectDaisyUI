@@ -129,7 +129,7 @@
                                Converter={StaticResource StatusToColor}}" />
 
                         <Label Grid.Row="1"
-                               Text="{Binding DetailsFormat}"
+                               Text="{Binding DetailsFormatWithDateTime}"
                                FontSize="14"
                                TextColor="{StaticResource White}" />
                     </Grid>
