@@ -2,7 +2,7 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Daily3_UI.Pages.PagesDaily3.HousePage"
+             x:Class="Daily3_UI.Pages.HouseAddUsersPage"
              BackgroundColor="{StaticResource Gray400}"
              Shell.NavBarIsVisible="False">
     <ContentPage.Content>
@@ -27,7 +27,7 @@
                     </Grid.ColumnDefinitions>
 
 
-                    <Label Text="Weekly Payout"
+                    <Label Text="Unverified Users"
                            Grid.Column="0"
                            TextColor="{StaticResource Black}"
                            Style="{StaticResource Day}"
@@ -73,18 +73,12 @@
                                    Padding="10"
                                    FontSize="16"
                                    TextColor="{StaticResource White}" />
-                            <Label Grid.Column="1"
-                                   Grid.Row="0"
-                                   Text="{Binding TotalWinnings}"
-                                   Padding="10"
-                                   FontSize="16"
-                                   TextColor="{StaticResource Gray100}" />
 
                             <!--Button For Tickets-->
                             <Button Grid.Column="2"
                                     Grid.Row="0"
-                                    Text="Tickets"
-                                    Clicked="OnTicketButtonClicked"
+                                    Text="Add User"
+                                    Clicked="RequestToAddUser"
                                     BindingContext="{Binding}"
                                     Style="{StaticResource Daily-Button}" />
 
@@ -105,15 +99,13 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-
-            <!--Change Screen Button-->
+            <!--Back To House Page Button-->
             <Button
                 Grid.Row="2"
-                Text="See Unaccepted Users"
-                Clicked="OnToUnacceptedUsersClicked"
-                VerticalOptions="End"
-                Style="{StaticResource Daily-Button}" />
-
+                Text="To Tickets Page"
+                Clicked="OnHousePageButtonClicked"
+                Style="{StaticResource Daily-Button}"
+                VerticalOptions="End" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>

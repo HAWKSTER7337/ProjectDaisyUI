@@ -23,9 +23,18 @@ public abstract class Ticket
     [JsonPropertyName("Type")] public TicketType? Type { get; init; } = null;
 
     [JsonPropertyName("TimeOfDay")] public TOD? TimeOfDay { get; set; } = null;
-
-    [JsonPropertyName("Date")] public string Date { get; set; } = null;
     
+    [JsonPropertyName("Date")] public string Date { get; set; } = null;
+
+    
+    [JsonPropertyName("PurchaseTimestamp")]
+    public string PurchaseTimestamp { get; set; } = string.Empty;
+    
+    /// <summary>
+    /// Creates a serializable ticket object without PurchaseTimestamp
+    /// </summary>
+    public abstract SerializableTicket ToSerializableTicket();
+
     [JsonPropertyName("WinningStatus")] public WinningStatus? WinningStatus { get; init; } = Enums.WinningStatus.TBD;
 
     [JsonPropertyName("WinningPayout")] public double WinningPayout { get; init; }
@@ -108,4 +117,50 @@ public abstract class Ticket
     /// </summary>
     public string DetailsFormat =>
         $"Price: ${FormattedPrice}   Date: {DateTime.Parse(Date):MM/dd/yyyy}";
+
+    /// <summary>
+    ///     returns the details format of the tickets bought with the time of purchase
+    /// </summary>
+    public string DetailsFormatWithDateTime
+    {
+        get
+        {
+            if (string.IsNullOrEmpty(PurchaseTimestamp))
+                return DetailsFormat + "\nTime of purchase: N/A";
+            
+            try
+            {
+                var timestamp = DateTime.Parse(PurchaseTimestamp);
+                return DetailsFormat + $"\nTime of purchase: {timestamp:MM/dd/yyyy h:mm tt}";
+            }
+            catch
+            {
+                return DetailsFormat + "\nTime of purchase: Invalid Format";
+            }
+        }
+    }
 }
+
+/// <summary>
+/// Serializable version of Ticket without PurchaseTimestamp
+/// </summary>
+public class SerializableTicket
+{
+    [JsonPropertyName("Number1")] public int? Number1 { get; set; }
+    [JsonPropertyName("Number2")] public int? Number2 { get; set; }
+    [JsonPropertyName("Number3")] public int? Number3 { get; set; }
+    [JsonPropertyName("Price")] public double Price { get; set; }
+    [JsonPropertyName("Type")] public TicketType Type { get; set; }
+    [JsonPropertyName("TimeOfDay")] public TOD TimeOfDay { get; set; }
+    [JsonPropertyName("Date")] public string Date { get; set; }
+    [JsonPropertyName("UserId")] public Guid UserId { get; set; }
+}
+
+/// <summary>
+/// Serializable version of Ticket4 without PurchaseTimestamp
+/// </summary>
+public class SerializableTicket4 : SerializableTicket
+{
+    [JsonPropertyName("Number4")] public int? Number4 { get; set; }
+}
+

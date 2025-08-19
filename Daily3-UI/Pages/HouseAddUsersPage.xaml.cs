@@ -3,9 +3,9 @@ using Daily3_UI.Classes;
 using Daily3_UI.Clients;
 using Daily3_UI.CustomPopUps;
 
-namespace Daily3_UI.Pages.PagesDaily3;
+namespace Daily3_UI.Pages;
 
-public partial class HousePage : ContentPage
+public partial class HouseAddUsersPage : ContentPage
 {
     private List<User> _users = new();
 
@@ -14,19 +14,24 @@ public partial class HousePage : ContentPage
         return _users.OrderBy(user => user.Username).ToList();
     }
 
-    public HousePage()
+    public HouseAddUsersPage()
     {
         InitializeComponent();
     }
 
     protected override async void OnAppearing()
     {
+        await LoadScreen();
+    }
+
+    private async Task LoadScreen()
+    {
         try
         {
             UserLoader.IsRunning = true;
             UserLoader.IsVisible = true;
 
-            _users = await GetUsersAndTicketsUnderHouse.GetUsersDaily();
+            _users = await GetUsersAndTicketsUnderHouse.GetUnverifiedUsers();
 
             UserCollectionView.ItemsSource = Users();
         }
@@ -41,21 +46,22 @@ public partial class HousePage : ContentPage
         }
     }
 
-    private void OnTicketButtonClicked(object sender, EventArgs e)
+    private async void OnHousePageButtonClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("..");
+    }
+
+    private async void RequestToAddUser(object sender, EventArgs e)
     {
         if (sender is not Button button) return;
         var user = button.BindingContext as User;
-        if (user == null) throw new Exception("User is not found");
-        var popup = new TicketAdminPopUp(user.Tickets);
 
-        if (this == null) throw new Exception("This is null for some reason");
-        if (popup == null) throw new Exception("The Popup is null for some reason");
+        var isAddingUserUnderThem =
+            await Application.Current.MainPage.ShowPopupAsync(new TicketAdminConfirmNewUserPopUp(user.Username)) as bool
+                ?;
 
-        this.ShowPopup(popup);
-    }
-
-    private async void OnToUnacceptedUsersClicked(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("HouseAddUsersPage");
+        if (isAddingUserUnderThem != true) return;
+        await GetUsersAndTicketsUnderHouse.AddUserUnderHouse(user.UserId);
+        await LoadScreen();
     }
 }

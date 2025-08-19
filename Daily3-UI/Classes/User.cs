@@ -21,6 +21,12 @@ public class User
         Username = username;
     }
 
+    public User(string username, Guid guid)
+    {
+        Username = username;
+        UserId = guid;
+    }
+
     public List<Ticket> Tickets = new();
 
     /// <summary>
@@ -35,4 +41,6 @@ public class User
     ///     Gives you the total winnings of the user
     /// </summary>
     public string TotalWinnings => $"$ {_totalWinnings:F2}";
+
+    public Guid UserId { get; init; }
 }
