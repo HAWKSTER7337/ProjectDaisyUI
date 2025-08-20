@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net8.0-ios;net8.0-maccatalyst</TargetFrameworks>
+        <TargetFrameworks>net8.0-android;net8.0-ios;net8.0-maccatalyst</TargetFrameworks>
         <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
         <!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
         <!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
@@ -30,6 +30,11 @@
         <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
         <Company>HawkProducts</Company>
+        
+        <!-- Android SDK and Java paths for macOS -->
+        <AndroidSdkDirectory Condition="$([MSBuild]::IsOSPlatform('osx'))">$(HOME)/Library/Android/sdk</AndroidSdkDirectory>
+        <JavaSdkDirectory Condition="$([MSBuild]::IsOSPlatform('osx'))">/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home</JavaSdkDirectory>
+        <AcceptAndroidSDKLicenses>true</AcceptAndroidSDKLicenses>
     </PropertyGroup>
 
     <ItemGroup>
@@ -139,6 +144,11 @@
             <SubType>Code</SubType>
         </Compile>
     </ItemGroup>
+
+    <PropertyGroup Condition="'$(TargetFramework)' == 'net8.0-android'">
+        <RuntimeIdentifiers>android-x64;android-arm64;android-arm</RuntimeIdentifiers>
+        <SupportedOSPlatformVersion>21.0</SupportedOSPlatformVersion>
+    </PropertyGroup>
 
     <PropertyGroup Condition="'$(TargetFramework)' == 'net8.0-ios'">
         <!-- Build for simulator (arm64) -->
