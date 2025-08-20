@@ -34,6 +34,11 @@
         <!-- Android SDK and Java paths for macOS -->
         <AndroidSdkDirectory Condition="$([MSBuild]::IsOSPlatform('osx'))">$(HOME)/Library/Android/sdk</AndroidSdkDirectory>
         <JavaSdkDirectory Condition="$([MSBuild]::IsOSPlatform('osx'))">/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home</JavaSdkDirectory>
+        
+        <!-- Android SDK and Java paths for Windows -->
+        <AndroidSdkDirectory Condition="$([MSBuild]::IsOSPlatform('windows'))">$(LOCALAPPDATA)\Android\Sdk</AndroidSdkDirectory>
+        <JavaSdkDirectory Condition="$([MSBuild]::IsOSPlatform('windows'))">C:\Program Files\Microsoft\jdk-17</JavaSdkDirectory>
+        
         <AcceptAndroidSDKLicenses>true</AcceptAndroidSDKLicenses>
     </PropertyGroup>
 
