@@ -10,7 +10,6 @@
         <UseMaui>true</UseMaui>
         <SingleProject>true</SingleProject>
         <ImplicitUsings>enable</ImplicitUsings>
-        <AcceptAndroidSDKLicenses>true</AcceptAndroidSDKLicenses>
 
         <!-- Display name -->
         <ApplicationTitle>Daily3-UI</ApplicationTitle>
@@ -31,6 +30,16 @@
         <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
         <Company>HawkProducts</Company>
+        
+        <!-- Android SDK and Java paths for macOS -->
+        <AndroidSdkDirectory Condition="$([MSBuild]::IsOSPlatform('osx'))">$(HOME)/Library/Android/sdk</AndroidSdkDirectory>
+        <JavaSdkDirectory Condition="$([MSBuild]::IsOSPlatform('osx'))">/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home</JavaSdkDirectory>
+        
+        <!-- Android SDK and Java paths for Windows -->
+        <AndroidSdkDirectory Condition="$([MSBuild]::IsOSPlatform('windows'))">$(LOCALAPPDATA)\Android\Sdk</AndroidSdkDirectory>
+        <JavaSdkDirectory Condition="$([MSBuild]::IsOSPlatform('windows'))">C:\Program Files\Microsoft\jdk-17</JavaSdkDirectory>
+        
+        <AcceptAndroidSDKLicenses>true</AcceptAndroidSDKLicenses>
     </PropertyGroup>
 
     <ItemGroup>
@@ -141,11 +150,20 @@
         </Compile>
     </ItemGroup>
 
-    <!-- iOS signing configuration -->
-    <PropertyGroup Condition="'$(TargetFramework)' == 'net8.0-ios'">
-        <RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
-        <CodesignKey>Apple Development: Alex Hawkins (874LFZDF5C)</CodesignKey>
-        <CodesignProvision>iOS Team Provisioning Profile: com.alexhawkins.daily3</CodesignProvision>
+    <PropertyGroup Condition="'$(TargetFramework)' == 'net8.0-android'">
+        <RuntimeIdentifiers>android-x64;android-arm64;android-arm</RuntimeIdentifiers>
+        <SupportedOSPlatformVersion>21.0</SupportedOSPlatformVersion>
     </PropertyGroup>
+
+    <PropertyGroup Condition="'$(TargetFramework)' == 'net8.0-ios'">
+        <!-- Build for simulator (arm64) -->
+        <RuntimeIdentifier>iossimulator-arm64</RuntimeIdentifier>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(TargetFramework)' == 'net8.0-maccatalyst'">
+        <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers>
+    </PropertyGroup>
+    
+
 
 </Project>
