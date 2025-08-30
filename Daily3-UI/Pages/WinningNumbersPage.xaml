@@ -7,15 +7,18 @@
              Shell.NavBarIsVisible="False"
              SizeChanged="OnSizeChanged">
 
-    <VerticalStackLayout
-        Spacing="5"
-        Padding="30,0"
-        VerticalOptions="Fill"
-        HorizontalOptions="Fill"
-        x:Name="Layout">
+    
 
         <!-- Added ScrollView to enable scrolling for the winning numbers section -->
-        <ScrollView>
+        <ScrollView
+            VerticalOptions="FillAndExpand"
+            HorizontalOptions="FillAndExpand">
+            <VerticalStackLayout
+                Spacing="5"
+                Padding="30,0"
+                VerticalOptions="Fill"
+                HorizontalOptions="Fill"
+                x:Name="Layout">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -293,6 +296,6 @@
                     </Grid>
                 </Border>
             </Grid>
-        </ScrollView>
-    </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
