@@ -2,6 +2,7 @@
 using Microsoft.Maui.Platform;
 #if IOS
 using UIKit;
+using System.Runtime.Versioning;
 #endif
 #if ANDROID
 using Android.Views.InputMethods;
@@ -20,13 +21,22 @@ namespace Daily3_UI.Classes
             var currentFocus = context.CurrentFocus ?? context.Window.DecorView;
             inputMethodManager?.HideSoftInputFromWindow(currentFocus?.WindowToken, HideSoftInputFlags.None);
 #elif IOS
-            var window = UIApplication.SharedApplication
-               .ConnectedScenes
-               .OfType<UIWindowScene>()
-               .SelectMany(scene => scene.Windows)
-               .FirstOrDefault(window => window.IsKeyWindow);
+            if (OperatingSystem.IsIOSVersionAtLeast(13))
+            {
+                // Use modern Scene-based API for iOS 13+
+                var window = UIApplication.SharedApplication
+                   .ConnectedScenes
+                   .OfType<UIWindowScene>()
+                   .SelectMany(scene => scene.Windows)
+                   .FirstOrDefault(window => window.IsKeyWindow);
 
-            window?.EndEditing(true);
+                window?.EndEditing(true);
+            }
+            else
+            {
+                // Fallback for older iOS versions
+                UIApplication.SharedApplication.SendAction(new ObjCRuntime.Selector("resignFirstResponder"), null, null, null);
+            }
 #endif
         }
     }

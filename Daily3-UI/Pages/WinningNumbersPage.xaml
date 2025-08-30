@@ -26,6 +26,7 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <!-- Title Image -->
@@ -53,14 +54,16 @@
                        Grid.Row="1"
                        Style="{StaticResource Day}"
                        Margin="0, 15, 0, 0"
-                       x:Name="YesterdayLabel" />
+                       x:Name="YesterdayLabel"
+                       IsVisible="False" />
                 <Border
                     Style="{StaticResource Tod-Border}"
                     Stroke="{StaticResource neutral1}"
                     StrokeShape="RoundRectangle 10,10,0,0"
                     Padding="8,0"
                     x:Name="YesterdayMiddayBorder"
-                    Grid.Row="2">
+                    Grid.Row="2"
+                    IsVisible="False">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="25" />
@@ -106,7 +109,8 @@
                     StrokeShape="RoundRectangle 0,0,10,10"
                     Padding="8,0"
                     x:Name="YesterdayEveningBorder"
-                    Grid.Row="3">
+                    Grid.Row="3"
+                    IsVisible="False">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="25" />
@@ -147,12 +151,51 @@
                     </Grid>
                 </Border>
 
-                <!-- Today's Daily Numbers -->
+                <!-- Loading Indicator -->
+                <ActivityIndicator
+                    Grid.Row="4"
+                    IsRunning="True"
+                    IsVisible="True"
+                    Color="{StaticResource neutral1}"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    HeightRequest="50"
+                    WidthRequest="50"
+                    x:Name="LoadingIndicator" />
+
+                <!-- Error Message (Initially Hidden) -->
+                <StackLayout
+                    Grid.Row="4"
+                    IsVisible="False"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Spacing="10"
+                    x:Name="ErrorContainer">
+                    <Label
+                        Text="⚠️ Unable to load winning numbers"
+                        Style="{StaticResource Day}"
+                        HorizontalOptions="Center"
+                        TextColor="Red" />
+                    <Label
+                        Text="Please check your connection and try again"
+                        Style="{StaticResource Tod}"
+                        HorizontalOptions="Center"
+                        TextColor="Red"
+                        FontSize="14" />
+                    <Button
+                        Text="Retry"
+                        Clicked="RetryButton_Clicked"
+                        Style="{StaticResource Daily-Button}"
+                        HorizontalOptions="Center" />
+                </StackLayout>
+
+                <!-- Today's Daily Numbers (Initially Invisible) -->
                 <Label Text="Today"
                        Style="{StaticResource Day}"
                        Margin="0,15,0,0"
                        x:Name="TodayLabel"
-                       Grid.Row="4" />
+                       Grid.Row="5"
+                       IsVisible="False" />
                 <Border
                     Style="{StaticResource Tod-Border}"
                     Stroke="{StaticResource neutral1}"
@@ -160,7 +203,8 @@
                     Padding="16,0"
                     Margin="0"
                     x:Name="TodayMiddayBorder"
-                    Grid.Row="5">
+                    Grid.Row="6"
+                    IsVisible="False">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="25" />
@@ -207,7 +251,8 @@
                     StrokeShape="RoundRectangle 0,0,10,10"
                     Padding="16,0"
                     x:Name="TodayEveningBorder"
-                    Grid.Row="6">
+                    Grid.Row="7"
+                    IsVisible="False">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="25" />

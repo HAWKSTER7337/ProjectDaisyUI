@@ -21,39 +21,95 @@ public partial class LogInPage : ContentPage
     /// </summary>
     private async void AttemptLogIn(object sender, EventArgs e)
     {
+        // Clear previous errors and show loading state
         ErrorLabel.Text = "";
-        var request_response = await VerifyUserClient.VerifyUser(Username.Text, Password.Text);
+        ErrorLabel.TextColor = Colors.Red;
+        LoginButton.IsEnabled = false;
+        LoginButton.Text = "Logging In...";
+        
         try
         {
-            var guidAndStatusList = SplitResponse(request_response);
+            // Validate input
+            if (string.IsNullOrWhiteSpace(Username.Text) || string.IsNullOrWhiteSpace(Password.Text))
+            {
+                ShowError("Please enter both username and password.", LoginErrorType.InvalidCredentials);
+                return;
+            }
 
-            // Adding the users global info
-            Globals.UserId = Guid.Parse(guidAndStatusList[0]);
-            Globals.Status = (Status?)int.Parse(guidAndStatusList[1]);
-
-            var nextPage = Globals.Status > Status.User ? "//Entrants" : "//Buy3";
-            await Shell.Current.GoToAsync(nextPage, true);
-
+            var loginResult = await VerifyUserClient.VerifyUser(Username.Text, Password.Text);
+            
+            if (loginResult.IsSuccess)
+            {
+                // Success - update globals and navigate
+                Globals.UserId = loginResult.UserGuid!.Value;
+                Globals.Status = (Status?)loginResult.UserStatus!.Value;
+                
+                // Show success message briefly
+                ShowSuccess("Login successful! Redirecting...");
+                
+                // Navigate to appropriate page
+                var nextPage = Globals.Status > Status.User ? "//Entrants" : "//Buy3";
+                await Shell.Current.GoToAsync(nextPage, true);
+            }
+            else
+            {
+                // Show appropriate error message
+                ShowError(loginResult.Message, loginResult.ErrorType);
+            }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
-            var errorCode = ex.Message;
-            ErrorLabel.Text = errorCode;
+            Console.WriteLine($"Login error: {ex.Message}");
+            ShowError("An unexpected error occurred. Please try again.", LoginErrorType.Unknown);
+        }
+        finally
+        {
+            // Restore button state
+            LoginButton.IsEnabled = true;
+            LoginButton.Text = "Log In";
         }
     }
 
     /// <summary>
-    ///     Splitting up the response from the back end to make sure
-    ///     the value of the GUID of the user as well as the Status are
-    ///     both collected
+    ///     Shows an error message with appropriate styling based on error type
     /// </summary>
-    /// <param name="guidAndStatus">The string that is being parsed</param>
-    /// <returns>An array of the GUID and Status of the user as a string</returns>
-    private List<string> SplitResponse(string guidAndStatus)
+    private void ShowError(string message, LoginErrorType errorType)
     {
-        char[] separator = { ',' };
-        var parts = guidAndStatus.Split(separator).ToList();
-        return parts;
+        ErrorLabel.Text = message;
+        
+        // Set appropriate color based on error type
+        ErrorLabel.TextColor = errorType switch
+        {
+            LoginErrorType.InvalidCredentials => Colors.Orange,
+            LoginErrorType.AccountPending => Colors.Blue,
+            LoginErrorType.NetworkError => Colors.Red,
+            LoginErrorType.Timeout => Colors.Orange,
+            LoginErrorType.ServerError => Colors.Red,
+            _ => Colors.Red
+        };
+        
+        // Add icon or additional styling for specific error types
+        if (errorType == LoginErrorType.AccountPending)
+        {
+            ErrorLabel.Text = "⏳ " + message;
+        }
+        else if (errorType == LoginErrorType.NetworkError)
+        {
+            ErrorLabel.Text = "📡 " + message;
+        }
+        else if (errorType == LoginErrorType.Timeout)
+        {
+            ErrorLabel.Text = "⏰ " + message;
+        }
+    }
+
+    /// <summary>
+    ///     Shows a success message
+    /// </summary>
+    private void ShowSuccess(string message)
+    {
+        ErrorLabel.Text = "✅ " + message;
+        ErrorLabel.TextColor = Colors.Green;
     }
 
     /// <summary>

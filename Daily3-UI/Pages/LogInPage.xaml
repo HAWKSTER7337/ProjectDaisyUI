@@ -55,7 +55,8 @@
                        HeightRequest="40"
                        Clicked="AttemptLogIn"
                        Style="{StaticResource Daily-Button}"
-                       FontSize="{OnPlatform Default=16, Android=14}" />
+                       FontSize="{OnPlatform Default=16, Android=14}"
+                       x:Name="LoginButton" />
 
                <!-- Create Account + Change Password -->
                <Grid Grid.Row="8" ColumnDefinitions="*,*">
@@ -75,9 +76,12 @@
                <!-- Error Message -->
                <Label Text=""
                       Grid.Row="9"
-                      FontSize="{OnPlatform Default=12, Android=10}"
+                      FontSize="{OnPlatform Default=14, Android=12}"
                       x:Name="ErrorLabel"
                       HorizontalOptions="Center"
+                      HorizontalTextAlignment="Center"
+                      TextColor="Red"
+                      Margin="0,10,0,0"
                       Style="{StaticResource Error-Message}" />
            </Grid>
        </Grid>
