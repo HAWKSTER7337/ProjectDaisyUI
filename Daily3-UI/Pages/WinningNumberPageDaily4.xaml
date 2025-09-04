@@ -71,7 +71,7 @@
                     IsVisible="False">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="25" />
+                            <RowDefinition Height="40" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Label Text="Midday"
@@ -126,7 +126,7 @@
                     IsVisible="False">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="25" />
+                            <RowDefinition Height="40" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Label Text="Evening"
@@ -228,7 +228,7 @@
                     IsVisible="False">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="25" />
+                            <RowDefinition Height="40" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Label Text="Midday"
@@ -284,7 +284,7 @@
                     IsVisible="False">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="25" />
+                            <RowDefinition Height="40" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Label Text="Evening"
