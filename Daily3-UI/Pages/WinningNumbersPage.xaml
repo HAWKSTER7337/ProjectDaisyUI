@@ -7,9 +7,6 @@
              Shell.NavBarIsVisible="False"
              SizeChanged="OnSizeChanged">
 
-    
-
-        <!-- Added ScrollView to enable scrolling for the winning numbers section -->
         <ScrollView
             VerticalOptions="FillAndExpand"
             HorizontalOptions="FillAndExpand">

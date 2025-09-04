@@ -119,7 +119,9 @@ main() {
     echo ""
     
     # Execute the build command
+    pushd Daily3-UI
     dotnet build -t:Run -f net8.0-ios -p:_DeviceName="$DEVICE_NAME" -p:RuntimeIdentifier=ios-arm64
+    popd
     
     # Check build result
     if [[ $? -eq 0 ]]; then
