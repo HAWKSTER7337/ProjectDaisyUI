@@ -15,7 +15,7 @@
         <ApplicationTitle>Daily3-UI</ApplicationTitle>
 
         <!-- App Identifier -->
-        <ApplicationId>com.companyname.daily3_ui</ApplicationId>
+        <ApplicationId>com.alexhawking.daily3</ApplicationId>
         <ApplicationIdGuid>7c1aa4e5-91ca-45f5-b82d-d0dd69b56f7d</ApplicationIdGuid>
 
 
@@ -48,7 +48,7 @@
 
     <ItemGroup>
         <!-- App Icon -->
-        <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+        <MauiIcon Include="Resources\AppIcon\appicon.png" />
 
         <!-- Splash Screen -->
         <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
@@ -63,6 +63,7 @@
         <!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
         <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
     </ItemGroup>
+
 
     <ItemGroup>
         <!-- Core MAUI packages required for .NET 8 -->

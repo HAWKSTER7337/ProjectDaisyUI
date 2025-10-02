@@ -7,14 +7,15 @@
              Shell.NavBarIsVisible="False"
              SizeChanged="OnSizeChanged">
 
-    <VerticalStackLayout
-        Spacing="5"
-        Padding="30,0"
-        VerticalOptions="Fill"
-        HorizontalOptions="Fill">
-
-        <!-- Added ScrollView to make the page scrollable -->
-        <ScrollView>
+    <ScrollView
+        VerticalOptions="FillAndExpand"
+        HorizontalOptions="FillAndExpand">
+        <VerticalStackLayout
+            Spacing="5"
+            Padding="30,0"
+            VerticalOptions="Fill"
+            HorizontalOptions="Fill"
+            x:Name="Layout">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -28,7 +29,6 @@
                     <RowDefinition Height="120" />
                 </Grid.RowDefinitions>
 
-                <!--Title Image-->
                 <!-- Title Image -->
                 <Grid
                     Grid.Row="0">
@@ -71,7 +71,7 @@
                     IsVisible="False">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="25" />
+                            <RowDefinition Height="40" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Label Text="Midday"
@@ -126,7 +126,7 @@
                     IsVisible="False">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="25" />
+                            <RowDefinition Height="40" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Label Text="Evening"
@@ -228,7 +228,7 @@
                     IsVisible="False">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="25" />
+                            <RowDefinition Height="40" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Label Text="Midday"
@@ -284,7 +284,7 @@
                     IsVisible="False">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="25" />
+                            <RowDefinition Height="40" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Label Text="Evening"
@@ -330,6 +330,6 @@
                     </Grid>
                 </Border>
             </Grid>
-        </ScrollView>
-    </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

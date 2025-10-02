@@ -1,6 +1,7 @@
 ﻿using System.Transactions;
 using Daily3_UI.Classes;
 using Daily3_UI.Clients;
+using Microsoft.Maui.Graphics;
 
 namespace Daily3_UI.Pages.PagesDaily3;
 
@@ -154,44 +155,144 @@ public partial class WinningNumbersPage : ContentPage
 
     private void OnSizeChanged(object sender, EventArgs e)
     {
-        var screenWidth = Width;
-        var screenHeight = Height;
+        try
+        {
+            if (Width <= 0 || Height <= 0 || double.IsNaN(Width) || double.IsNaN(Height))
+            {
+                return;
+            }
 
-        // Scale values for elements
-        var borderPadding = screenWidth * 0.05;
-        var labelFontSize = screenWidth * 0.05;
-        var numberFontSize = screenWidth * 0.07;
-        var imageHeight = screenHeight * 0.1;
-        var borderBallHeight = screenHeight * (3.0 / 7);
-        var groupingNumberBorderHeight = screenHeight * 0.19;
+            var screenWidth = Width;
+            var screenHeight = Height;
 
-        // Adjust elements accordingly
-        Daily3TitleImage.HeightRequest = imageHeight;
+            // Detect if we're on a tablet (larger screen)
+            var isTablet = screenWidth >= 768 || screenHeight >= 1024;
+            
+            // Scale values for elements
+            var borderPadding = screenWidth * 0.05;
+            var labelFontSize = screenWidth * 0.05;
+            var numberFontSize = screenWidth * 0.07;
+            var imageHeight = screenHeight * 0.1;
+            var borderBallHeight = screenHeight * (3.0 / 7);
+            var groupingNumberBorderHeight = screenHeight * 0.19;
 
-        YesterdayLabel.FontSize = labelFontSize;
-        TodayLabel.FontSize = labelFontSize;
+            // Ball border scaling for tablets
+            var ballSize = isTablet ? Math.Max(80, screenWidth * 0.12) : 60;
+            var ballRadius = isTablet ? Math.Max(120, ballSize * 1.5) : 100;
+            var ballMargin = isTablet ? Math.Max(8, screenWidth * 0.015) : 5;
 
-        YesterdayMiddayLabel.FontSize = labelFontSize;
-        YesterdayEveningLabel.FontSize = labelFontSize;
-        TodayMiddayLabel.FontSize = labelFontSize;
-        TodayEveningLabel.FontSize = labelFontSize;
+            // Adjust elements accordingly
+            if (Daily3TitleImage != null)
+                Daily3TitleImage.HeightRequest = imageHeight;
 
-        YesterdayMiddayBorder.HeightRequest = groupingNumberBorderHeight;
-        YesterdayEveningBorder.HeightRequest = groupingNumberBorderHeight;
-        TodayMiddayBorder.HeightRequest = groupingNumberBorderHeight;
-        TodayEveningBorder.HeightRequest = groupingNumberBorderHeight;
+            if (YesterdayLabel != null)
+                YesterdayLabel.FontSize = labelFontSize;
+            if (TodayLabel != null)
+                TodayLabel.FontSize = labelFontSize;
 
-        YesterdayMidday1.FontSize = numberFontSize;
-        YesterdayMidday2.FontSize = numberFontSize;
-        YesterdayMidday3.FontSize = numberFontSize;
-        YesterdayEvening1.FontSize = numberFontSize;
-        YesterdayEvening2.FontSize = numberFontSize;
-        YesterdayEvening3.FontSize = numberFontSize;
-        TodayMidday1.FontSize = numberFontSize;
-        TodayMidday2.FontSize = numberFontSize;
-        TodayMidday3.FontSize = numberFontSize;
-        TodayEvening1.FontSize = numberFontSize;
-        TodayEvening2.FontSize = numberFontSize;
-        TodayEvening3.FontSize = numberFontSize;
+            if (YesterdayMiddayLabel != null)
+                YesterdayMiddayLabel.FontSize = labelFontSize;
+            if (YesterdayEveningLabel != null)
+                YesterdayEveningLabel.FontSize = labelFontSize;
+            if (TodayMiddayLabel != null)
+                TodayMiddayLabel.FontSize = labelFontSize;
+            if (TodayEveningLabel != null)
+                TodayEveningLabel.FontSize = labelFontSize;
+
+            if (YesterdayMiddayBorder != null)
+                YesterdayMiddayBorder.HeightRequest = groupingNumberBorderHeight;
+            if (YesterdayEveningBorder != null)
+                YesterdayEveningBorder.HeightRequest = groupingNumberBorderHeight;
+            if (TodayMiddayBorder != null)
+                TodayMiddayBorder.HeightRequest = groupingNumberBorderHeight;
+            if (TodayEveningBorder != null)
+                TodayEveningBorder.HeightRequest = groupingNumberBorderHeight;
+
+            UpdateBallBorder(YesterdayMidday1, ballSize, ballRadius, ballMargin);
+            UpdateBallBorder(YesterdayMidday2, ballSize, ballRadius, ballMargin);
+            UpdateBallBorder(YesterdayMidday3, ballSize, ballRadius, ballMargin);
+            UpdateBallBorder(YesterdayEvening1, ballSize, ballRadius, ballMargin);
+            UpdateBallBorder(YesterdayEvening2, ballSize, ballRadius, ballMargin);
+            UpdateBallBorder(YesterdayEvening3, ballSize, ballRadius, ballMargin);
+            UpdateBallBorder(TodayMidday1, ballSize, ballRadius, ballMargin);
+            UpdateBallBorder(TodayMidday2, ballSize, ballRadius, ballMargin);
+            UpdateBallBorder(TodayMidday3, ballSize, ballRadius, ballMargin);
+            UpdateBallBorder(TodayEvening1, ballSize, ballRadius, ballMargin);
+            UpdateBallBorder(TodayEvening2, ballSize, ballRadius, ballMargin);
+            UpdateBallBorder(TodayEvening3, ballSize, ballRadius, ballMargin);
+
+            // Keep number font sizes consistent
+            if (YesterdayMidday1 != null)
+                YesterdayMidday1.FontSize = numberFontSize;
+            if (YesterdayMidday2 != null)
+                YesterdayMidday2.FontSize = numberFontSize;
+            if (YesterdayMidday3 != null)
+                YesterdayMidday3.FontSize = numberFontSize;
+            if (YesterdayEvening1 != null)
+                YesterdayEvening1.FontSize = numberFontSize;
+            if (YesterdayEvening2 != null)
+                YesterdayEvening2.FontSize = numberFontSize;
+            if (YesterdayEvening3 != null)
+                YesterdayEvening3.FontSize = numberFontSize;
+            if (TodayMidday1 != null)
+                TodayMidday1.FontSize = numberFontSize;
+            if (TodayMidday2 != null)
+                TodayMidday2.FontSize = numberFontSize;
+            if (TodayMidday3 != null)
+                TodayMidday3.FontSize = numberFontSize;
+            if (TodayEvening1 != null)
+                TodayEvening1.FontSize = numberFontSize;
+            if (TodayEvening2 != null)
+                TodayEvening2.FontSize = numberFontSize;
+            if (TodayEvening3 != null)
+                TodayEvening3.FontSize = numberFontSize;
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Error in OnSizeChanged: {ex.Message}");
+        }
+    }
+
+    private void UpdateBallBorder(Label numberLabel, double ballSize, double ballRadius, double ballMargin)
+    {
+        try
+        {
+            if (numberLabel?.Parent is Border ballBorder)
+            {
+                ballBorder.WidthRequest = ballSize;
+                ballBorder.HeightRequest = ballSize;
+                ballBorder.Margin = new Thickness(ballMargin, ballMargin, ballMargin, ballMargin);
+                
+                // Update the stroke shape for better tablet appearance
+                // Use platform-safe approach for Android compatibility
+                if (DeviceInfo.Platform == DevicePlatform.Android)
+                {
+                    // On Android, use a simpler approach or skip stroke shape updates
+                    // The original Ball style will handle the appearance
+                    return;
+                }
+                else
+                {
+                    // On iOS and other platforms, use the enhanced stroke shape
+                    try
+                    {
+                        var strokeShape = new Microsoft.Maui.Controls.Shapes.RoundRectangle
+                        {
+                            CornerRadius = new CornerRadius(ballRadius)
+                        };
+                        ballBorder.StrokeShape = strokeShape;
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"Error updating stroke shape: {ex.Message}");
+                        // Fallback: don't update stroke shape if it fails
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Error in UpdateBallBorder: {ex.Message}");
+        }
     }
 }
