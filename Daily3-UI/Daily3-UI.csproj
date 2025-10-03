@@ -20,8 +20,8 @@
 
 
         <!-- Versions -->
-        <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
-        <ApplicationVersion>1</ApplicationVersion>
+        <ApplicationDisplayVersion>1.2</ApplicationDisplayVersion>
+        <ApplicationVersion>3</ApplicationVersion>
 
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">18.0</SupportedOSPlatformVersion>
         <RuntimeIdentifier Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">iossimulator-arm64</RuntimeIdentifier>
@@ -175,6 +175,10 @@
         <SupportedOSPlatformVersion>18.0</SupportedOSPlatformVersion>
         <MtouchFloat32>false</MtouchFloat32>
         <MtouchUseLlvm>false</MtouchUseLlvm>
+        
+        <!-- Apple Distribution Code Signing -->
+        <CodesignKey>Apple Distribution: Alex Hawkins (263J2FB9U5)</CodesignKey>
+        <CodesignProvision>Daily3-Dist</CodesignProvision>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(TargetFramework)' == 'net8.0-maccatalyst'">

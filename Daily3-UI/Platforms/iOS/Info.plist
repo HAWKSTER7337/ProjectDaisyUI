@@ -4,7 +4,25 @@
     <dict>
         <key>CFBundleIdentifier</key>
         <string>com.alexhawkins.daily3</string>
-
+        
+        <key>CFBundleName</key>
+        <string>Daily3</string>
+        
+        <key>CFBundleDisplayName</key>
+        <string>Daily3</string>
+        
+        <key>CFBundleVersion</key>
+        <string>4</string>
+        
+        <key>CFBundleShortVersionString</key>
+        <string>1.2</string>
+        
+        <key>CFBundlePackageType</key>
+        <string>APPL</string>
+        
+        <key>CFBundleSignature</key>
+        <string>????</string>
+        
         <key>LSRequiresIPhoneOS</key>
         <true/>
         <key>UIDeviceFamily</key>
@@ -35,6 +53,46 @@
         <array>
             <string>BebasNeue-Regular.ttf</string>
         </array>
+        
+        <key>ITSAppUsesNonExemptEncryption</key>
+        <false/>
+        
+        <key>NSAppTransportSecurity</key>
+        <dict>
+            <key>NSAllowsArbitraryLoads</key>
+            <true/>
+        </dict>
+        
+        <key>UIStatusBarStyle</key>
+        <string>UIStatusBarStyleDefault</string>
+        
+        <key>UIViewControllerBasedStatusBarAppearance</key>
+        <false/>
+        
+        <!-- Privacy Usage Descriptions -->
+        <key>NSBluetoothAlwaysUsageDescription</key>
+        <string>This app does not use Bluetooth functionality. This permission is required by the app framework.</string>
+        
+        <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+        <string>This app does not use location services. This permission is required by the app framework.</string>
+        
+        <key>NSLocationWhenInUseUsageDescription</key>
+        <string>This app does not use location services. This permission is required by the app framework.</string>
+        
+        <key>NSContactsUsageDescription</key>
+        <string>This app does not access contacts. This permission is required by the app framework.</string>
+        
+        <key>NSSiriUsageDescription</key>
+        <string>This app does not use Siri functionality. This permission is required by the app framework.</string>
+        
+        <key>NSCalendarsUsageDescription</key>
+        <string>This app does not access calendar data. This permission is required by the app framework.</string>
+        
+        <key>NSMicrophoneUsageDescription</key>
+        <string>This app does not use the microphone. This permission is required by the app framework.</string>
+        
+        <key>NSAppleMusicUsageDescription</key>
+        <string>This app does not access Apple Music. This permission is required by the app framework.</string>
 
     </dict>
 </plist>
